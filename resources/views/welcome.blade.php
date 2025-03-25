@@ -75,10 +75,10 @@
         <div class="w-[75px] h-[75px] fixed bottom-[20px] left-[20px] z-[1000] bg-[#ffffff4d] rounded-full backdrop-blur-[2px] flex items-center justify-center">
             <img class="wa-text-curv flex items-center justify-center" src="/image/war.png" alt=""><svg widht="30px" height="30px" fill="#000000" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M11.42 9.49c-.19-.09-1.1-.54-1.27-.61s-.29-.09-.42.1-.48.6-.59.73-.21.14-.4 0a5.13 5.13 0 0 1-1.49-.92 5.25 5.25 0 0 1-1-1.29c-.11-.18 0-.28.08-.38s.18-.21.28-.32a1.39 1.39 0 0 0 .18-.31.38.38 0 0 0 0-.33c0-.09-.42-1-.58-1.37s-.3-.32-.41-.32h-.4a.72.72 0 0 0-.5.23 2.1 2.1 0 0 0-.65 1.55A3.59 3.59 0 0 0 5 8.2 8.32 8.32 0 0 0 8.19 11c.44.19.78.3 1.05.39a2.53 2.53 0 0 0 1.17.07 1.93 1.93 0 0 0 1.26-.88 1.67 1.67 0 0 0 .11-.88c-.05-.07-.17-.12-.36-.21z"></path><path d="M13.29 2.68A7.36 7.36 0 0 0 8 .5a7.44 7.44 0 0 0-6.41 11.15l-1 3.85 3.94-1a7.4 7.4 0 0 0 3.55.9H8a7.44 7.44 0 0 0 5.29-12.72zM8 14.12a6.12 6.12 0 0 1-3.15-.87l-.22-.13-2.34.61.62-2.28-.14-.23a6.18 6.18 0 0 1 9.6-7.65 6.12 6.12 0 0 1 1.81 4.37A6.19 6.19 0 0 1 8 14.12z"></path></g></svg>
         </div>
-    </a>
+    </a>    
      <!-- Background Section -->
     <div class="relative bg-no-repeat bg-cover w-full" style="background-image:url('/image/pabrik.jpg')">
-        <div class="Relative after:content-[''] after:w-full after:h-full after:absolute after:top-0 after:left-0 after:bg-[rgba(1441,1441,1441,0.50)] after:blur-[10px]"></div>
+        <div class="Relative after:content-[''] after:w-full after:h-full after:absolute after:top-0 after:left-0 after:bg-[rgba(1441,1441,1441,0.65)] after:blur-[10px]"></div>
         
         <!-- Navigation -->
         <nav class="relative z-10 text-[#066C5F] py-4 px-6 shadow-md">
@@ -115,15 +115,15 @@
                     <div class="swiper-wrapper">
                         <!-- Slide 1 -->
                         <div class="swiper-slide">
-                            <img src="/image/5.jpg" class="w-full h-full object-cover rounded-lg" alt="Slide 1">
+                            <img src="/image/6.jpg" class="w-full h-full object-cover rounded-lg" alt="Slide 1">
                         </div>
                         <!-- Slide 2 -->
                         <div class="swiper-slide">
-                            <img src="/image/5.jpg" class="w-full h-full object-cover rounded-lg" alt="Slide 2">
+                            <img src="/image/6.jpg" class="w-full h-full object-cover rounded-lg" alt="Slide 2">
                         </div>
                         <!-- Slide 3 -->
                         <div class="swiper-slide">
-                            <img src="/image/5.jpg" class="w-full h-full object-cover rounded-lg" alt="Slide 3">
+                            <img src="/image/6.jpg" class="w-full h-full object-cover rounded-lg" alt="Slide 3">
                         </div>
                         <div class="swiper-slide">
                             <img src="/image/6.jpg" class="w-full h-full object-cover rounded-lg" alt="Slide 3">
@@ -163,7 +163,7 @@
 
         {{-- First sesion --}}
         <div class="relative z-10 flex flex-col items-center text-center h-screen pt-20 px-6">
-            <p class="mt-4 text-md flex font-bold items-center text-[#066c5f] max-w-2xl shining-text"><span class="mx-2"><svg width="15px" height="15px" fill="#F77F1E" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon" stroke="#F77F1E">
+            <p class="mt-4 text-md flex font-bold items-center text-[#066c5f] max-w-2xl shining-text"><span class="mx-2"><svg width="16px" height="16px" fill="#F77F1E" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" class="icon" stroke="#F77F1E">
                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                 <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                 <g id="SVGRepo_iconCarrier">
@@ -172,7 +172,7 @@
             </svg>
         </span>Penuhi Kebutuhan Listrik dengan Produk Terbaik</p>
         <h1 class="text-4xl font-extrabold text-[#066c5f]">Selamat Datang di Vinsa</h1>
-        <p class="mt-4 mb-10 text-md  font-medium text-[#066c5f] max-w-2xl">"Vinsa: Dedikasi dalam Menyediakan Solusi Kelistrikan Premium, Menghadirkan Produk Berkualitas Tinggi untuk Kebutuhan Rumah, Bisnis, dan Industri Anda!"</p>
+        <p class="mt-4 mb-10 text-lg  font-medium text-[#066c5f] max-w-2xl">"Vinsa: Dedikasi dalam Menyediakan Solusi Kelistrikan Premium, Menghadirkan Produk Berkualitas Tinggi untuk Kebutuhan Rumah, Bisnis, dan Industri Anda!"</p>
             <div class="mt-6 flex space-x-4">
                 <a href="#" class="bg-green-600 text-white px-6 py-3 transition-all duration-100 ease-in-out rounded-full shadow hover:bg-green-700">LIHAT KOLEKSI</a>
                 <a href="#" class="border-2 border-[#F77F1E] text-[#000000] px-6 py-3 rounded-full transition-all duration-300 ease-in-out shadow hover:bg-[#F77F1E] hover:text-white">CONTACT US</a>
@@ -218,7 +218,7 @@
             <div class="w-40 h-56 sm:w-52 sm:h-64 md:w-60 md:h-72 bg-[#066c5f]/37 border border-black text-white p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col justify-between relative overflow-hidden backdrop-blur-[8px]">
                 <h2 class="text-base sm:text-lg font-bold">Push Button</h2>
                 <p class="mt-2 flex-grow text-xs sm:text-sm"><img src="/image/1.png" alt="Vinsa"></p>
-                <button class="px-3 sm:px-4 py-1 sm:py-2 bg-white text-[#066c5f] text-sm font-semibold rounded-lg hover:bg-gray-200">
+                <button class="hover:cursor-pointer px-3 sm:px-4 py-1 sm:py-2 bg-white text-[#066c5f] text-sm font-semibold rounded-lg hover:bg-gray-200">
                     Action
                 </button>
             </div>
@@ -226,7 +226,7 @@
             <div class="w-40 h-56 max-h-96 sm:w-52 sm:h-64 md:w-60 md:h-72 bg-[#066c5f]/37 border border-black text-white p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col justify-between relative overflow-hidden backdrop-blur-[8px]">
                 <h2 class="text-base sm:text-lg font-bold">Box Panel</h2>
                 <p class="mt-2 flex-grow text-xs sm:text-sm"><img class="" src="/image/2.png" alt="Vinsa"></p>
-                <button class="px-3 sm:px-4 py-1 sm:py-2 bg-white text-[#066c5f] text-sm font-semibold rounded-lg hover:bg-gray-200">
+                <button class="hover:cursor-pointer px-3 sm:px-4 py-1 sm:py-2 bg-white text-[#066c5f] text-sm font-semibold rounded-lg hover:bg-gray-200">
                     Action
                 </button>
             </div>
@@ -234,7 +234,7 @@
             <div class="w-40 h-56 sm:w-52 sm:h-64 md:w-60 md:h-72 bg-[#066c5f]/37 border border-black text-white p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col justify-between relative overflow-hidden backdrop-blur-[8px]">
                 <h2 class="text-base sm:text-lg font-bold">Box Panel</h2>
                 <p class="mt-2 flex-grow text-xs sm:text-sm"><img class="" src="/image/3.png" alt="Vinsa"></p>
-                <button class="px-3 sm:px-4 py-1 sm:py-2 bg-white text-[#066c5f] text-sm font-semibold rounded-lg hover:bg-gray-200">
+                <button class="hover:cursor-pointer px-3 sm:px-4 py-1 sm:py-2 bg-white text-[#066c5f] text-sm font-semibold rounded-lg hover:bg-gray-200">
                     Action
                 </button>
             </div>
@@ -242,7 +242,7 @@
             <div class="w-40 h-56 sm:w-52 sm:h-64 md:w-60 md:h-72 bg-[#066c5f]/37 border border-black text-white p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col justify-between relative overflow-hidden backdrop-blur-[8px]">
                 <h2 class="text-base sm:text-lg font-bold">Card Title</h2>
                 <p class="mt-2 flex-grow text-xs sm:text-sm"><img class="" src="/image/4.png" alt="Vinsa"></p>
-                <button class="px-3 sm:px-4 py-1 sm:py-2 bg-white text-[#066c5f] text-sm font-semibold rounded-lg hover:bg-gray-200">
+                <button class="hover:cursor-pointer px-3 sm:px-4 py-1 sm:py-2 bg-white text-[#066c5f] text-sm font-semibold rounded-lg hover:bg-gray-200">
                     Action
                 </button>
             </div>
