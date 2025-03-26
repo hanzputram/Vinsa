@@ -87,7 +87,7 @@
         
                 <ul class="hidden md:flex space-x-6">
                     <li><a href="{{ url('/') }}" class="font-bold text-xl hover:text-[#066c5fad]">Home</a></li>
-                    <li><a href="{{ url('/about') }}" class="font-bold text-xl hover:text-[#066c5fad]">About Us</a></li>
+                    <li><a href="/about" class="font-bold text-xl hover:text-[#066c5fad]">About Us</a></li>
                     <li><a href="{{ url('/contact') }}" class="font-bold text-xl hover:text-[#066c5fad]">Contact Us</a></li>
                 </ul>
         
@@ -109,24 +109,24 @@
 
         {{-- carosel --}}
 
-        <div class="w-[90%] lg:h-[100%] h-[150px] mx-auto mt-10">
+        <div class="w-[100%] lg:h-[100%] h-[150px] mx-auto ">
         <div class="relative w-[100%] h-[100%] mx-auto">
-                <div class="swiper mySmallSwiper w-full h-full rounded-lg shadow-md">
+                <div class="swiper mySmallSwiper w-full h-full shadow-md">
                     <div class="swiper-wrapper">
                         <!-- Slide 1 -->
                         <div class="swiper-slide">
-                            <img src="/image/6.jpg" class="w-full h-full object-cover rounded-lg" alt="Slide 1">
+                            <img src="/image/6.jpg" class="w-full h-full object-cover" alt="Slide 1">
                         </div>
                         <!-- Slide 2 -->
                         <div class="swiper-slide">
-                            <img src="/image/6.jpg" class="w-full h-full object-cover rounded-lg" alt="Slide 2">
+                            <img src="/image/6.jpg" class="w-full h-full object-cover" alt="Slide 2">
                         </div>
                         <!-- Slide 3 -->
                         <div class="swiper-slide">
-                            <img src="/image/6.jpg" class="w-full h-full object-cover rounded-lg" alt="Slide 3">
+                            <img src="/image/6.jpg" class="w-full h-full object-cover" alt="Slide 3">
                         </div>
                         <div class="swiper-slide">
-                            <img src="/image/6.jpg" class="w-full h-full object-cover rounded-lg" alt="Slide 3">
+                            <img src="/image/6.jpg" class="w-full h-full object-cover" alt="Slide 3">
                         </div>
                     </div>
             
@@ -198,7 +198,7 @@
 
 
     {{-- animated background --}}
-    <div id="second" class="w-full min-h-screen flex flex-wrap justify-center items-center gap-4 p-4 bg-linear-to-r from-[#066c5f] to-[#3cd6c1]">
+    <div id="second" class="w-full h-screen flex flex-wrap justify-center items-center gap-4 p-4 bg-linear-to-r from-[#066c5f] to-[#3cd6c1]">
         <script src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs" type="module"></script>
         <dotlottie-player 
         class="absolute opacity-45 z-[-1000px] w-[150%] h-[150%] sm:w-[120%] sm:h-[120%] md:w-full md:h-full" 
