@@ -86,7 +86,7 @@
                 <a href="{{ url('/') }}" class="w-[100px]"><img src="/image/vinsalg.png" alt="Vinsa"></a>
         
                 <ul class="hidden md:flex space-x-6">
-                    <li><a href="{{ url('/') }}" class="font-bold text-xl hover:text-[#066c5fad]">Home</a></li>
+                    <li><a href="{{ url('/') }}" class="font-bold text-xl hover:text-[#066c5fad]">Dashboard</a></li>
                     <li><a href="/about" class="font-bold text-xl hover:text-[#066c5fad]">About Us</a></li>
                     <li><a href="{{ url('/contact') }}" class="font-bold text-xl hover:text-[#066c5fad]">Contact Us</a></li>
                 </ul>
@@ -101,7 +101,7 @@
         
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden p-4">
-                <a href="{{ url('/') }}" class="block py-2 text-[#066C5F] border-b-[1.5px] hover:text-[#066c5fad] font-bold">Home</a>
+                <a href="{{ url('/') }}" class="block py-2 text-[#066C5F] border-b-[1.5px] hover:text-[#066c5fad] font-bold">Dashboard</a>
                 <a href="{{ url('/about') }}" class="block py-2 border-b-[1.5px] text-[#066C5F] hover:text-[#066c5fad] font-bold">About Us</a>
                 <a href="{{ url('/contact') }}" class="block py-2 text-[#066C5F] hover:text-[#066c5fad] font-bold">Contact Us</a>
             </div>
