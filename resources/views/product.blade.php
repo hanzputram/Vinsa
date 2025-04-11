@@ -15,7 +15,6 @@
         .outfit {
             font-family: "Outfit", sans-serif;
             font-optical-sizing: auto;
-            font-weight: <weight>;
             font-style: normal;
         }
 
@@ -37,42 +36,33 @@
             animation: shine 6s linear infinite;
         }
 
-        /* Untuk Chrome, Safari, Edge */
         ::-webkit-scrollbar {
             width: 6px;
-            /* Lebar scrollbar */
             height: 7px;
-            /* Tinggi scrollbar */
         }
 
         ::-webkit-scrollbar-button {
             display: block;
             background-color: #cccccc00;
-            /* Warna tombol */
             border-radius: 10px;
             width: 10px;
         }
 
         ::-webkit-scrollbar-thumb {
             background: #ffffff53;
-            /* Warna thumb */
             border-radius: 100px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
             background: #ffffffb5;
-            /* Warna saat hover */
         }
 
         ::-webkit-scrollbar-track {
             background: transparent;
-            /* Menghilangkan background */
         }
 
-        /* Untuk Firefox */
         .scroll-container {
             scrollbar-width: thin;
-            /* Lebar scrollbar */
             scrollbar-color: #888 transparent;
         }
 
@@ -126,10 +116,10 @@
             <x-navUser></x-navUser>
         </div>
         <div
-            class="overflow-hidden p-10 lg:p-[5rem] lg:justify-between py-[80px]  flex justify-center relative bg-no-repeat bg-cover w-full min-h-screen after:content-[''] bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] after:w-full after:h-full after:absolute after:top-0 after:left-0 rounded-[40px]">
+            class="overflow-hidden p-10 lg:p-[5rem] lg:justify-between py-[80px] flex justify-center relative bg-no-repeat bg-cover w-full min-h-screen after:content-[''] bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] after:w-full after:h-full after:absolute after:top-0 after:left-0 rounded-[40px]">
             <div class="w-full relative z-[10]">
-                {{-- isi web --}}
-                <a href="/new" class="group">
+
+                <a href="/new" class="group mb-4 inline-block">
                     <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         class="stroke-white group-hover:stroke-gray-400 transition-colors duration-300">
@@ -137,20 +127,29 @@
                             stroke-linejoin="round"></path>
                     </svg>
                 </a>
-                <p class="text-6xl pb-10 text-center font-extrabold  text-[#fff]">
+                <p class="text-6xl pb-10 text-center font-extrabold text-[#fff]">
                     Our Collection
                 </p>
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+
+                <input type="text" id="searchInput" placeholder="Cari produk..."
+                    class="mb-6 w-full max-w-sm mx-auto block rounded-full px-8 py-4 text-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0dd8bd] shadow"
+                    oninput="filterProducts()">
+
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     @forelse ($products as $product)
                         <div
-                            class="w-full bg-[#fdfbee68] border border-[#ffffff] text-white sm:p-4 px-7 sm:rounded-2xl rounded-full shadow-lg flex flex-row sm:flex-col justify-between relative overflow-hidden backdrop-blur-[8px] transition-transform transform hover:scale-[1.01] hover:shadow-xl duration-300">
+                            class="product-card w-full bg-[#fdfbee68] border border-[#ffffff] text-white sm:p-4 px-7 sm:rounded-2xl rounded-full shadow-lg flex flex-row sm:flex-col justify-between relative overflow-hidden backdrop-blur-[8px] transition-transform transform hover:scale-[1.01] hover:shadow-xl duration-300">
                             <div
                                 class="sm:flex sm:flex-col flex justify-between items-center sm:justify-between flex-grow sm:items-center sm:text-center">
-                                <div class="font-bold text-base hidden sm:block sm:text-lg">{{ $product->name }}</div>
+                                <div class="font-bold text-base hidden sm:block sm:text-lg product-name">
+                                    {{ \Illuminate\Support\Str::limit($product->name, 20) }}
+                                </div>
+                                <div class="font-bold text-base hidden sm:block sm:text-lg product-code">
+                                    {{ $product->kode }}
+                                </div>
 
-                                {{-- Image --}}
-                                <img class="w-16 h-1w-16 object-contain rounded-full sm:w-full"
-                                    src="{{ asset('storage/' . $product->image) }}" alt="Vinsa">
+                                <img class="w-16 h-1w-16 object-contain md:rounded-lg rounded-full sm:w-full"
+                                    src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                                 <div>
                                     <div class="font-bold text-base sm:hidden block sm:text-lg">
                                         {{ \Illuminate\Support\Str::limit($product->name, 10) }}
@@ -159,16 +158,13 @@
                                         Spesifikasi {{ \Illuminate\Support\Str::limit($product->name, 5) }}
                                     </p>
                                 </div>
-                                {{-- Text content --}}
 
-                                {{-- Button (responsive) --}}
                                 <div class="flex justify-end sm:justify-center items-center ">
                                     <a href="/detail/{{ $product->id }}"
-                                        class="py-2 px-4 text-sm font-semibold rounded-lg bg-white text-[#066c5f] hover:bg-gray-200 transition hidden sm:block">
+                                        class="py-2 px-4 md:mt-3 text-sm font-semibold rounded-lg bg-white text-[#066c5f] hover:bg-gray-200 transition hidden sm:block">
                                         Spesifikasi Product
                                     </a>
 
-                                    <!-- Link ke halaman detail -->
                                     <a href="/detail/{{ $product->id }}"
                                         class="group relative h-10 w-10 flex justify-center items-center sm:hidden overflow-hidden cursor-pointer rounded-full"
                                         style="
@@ -176,10 +172,7 @@
                                             --shimmer-color: #fff;
                                             --radius: 99999px;
                                             --speed: 2.7s;
-                                            --cut: 0.05em;
-                                        ">
-
-                                        <!-- Spinning shimmer border -->
+                                            --cut: 0.05em;">
                                         <div class="absolute inset-0 rounded-full animate-rotate-border -z-10"
                                             style="background: conic-gradient(
                                                  from calc(270deg - (var(--spread) * 0.5)),
@@ -188,8 +181,6 @@
                                                  transparent var(--spread)
                                              );">
                                         </div>
-
-                                        <!-- Inner icon with solid border -->
                                         <div class="relative z-10 p-2 rounded-full bg-[#6CD6C2]">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white"
                                                 fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -210,13 +201,24 @@
             </div>
         </div>
     </div>
-    </div>
     <x-footer></x-footer>
 </body>
 
 </html>
+
 <script>
-    document.getElementById('menu-toggle').addEventListener('click', function() {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
+    function filterProducts() {
+        const input = document.getElementById('searchInput').value.toLowerCase();
+        const cards = document.querySelectorAll('.product-card');
+
+        cards.forEach(card => {
+            const name = card.querySelector('.product-name')?.textContent.toLowerCase() || '';
+            const kode = card.querySelector('.product-code')?.textContent.toLowerCase() || '';
+            card.style.display = name.includes(input) || kode.includes(input) ? '' : 'none';
+        });
+    }
+
+    document.getElementById('menu-toggle')?.addEventListener('click', function() {
+        document.getElementById('mobile-menu')?.classList.toggle('hidden');
     });
 </script>

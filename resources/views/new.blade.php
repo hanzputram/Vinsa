@@ -167,46 +167,46 @@
 
             {{-- card slider --}}
             <div
-                class="hidden sm:hidden md:hidden lg:block lg:rounded-[2rem] lg:border-[1px] lg:shadow-lg lg:shadow-[#ffffff2a] lg:border-white  lg:max-w-[330px] lg:max-h-[430px] bg-[#00000036] backdrop-blur-[2.5px] z-[10]">
-                <div class="flex flex-col  bg-transparent items-end gap-[1.25rem] text-white">
+                class="hidden sm:hidden md:hidden lg:block lg:rounded-[2rem] lg:border-[1px] lg:shadow-lg lg:shadow-[#ffffff2a] lg:border-white lg:max-w-[330px] lg:max-h-[430px] bg-[#00000036] backdrop-blur-[2.5px] z-[10]">
+                <div class="flex flex-col bg-transparent items-end gap-[1.25rem] text-white">
+
                     <div class="w-full overflow-x-hidden">
                         <div class="px-[1.25rem]">
-                            <h2 class="my-[1rem] text-center text-2xl lg:text-3xl"><svg viewBox="0 0 32 32"
-                                    widht="20px" height="20px" xmlns="http://www.w3.org/2000/svg" fill="#000000">
-                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                    <g id="SVGRepo_iconCarrier">
-                                        <g fill="none" fill-rule="evenodd">
-                                            <path d="m0 0h32v32h-32z"></path>
-                                            <path
-                                                d="m19 1.73205081 7.8564065 4.53589838c1.8564064 1.07179677 3 3.05255889 3 5.19615241v9.0717968c0 2.1435935-1.1435936 4.1243556-3 5.1961524l-7.8564065 4.5358984c-1.8564065 1.0717968-4.1435935 1.0717968-6 0l-7.85640646-4.5358984c-1.85640646-1.0717968-3-3.0525589-3-5.1961524v-9.0717968c0-2.14359352 1.14359354-4.12435564 3-5.19615241l7.85640646-4.53589838c1.8564065-1.07179677 4.1435935-1.07179677 6 0zm4.0203166 9.82532719c-.259282-.4876385-.8647807-.672758-1.3524192-.4134761l-5.6794125 3.0187491-5.6793299-3.0187491c-.4876385-.2592819-1.09313718-.0741624-1.35241917.4134761-.25928198.4876385-.07416246 1.0931371.41347603 1.3524191l5.61827304 2.9868539.0000413 6.7689186c0 .5522848.4477153 1 1 1 .5522848 0 1-.4477152 1-1l-.0000413-6.7689186 5.6183556-2.9868539c.4876385-.259282.6727581-.8647806.4134761-1.3524191z"
-                                                fill="#ffffff"></path>
-                                        </g>
+                            <h2 class="my-[1rem] text-center text-2xl lg:text-3xl">
+                                <svg viewBox="0 0 32 32" width="20px" height="20px"
+                                    xmlns="http://www.w3.org/2000/svg" fill="#000000">
+                                    <g fill="none" fill-rule="evenodd">
+                                        <path d="m0 0h32v32h-32z"></path>
+                                        <path
+                                            d="m19 1.73205081 7.8564065 4.53589838c1.8564064 1.07179677 3 3.05255889 3 5.19615241v9.0717968c0 2.1435935-1.1435936 4.1243556-3 5.1961524l-7.8564065 4.5358984c-1.8564065 1.0717968-4.1435935 1.0717968-6 0l-7.85640646-4.5358984c-1.85640646-1.0717968-3-3.0525589-3-5.1961524v-9.0717968c0-2.14359352 1.14359354-4.12435564 3-5.19615241l7.85640646-4.53589838c1.8564065-1.07179677 4.1435935-1.07179677 6 0zm4.0203166 9.82532719c-.259282-.4876385-.8647807-.672758-1.3524192-.4134761l-5.6794125 3.0187491-5.6793299-3.0187491c-.4876385-.2592819-1.09313718-.0741624-1.35241917.4134761-.25928198.4876385-.07416246 1.0931371.41347603 1.3524191l5.61827304 2.9868539.0000413 6.7689186c0 .5522848.4477153 1 1 1 .5522848 0 1-.4477152 1-1l-.0000413-6.7689186 5.6183556-2.9868539c.4876385-.259282.6727581-.8647806.4134761-1.3524191z"
+                                            fill="#ffffff"></path>
                                     </g>
                                 </svg>
                                 Our Product
                             </h2>
-                            <div class="fixed w-9 top-[50%] right-0  z-10">
-                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <!-- Thin white outline (stroke-width: 2.5) -->
-                                    <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="#FFFFFF" stroke-width="3"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-
-                                    <!-- Main orange stroke -->
-                                    <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="#000" stroke-width="1.8"
-                                        stroke-linecap="round" stroke-linejoin="round" />
-                                </svg>
-                            </div>
                         </div>
+
                         {{-- Slider --}}
                         <div
                             class="w-full p-5 mx-auto max-w-full overflow-x-scroll flex gap-[1rem] flex-wrap-none pb-[.8rem] mb-5">
-                            @forelse ($products as $product)
+
+                            @forelse ($products->take(10) as $product)
+                                @if ($loop->first)
+                                    <div class="fixed w-9 top-[50%] right-0 z-10">
+                                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="#FFFFFF" stroke-width="3"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                            <path d="M6 12H18M18 12L13 7M18 12L13 17" stroke="#000" stroke-width="1.8"
+                                                stroke-linecap="round" stroke-linejoin="round" />
+                                        </svg>
+                                    </div>
+                                @endif
+
                                 <div
-                                    class="group card rounded-[24px] w-[200px] h-[275px] border-[1px] border-[#fff] bg-[#2c2c2c36] backdrop-blur-lg p-4 shrink-0 flex flex-col shadow-none">
+                                    class="group card rounded-[24px] w-[200px] h-[275px] border-[1px] border-[#fff] bg-[#2c2c2c36] backdrop-blur-lg pb-6 px-4 shrink-0 flex flex-col shadow-none relative">
                                     <p
                                         class="w-full flex justify-center object-cover transition-opacity duration-500 group-hover:opacity-0">
-                                        {{ $product->name }}
+                                        {{ \Illuminate\Support\Str::limit($product->name, 10) }}
                                     </p>
                                     <img class="object-cover transition-opacity w-full duration-500 group-hover:opacity-0"
                                         src="{{ asset('storage/' . $product->image) }}" alt="">
@@ -220,12 +220,24 @@
                                     Belum ada produk yang ditambahkan.
                                 </div>
                             @endforelse
-                        </div>
 
+                            @if ($products->count() > 10)
+                                <a href="{{ route('products.view.user') }}"
+                                    class="rounded-[24px] hover:bg-[#ffffff75] transition-all duration-300 hover:text-black w-[200px] h-[275px] border border-dashed border-[#fff] backdrop-blur-lg shrink-0 flex items-center justify-center text-white text-center">
+                                    <p class="underline">
+                                        Lihat Selengkapnya →
+                                    </p>
+                                </a>
+                            @endif
+
+                        </div>
                     </div>
                 </div>
-
             </div>
+
+
+
+
         </div>
         <div class="swiper mySwiper w-full mt-10">
             <div class="swiper-wrapper">
@@ -268,7 +280,7 @@
                 <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
                 <p class="mb-[1.5rem]">Get the best products and the best quality at affordable prices and you will be
                     able to feel the advantages yourself.</p>
-                <a href="https://wa.me/6282223332830"
+                <a href="https://wa.me/6281335715398"
                     class="border-2 bg-white underline hover:text-blue-500 text-[#000] px-6 py-2 rounded-full transition-all duration-300 ease-in-out shadow border-[#fff]">Contact
                     Us →</a>
             </div>
@@ -291,6 +303,7 @@
             </div>
 
         </div>
+    </div>
     </div>
     </div>
     <x-footer></x-footer>

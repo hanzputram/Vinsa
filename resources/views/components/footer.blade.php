@@ -1,6 +1,6 @@
 <footer class="w-[100%] bg-[#ffffff] border-t-[2px] border-[#066c5f] mt-10 relative" id="footer">
     <div class="mx-auto w-[90%] flex py-[3rem]  justify-between flex-wrap">
-        <a href="https://wa.me/6282223332830" id="fixedWhatsapp">
+        <a href="https://wa.me/6281335715398" id="fixedWhatsapp">
             <div
                 class="w-[75px] h-[75px] fixed bottom-[20px] left-[20px] z-[1000] bg-[#ffffff4d] rounded-full backdrop-blur-[2px] flex items-center justify-center">
                 <img class="wa-text-curv flex items-center justify-center" src="/image/war.png" alt=""><svg
@@ -39,12 +39,12 @@
         <div class="lg:w-1/2">
             <img width="100px" src="/image/vinsalg.png" alt="">
         </div>
-        <div class="lg:text-center text-right lg:w-1/2 text-[#066C5F] font-bold">
+        <div class="text-right lg:w-1/2 text-[#066C5F] font-bold">
             Stay Connected
             <br>
-            <div class="my-4 flex text-black justify-center font-normal space-x-4">
+            <div class="my-4  text-black font-normal space-x-4">
                 <a href="#" class="hover:text-[#066C5F]">Tik Tok</a>
-                <a href="#" class="hover:text-[#066C5F]">You Tube</a>
+                <a href="https://wa.me/6281335715398" class="hover:text-[#066C5F]">Whats App</a>
                 <a href="#" class="hover:text-[#066C5F]">Instagram</a>
             </div>
             &copy; 2025 Vinsa. All rights reserved.

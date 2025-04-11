@@ -50,7 +50,7 @@
                         <x-slot name="trigger">
                             <button
                                 class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-900 bg-white hover:text-gray-500 focus:outline-none transition ease-in-out duration-150">
-                                <div>Gambar</div>
+                                <div>Banner</div>
 
                                 <div class="ms-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -161,7 +161,7 @@
             <div>
                 <button @click="openGambar = !openGambar"
                     class="w-full text-left px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none flex items-center justify-between">
-                    <span class="text-lg">Gambar</span>
+                    <span class="text-lg">Banner</span>
                     <svg :class="{ 'transform rotate-180': openGambar }"
                         class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
@@ -170,10 +170,10 @@
                 </button>
                 <div x-show="openGambar" x-collapse class="pl-6 space-y-1">
                     <x-responsive-nav-link :href="route('carousels.create')" :active="request()->routeIs('carousels.create')">
-                        {{ __('Tambah Carousel') }}
+                        {{ __('Tambah Banner') }}
                     </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('carousels.index')" :active="request()->routeIs('carousels.index')">
-                        {{ __('Perbarui Gambar') }}
+                        {{ __('Perbarui Banner') }}
                     </x-responsive-nav-link>
                 </div>
             </div>

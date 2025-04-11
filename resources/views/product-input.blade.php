@@ -49,7 +49,7 @@
             <div class="flex gap-2 mb-2 spec-row">
                 <input type="text" name="specifications[0][field_name]" placeholder="Nama Spesifikasi"
                     class="w-1/2 px-4 py-2 border border-gray-300 rounded-lg spec-field">
-                <input type="text" name="specifications[0][field_value]" placeholder="Nilai"
+                <input type="text" name="specifications[0][field_value]" placeholder="mm, Kg, °C ..."
                     class="w-1/2 px-4 py-2 border border-gray-300 rounded-lg spec-value">
             </div>
         </div>
@@ -99,7 +99,7 @@
                 div.innerHTML = `
                     <input type="text" name="specifications[${specCount}][field_name]" placeholder="Nama Spesifikasi" 
                         class="w-1/2 px-4 py-2 border border-gray-300 rounded-lg spec-field">
-                    <input type="text" name="specifications[${specCount}][field_value]" placeholder="Nilai" 
+                    <input type="text" name="specifications[${specCount}][field_value]" placeholder="mm, Kg, °C ..." 
                         class="w-1/2 px-4 py-2 border border-gray-300 rounded-lg spec-value">
                 `;
                 specContainer.appendChild(div);

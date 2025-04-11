@@ -36,7 +36,7 @@
                 hover:file:bg-blue-100">
                 <p class="text-gray-500 text-sm">*Biarkan kosong jika tidak ingin mengganti gambar</p>
                 <p class="text-red-500 text-sm">*Wajib menggunakan ratio 8:11</p>
-                <img src="{{ asset('storage/' . $product->image) }}" alt="Product Image" class="w-40 mt-2 rounded-lg">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="Product Image" class="w-40 border-[1.5px] mt-2 rounded-lg">
             </div>
 
             <div class="max-w-[90%]" id="specifications">
@@ -47,7 +47,7 @@
                             value="{{ $attribute->field_name }}" placeholder="Nama Spesifikasi"
                             class="w-1/2 px-4 py-2 border rounded-lg">
                         <input type="text" name="specifications[{{ $index }}][field_value]"
-                            value="{{ $attribute->field_value }}" placeholder="Nilai"
+                            value="{{ $attribute->field_value }}" placeholder="mm, Kg, °C ..."
                             class="w-1/2 px-4 py-2 border rounded-lg">
                     </div>
                 @endforeach
@@ -106,7 +106,7 @@
             div.classList.add('flex', 'gap-2', 'mb-2');
             div.innerHTML = `
             <input type="text" name="specifications[${specCount}][field_name]" placeholder="Nama Spesifikasi" class="w-1/2 px-4 py-2 border rounded-lg">
-            <input type="text" name="specifications[${specCount}][field_value]" placeholder="Nilai" class="w-1/2 px-4 py-2 border rounded-lg">
+            <input type="text" name="specifications[${specCount}][field_value]" placeholder="mm, Kg, °C ..." class="w-1/2 px-4 py-2 border rounded-lg">
             `;
             document.getElementById('specifications').appendChild(div);
             specCount++;

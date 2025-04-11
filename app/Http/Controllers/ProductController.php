@@ -9,9 +9,20 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with('attributes')->get();
+        $query = Product::with('attributes');
+
+        if ($request->has('search') && $request->search !== null) {
+            $searchTerm = $request->search;
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('name', 'like', "%{$searchTerm}%")
+                    ->orWhere('kode', 'like', "%{$searchTerm}%");
+            });
+        }
+
+        $products = $query->get();
+
         return view('product', compact('products'));
     }
 
@@ -78,7 +89,7 @@ class ProductController extends Controller
             'action' => 'create',
             'entity_type' => 'product',
             'entity_id' => $product->id,
-            'description' => ' menambahkan produk baru: ' . $product->name,
+            'description' => auth()->user()->name . ' menambahkan produk baru: ' . $product->name,
         ]);
 
         return redirect()->back()->with('success', 'Produk berhasil ditambahkan!');
@@ -181,11 +192,11 @@ class ProductController extends Controller
                 'action' => 'update',
                 'entity_type' => 'product',
                 'entity_id' => $product->id,
-                'description' => ' memperbarui produk "' . $product->name . '" dengan perubahan: ' . implode(', ', $historyChanges),
+                'description' => auth()->user()->name . ' memperbarui produk "' . $product->name . '" dengan perubahan: ' . implode(', ', $historyChanges),
             ]);
         }
 
-        return redirect()->back()->with('success', 'Produk berhasil diperbarui!');
+        return redirect()->route('products.edit')->with('success', 'Produk berhasil diperbarui!');
     }
 
     public function destroy($id)
@@ -204,7 +215,7 @@ class ProductController extends Controller
             'action' => 'delete',
             'entity_type' => 'product',
             'entity_id' => $id,
-            'description' => ' menghapus produk: ' . $productName,
+            'description' => auth()->user()->name . ' menghapus produk: ' . $productName,
         ]);
 
         return redirect()->route('products.edit')->with('success', 'Produk berhasil dihapus.');

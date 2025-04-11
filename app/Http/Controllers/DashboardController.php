@@ -12,24 +12,34 @@ use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
-
     public function index(Request $request)
     {
         $productCount = Product::count();
         $carouselCount = Carousel::count();
 
-        // Ambil semua histories, termasuk relasi user
         $query = History::with('user');
 
-        // Filter berdasarkan tanggal jika ada
+        // Filter berdasarkan tanggal
         if ($request->has('date') && $request->date != '') {
             $query->whereDate('created_at', $request->date);
         } else {
             $query->whereDate('created_at', Carbon::today());
         }
 
-        // Ambil 10 log terbaru
-        $histories = $query->latest()->take(10)->get();
+        // Filter berdasarkan search query
+        if ($request->has('search') && $request->search != '') {
+            $search = $request->search;
+
+            $query->where(function ($q) use ($search) {
+                $q->whereHas('user', function ($uq) use ($search) {
+                    $uq->where('name', 'like', '%' . $search . '%');
+                })
+                    ->orWhere('description', 'like', '%' . $search . '%')
+                    ->orWhereRaw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') like ?", ["%$search%"]);
+            });
+        }
+
+        $histories = $query->latest()->paginate(10);
 
         return view('dashboard', compact('histories', 'productCount', 'carouselCount'));
     }
