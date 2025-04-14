@@ -1,13 +1,42 @@
 <x-app-layout>
     {{-- SweetAlert2 CDN --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <div class="max-w-screen min-h-[calc(100vh-66px)] bg-white p-6">
         <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data"
             class="space-y-4">
             @csrf
             @method('PUT')
 
+            <a href="{{ route('products.edit') }}" class="group">
+                <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    class="stroke-black group-hover:stroke-gray-400 transition-colors duration-300">
+                    <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </svg>
+            </a>
+
             <h2 class="text-2xl font-semibold text-gray-700 mb-4">Edit Produk</h2>
+
+            <select name="category_id" id="categorySelect" required class="form-select rounded-xl">
+                <option value="" disabled
+                    {{ old('category_id', $product->category_id ?? '') == '' ? 'selected' : '' }}>Pilih Kategori
+                </option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"
+                        {{ old('category_id', $product->category_id ?? '') == $category->id ? 'selected' : '' }}
+                        data-name="{{ strtolower($category->name) }}">
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+
+            <input type="hidden" name="custom_input" id="custom_input"
+                value="{{ old('custom_input', $product->custom_input ?? '') }}">
+
+            <div id="category-extra" class="max-w-[90%] space-y-2 mt-2">
+                {{-- Akan diisi oleh JS --}}
+            </div>
 
             <div class="max-w-[90%]">
                 <label class="block text-gray-600 mb-1">Nama Produk</label>
@@ -16,7 +45,7 @@
             </div>
 
             <div class="max-w-[90%]">
-                <label class="block text-gray-600 mb-1">Kode Produk</label>
+                <label class="block text-gray-600 mb-1">Referensi Kode Product</label>
                 <input type="text" name="kode" value="{{ $product->kode }}" required
                     class="w-full px-4 py-2 border rounded-lg">
             </div>
@@ -36,7 +65,8 @@
                 hover:file:bg-blue-100">
                 <p class="text-gray-500 text-sm">*Biarkan kosong jika tidak ingin mengganti gambar</p>
                 <p class="text-red-500 text-sm">*Wajib menggunakan ratio 8:11</p>
-                <img src="{{ asset('storage/' . $product->image) }}" alt="Product Image" class="w-40 border-[1.5px] mt-2 rounded-lg">
+                <img src="{{ asset('storage/' . $product->image) }}" alt="Product Image"
+                    class="w-40 border-[1.5px] mt-2 rounded-lg">
             </div>
 
             <div class="max-w-[90%]" id="specifications">
@@ -105,18 +135,68 @@
             let div = document.createElement('div');
             div.classList.add('flex', 'gap-2', 'mb-2');
             div.innerHTML = `
-            <input type="text" name="specifications[${specCount}][field_name]" placeholder="Nama Spesifikasi" class="w-1/2 px-4 py-2 border rounded-lg">
-            <input type="text" name="specifications[${specCount}][field_value]" placeholder="mm, Kg, °C ..." class="w-1/2 px-4 py-2 border rounded-lg">
+                <input type="text" name="specifications[${specCount}][field_name]" placeholder="Nama Spesifikasi" class="w-1/2 px-4 py-2 border rounded-lg">
+                <input type="text" name="specifications[${specCount}][field_value]" placeholder="mm, Kg, °C ..." class="w-1/2 px-4 py-2 border rounded-lg">
             `;
             document.getElementById('specifications').appendChild(div);
             specCount++;
         }
-    </script>
 
-    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const categorySelect = document.getElementById('categorySelect');
+            const extraContainer = document.getElementById('category-extra');
+            const customInputHidden = document.getElementById('custom_input');
+            const oldCategory = categorySelect.options[categorySelect.selectedIndex]?.dataset?.name;
+            const oldValue = `{{ old('custom_input', $product->custom_input ?? '') }}`;
+
+            function renderExtraFields(category) {
+                extraContainer.innerHTML = '';
+                if (category === 'cable tray') {
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">U & C Series</label>
+                        <select class="w-full px-4 py-2 border rounded-lg"
+                            onchange="document.getElementById('custom_input').value = this.value;">
+                            <option value="">Pilih Series</option>
+                            <option value="U Series" ${oldValue === 'U Series' ? 'selected' : ''}>U Series</option>
+                            <option value="C Series" ${oldValue === 'C Series' ? 'selected' : ''}>C Series</option>
+                        </select>
+                    `;
+                    customInputHidden.value = oldValue;
+                } else if (['push button', 'selector switch', 'pilot lamp', 'accessories'].includes(category)) {
+                    let label = '';
+                    if (category === 'push button') {
+                        label = 'Tipe Push Button';
+                    } else if (category === 'selector switch') {
+                        label = 'Tipe Selector Switch';
+                    } else if (category === 'pilot lamp') {
+                        label = 'Tipe Pilot Lamp';
+                    } else if (category === 'accessories') {
+                        label = 'Tipe Aksesoris';
+                    }
+
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">${label}</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg"
+                            placeholder="Masukkan ${label.toLowerCase()}"
+                            value="${oldValue}"
+                            oninput="document.getElementById('custom_input').value = this.value">
+                    `;
+                    customInputHidden.value = oldValue;
+                }
+            }
+
+            if (oldCategory) {
+                renderExtraFields(oldCategory);
+            }
+
+            categorySelect.addEventListener('change', function() {
+                const selected = this.options[this.selectedIndex].dataset.name;
+                renderExtraFields(selected);
+            });
+        });
+
         document.addEventListener('DOMContentLoaded', function() {
             const deleteButtons = document.querySelectorAll('.delete-product-btn');
-
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const id = this.getAttribute('data-id');

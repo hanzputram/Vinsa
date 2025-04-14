@@ -138,7 +138,7 @@
 <body class="outfit bg-[#FDFBEE]">
     <div class="max-w-[93%] mx-auto">
         <div class="flex justify-between items-center py-3">
-            <x-navUser></x-navUser>
+            <x-navUser class="relative z-[11]"></x-navUser>
         </div>
 
         {{-- isi image --}}

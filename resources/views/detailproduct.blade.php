@@ -116,11 +116,20 @@
                             stroke-linejoin="round"></path>
                     </svg>
                 </a>
+
+                {{-- Produk --}}
                 <div
                     class="w-full min-h-full flex flex-col justify-center items-center gap-6 lg:flex-row lg:items-start lg:justify-start mx-auto my-10">
                     <div
                         class="w-full sm:w-72 md:w-80 h-auto bg-[#FDFBEE]/40 border border-white text-white p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col justify-start relative overflow-hidden backdrop-blur-[8px]">
-                        <h2 class="text-base sm:text-lg text-center font-bold">{{ $product->kode }}</h2>
+                        <h2 class="text-base sm:text-lg text-center font-bold">
+                            @if ($product->custom_input)
+                                {{ $product->custom_input }}<br>
+                                <span class="text-sm font-normal">{{ $product->kode }}</span>
+                            @else
+                                {{ $product->kode }}
+                            @endif
+                        </h2>
                         <p class="mt-2 flex-grow text-xs flex justify-center items-center sm:text-sm">
                             <img src="{{ asset('storage/' . $product->image) }}" width="180px" alt="Vinsa">
                         </p>
@@ -132,7 +141,11 @@
                                 {{ $product->name }}
                             </p>
                             <p class="text-lg sm:text-xl lg:text-2xl text-left font-semibold text-white">
-                                {{ $product->kode }}
+                                @if ($product->custom_input)
+                                    {{ $product->custom_input }} - {{ $product->kode }}
+                                @else
+                                    {{ $product->kode }}
+                                @endif
                             </p>
                         </div>
                         <div>
@@ -154,8 +167,8 @@
                             </ul>
                         </div>
                     </div>
-
                 </div>
+
                 <div class="text-center lg:text-left px-4">
                     <p class="text-3xl sm:text-5xl lg:text-6xl font-bold text-white">
                         Interest With This?

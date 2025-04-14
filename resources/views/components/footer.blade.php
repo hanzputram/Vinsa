@@ -43,9 +43,9 @@
             Stay Connected
             <br>
             <div class="my-4  text-black font-normal space-x-4">
-                <a href="#" class="hover:text-[#066C5F]">Tik Tok</a>
+                {{-- <a href="#" class="hover:text-[#066C5F]">Tik Tok</a> --}}
                 <a href="https://wa.me/6281335715398" class="hover:text-[#066C5F]">Whats App</a>
-                <a href="#" class="hover:text-[#066C5F]">Instagram</a>
+                {{-- <a href="#" class="hover:text-[#066C5F]">Instagram</a> --}}
             </div>
             &copy; 2025 Vinsa. All rights reserved.
         </div>

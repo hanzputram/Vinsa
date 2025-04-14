@@ -127,8 +127,8 @@
                     About Us
                 </p>
                 <p class="text-xl w-[90%] text-center text-[#fffffffe] pt-5 mx-auto pb-15">
-                    "Vinsa: Dedikasi dalam Menyediakan Solusi Kelistrikan Premium, Menghadirkan Produk Berkualitas
-                    Tinggi untuk Kebutuhan Rumah, Bisnis, dan Industri Anda!
+                    {{-- "Vinsa: Dedikasi dalam Menyediakan Solusi Kelistrikan Premium, Menghadirkan Produk Berkualitas
+                    Tinggi untuk Kebutuhan Rumah, Bisnis, dan Industri Anda! --}}
                 </p>
             </div>
         </div>

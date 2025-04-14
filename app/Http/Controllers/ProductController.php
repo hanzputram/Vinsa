@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\ProductAtribute;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -22,8 +23,9 @@ class ProductController extends Controller
         }
 
         $products = $query->get();
+        $categories = Category::all();
 
-        return view('product', compact('products'));
+        return view('product', compact('products', 'categories'));
     }
 
     public function show($id)
@@ -34,16 +36,19 @@ class ProductController extends Controller
 
     public function view()
     {
-        return view('product-input');
+        $categories = Category::all();
+        return view('product-input', compact('categories'));
     }
 
     public function store(Request $request)
     {
+        
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'stock' => 'nullable|integer|min:0',
             'kode' => 'required|string|unique:products,kode',
+            'category_id' => 'required|exists:categories,id',
             'image' => [
                 'required',
                 'image',
@@ -63,6 +68,30 @@ class ProductController extends Controller
             'specifications.*.field_value' => 'nullable|string',
         ]);
 
+        foreach ($request->specifications ?? [] as $index => $spec) {
+            if (!empty($spec['field_name']) && empty($spec['field_value'])) {
+                return back()->withErrors([
+                    "specifications.$index.field_value" => "Field value dibutuhkan jika field name diisi.",
+                ])->withInput();
+            }
+
+            if (empty($spec['field_name']) && !empty($spec['field_value'])) {
+                return back()->withErrors([
+                    "specifications.$index.field_name" => "Field name dibutuhkan jika field value diisi.",
+                ])->withInput();
+            }
+        }
+
+        // Ambil custom input dari field dinamis
+        $customInput = null;
+        $customInputFields = ['push_button_type', 'selector_switch_type', 'pilot_lamp_type', 'uc_series'];
+        foreach ($customInputFields as $field) {
+            if ($request->has($field)) {
+                $customInput = $request->input($field);
+                break;
+            }
+        }
+
         $imagePath = $request->file('image')->store('products', 'public');
 
         $product = Product::create([
@@ -70,12 +99,14 @@ class ProductController extends Controller
             'description' => $request->description,
             'stock' => $request->stock,
             'kode' => $request->kode,
+            'category_id' => $request->category_id,
+            'custom_input' => $customInput, // ← Masukkan di sini
             'image' => $imagePath,
         ]);
 
         if ($request->has('specifications')) {
             foreach ($request->specifications as $spec) {
-                if (!empty($spec['field_name']) || !empty($spec['field_value'])) {
+                if (!empty($spec['field_name']) && !empty($spec['field_value'])) {
                     ProductAtribute::create([
                         'product_id' => $product->id,
                         'field_name' => $spec['field_name'],
@@ -92,8 +123,11 @@ class ProductController extends Controller
             'description' => auth()->user()->name . ' menambahkan produk baru: ' . $product->name,
         ]);
 
-        return redirect()->back()->with('success', 'Produk berhasil ditambahkan!');
+        return redirect()->route('products.view', $product->id)->with('success', 'Produk berhasil ditambahkan!');
     }
+
+
+
 
     public function edit()
     {
@@ -104,7 +138,8 @@ class ProductController extends Controller
     public function editView($id)
     {
         $product = Product::with('attributes')->findOrFail($id);
-        return view('update-product', compact('product'));
+        $categories = Category::all();
+        return view('update-product', compact('product', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -114,6 +149,7 @@ class ProductController extends Controller
             'description' => 'nullable|string',
             'stock' => 'nullable|integer|min:0',
             'kode' => 'required|string|unique:products,kode,' . $id,
+            'category_id' => 'required|exists:categories,id',
             'image' => [
                 'nullable',
                 'image',
@@ -158,6 +194,23 @@ class ProductController extends Controller
             $product->kode = $request->kode;
         }
 
+        if ($product->category_id !== $request->category_id) {
+            $oldCategoryName = $product->category ? $product->category->name : '(kategori dihapus)';
+            $newCategoryName = Category::find($request->category_id)->name;
+            $historyChanges[] = 'kategori dari "' . $oldCategoryName . '" menjadi "' . $newCategoryName . '"';
+            $product->category_id = $request->category_id;
+        }
+
+        // Ambil langsung custom_input dari request
+        $customInput = $request->custom_input;
+
+        if ($product->custom_input !== $customInput) {
+            $oldCustom = $product->custom_input ?? '(kosong)';
+            $newCustom = $customInput ?? '(kosong)';
+            $historyChanges[] = 'custom input dari "' . $oldCustom . '" menjadi "' . $newCustom . '"';
+            $product->custom_input = $customInput;
+        }
+
         if ($request->hasFile('image')) {
             $newImagePath = $request->file('image')->store('products', 'public');
             if ($product->image && Storage::disk('public')->exists($product->image)) {
@@ -169,6 +222,7 @@ class ProductController extends Controller
 
         $product->save();
 
+        // Update spesifikasi
         $product->attributes()->delete();
         $hasSpec = false;
         if ($request->has('specifications')) {
@@ -183,6 +237,7 @@ class ProductController extends Controller
                 }
             }
         }
+
         if ($hasSpec) {
             $historyChanges[] = 'spesifikasi telah diperbarui';
         }
@@ -196,8 +251,12 @@ class ProductController extends Controller
             ]);
         }
 
+        // dd($request->all());
         return redirect()->route('products.edit')->with('success', 'Produk berhasil diperbarui!');
     }
+
+
+
 
     public function destroy($id)
     {
