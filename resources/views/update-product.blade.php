@@ -7,7 +7,7 @@
             class="space-y-4">
             @csrf
             @method('PUT')
-
+            {{-- nice --}}
             <a href="{{ route('products.edit') }}" class="group">
                 <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none" xmlns="http://www.w3.org/2000/svg"
                     class="stroke-black group-hover:stroke-gray-400 transition-colors duration-300">
