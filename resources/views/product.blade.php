@@ -187,13 +187,13 @@
                                     </div>
                                     <p class="text-[12px] sm:hidden text-gray-200">
                                         @if ($product->custom_input)
-                                            {{ $product->custom_input }}
+                                        {{ \Illuminate\Support\Str::limit($product->custom_input, 10) }}
                                         @else
                                             Kode: {{ $product->kode }}
                                         @endif
                                     </p>
                                 </div>
-                                <div class="">
+                                <div class="text-[12px]">
                                     @if ($product->custom_input)
                                         {{ $product->kode }}
                                     @endif
