@@ -159,7 +159,7 @@
                     <a href="/product"
                         class="bg-green-600 text-white px-6 py-3 transition-all mr-5 duration-100 ease-in-out rounded-full shadow hover:bg-green-700">Our
                         Product</a>
-                    <a href="https://wa.me/6282223332830"
+                    <a href="https://wa.me/6281335715398"
                         class="border-2 border-[#F77F1E] text-[#fff] px-6 py-3 rounded-full transition-all duration-300 ease-in-out shadow hover:bg-[#F77F1E] hover:text-white">Contact
                         Us</a>
                 </div>

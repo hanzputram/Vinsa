@@ -18,7 +18,7 @@
                 </svg>
             </div>
         </a>
-        <a href="https://wa.me/6282223332830" id="absoluteWhatsapp">
+        <a href="https://wa.me/6281335715398" id="absoluteWhatsapp">
             <div
                 class="w-[75px] h-[75px] absolute top-[-98px] left-[20px] z-[1000] bg-[#ffffff4d] rounded-full backdrop-blur-[2px] flex items-center justify-center">
                 <img class="wa-text-curv flex items-center justify-center" src="/image/war.png" alt=""><svg
