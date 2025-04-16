@@ -296,7 +296,7 @@
                         style="--i:13">d</span><span style="--i:14">u</span><span style="--i:15">c</span><span
                         style="--i:16">t</span>
                 </h2>
-                <p class="mb-[1.5rem]">Engineered for durability and safety</p>
+                <p class="mb-[1.5rem]">Built for durability and safety</p>
                 <a href="/product"
                     class="border-2 bg-[#066c5f] text-white underline hover:text-blue-500  px-6 pt-2 pb-3 rounded-full transition-all duration-300 ease-in-out shadow border-[#fff]">Our
                     Product More →</a>
