@@ -267,7 +267,7 @@
         </div>
 
         {{-- category produk --}}
-        {{-- <div class="grid grid-rows-{{ count($categories) }} gap-4">
+        <div class="grid grid-rows-{{ count($categories) }} gap-4">
             @foreach ($categories as $category)
                 @php
                     $firstProduct = $category->products->first();
@@ -328,7 +328,7 @@
                     </div>
                 </div>
             @endforeach
-        </div> --}}
+        </div>
         <div class="mx-auto mt-10">
             <!-- Grid Section -->
             <div class="grid md:grid-cols-3 gap-6">
