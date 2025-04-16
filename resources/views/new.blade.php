@@ -260,7 +260,6 @@
                 @endphp
 
                 <div class="grid grid-cols-6 row-span-1 gap-4">
-                    {{-- KIRI: Gambar dan nama kategori --}}
                     <div
                         class="bg-[#5f5f5f60] hidden md:col-span-1 border-white border-[1.5px] py-[2rem] text-center rounded-xl overflow-hidden shadow-md md:flex md:flex-col md:items-center justify-start">
                         <h3 class="text-lg font-bold mb-2">{{ $category->name }}</h3>
@@ -276,7 +275,7 @@
                         @endif
                     </div>
 
-                    {{-- KANAN: Horizontal scroll slider --}}
+
                     <div class="col-span-7 md:col-span-5 bg-[#5f5f5f60] rounded-xl p-4">
                             <h3 class="text-lg md:hidden font-bold mb-2">{{ $category->name }}</h3>
                         @if ($category->products->count())
