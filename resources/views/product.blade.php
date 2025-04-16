@@ -170,9 +170,10 @@
                                     {{ \Illuminate\Support\Str::limit($product->name, 19) }}
                                 </div>
 
-                                <div class="font-bold text-base hidden sm:block sm:text-lg product-code">
+                                <div
+                                    class="font-semibold text-base hidden sm:block sm:text-[13px] sm:text-gray-200 product-code">
                                     @if ($product->custom_input)
-                                        {{ $product->custom_input }}
+                                        {{ \Illuminate\Support\Str::limit($product->custom_input, 20) }}
                                     @else
                                         {{ $product->kode }}
                                     @endif
@@ -187,10 +188,10 @@
                                     </div>
                                     <div class="text-[12px] sm:hidden text-gray-200">
                                         @if ($product->custom_input)
-                                        {{ \Illuminate\Support\Str::limit($product->custom_input, 15) }}
+                                            {{ \Illuminate\Support\Str::limit($product->custom_input, 15) }}
                                         @else
                                             {{ $product->kode }}
-                                        @endif 
+                                        @endif
                                         <br>
                                         @if ($product->custom_input)
                                             {{ $product->kode }}
