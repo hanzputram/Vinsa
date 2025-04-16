@@ -171,7 +171,7 @@
                                 </div>
 
                                 <div
-                                    class="font-semibold text-base hidden sm:block sm:text-[13px] sm:text-gray-200 product-code">
+                                    class="font-semibold text-base hidden sm:block sm:text-[13px] sm:text-gray-300 product-code">
                                     @if ($product->custom_input)
                                         {{ \Illuminate\Support\Str::limit($product->custom_input, 20) }}
                                     @else
