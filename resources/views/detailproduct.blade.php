@@ -134,7 +134,7 @@
                         </p>
                     </div>
                     <div
-                        class="w-full lg:h-[325px] sm:w-72 md:w-[400px] mx-0 lg:mx-10 flex flex-col justify-between gap-4 lg:overflow-y-auto pr-2">
+                        class="w-full lg:h-[325px] mx-0 lg:mx-10 flex flex-col justify-between gap-4 lg:overflow-y-auto pr-2">
                         <div class="border-b-[1.5px] border-white pb-3">
                             <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-left font-extrabold text-white">
                                 {{ $product->name }}
