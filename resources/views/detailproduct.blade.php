@@ -124,7 +124,7 @@
                         <h2 class="text-base sm:text-lg text-center font-bold">
                             @if ($product->custom_input)
                                 {{ $product->custom_input }}<br>
-                                <span class="text-sm font-normal">{{ $product->kode }}</span>
+                                {{-- <span class="text-sm font-normal">{{ $product->kode }}</span> --}}
                             @else
                                 {{ $product->kode }}
                             @endif
