@@ -5,7 +5,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite('resources/css/app.css')
+    @php
+        $isProduction = app()->environment('production');
+        $manifestPath = $isProduction ? '../public_html/build/manifest.json' : public_path('build/manifest.json');
+    @endphp
+
+    @if ($isProduction && file_exists($manifestPath))
+        @php
+            $manifest = json_decode(file_get_contents($manifestPath), true);
+        @endphp
+        <link rel="stylesheet" href="{{ config('app.url') }}/build/{{ $manifest['resources/css/app.css']['file'] }}">
+        <script type="module" src="{{ config('app.url') }}/build/{{ $manifest['resources/js/app.js']['file'] }}"></script>
+    @else
+        @viteReactRefresh
+        @vite(['resources/js/app.js', 'resources/css/app.css'])
+    @endif
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -253,7 +267,7 @@
         </div>
 
         {{-- category produk --}}
-        {{-- <div class="grid grid-rows-{{ count($categories) }} gap-4">
+        <div class="grid grid-rows-{{ count($categories) }} gap-4">
             @foreach ($categories as $category)
                 @php
                     $firstProduct = $category->products->first();
@@ -268,8 +282,7 @@
                             <img src="{{ asset('storage/' . $firstProduct->image) }}" alt="{{ $firstProduct->name }}"
                                 class="w-[120px] object-cover rounded-md">
                         @else
-                            <div
-                                class="w-[120px] flex items-center justify-center text-gray-400 bg-white rounded-md">
+                            <div class="w-[120px] flex items-center justify-center text-gray-400 bg-white rounded-md">
                                 Gambar tidak tersedia
                             </div>
                         @endif
@@ -277,13 +290,14 @@
 
 
                     <div class="col-span-7 md:col-span-5 bg-[#5f5f5f60] rounded-xl p-4">
-                            <h3 class="text-lg md:hidden font-bold mb-2">{{ $category->name }}</h3>
+                        <h3 class="text-lg md:hidden font-bold mb-2">{{ $category->name }}</h3>
                         @if ($category->products->count())
                             <div class="flex gap-4 overflow-x-auto pb-2">
                                 @foreach ($category->products as $productItem)
                                     <div
                                         class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                        <a href="/detail/{{ $productItem->id }}" class="transition-transform transform hover:scale-[1.01]">
+                                        <a href="/detail/{{ $productItem->id }}"
+                                            class="transition-transform transform hover:scale-[1.01]">
                                             @if ($productItem->custom_input)
                                                 <p class="text-xs text-gray-300 mb-2">
                                                     {{ Str::limit($productItem->kode, 50) }}
@@ -314,7 +328,7 @@
                     </div>
                 </div>
             @endforeach
-        </div> --}}
+        </div>
         <div class="mx-auto mt-10">
             <!-- Grid Section -->
             <div class="grid md:grid-cols-3 gap-6">
