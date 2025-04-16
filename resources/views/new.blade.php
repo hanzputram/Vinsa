@@ -11,8 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <title>Vinsa</title>
-    <link rel="icon" type="image/png" href="{{ asset('image/sa.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
     <style>
         .outfit {
             font-family: "Outfit", sans-serif;
@@ -56,13 +58,13 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #ffffff53;
+            background: #ffffff84;
             /* Warna thumb */
             border-radius: 100px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #ffffffb5;
+            background: #ffffffd6;
             /* Warna saat hover */
         }
 
@@ -234,10 +236,6 @@
                     </div>
                 </div>
             </div>
-
-
-
-
         </div>
         <div class="swiper mySwiper w-full mt-10">
             <div class="swiper-wrapper">
@@ -254,6 +252,70 @@
             <div class="swiper-pagination"></div>
         </div>
 
+        {{-- category produk --}}
+        <div class="grid grid-rows-{{ count($categories) }} gap-4">
+            @foreach ($categories as $category)
+                @php
+                    $firstProduct = $category->products->first();
+                @endphp
+
+                <div class="grid grid-cols-6 row-span-1 gap-4">
+                    {{-- KIRI: Gambar dan nama kategori --}}
+                    <div
+                        class="bg-[#5f5f5f60] hidden md:col-span-1 border-white border-[1.5px] py-[2rem] text-center rounded-xl overflow-hidden shadow-md md:flex md:flex-col md:items-center justify-start">
+                        <h3 class="text-lg font-bold mb-2">{{ $category->name }}</h3>
+
+                        @if ($firstProduct && $firstProduct->image)
+                            <img src="{{ asset('storage/' . $firstProduct->image) }}" alt="{{ $firstProduct->name }}"
+                                class="w-[120px] object-cover rounded-md">
+                        @else
+                            <div
+                                class="w-[120px] flex items-center justify-center text-gray-400 bg-white rounded-md">
+                                Gambar tidak tersedia
+                            </div>
+                        @endif
+                    </div>
+
+                    {{-- KANAN: Horizontal scroll slider --}}
+                    <div class="col-span-7 md:col-span-5 bg-[#5f5f5f60] rounded-xl p-4">
+                            <h3 class="text-lg md:hidden font-bold mb-2">{{ $category->name }}</h3>
+                        @if ($category->products->count())
+                            <div class="flex gap-4 overflow-x-auto pb-2">
+                                @foreach ($category->products as $productItem)
+                                    <div
+                                        class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                        <a href="/detail/{{ $productItem->id }}" class="transition-transform transform hover:scale-[1.01]">
+                                            @if ($productItem->custom_input)
+                                                <p class="text-xs text-gray-300 mb-2">
+                                                    {{ Str::limit($productItem->kode, 50) }}
+                                                </p>
+                                            @endif
+                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                alt="{{ $productItem->name }}"
+                                                class="w-[120px] h-40 object-cover rounded">
+                                            <h4 class="mt-2 font-bold text-sm">
+                                                {{ Str::limit($productItem->name, 10) }}
+                                            </h4>
+                                            @if ($productItem->custom_input)
+                                                <p class="text-xs text-gray-300">
+                                                    {{ Str::limit($productItem->custom_input, 20) }}
+                                                </p>
+                                            @else
+                                                <p class="text-xs text-gray-300">
+                                                    {{ Str::limit($productItem->kode, 50) }}
+                                                </p>
+                                            @endif
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @else
+                            <p class="text-sm text-gray-500">Belum ada produk pada kategori ini.</p>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+        </div>
         <div class="mx-auto mt-10">
             <!-- Grid Section -->
             <div class="grid md:grid-cols-3 gap-6">
@@ -307,6 +369,7 @@
     </div>
     </div>
     <x-footer></x-footer>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </body>
 
 </html>
@@ -345,5 +408,18 @@
                 passive: false
             });
         }
+    });
+</script>
+<script>
+    const categoryIds = @json($categories->pluck('id'));
+
+    categoryIds.forEach(id => {
+        new Swiper(`.mySwiper-${id}`, {
+            slidesPerView: 3,
+            spaceBetween: 20,
+            grabCursor: true,
+            navigation: true,
+            loop: false,
+        });
     });
 </script>

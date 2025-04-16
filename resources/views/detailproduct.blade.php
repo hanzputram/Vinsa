@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <title>Vinsa</title>
-    <link rel="icon" type="image/png" href="{{ asset('image/sa.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
     <style>
         .outfit {
             font-family: "Outfit", sans-serif;
@@ -50,12 +50,14 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #ffffff53;
+            background: #ffffff84;
+            /* Warna thumb */
             border-radius: 100px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #ffffffb5;
+            background: #ffffffd6;
+            /* Warna saat hover */
         }
 
         ::-webkit-scrollbar-track {
