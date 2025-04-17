@@ -228,7 +228,7 @@
                             @if (strtolower($category->name) === 'push button')
                                 <div class="flex flex-col md:flex-row gap-4">
                                     {{-- KB 5 Series --}}
-                                    <div class="w-full md:w-1/2">
+                                    <div class="w-full md:w-1/2 md:border-r-[2px] md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
                                         <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach ($category->products->filter(function ($item) {
@@ -272,7 +272,7 @@
                                     </div>
 
                                     {{-- KB 2 Series --}}
-                                    <div class="w-full md:w-1/2 md:border-l-[2px] md:pl-[13.5px] md:border-white">
+                                    <div class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
                                         <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach (
