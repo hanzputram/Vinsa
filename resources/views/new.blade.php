@@ -284,7 +284,7 @@
                                                     $customInput = json_decode($productItem->custom_input, true);
                                                 @endphp
                                                 <div
-                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-5 w-40">
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
                                                     <a href="/detail/{{ $productItem->id }}"
                                                         class="transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
