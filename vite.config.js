@@ -8,11 +8,11 @@ export default defineConfig({
             'resources/js/app.js',
         ]),
     ],
-    // server: {
-    //     host: '0.0.0.0',
-    //     strictPort: true,
-    //     hmr: {
-    //         host: '192.168.1.6',
-    //     },
-    // },
+    server: {
+        host: '0.0.0.0',
+        strictPort: true,
+        hmr: {
+            host: '192.168.1.6',
+        },
+    },
 });

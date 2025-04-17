@@ -31,7 +31,7 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with('attributes')->findOrFail($id);
-        return view('detailproduct', compact('product')); 
+        return view('detailproduct', compact('product'));
     }
 
     public function view()
@@ -42,7 +42,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        
         $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
@@ -82,13 +81,26 @@ class ProductController extends Controller
             }
         }
 
-        // Ambil custom input dari field dinamis
         $customInput = null;
-        $customInputFields = ['push_button_type', 'selector_switch_type', 'pilot_lamp_type', 'uc_series'];
-        foreach ($customInputFields as $field) {
-            if ($request->has($field)) {
-                $customInput = $request->input($field);
-                break;
+
+        $category = Category::find($request->category_id);
+        if ($category && strtolower($category->name) === 'push button') {
+            $type = $request->input('push_button_type');
+            $series = $request->input('push_button_series');
+            $customInput = trim("$type, $series", ", ");
+        } else {
+            $customInputFields = [
+                'selector_switch_type',
+                'pilot_lamp_type',
+                'uc_series',
+                'accessories_type',
+            ];
+
+            foreach ($customInputFields as $field) {
+                if ($request->has($field)) {
+                    $customInput = $request->input($field);
+                    break;
+                }
             }
         }
 
@@ -100,7 +112,7 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'kode' => $request->kode,
             'category_id' => $request->category_id,
-            'custom_input' => $customInput, // ← Masukkan di sini
+            'custom_input' => $customInput,
             'image' => $imagePath,
         ]);
 
@@ -125,8 +137,6 @@ class ProductController extends Controller
 
         return redirect()->route('products.view', $product->id)->with('success', 'Produk berhasil ditambahkan!');
     }
-
-
 
 
     public function edit()
@@ -155,7 +165,7 @@ class ProductController extends Controller
                 'image',
                 'mimes:jpeg,png,jpg,gif',
                 function ($attribute, $value, $fail) {
-                    if ($value->isValid()) {
+                    if ($value && $value->isValid()) {
                         $dimensions = getimagesize($value);
                         $ratio = $dimensions[0] / $dimensions[1];
                         if (abs($ratio - (8 / 11)) > 0.01) {
@@ -201,8 +211,8 @@ class ProductController extends Controller
             $product->category_id = $request->category_id;
         }
 
-        // Ambil langsung custom_input dari request
-        $customInput = $request->custom_input;
+        // Ambil langsung custom_input dari request (sudah digabung dari form)
+        $customInput = $request->input('custom_input');
 
         if ($product->custom_input !== $customInput) {
             $oldCustom = $product->custom_input ?? '(kosong)';
@@ -251,7 +261,6 @@ class ProductController extends Controller
             ]);
         }
 
-        // dd($request->all());
         return redirect()->route('products.edit')->with('success', 'Produk berhasil diperbarui!');
     }
 

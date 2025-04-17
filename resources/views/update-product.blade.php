@@ -7,7 +7,7 @@
             class="space-y-4">
             @csrf
             @method('PUT')
-            {{-- nice --}}
+
             <a href="{{ route('products.edit') }}" class="group">
                 <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none" xmlns="http://www.w3.org/2000/svg"
                     class="stroke-black group-hover:stroke-gray-400 transition-colors duration-300">
@@ -34,9 +34,7 @@
             <input type="hidden" name="custom_input" id="custom_input"
                 value="{{ old('custom_input', $product->custom_input ?? '') }}">
 
-            <div id="category-extra" class="max-w-[90%] space-y-2 mt-2">
-                {{-- Akan diisi oleh JS --}}
-            </div>
+            <div id="category-extra" class="max-w-[90%] space-y-2 mt-2"></div>
 
             <div class="max-w-[90%]">
                 <label class="block text-gray-600 mb-1">Nama Produk</label>
@@ -104,7 +102,6 @@
         </form>
     </div>
 
-    {{-- SweetAlert2 Error --}}
     @if ($errors->any())
         <script>
             Swal.fire({
@@ -116,7 +113,6 @@
         </script>
     @endif
 
-    {{-- SweetAlert2 Success --}}
     @if (session('success'))
         <script>
             Swal.fire({
@@ -142,37 +138,69 @@
             specCount++;
         }
 
+        function updatePushButtonValue(tipe = null, series = null) {
+            const hidden = document.getElementById('custom_input');
+            let current = {};
+            try {
+                current = JSON.parse(hidden.value || '{}');
+            } catch {}
+            if (tipe !== null) current.tipe = tipe;
+            if (series !== null) current.series = series;
+            hidden.value = JSON.stringify(current);
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             const categorySelect = document.getElementById('categorySelect');
             const extraContainer = document.getElementById('category-extra');
             const customInputHidden = document.getElementById('custom_input');
             const oldCategory = categorySelect.options[categorySelect.selectedIndex]?.dataset?.name;
-            const oldValue = `{{ old('custom_input', $product->custom_input ?? '') }}`;
+            let oldValue = customInputHidden.value;
+            let parsedOld = {};
+
+            try {
+                parsedOld = JSON.parse(oldValue);
+            } catch {}
 
             function renderExtraFields(category) {
                 extraContainer.innerHTML = '';
                 if (category === 'cable tray') {
+                    const selected = oldValue === 'U Series' ? 'U Series' : (oldValue === 'C Series' ? 'C Series' :
+                        '');
                     extraContainer.innerHTML = `
                         <label class="block text-gray-600">U & C Series</label>
                         <select class="w-full px-4 py-2 border rounded-lg"
                             onchange="document.getElementById('custom_input').value = this.value;">
                             <option value="">Pilih Series</option>
-                            <option value="U Series" ${oldValue === 'U Series' ? 'selected' : ''}>U Series</option>
-                            <option value="C Series" ${oldValue === 'C Series' ? 'selected' : ''}>C Series</option>
+                            <option value="U Series" ${selected === 'U Series' ? 'selected' : ''}>U Series</option>
+                            <option value="C Series" ${selected === 'C Series' ? 'selected' : ''}>C Series</option>
                         </select>
                     `;
-                    customInputHidden.value = oldValue;
-                } else if (['push button', 'selector switch', 'pilot lamp', 'accessories'].includes(category)) {
-                    let label = '';
-                    if (category === 'push button') {
-                        label = 'Tipe Push Button';
-                    } else if (category === 'selector switch') {
-                        label = 'Tipe Selector Switch';
-                    } else if (category === 'pilot lamp') {
-                        label = 'Tipe Pilot Lamp';
-                    } else if (category === 'accessories') {
-                        label = 'Tipe Aksesoris';
-                    }
+                    customInputHidden.value = selected;
+                } else if (category === 'push button') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">Tipe Push Button</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
+                            placeholder="Masukkan tipe push button"
+                            value="${tipe}"
+                            oninput="updatePushButtonValue(this.value, null)">
+                        
+                        <label class="block text-gray-600">Series</label>
+                        <select class="w-full px-4 py-2 border rounded-lg"
+                            onchange="updatePushButtonValue(null, this.value)">
+                            <option value="">Pilih Series</option>
+                            <option value="KB 5 Series" ${series === 'KB 5 Series' ? 'selected' : ''}>KB 5 Series</option>
+                            <option value="KB 2 Series" ${series === 'KB 2 Series' ? 'selected' : ''}>KB 2 Series</option>
+                        </select>
+                    `;
+                    customInputHidden.value = JSON.stringify({
+                        tipe,
+                        series
+                    });
+                } else if (['selector switch', 'pilot lamp', 'accessories'].includes(category)) {
+                    let label = category === 'selector switch' ? 'Tipe Selector Switch' :
+                        category === 'pilot lamp' ? 'Tipe Pilot Lamp' : 'Tipe Aksesoris';
 
                     extraContainer.innerHTML = `
                         <label class="block text-gray-600">${label}</label>
@@ -181,7 +209,6 @@
                             value="${oldValue}"
                             oninput="document.getElementById('custom_input').value = this.value">
                     `;
-                    customInputHidden.value = oldValue;
                 }
             }
 

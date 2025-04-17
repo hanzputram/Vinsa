@@ -145,8 +145,16 @@
                     extraContainer.innerHTML = `
                         <label class="block text-gray-600">Tipe Push Button</label>
                         <input type="text" name="push_button_type"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                            class="w-full px-4 py-2 border rounded-lg mb-2"
                             placeholder="Masukkan tipe push button">
+
+                        <label class="block text-gray-600">Series</label>
+                        <select name="push_button_series"
+                            class="w-full px-4 py-2 border rounded-lg">
+                            <option value="">Pilih Series</option>
+                            <option value="KB 5 Series">KB 5 Series</option>
+                            <option value="KB 2 Series">KB 2 Series</option>
+                        </select>
                     `;
                 } else if (selectedCategory === 'selector switch') {
                     extraContainer.innerHTML = `
@@ -165,9 +173,9 @@
                 } else if (selectedCategory === 'accessories') {
                     extraContainer.innerHTML = `
                         <label class="block text-gray-600">Tipe Accessories</label>
-                        <input type="text" name="pilot_lamp_type"
+                        <input type="text" name="accessories_type"
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                            placeholder="Masukkan tipe pilot accessories">
+                            placeholder="Masukkan tipe accessories">
                     `;
                 }
             });

@@ -123,14 +123,20 @@
                     class="w-full min-h-full flex flex-col justify-center items-center gap-6 lg:flex-row lg:items-start lg:justify-start mx-auto my-10">
                     <div
                         class="w-full sm:w-72 md:w-80 h-auto bg-[#FDFBEE]/40 border border-white text-white p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col justify-start relative overflow-hidden backdrop-blur-[8px]">
-                        <h2 class="text-base sm:text-lg text-center font-bold">
-                            @if ($product->custom_input)
-                                {{ $product->custom_input }}<br>
-                                {{-- <span class="text-sm font-normal">{{ $product->kode }}</span> --}}
+                        @php
+                            $customInput = json_decode($product->custom_input, true);
+                        @endphp
+
+                        <h2 class="text-base sm:text-lg text-center text-white font-bold">
+                            @if ($customInput)
+                                @foreach ($customInput as $key => $value)
+                                    <div class="capitalize">{{ ucfirst($key) }}: {{ $value }}</div>
+                                @endforeach
                             @else
                                 {{ $product->kode }}
                             @endif
                         </h2>
+
                         <p class="mt-2 flex-grow text-xs flex justify-center items-center sm:text-sm">
                             <img src="{{ asset('storage/' . $product->image) }}" width="180px" alt="Vinsa">
                         </p>
@@ -141,13 +147,17 @@
                             <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-left font-extrabold text-white">
                                 {{ $product->name }}
                             </p>
-                            <p class="text-lg sm:text-xl lg:text-2xl text-left font-semibold text-white">
-                                @if ($product->custom_input)
-                                    {{ $product->custom_input }} - {{ $product->kode }}
+                            <p class="text-lg sm:text-xl lg:text-2xl text-left font-bold text-white">
+                                @if ($customInput)
+                                    @foreach ($customInput as $key => $value)
+                                        <div class="capitalize text-white font-bold text-xl">{{ ucfirst($key) }}: {{ $value }}</div>
+                                    @endforeach
+                                    <div class="text-white font-bold text-xl">{{ $product->kode }}</div>
                                 @else
                                     {{ $product->kode }}
                                 @endif
                             </p>
+
                         </div>
                         <div>
                             <ul class="text-white text-sm sm:text-base">

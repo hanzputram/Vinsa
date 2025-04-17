@@ -99,7 +99,6 @@
         <div
             class="overflow-hidden p-10 lg:p-[5rem] lg:justify-between py-[80px] flex justify-center relative bg-no-repeat bg-cover w-full min-h-screen after:content-[''] bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] after:w-full after:h-full after:absolute after:top-0 after:left-0 rounded-[40px]">
             <div class="w-full relative z-[10]">
-
                 <a href="/new" class="group mb-4 inline-block">
                     <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -110,15 +109,11 @@
                 </a>
                 <p class="text-6xl pb-10 text-center font-extrabold text-[#fff]">Our Collection</p>
 
-                <!-- Overlay -->
                 <div class="fixed inset-0 bg-black bg-opacity-30 z-[29]" x-show="sidebarOpen" x-transition.opacity
                     @click="sidebarOpen = false" x-cloak></div>
 
-                <!-- Sidebar -->
                 <div class="fixed top-0 left-0 w-64 h-full bg-[#FFFCF0] shadow-lg p-4 z-[30] transform transition-transform duration-300 ease-in-out"
                     :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }" x-cloak>
-
-                    <!-- Link Menu -->
                     <a href="{{ url('/') }}"
                         class="block py-2 text-[#066C5F] border-b-[1.5px] hover:text-[#066c5fad] font-bold">Home</a>
                     <a href="{{ url('/about') }}"
@@ -126,7 +121,6 @@
                     <a href="{{ url('/contact') }}"
                         class="block py-2 text-[#066C5F] hover:text-[#066c5fad] font-bold">Contact Us</a>
 
-                    <!-- Filter Kategori -->
                     <div class="mt-6">
                         <label for="categoryFilter" class="block text-sm font-semibold text-[#066C5F] mb-2">Pilih
                             Kategori</label>
@@ -140,7 +134,6 @@
                     </div>
                 </div>
 
-                <!-- Tombol Toggle Sidebar -->
                 <button class="z-[31] text-white bg-[#0dd8bd] p-2 rounded-full" @click="sidebarOpen = true">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
@@ -149,18 +142,17 @@
                     </svg>
                 </button>
 
-                <!-- Input pencarian -->
                 <input type="text" id="searchInput" placeholder="Cari produk..."
                     class="my-6 w-full max-w-sm mx-auto block rounded-full px-8 py-4 text-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0dd8bd] shadow"
                     oninput="filterProducts()">
 
-                <!-- Produk -->
                 <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                     @forelse ($products as $product)
                         @php
                             $searchText = strtolower(
                                 $product->name . ' ' . $product->kode . ' ' . ($product->custom_input ?? ''),
                             );
+                            $customInput = json_decode($product->custom_input, true);
                         @endphp
                         <div class="product-card w-full bg-[#fdfbee68] border border-[#ffffff] text-white sm:p-4 px-7 sm:rounded-2xl rounded-full shadow-lg flex flex-row sm:flex-col justify-between relative overflow-hidden backdrop-blur-[8px] transition-transform transform hover:scale-[1.01] hover:shadow-xl duration-300"
                             data-category-id="{{ $product->category_id }}" data-search="{{ $searchText }}">
@@ -172,8 +164,11 @@
 
                                 <div
                                     class="font-semibold text-base hidden sm:block sm:text-[13px] sm:text-gray-300 product-code">
-                                    @if ($product->custom_input)
-                                        {{ \Illuminate\Support\Str::limit($product->custom_input, 20) }}
+                                    @if ($customInput)
+                                        @foreach ($customInput as $key => $value)
+                                            <div class="capitalize">{{ ucfirst($key) }}:
+                                                {{ \Illuminate\Support\Str::limit($value, 20) }}</div>
+                                        @endforeach
                                     @else
                                         {{ $product->kode }}
                                     @endif
@@ -187,23 +182,25 @@
                                         {{ \Illuminate\Support\Str::limit($product->name, 10) }}
                                     </div>
                                     <div class="text-[12px] sm:hidden text-gray-200">
-                                        @if ($product->custom_input)
-                                            {{ \Illuminate\Support\Str::limit($product->custom_input, 15) }}
+                                        @if ($customInput)
+                                            @foreach ($customInput as $key => $value)
+                                                <div class="capitalize">{{ ucfirst($key) }}:
+                                                    {{ \Illuminate\Support\Str::limit($value, 15) }}</div>
+                                            @endforeach
+                                            <div>{{ $product->kode }}</div>
                                         @else
-                                            {{ $product->kode }}
-                                        @endif
-                                        <br>
-                                        @if ($product->custom_input)
                                             {{ $product->kode }}
                                         @endif
                                     </div>
                                 </div>
+
                                 <div class="text-[12px] hidden sm:block">
-                                    @if ($product->custom_input)
+                                    @if ($customInput)
                                         {{ $product->kode }}
                                     @endif
                                 </div>
-                                <div class="flex justify-end sm:justify-center items-center ">
+
+                                <div class="flex justify-end sm:justify-center items-center">
                                     <a href="/detail/{{ $product->id }}"
                                         class="py-2 px-4 md:mt-3 text-sm font-semibold rounded-lg bg-white text-[#066c5f] hover:bg-gray-200 transition hidden sm:block">
                                         Spesifikasi Product
@@ -213,12 +210,7 @@
                                         class="group relative h-10 w-10 flex justify-center items-center sm:hidden overflow-hidden cursor-pointer rounded-full"
                                         style="--spread: 90deg; --shimmer-color: #fff; --radius: 99999px; --speed: 2.7s; --cut: 0.05em;">
                                         <div class="absolute inset-0 rounded-full animate-rotate-border -z-10"
-                                            style="background: conic-gradient(
-                                                from calc(270deg - (var(--spread) * 0.5)),
-                                                transparent 0,
-                                                var(--shimmer-color) var(--spread),
-                                                transparent var(--spread)
-                                            );">
+                                            style="background: conic-gradient(from calc(270deg - (var(--spread) * 0.5)), transparent 0, var(--shimmer-color) var(--spread), transparent var(--spread));">
                                         </div>
                                         <div class="relative z-10 p-2 rounded-full bg-[#6CD6C2]">
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white"
@@ -237,7 +229,6 @@
                         </div>
                     @endforelse
                 </div>
-
             </div>
         </div>
     </div>
@@ -253,10 +244,8 @@
             cards.forEach(card => {
                 const searchData = card.getAttribute('data-search') || '';
                 const category = card.getAttribute('data-category-id');
-
                 const matchesSearch = searchData.includes(searchInput);
                 const matchesCategory = categoryFilter === "" || category === categoryFilter;
-
                 card.style.display = (matchesSearch && matchesCategory) ? '' : 'none';
             });
         }
