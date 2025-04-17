@@ -275,11 +275,14 @@
                                     <div class="w-full md:w-1/2 md:border-l-[2px] md:pl-[13.5px] md:border-white">
                                         <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
-                                            @foreach ($category->products->filter(function ($item) {
-            return str_contains(strtolower($item->kode), 'kb2');
-        })->sortBy(function ($item) {
-            return $item->kode;
-        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                            @foreach (
+                                                $category->products->filter(function ($item) {
+                                                    return str_contains(strtolower($item->kode), 'kb2');
+                                                })->sortBy(function ($item) {
+                                                    // Sort berdasarkan panjang kode terlebih dahulu, lalu alfabetis (a-z0-9)
+                                                    return [strlen($item->kode), strtolower($item->kode)];
+                                                }, SORT_REGULAR) as $productItem
+                                            )
                                                 @php
                                                     $customInput = json_decode($productItem->custom_input, true);
                                                 @endphp
