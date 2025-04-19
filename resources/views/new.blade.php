@@ -278,10 +278,10 @@
                                         <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach ($category->products->filter(function ($item) {
-            return str_contains(strtolower($item->kode), 'kb2');
-        })->sortBy(function ($item) {
-            return [strlen($item->kode), strtolower($item->kode)];
-        }, SORT_REGULAR) as $productItem)
+                                                        return str_contains(strtolower($item->kode), 'kb2');
+                                                    })->sortBy(function ($item) {
+                                                        return [strlen($item->kode), strtolower($item->kode)];
+                                                    }, SORT_REGULAR) as $productItem)
                                                 @php
                                                     $customInput = json_decode($productItem->custom_input, true);
                                                 @endphp
@@ -325,10 +325,10 @@
                                         <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach ($category->products->filter(function ($item) {
-            return str_contains(strtolower($item->kode), 'kb5');
-        })->sortBy(function ($item) {
-            return $item->kode;
-        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                return Str::startsWith(strtolower($item->kode), 'kb5');
+                                                        })->sortBy(function ($item) {
+                                                            return $item->kode;
+                                                        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
                                                 @php
                                                     $customInput = json_decode($productItem->custom_input, true);
                                                 @endphp
@@ -370,10 +370,10 @@
                                         <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach ($category->products->filter(function ($item) {
-            return str_contains(strtolower($item->kode), 'kb2');
-        })->sortBy(function ($item) {
-            return [strlen($item->kode), strtolower($item->kode)];
-        }, SORT_REGULAR) as $productItem)
+                                                return Str::startsWith(strtolower($item->kode), 'kb2');
+                                                                })->sortBy(function ($item) {
+                                                                    return [strlen($item->kode), strtolower($item->kode)];
+                                                                }, SORT_REGULAR) as $productItem)
                                                 @php
                                                     $customInput = json_decode($productItem->custom_input, true);
                                                 @endphp
@@ -417,10 +417,10 @@
                                         <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach ($category->products->filter(function ($item) {
-            return str_contains(strtolower($item->kode), 'kb5');
-        })->sortBy(function ($item) {
-            return $item->kode;
-        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                return Str::startsWith(strtolower($item->kode), 'kb5');
+                                                    })->sortBy(function ($item) {
+                                                        return $item->kode;
+                                                    }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
                                                 @php
                                                     $customInput = json_decode($productItem->custom_input, true);
                                                 @endphp
@@ -462,7 +462,7 @@
                                         <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach ($category->products->filter(function ($item) {
-            return str_contains(strtolower($item->kode), 'kb2');
+                                                return Str::startsWith(strtolower($item->kode), 'kb2');
         })->sortBy(function ($item) {
             return [strlen($item->kode), strtolower($item->kode)];
         }, SORT_REGULAR) as $productItem)
@@ -509,7 +509,7 @@
                                         <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach ($category->products->filter(function ($item) {
-            return str_contains(strtolower($item->kode), 'kb5');
+                                                return Str::startsWith(strtolower($item->kode), 'kb5');
         })->sortBy(function ($item) {
             return $item->kode;
         }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
@@ -554,7 +554,7 @@
                                         <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach ($category->products->filter(function ($item) {
-            return str_contains(strtolower($item->kode), 'kb2');
+                                                return Str::startsWith(strtolower($item->kode), 'kb2');
         })->sortBy(function ($item) {
             return [strlen($item->kode), strtolower($item->kode)];
         }, SORT_REGULAR) as $productItem)
