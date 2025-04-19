@@ -248,7 +248,7 @@
                     extraContainer.innerHTML = `
                         <label class="block text-gray-600">Tipe Push Button</label>
                         <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe push button"
+                            placeholder="Masukkan tipe selector switch"
                             value="${tipe}"
                             oninput="updatePushButtonValue(this.value, null)">
                         
