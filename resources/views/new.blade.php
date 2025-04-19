@@ -357,7 +357,7 @@
                                                 </div>
                                             @endforeach
                                         </div>
-                            @elseif (strtolower($category->name) === 'emergency push button')
+                            @elseif (strtolower($category->name) === 'emergency push')
                             <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach ($category->products->filter(function ($item) {
                                                 return str_contains(strtolower($item->kode), 'kb2');
