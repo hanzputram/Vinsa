@@ -246,7 +246,7 @@
                     const tipe = parsedOld.tipe || '';
                     const series = parsedOld.series || '';
                     extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Push Button</label>
+                        <label class="block text-gray-600">Tipe Selector Switch</label>
                         <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
                             placeholder="Masukkan tipe selector switch"
                             value="${tipe}"
