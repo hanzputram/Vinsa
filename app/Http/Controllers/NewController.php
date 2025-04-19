@@ -16,10 +16,28 @@ class NewController extends Controller
         $carousels = Carousel::all();
         $products = Product::all();
 
-        // Ambil semua kategori beserta produk pertama di setiap kategori
-        $categories = Category::with('products')->get();
-        
+        $customOrder = [
+            'Push Button',
+            'Illuminated Push Button',
+            'Emergency Push Button',
+            'Selector Switch',
+            'Illuminated Selector Switch',
+        ];
 
-        return view('new', compact('carousels', 'products', 'categories', 'categories'));
+        $allCategories = Category::with('products')->get();
+
+        $orderedCategories = collect($customOrder)
+            ->map(function ($name) use ($allCategories) {
+                return $allCategories->firstWhere('name', $name);
+            })
+            ->filter();
+
+        $remainingCategories = $allCategories->filter(function ($category) use ($customOrder) {
+            return !in_array($category->name, $customOrder);
+        });
+
+        $categories = $orderedCategories->concat($remainingCategories)->values();
+
+        return view('new', compact('carousels', 'products', 'categories'));
     }
 }
