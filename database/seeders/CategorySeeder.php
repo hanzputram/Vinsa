@@ -11,6 +11,9 @@ class CategorySeeder extends Seeder
     {
         $categories = [
             'Push Button',
+            'Illuminated Push Button',
+            'Emergency Push Button',
+            'Illuminated Selector Switch',
             'Selector Switch',
             'Pilot Lamp',
             'Box Panel',

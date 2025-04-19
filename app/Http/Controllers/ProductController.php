@@ -84,22 +84,38 @@ class ProductController extends Controller
         $customInput = null;
 
         $category = Category::find($request->category_id);
-        if ($category && strtolower($category->name) === 'push button') {
-            $type = $request->input('push_button_type');
-            $series = $request->input('push_button_series');
-            $customInput = trim("$type, $series", ", ");
-        } else {
-            $customInputFields = [
-                'selector_switch_type',
-                'pilot_lamp_type',
-                'uc_series',
-                'accessories_type',
-            ];
 
-            foreach ($customInputFields as $field) {
-                if ($request->has($field)) {
-                    $customInput = $request->input($field);
-                    break;
+        if ($category) {
+            $categoryName = strtolower($category->name);
+
+            if ($categoryName === 'push button') {
+                $type = $request->input('push_button_type');
+                $series = $request->input('push_button_series');
+                $customInput = json_encode([
+                    'tipe' => $type,
+                    'series' => $series,
+                ]);
+            } elseif ($categoryName === 'selector switch') {
+                $type = $request->input('selector_switch_type');
+                $series = $request->input('selector_switch_series');
+                $customInput = json_encode([
+                    'tipe' => $type,
+                    'series' => $series,
+                ]);
+            } else {
+                $customInputFields = [
+                    'pilot_lamp_type',
+                    'uc_series',
+                    'accessories_type',
+                ];
+
+                foreach ($customInputFields as $field) {
+                    if ($request->has($field)) {
+                        $customInput = json_encode([
+                            'value' => $request->input($field),
+                        ]);
+                        break;
+                    }
                 }
             }
         }
@@ -137,6 +153,7 @@ class ProductController extends Controller
 
         return redirect()->route('products.view', $product->id)->with('success', 'Produk berhasil ditambahkan!');
     }
+
 
 
     public function edit()

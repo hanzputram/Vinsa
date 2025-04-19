@@ -198,9 +198,96 @@
                         tipe,
                         series
                     });
-                } else if (['selector switch', 'pilot lamp', 'accessories'].includes(category)) {
-                    let label = category === 'selector switch' ? 'Tipe Selector Switch' :
-                        category === 'pilot lamp' ? 'Tipe Pilot Lamp' : 'Tipe Aksesoris';
+                } else if (category === 'illuminated push button') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">Tipe Push Button</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
+                            placeholder="Masukkan tipe push button"
+                            value="${tipe}"
+                            oninput="updatePushButtonValue(this.value, null)">
+                        
+                        <label class="block text-gray-600">Series</label>
+                        <select class="w-full px-4 py-2 border rounded-lg"
+                            onchange="updatePushButtonValue(null, this.value)">
+                            <option value="">Pilih Series</option>
+                            <option value="KB 5 Series" ${series === 'KB 5 Series' ? 'selected' : ''}>KB 5 Series</option>
+                            <option value="KB 2 Series" ${series === 'KB 2 Series' ? 'selected' : ''}>KB 2 Series</option>
+                        </select>
+                    `;
+                    customInputHidden.value = JSON.stringify({
+                        tipe,
+                        series
+                    });
+                } else if (category === 'emergency push button') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">Tipe Push Button</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
+                            placeholder="Masukkan tipe push button"
+                            value="${tipe}"
+                            oninput="updatePushButtonValue(this.value, null)">
+                        
+                        <label class="block text-gray-600">Series</label>
+                        <select class="w-full px-4 py-2 border rounded-lg"
+                            onchange="updatePushButtonValue(null, this.value)">
+                            <option value="">Pilih Series</option>
+                            <option value="KB 5 Series" ${series === 'KB 5 Series' ? 'selected' : ''}>KB 5 Series</option>
+                            <option value="KB 2 Series" ${series === 'KB 2 Series' ? 'selected' : ''}>KB 2 Series</option>
+                        </select>
+                    `;
+                    customInputHidden.value = JSON.stringify({
+                        tipe,
+                        series
+                    });
+                } else if (category === 'illuminated selector switch') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">Tipe Push Button</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
+                            placeholder="Masukkan tipe push button"
+                            value="${tipe}"
+                            oninput="updatePushButtonValue(this.value, null)">
+                        
+                        <label class="block text-gray-600">Series</label>
+                        <select class="w-full px-4 py-2 border rounded-lg"
+                            onchange="updatePushButtonValue(null, this.value)">
+                            <option value="">Pilih Series</option>
+                            <option value="KB 5 Series" ${series === 'KB 5 Series' ? 'selected' : ''}>KB 5 Series</option>
+                            <option value="KB 2 Series" ${series === 'KB 2 Series' ? 'selected' : ''}>KB 2 Series</option>
+                        </select>
+                    `;
+                    customInputHidden.value = JSON.stringify({
+                        tipe,
+                        series
+                    });
+                } else if (category === 'selector switch') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    extraContainer.innerHTML = `
+                            <label class="block text-gray-600">Tipe Selector Switch</label>
+                            <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
+                                placeholder="Masukkan tipe selector switch"
+                                value="${tipe}"
+                                oninput="updatePushButtonValue(this.value, null)">
+                            
+                            <label class="block text-gray-600">Series</label>
+                            <select class="w-full px-4 py-2 border rounded-lg"
+                                onchange="updatePushButtonValue(null, this.value)">
+                                <option value="">Pilih Series</option>
+                                <option value="KB 5 Series" ${series === 'KB 5 Series' ? 'selected' : ''}>KB 5 Series</option>
+                                <option value="KB 2 Series" ${series === 'KB 2 Series' ? 'selected' : ''}>KB 2 Series</option>
+                            </select>
+                        `;
+                    customInputHidden.value = JSON.stringify({
+                        tipe,
+                        series
+                    });
+                } else if (['pilot lamp', 'accessories'].includes(category)) {
+                    let label = category === 'pilot lamp' ? 'Tipe Pilot Lamp' : 'Tipe Aksesoris';
 
                     extraContainer.innerHTML = `
                         <label class="block text-gray-600">${label}</label>

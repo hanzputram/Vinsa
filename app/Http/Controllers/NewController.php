@@ -18,6 +18,7 @@ class NewController extends Controller
 
         // Ambil semua kategori beserta produk pertama di setiap kategori
         $categories = Category::with('products')->get();
+        
 
         return view('new', compact('carousels', 'products', 'categories', 'categories'));
     }
