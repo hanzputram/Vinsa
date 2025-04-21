@@ -222,7 +222,7 @@
 
                     {{-- KANAN: Produk dalam slider horizontal --}}
                     <div class="col-span-12 md:col-span-10 bg-[#5f5f5f60] rounded-xl p-4">
-                        <h3 class="text-lg md:hidden font-bold mb-2">{{ $category->name }}</h3>
+                        <h3 class="text-lg md:hidden font-bold mb-2 border-b-[1.5px] pb-2 border-white">- {{ $category->name }}</h3>
                     
                         @if ($category->products->count())
                             @if (strtolower($category->name) === 'push button')
