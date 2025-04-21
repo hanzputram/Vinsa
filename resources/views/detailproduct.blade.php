@@ -128,13 +128,7 @@
                         @endphp
 
                         <h2 class="text-base sm:text-lg text-center text-white font-bold">
-                            @if ($customInput)
-                                @foreach ($customInput as $key => $value)
-                                    <div class="capitalize">{{ ucfirst($key) }}: {{ $value }}</div>
-                                @endforeach
-                            @else
-                                {{ $product->kode }}
-                            @endif
+                            {{ $product->name }}
                         </h2>
 
                         <p class="mt-2 flex-grow text-xs flex justify-center items-center sm:text-sm">
