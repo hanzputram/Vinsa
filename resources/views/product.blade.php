@@ -99,7 +99,7 @@
         <div
             class="overflow-hidden p-10 lg:p-[5rem] lg:justify-between py-[80px] flex justify-center relative bg-no-repeat bg-cover w-full min-h-screen after:content-[''] bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] after:w-full after:h-full after:absolute after:top-0 after:left-0 rounded-[40px]">
             <div class="w-full relative z-[10]">
-                <a href="{{ url()->previous() }}" class="group mb-4 inline-block">
+                <a href="/" class="group mb-4 inline-block">
                     <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         class="stroke-white group-hover:stroke-gray-400 transition-colors duration-300">
