@@ -205,25 +205,45 @@
 
                 <div class="grid grid-cols-12 row-span-1 gap-4">
                     {{-- KIRI: Gambar dan nama kategori --}}
-                    <div
-                        class="bg-[#5f5f5f60] border-white border-[1.5px] col-span-2 hidden p-4 text-center rounded-xl overflow-hidden shadow-md md:flex md:flex-col items-center justify-start">
-                        <h3 class="text-lg font-bold mb-2">{{ $category->name }}</h3>
+                    @if (strtolower($category->name) === 'accessories')
+                        <div
+                            class="bg-[#5f5f5f60] border-white border-[1.5px] col-span-2 hidden p-4 text-center rounded-xl overflow-hidden shadow-md md:flex md:flex-col items-center justify-start">
+                            <h3 class="text-lg font-bold mb-2">{{ $category->name }}</h3>
 
-                        @if ($firstProduct && $firstProduct->image)
-                            <img src="{{ asset('storage/' . $firstProduct->image) }}" alt="{{ $firstProduct->name }}"
-                                class="w-[120px] h-[150px] object-cover rounded-md">
-                        @else
-                            <div
-                                class="w-[120px] h-[150px] flex items-center justify-center text-gray-400 bg-white rounded-md">
-                                Gambar tidak tersedia
-                            </div>
-                        @endif
-                    </div>
+                            @if ($firstProduct)
+                                <div
+                                    class="w-[120px] h-[150px] flex items-center justify-center text-gray-400 bg-white rounded-md">
+                                    Gambar tidak tersedia
+                                </div>
+                            @else
+                                <div
+                                    class="w-[120px] h-[150px] flex items-center justify-center text-gray-400 bg-white rounded-md">
+                                    Gambar tidak tersedia
+                                </div>
+                            @endif
+                        </div>
+                    @else
+                        <div
+                            class="bg-[#5f5f5f60] border-white border-[1.5px] col-span-2 hidden p-4 text-center rounded-xl overflow-hidden shadow-md md:flex md:flex-col items-center justify-start">
+                            <h3 class="text-lg font-bold mb-2">{{ $category->name }}</h3>
+
+                            @if ($firstProduct && $firstProduct->image)
+                                <img src="{{ asset('storage/' . $firstProduct->image) }}"
+                                    alt="{{ $firstProduct->name }}" class="w-[120px] h-[150px] object-cover rounded-md">
+                            @else
+                                <div
+                                    class="w-[120px] h-[150px] flex items-center justify-center text-gray-400 bg-white rounded-md">
+                                    Gambar tidak tersedia
+                                </div>
+                            @endif
+                        </div>
+                    @endif
 
                     {{-- KANAN: Produk dalam slider horizontal --}}
                     <div class="col-span-12 md:col-span-10 bg-[#5f5f5f60] rounded-xl p-4">
-                        <h3 class="text-lg md:hidden font-bold mb-2 border-b-[1.5px] pb-2 border-white">- {{ $category->name }}</h3>
-                    
+                        <h3 class="text-lg md:hidden font-bold mb-2 border-b-[1.5px] pb-2 border-white">-
+                            {{ $category->name }}</h3>
+
                         @if ($category->products->count())
                             @if (strtolower($category->name) === 'push button')
                                 <div class="flex flex-col md:flex-row gap-4">
@@ -233,27 +253,33 @@
                                         <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach ($category->products->filter(function ($item) {
-                                                return str_contains(strtolower($item->kode), 'kb5');
-                                            })->sortBy(function ($item) {
-                                                return $item->kode;
-                                            }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+            return str_contains(strtolower($item->kode), 'kb5');
+        })->sortBy(function ($item) {
+            return $item->kode;
+        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
                                                 @php
                                                     $customInput = json_decode($productItem->custom_input, true);
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
                                                     <a href="/detail/{{ $productItem->id }}"
-                                                        class="transition-transform transform hover:scale-[1.01]">
+                                                        class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                        <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                            alt="{{ $productItem->name }}"
-                                                            class="w-[120px] h-40 object-cover rounded">
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
+                                                        </div>
                                                         <h4 class="mt-2 text-white font-bold text-sm">
                                                             {{ Str::limit($productItem->name, 10) }}
                                                         </h4>
-                    
+
                                                         @if ($customInput)
                                                             <div class="text-[10px] text-gray-300 mt-1">
                                                                 @foreach ($customInput as $key => $value)
@@ -271,34 +297,40 @@
                                             @endforeach
                                         </div>
                                     </div>
-                    
+
                                     {{-- KB 2 Series --}}
                                     <div
                                         class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
                                         <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
                                         <div class="flex gap-4 overflow-x-auto pb-2">
                                             @foreach ($category->products->filter(function ($item) {
-                                                return str_contains(strtolower($item->kode), 'kb2');
-                                            })->sortBy(function ($item) {
-                                                return [strlen($item->kode), strtolower($item->kode)];
-                                            }, SORT_REGULAR) as $productItem)
+            return str_contains(strtolower($item->kode), 'kb2');
+        })->sortBy(function ($item) {
+            return [strlen($item->kode), strtolower($item->kode)];
+        }, SORT_REGULAR) as $productItem)
                                                 @php
                                                     $customInput = json_decode($productItem->custom_input, true);
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
                                                     <a href="/detail/{{ $productItem->id }}"
-                                                        class="transition-transform transform hover:scale-[1.01]">
+                                                        class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                        <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                            alt="{{ $productItem->name }}"
-                                                            class="w-[120px] h-40 object-cover rounded">
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
+                                                        </div>
                                                         <h4 class="mt-2 text-white font-bold text-sm">
                                                             {{ Str::limit($productItem->name, 10) }}
                                                         </h4>
-                    
+
                                                         @if ($customInput)
                                                             <div class="text-[10px] text-gray-300 mt-1">
                                                                 @foreach ($customInput as $key => $value)
@@ -318,499 +350,563 @@
                                     </div>
                                 </div>
                             @elseif (strtolower($category->name) === 'illuminated push button')
-                            <div class="flex flex-col md:flex-row gap-4">
-                                {{-- KB 5 Series --}}
-                                <div
-                                    class="w-full md:w-1/2 md:border-r-[2px] md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
-                                    <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
-                                    <div class="flex gap-4 overflow-x-auto pb-2">
-                                        @foreach ($category->products->filter(function ($item) {
-                                            return str_contains(strtolower($item->kode), 'kb5');
-                                        })->sortBy(function ($item) {
-                                            return $item->kode;
-                                        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
-                                            @php
-                                                $customInput = json_decode($productItem->custom_input, true);
-                                            @endphp
-                                            <div
-                                                class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                <a href="/detail/{{ $productItem->id }}"
-                                                    class="transition-transform transform hover:scale-[1.01]">
-                                                    <p class="text-xs text-gray-300 mb-2">
-                                                        {{ Str::limit($productItem->kode, 50) }}
-                                                    </p>
-                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                        alt="{{ $productItem->name }}"
-                                                        class="w-[120px] h-40 object-cover rounded">
-                                                    <h4 class="mt-2 text-white font-bold text-sm">
-                                                        {{ Str::limit($productItem->name, 10) }}
-                                                    </h4>
-                
-                                                    @if ($customInput)
-                                                        <div class="text-[10px] text-gray-300 mt-1">
-                                                            @foreach ($customInput as $key => $value)
-                                                                <div class="capitalize">{{ ucfirst($key) }}:
-                                                                    {{ Str::limit($value, 15) }}</div>
-                                                            @endforeach
-                                                        </div>
-                                                    @else
-                                                        <p class="text-xs text-gray-300 mt-1">
+                                <div class="flex flex-col md:flex-row gap-4">
+                                    {{-- KB 5 Series --}}
+                                    <div
+                                        class="w-full md:w-1/2 md:border-r-[2px] md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
+                                        <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
+                                        <div class="flex gap-4 overflow-x-auto pb-2">
+                                            @foreach ($category->products->filter(function ($item) {
+            return str_contains(strtolower($item->kode), 'kb5');
+        })->sortBy(function ($item) {
+            return $item->kode;
+        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @php
+                                                    $customInput = json_decode($productItem->custom_input, true);
+                                                @endphp
+                                                <div
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                   <a href="/detail/{{ $productItem->id }}"
+                                                        class="group transition-transform transform hover:scale-[1.01]">
+                                                        <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                    @endif
-                                                </a>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                
-                                {{-- KB 2 Series --}}
-                                <div
-                                    class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
-                                    <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
-                                    <div class="flex gap-4 overflow-x-auto pb-2">
-                                        @foreach ($category->products->filter(function ($item) {
-                                            return str_contains(strtolower($item->kode), 'kb2');
-                                        })->sortBy(function ($item) {
-                                            return [strlen($item->kode), strtolower($item->kode)];
-                                        }, SORT_REGULAR) as $productItem)
-                                            @php
-                                                $customInput = json_decode($productItem->custom_input, true);
-                                            @endphp
-                                            <div
-                                                class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                <a href="/detail/{{ $productItem->id }}"
-                                                    class="transition-transform transform hover:scale-[1.01]">
-                                                    <p class="text-xs text-gray-300 mb-2">
-                                                        {{ Str::limit($productItem->kode, 50) }}
-                                                    </p>
-                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                        alt="{{ $productItem->name }}"
-                                                        class="w-[120px] h-40 object-cover rounded">
-                                                    <h4 class="mt-2 text-white font-bold text-sm">
-                                                        {{ Str::limit($productItem->name, 10) }}
-                                                    </h4>
-                
-                                                    @if ($customInput)
-                                                        <div class="text-[10px] text-gray-300 mt-1">
-                                                            @foreach ($customInput as $key => $value)
-                                                                <div class="capitalize">{{ ucfirst($key) }}:
-                                                                    {{ Str::limit($value, 15) }}</div>
-                                                            @endforeach
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
                                                         </div>
-                                                    @else
-                                                        <p class="text-xs text-gray-300 mt-1">
+                                                        <h4 class="mt-2 text-white font-bold text-sm">
+                                                            {{ Str::limit($productItem->name, 10) }}
+                                                        </h4>
+
+                                                        @if ($customInput)
+                                                            <div class="text-[10px] text-gray-300 mt-1">
+                                                                @foreach ($customInput as $key => $value)
+                                                                    <div class="capitalize">{{ ucfirst($key) }}:
+                                                                        {{ Str::limit($value, 15) }}</div>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <p class="text-xs text-gray-300 mt-1">
+                                                                {{ Str::limit($productItem->kode, 50) }}
+                                                            </p>
+                                                        @endif
+                                                    </a>    
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    {{-- KB 2 Series --}}
+                                    <div
+                                        class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
+                                        <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
+                                        <div class="flex gap-4 overflow-x-auto pb-2">
+                                            @foreach ($category->products->filter(function ($item) {
+            return str_contains(strtolower($item->kode), 'kb2');
+        })->sortBy(function ($item) {
+            return [strlen($item->kode), strtolower($item->kode)];
+        }, SORT_REGULAR) as $productItem)
+                                                @php
+                                                    $customInput = json_decode($productItem->custom_input, true);
+                                                @endphp
+                                                <div
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                   <a href="/detail/{{ $productItem->id }}"
+                                                        class="group transition-transform transform hover:scale-[1.01]">
+                                                        <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                    @endif
-                                                </a>
-                                            </div>
-                                        @endforeach
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="mt-2 text-white font-bold text-sm">
+                                                            {{ Str::limit($productItem->name, 10) }}
+                                                        </h4>
+
+                                                        @if ($customInput)
+                                                            <div class="text-[10px] text-gray-300 mt-1">
+                                                                @foreach ($customInput as $key => $value)
+                                                                    <div class="capitalize">{{ ucfirst($key) }}:
+                                                                        {{ Str::limit($value, 15) }}</div>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <p class="text-xs text-gray-300 mt-1">
+                                                                {{ Str::limit($productItem->kode, 50) }}
+                                                            </p>
+                                                        @endif
+                                                    </a>    
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @elseif (strtolower($category->name) === 'emergency push button')
-                            <div class="flex flex-col md:flex-row gap-4">
-                                {{-- KB 5 Series --}}
-                                <div
-                                    class="w-full md:w-1/2 md:border-r-[2px] md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
-                                    <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
-                                    <div class="flex gap-4 overflow-x-auto pb-2">
-                                        @foreach ($category->products->filter(function ($item) {
-                                            return str_contains(strtolower($item->kode), 'kb5');
-                                        })->sortBy(function ($item) {
-                                            return $item->kode;
-                                        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
-                                            @php
-                                                $customInput = json_decode($productItem->custom_input, true);
-                                            @endphp
-                                            <div
-                                                class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                <a href="/detail/{{ $productItem->id }}"
-                                                    class="transition-transform transform hover:scale-[1.01]">
-                                                    <p class="text-xs text-gray-300 mb-2">
-                                                        {{ Str::limit($productItem->kode, 50) }}
-                                                    </p>
-                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                        alt="{{ $productItem->name }}"
-                                                        class="w-[120px] h-40 object-cover rounded">
-                                                    <h4 class="mt-2 text-white font-bold text-sm">
-                                                        {{ Str::limit($productItem->name, 10) }}
-                                                    </h4>
-                
-                                                    @if ($customInput)
-                                                        <div class="text-[10px] text-gray-300 mt-1">
-                                                            @foreach ($customInput as $key => $value)
-                                                                <div class="capitalize">{{ ucfirst($key) }}:
-                                                                    {{ Str::limit($value, 15) }}</div>
-                                                            @endforeach
-                                                        </div>
-                                                    @else
-                                                        <p class="text-xs text-gray-300 mt-1">
+                                <div class="flex flex-col md:flex-row gap-4">
+                                    {{-- KB 5 Series --}}
+                                    <div
+                                        class="w-full md:w-1/2 md:border-r-[2px] md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
+                                        <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
+                                        <div class="flex gap-4 overflow-x-auto pb-2">
+                                            @foreach ($category->products->filter(function ($item) {
+            return str_contains(strtolower($item->kode), 'kb5');
+        })->sortBy(function ($item) {
+            return $item->kode;
+        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @php
+                                                    $customInput = json_decode($productItem->custom_input, true);
+                                                @endphp
+                                                <div
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                   <a href="/detail/{{ $productItem->id }}"
+                                                        class="group transition-transform transform hover:scale-[1.01]">
+                                                        <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                    @endif
-                                                </a>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                
-                                {{-- KB 2 Series --}}
-                                <div
-                                    class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
-                                    <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
-                                    <div class="flex gap-4 overflow-x-auto pb-2">
-                                        @foreach ($category->products->filter(function ($item) {
-                                            return str_contains(strtolower($item->kode), 'kb2');
-                                        })->sortBy(function ($item) {
-                                            return [strlen($item->kode), strtolower($item->kode)];
-                                        }, SORT_REGULAR) as $productItem)
-                                            @php
-                                                $customInput = json_decode($productItem->custom_input, true);
-                                            @endphp
-                                            <div
-                                                class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                <a href="/detail/{{ $productItem->id }}"
-                                                    class="transition-transform transform hover:scale-[1.01]">
-                                                    <p class="text-xs text-gray-300 mb-2">
-                                                        {{ Str::limit($productItem->kode, 50) }}
-                                                    </p>
-                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                        alt="{{ $productItem->name }}"
-                                                        class="w-[120px] h-40 object-cover rounded">
-                                                    <h4 class="mt-2 text-white font-bold text-sm">
-                                                        {{ Str::limit($productItem->name, 10) }}
-                                                    </h4>
-                
-                                                    @if ($customInput)
-                                                        <div class="text-[10px] text-gray-300 mt-1">
-                                                            @foreach ($customInput as $key => $value)
-                                                                <div class="capitalize">{{ ucfirst($key) }}:
-                                                                    {{ Str::limit($value, 15) }}</div>
-                                                            @endforeach
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
                                                         </div>
-                                                    @else
-                                                        <p class="text-xs text-gray-300 mt-1">
+                                                        <h4 class="mt-2 text-white font-bold text-sm">
+                                                            {{ Str::limit($productItem->name, 10) }}
+                                                        </h4>
+
+                                                        @if ($customInput)
+                                                            <div class="text-[10px] text-gray-300 mt-1">
+                                                                @foreach ($customInput as $key => $value)
+                                                                    <div class="capitalize">{{ ucfirst($key) }}:
+                                                                        {{ Str::limit($value, 15) }}</div>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <p class="text-xs text-gray-300 mt-1">
+                                                                {{ Str::limit($productItem->kode, 50) }}
+                                                            </p>
+                                                        @endif
+                                                    </a>    
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    {{-- KB 2 Series --}}
+                                    <div
+                                        class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
+                                        <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
+                                        <div class="flex gap-4 overflow-x-auto pb-2">
+                                            @foreach ($category->products->filter(function ($item) {
+            return str_contains(strtolower($item->kode), 'kb2');
+        })->sortBy(function ($item) {
+            return [strlen($item->kode), strtolower($item->kode)];
+        }, SORT_REGULAR) as $productItem)
+                                                @php
+                                                    $customInput = json_decode($productItem->custom_input, true);
+                                                @endphp
+                                                <div
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                   <a href="/detail/{{ $productItem->id }}"
+                                                        class="group transition-transform transform hover:scale-[1.01]">
+                                                        <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                    @endif
-                                                </a>
-                                            </div>
-                                        @endforeach
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="mt-2 text-white font-bold text-sm">
+                                                            {{ Str::limit($productItem->name, 10) }}
+                                                        </h4>
+
+                                                        @if ($customInput)
+                                                            <div class="text-[10px] text-gray-300 mt-1">
+                                                                @foreach ($customInput as $key => $value)
+                                                                    <div class="capitalize">{{ ucfirst($key) }}:
+                                                                        {{ Str::limit($value, 15) }}</div>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <p class="text-xs text-gray-300 mt-1">
+                                                                {{ Str::limit($productItem->kode, 50) }}
+                                                            </p>
+                                                        @endif
+                                                    </a>    
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @elseif (strtolower($category->name) === 'illuminated selector switch')
-                            <div class="flex flex-col md:flex-row gap-4">
-                                {{-- KB 5 Series --}}
-                                <div
-                                    class="w-full md:w-1/2 md:border-r-[2px] md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
-                                    <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
-                                    <div class="flex gap-4 overflow-x-auto pb-2">
-                                        @foreach ($category->products->filter(function ($item) {
-                                            return str_contains(strtolower($item->kode), 'kb5');
-                                        })->sortBy(function ($item) {
-                                            return $item->kode;
-                                        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
-                                            @php
-                                                $customInput = json_decode($productItem->custom_input, true);
-                                            @endphp
-                                            <div
-                                                class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                <a href="/detail/{{ $productItem->id }}"
-                                                    class="transition-transform transform hover:scale-[1.01]">
-                                                    <p class="text-xs text-gray-300 mb-2">
-                                                        {{ Str::limit($productItem->kode, 50) }}
-                                                    </p>
-                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                        alt="{{ $productItem->name }}"
-                                                        class="w-[120px] h-40 object-cover rounded">
-                                                    <h4 class="mt-2 text-white font-bold text-sm">
-                                                        {{ Str::limit($productItem->name, 10) }}
-                                                    </h4>
-                
-                                                    @if ($customInput)
-                                                        <div class="text-[10px] text-gray-300 mt-1">
-                                                            @foreach ($customInput as $key => $value)
-                                                                <div class="capitalize">{{ ucfirst($key) }}:
-                                                                    {{ Str::limit($value, 15) }}</div>
-                                                            @endforeach
-                                                        </div>
-                                                    @else
-                                                        <p class="text-xs text-gray-300 mt-1">
+                                <div class="flex flex-col md:flex-row gap-4">
+                                    {{-- KB 5 Series --}}
+                                    <div
+                                        class="w-full md:w-1/2 md:border-r-[2px] md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
+                                        <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
+                                        <div class="flex gap-4 overflow-x-auto pb-2">
+                                            @foreach ($category->products->filter(function ($item) {
+            return str_contains(strtolower($item->kode), 'kb5');
+        })->sortBy(function ($item) {
+            return $item->kode;
+        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @php
+                                                    $customInput = json_decode($productItem->custom_input, true);
+                                                @endphp
+                                                <div
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                   <a href="/detail/{{ $productItem->id }}"
+                                                        class="group transition-transform transform hover:scale-[1.01]">
+                                                        <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                    @endif
-                                                </a>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                
-                                {{-- KB 2 Series --}}
-                                <div
-                                    class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
-                                    <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
-                                    <div class="flex gap-4 overflow-x-auto pb-2">
-                                        @foreach ($category->products->filter(function ($item) {
-                                            return str_contains(strtolower($item->kode), 'kb2');
-                                        })->sortBy(function ($item) {
-                                            return [strlen($item->kode), strtolower($item->kode)];
-                                        }, SORT_REGULAR) as $productItem)
-                                            @php
-                                                $customInput = json_decode($productItem->custom_input, true);
-                                            @endphp
-                                            <div
-                                                class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                <a href="/detail/{{ $productItem->id }}"
-                                                    class="transition-transform transform hover:scale-[1.01]">
-                                                    <p class="text-xs text-gray-300 mb-2">
-                                                        {{ Str::limit($productItem->kode, 50) }}
-                                                    </p>
-                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                        alt="{{ $productItem->name }}"
-                                                        class="w-[120px] h-40 object-cover rounded">
-                                                    <h4 class="mt-2 text-white font-bold text-sm">
-                                                        {{ Str::limit($productItem->name, 10) }}
-                                                    </h4>
-                
-                                                    @if ($customInput)
-                                                        <div class="text-[10px] text-gray-300 mt-1">
-                                                            @foreach ($customInput as $key => $value)
-                                                                <div class="capitalize">{{ ucfirst($key) }}:
-                                                                    {{ Str::limit($value, 15) }}</div>
-                                                            @endforeach
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
                                                         </div>
-                                                    @else
-                                                        <p class="text-xs text-gray-300 mt-1">
+                                                        <h4 class="mt-2 text-white font-bold text-sm">
+                                                            {{ Str::limit($productItem->name, 10) }}
+                                                        </h4>
+
+                                                        @if ($customInput)
+                                                            <div class="text-[10px] text-gray-300 mt-1">
+                                                                @foreach ($customInput as $key => $value)
+                                                                    <div class="capitalize">{{ ucfirst($key) }}:
+                                                                        {{ Str::limit($value, 15) }}</div>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <p class="text-xs text-gray-300 mt-1">
+                                                                {{ Str::limit($productItem->kode, 50) }}
+                                                            </p>
+                                                        @endif
+                                                    </a>    
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    {{-- KB 2 Series --}}
+                                    <div
+                                        class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
+                                        <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
+                                        <div class="flex gap-4 overflow-x-auto pb-2">
+                                            @foreach ($category->products->filter(function ($item) {
+            return str_contains(strtolower($item->kode), 'kb2');
+        })->sortBy(function ($item) {
+            return [strlen($item->kode), strtolower($item->kode)];
+        }, SORT_REGULAR) as $productItem)
+                                                @php
+                                                    $customInput = json_decode($productItem->custom_input, true);
+                                                @endphp
+                                                <div
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                   <a href="/detail/{{ $productItem->id }}"
+                                                        class="group transition-transform transform hover:scale-[1.01]">
+                                                        <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                    @endif
-                                                </a>
-                                            </div>
-                                        @endforeach
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="mt-2 text-white font-bold text-sm">
+                                                            {{ Str::limit($productItem->name, 10) }}
+                                                        </h4>
+
+                                                        @if ($customInput)
+                                                            <div class="text-[10px] text-gray-300 mt-1">
+                                                                @foreach ($customInput as $key => $value)
+                                                                    <div class="capitalize">{{ ucfirst($key) }}:
+                                                                        {{ Str::limit($value, 15) }}</div>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <p class="text-xs text-gray-300 mt-1">
+                                                                {{ Str::limit($productItem->kode, 50) }}
+                                                            </p>
+                                                        @endif
+                                                    </a>    
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @elseif (strtolower($category->name) === 'cable ties')
-                            <div class="flex flex-col md:flex-row gap-4">
-                                {{-- Nylon --}}
-                                <div
-                                    class="w-full md:w-1/2 md:border-r-[2px] md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
-                                    <h4 class="text-md font-bold mb-2">Nylon Cable Ties</h4>
-                                    <div class="flex gap-4 overflow-x-auto pb-2">
-                                        @foreach ($category->products->filter(function ($item) {
-                                            return str_contains(strtolower($item->kode), 'nct');
-                                        })->sortBy(function ($item) {
-                                            return $item->kode;
-                                        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
-                                            @php
-                                                $customInput = json_decode($productItem->custom_input, true);
-                                            @endphp
-                                            <div
-                                                class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                <a href="/detail/{{ $productItem->id }}"
-                                                    class="transition-transform transform hover:scale-[1.01]">
-                                                    <p class="text-xs text-gray-300 mb-2">
-                                                        {{ Str::limit($productItem->kode, 50) }}
-                                                    </p>
-                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                        alt="{{ $productItem->name }}"
-                                                        class="w-[120px] h-40 object-cover rounded">
-                                                    <h4 class="mt-2 text-white font-bold text-sm">
-                                                        {{ Str::limit($productItem->name, 10) }}
-                                                    </h4>
-                
-                                                    @if ($customInput)
-                                                        <div class="text-[10px] text-gray-300 mt-1">
-                                                            @foreach ($customInput as $key => $value)
-                                                                <div class="capitalize">{{ ucfirst($key) }}:
-                                                                    {{ Str::limit($value, 15) }}</div>
-                                                            @endforeach
-                                                        </div>
-                                                    @else
-                                                        <p class="text-xs text-gray-300 mt-1">
+                                <div class="flex flex-col md:flex-row gap-4">
+                                    {{-- Nylon --}}
+                                    <div
+                                        class="w-full md:w-1/2 md:border-r-[2px] md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
+                                        <h4 class="text-md font-bold mb-2">Nylon Cable Ties</h4>
+                                        <div class="flex gap-4 overflow-x-auto pb-2">
+                                            @foreach ($category->products->filter(function ($item) {
+            return str_contains(strtolower($item->kode), 'nct');
+        })->sortBy(function ($item) {
+            return $item->kode;
+        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @php
+                                                    $customInput = json_decode($productItem->custom_input, true);
+                                                @endphp
+                                                <div
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                   <a href="/detail/{{ $productItem->id }}"
+                                                        class="group transition-transform transform hover:scale-[1.01]">
+                                                        <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                    @endif
-                                                </a>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-                
-                                {{-- Stainless Steel --}}
-                                <div
-                                    class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
-                                    <h4 class="text-md font-bold mb-2">Stainless Steel Cable Ties</h4>
-                                    <div class="flex gap-4 overflow-x-auto pb-2">
-                                        @foreach ($category->products->filter(function ($item) {
-                                            return str_contains(strtolower($item->kode), 'ssct');
-                                        })->sortBy(function ($item) {
-                                            return [strlen($item->kode), strtolower($item->kode)];
-                                        }, SORT_REGULAR) as $productItem)
-                                            @php
-                                                $customInput = json_decode($productItem->custom_input, true);
-                                            @endphp
-                                            <div
-                                                class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                <a href="/detail/{{ $productItem->id }}"
-                                                    class="transition-transform transform hover:scale-[1.01]">
-                                                    <p class="text-xs text-gray-300 mb-2">
-                                                        {{ Str::limit($productItem->kode, 50) }}
-                                                    </p>
-                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                        alt="{{ $productItem->name }}"
-                                                        class="w-[120px] h-40 object-cover rounded">
-                                                    <h4 class="mt-2 text-white font-bold text-sm">
-                                                        {{ Str::limit($productItem->name, 10) }}
-                                                    </h4>
-                
-                                                    @if ($customInput)
-                                                        <div class="text-[10px] text-gray-300 mt-1">
-                                                            @foreach ($customInput as $key => $value)
-                                                                <div class="capitalize">{{ ucfirst($key) }}:
-                                                                    {{ Str::limit($value, 15) }}</div>
-                                                            @endforeach
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
                                                         </div>
-                                                    @else
-                                                        <p class="text-xs text-gray-300 mt-1">
+                                                        <h4 class="mt-2 text-white font-bold text-sm">
+                                                            {{ Str::limit($productItem->name, 10) }}
+                                                        </h4>
+
+                                                        @if ($customInput)
+                                                            <div class="text-[10px] text-gray-300 mt-1">
+                                                                @foreach ($customInput as $key => $value)
+                                                                    <div class="capitalize">{{ ucfirst($key) }}:
+                                                                        {{ Str::limit($value, 15) }}</div>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <p class="text-xs text-gray-300 mt-1">
+                                                                {{ Str::limit($productItem->kode, 50) }}
+                                                            </p>
+                                                        @endif
+                                                    </a>    
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    {{-- Stainless Steel --}}
+                                    <div
+                                        class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
+                                        <h4 class="text-md font-bold mb-2">Stainless Steel Cable Ties</h4>
+                                        <div class="flex gap-4 overflow-x-auto pb-2">
+                                            @foreach ($category->products->filter(function ($item) {
+            return str_contains(strtolower($item->kode), 'ssct');
+        })->sortBy(function ($item) {
+            return [strlen($item->kode), strtolower($item->kode)];
+        }, SORT_REGULAR) as $productItem)
+                                                @php
+                                                    $customInput = json_decode($productItem->custom_input, true);
+                                                @endphp
+                                                <div
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                   <a href="/detail/{{ $productItem->id }}"
+                                                        class="group transition-transform transform hover:scale-[1.01]">
+                                                        <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                    @endif
-                                                </a>
-                                            </div>
-                                        @endforeach
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="mt-2 text-white font-bold text-sm">
+                                                            {{ Str::limit($productItem->name, 10) }}
+                                                        </h4>
+
+                                                        @if ($customInput)
+                                                            <div class="text-[10px] text-gray-300 mt-1">
+                                                                @foreach ($customInput as $key => $value)
+                                                                    <div class="capitalize">{{ ucfirst($key) }}:
+                                                                        {{ Str::limit($value, 15) }}</div>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <p class="text-xs text-gray-300 mt-1">
+                                                                {{ Str::limit($productItem->kode, 50) }}
+                                                            </p>
+                                                        @endif
+                                                    </a>    
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @elseif (strtolower($category->name) === 'selector switch')
-                            <div class="flex flex-col md:flex-row gap-4">
-                                {{-- KB 5 Series SS --}}
-                                <div
-                                    class="w-full md:w-1/2 md:border-r-[2px] md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
-                                    <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
-                                    <div class="flex gap-4 overflow-x-auto pb-2">
-                                        @foreach ($category->products->filter(function ($item) {
-        return str_contains(strtolower($item->kode), 'kb5');
-    })->sortBy(function ($item) {
-        return $item->kode;
-    }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
-                                            @php
-                                                $customInput = json_decode($productItem->custom_input, true);
-                                            @endphp
-                                            <div
-                                                class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                <a href="/detail/{{ $productItem->id }}"
-                                                    class="transition-transform transform hover:scale-[1.01]">
-                                                    <p class="text-xs text-gray-300 mb-2">
-                                                        {{ Str::limit($productItem->kode, 50) }}
-                                                    </p>
-                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                        alt="{{ $productItem->name }}"
-                                                        class="w-[120px] h-40 object-cover rounded">
-                                                    <h4 class="mt-2 text-white font-bold text-sm">
-                                                        {{ Str::limit($productItem->name, 10) }}
-                                                    </h4>
-
-                                                    @if ($customInput)
-                                                        <div class="text-[10px] text-gray-300 mt-1">
-                                                            @foreach ($customInput as $key => $value)
-                                                                <div class="capitalize">{{ ucfirst($key) }}:
-                                                                    {{ Str::limit($value, 15) }}</div>
-                                                            @endforeach
-                                                        </div>
-                                                    @else
-                                                        <p class="text-xs text-gray-300 mt-1">
+                                <div class="flex flex-col md:flex-row gap-4">
+                                    {{-- KB 5 Series SS --}}
+                                    <div
+                                        class="w-full md:w-1/2 md:border-r-[2px] md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
+                                        <h4 class="text-md font-bold mb-2">KB 5 Series</h4>
+                                        <div class="flex gap-4 overflow-x-auto pb-2">
+                                            @foreach ($category->products->filter(function ($item) {
+            return str_contains(strtolower($item->kode), 'kb5');
+        })->sortBy(function ($item) {
+            return $item->kode;
+        }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @php
+                                                    $customInput = json_decode($productItem->custom_input, true);
+                                                @endphp
+                                                <div
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                   <a href="/detail/{{ $productItem->id }}"
+                                                        class="group transition-transform transform hover:scale-[1.01]">
+                                                        <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                    @endif
-                                                </a>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </div>
-
-                                {{-- KB 2 Series SS --}}
-                                <div
-                                    class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
-                                    <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
-                                    <div class="flex gap-4 overflow-x-auto pb-2">
-                                        @foreach ($category->products->filter(function ($item) {
-        return str_contains(strtolower($item->kode), 'kb2');
-    })->sortBy(function ($item) {
-        // Sort berdasarkan panjang kode terlebih dahulu, lalu alfabetis (a-z0-9)
-        return [strlen($item->kode), strtolower($item->kode)];
-    }, SORT_REGULAR) as $productItem)
-                                            @php
-                                                $customInput = json_decode($productItem->custom_input, true);
-                                            @endphp
-                                            <div
-                                                class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                <a href="/detail/{{ $productItem->id }}"
-                                                    class="transition-transform transform hover:scale-[1.01]">
-                                                    <p class="text-xs text-gray-300 mb-2">
-                                                        {{ Str::limit($productItem->kode, 50) }}
-                                                    </p>
-                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                        alt="{{ $productItem->name }}"
-                                                        class="w-[120px] h-40 object-cover rounded">
-                                                    <h4 class="mt-2 text-white font-bold text-sm">
-                                                        {{ Str::limit($productItem->name, 10) }}
-                                                    </h4>
-
-                                                    @if ($customInput)
-                                                        <div class="text-[10px] text-gray-300 mt-1">
-                                                            @foreach ($customInput as $key => $value)
-                                                                <div class="capitalize">{{ ucfirst($key) }}:
-                                                                    {{ Str::limit($value, 15) }}</div>
-                                                            @endforeach
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
                                                         </div>
-                                                    @else
-                                                        <p class="text-xs text-gray-300 mt-1">
+                                                        <h4 class="mt-2 text-white font-bold text-sm">
+                                                            {{ Str::limit($productItem->name, 10) }}
+                                                        </h4>
+
+                                                        @if ($customInput)
+                                                            <div class="text-[10px] text-gray-300 mt-1">
+                                                                @foreach ($customInput as $key => $value)
+                                                                    <div class="capitalize">{{ ucfirst($key) }}:
+                                                                        {{ Str::limit($value, 15) }}</div>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <p class="text-xs text-gray-300 mt-1">
+                                                                {{ Str::limit($productItem->kode, 50) }}
+                                                            </p>
+                                                        @endif
+                                                    </a>    
+                                                </div>
+                                            @endforeach
+                                        </div>
+                                    </div>
+
+                                    {{-- KB 2 Series SS --}}
+                                    <div
+                                        class="w-full md:w-[calc(50%-1rem)] md:border-l-[2px] md:pl-[13.5px] mr-6 md:border-white text-white md:bg-black/20 md:p-4 md:rounded-lg">
+                                        <h4 class="text-md font-bold mb-2">KB 2 Series</h4>
+                                        <div class="flex gap-4 overflow-x-auto pb-2">
+                                            @foreach ($category->products->filter(function ($item) {
+            return str_contains(strtolower($item->kode), 'kb2');
+        })->sortBy(function ($item) {
+            // Sort berdasarkan panjang kode terlebih dahulu, lalu alfabetis (a-z0-9)
+            return [strlen($item->kode), strtolower($item->kode)];
+        }, SORT_REGULAR) as $productItem)
+                                                @php
+                                                    $customInput = json_decode($productItem->custom_input, true);
+                                                @endphp
+                                                <div
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                   <a href="/detail/{{ $productItem->id }}"
+                                                        class="group transition-transform transform hover:scale-[1.01]">
+                                                        <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
                                                         </p>
-                                                    @endif
-                                                </a>
-                                            </div>
-                                        @endforeach
+                                                        <div class="relative w-[120px] h-40">
+                                                            <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                alt="{{ $productItem->name }}"
+                                                                class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                            <div
+                                                                class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                            </div>
+                                                        </div>
+                                                        <h4 class="mt-2 text-white font-bold text-sm">
+                                                            {{ Str::limit($productItem->name, 10) }}
+                                                        </h4>
+
+                                                        @if ($customInput)
+                                                            <div class="text-[10px] text-gray-300 mt-1">
+                                                                @foreach ($customInput as $key => $value)
+                                                                    <div class="capitalize">{{ ucfirst($key) }}:
+                                                                        {{ Str::limit($value, 15) }}</div>
+                                                                @endforeach
+                                                            </div>
+                                                        @else
+                                                            <p class="text-xs text-gray-300 mt-1">
+                                                                {{ Str::limit($productItem->kode, 50) }}
+                                                            </p>
+                                                        @endif
+                                                    </a>    
+                                                </div>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
                             @else
                                 {{-- Layout default jika bukan kategori Push Button --}}
                                 <div class="flex gap-4 overflow-x-auto pb-2">
                                     @foreach ($category->products->sortBy(function ($item) {
-                                        return $item->kode;
-                                    }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+        return $item->kode;
+    }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
                                         @php
                                             $customInput = json_decode($productItem->custom_input, true);
                                         @endphp
                                         <div
                                             class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                            <a href="/detail/{{ $productItem->id }}"
-                                                class="transition-transform transform hover:scale-[1.01]">
+                                            <a href="/detail/{{ $productItem->id }}" class="group transition-transform transform hover:scale-[1.01]">
                                                 <p class="text-xs text-gray-300 mb-2">
                                                     {{ Str::limit($productItem->kode, 50) }}
                                                 </p>
-                                                <img src="{{ asset('storage/' . $productItem->image) }}"
-                                                    alt="{{ $productItem->name }}"
-                                                    class="w-[120px] h-40 object-cover rounded">
+                                                <div class="relative w-[120px] h-40">
+                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                        alt="{{ $productItem->name }}"
+                                                        class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                    <div
+                                                        class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                Lihat Selengkapnya ↗
+                                                    </div>
+                                                </div>
                                                 <h4 class="mt-2 text-white font-bold text-sm">
                                                     {{ Str::limit($productItem->name, 10) }}
                                                 </h4>
-                    
+                                            
                                                 @if ($customInput)
                                                     <div class="text-[10px] text-gray-300 mt-1">
                                                         @foreach ($customInput as $key => $value)
-                                                            <div class="capitalize">{{ ucfirst($key) }}:
-                                                                {{ Str::limit($value, 15) }}</div>
+                                                            <div class="capitalize">{{ ucfirst($key) }}: {{ Str::limit($value, 15) }}</div>
                                                         @endforeach
                                                     </div>
                                                 @endif
                                             </a>
+                                            
                                         </div>
                                     @endforeach
                                 </div>
@@ -819,7 +915,7 @@
                             <p class="text-sm text-gray-500">Belum ada produk pada kategori ini.</p>
                         @endif
                     </div>
-                    
+
                 </div>
             @endforeach
         </div>
