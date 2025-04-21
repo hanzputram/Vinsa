@@ -22,6 +22,7 @@ class NewController extends Controller
             'Emergency Push Button',
             'Selector Switch',
             'Illuminated Selector Switch',
+            'Box Panel',
         ];
 
         $allCategories = Category::with('products')->get();
