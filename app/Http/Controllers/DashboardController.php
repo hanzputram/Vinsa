@@ -42,23 +42,7 @@ class DashboardController extends Controller
     
         $histories = $query->latest()->paginate(10);
     
-        // Catat visitor hanya jika domain = vinsa.fr dan path = /
-        if (request()->getHost() === 'vinsa.fr' && request()->path() === '/') {
-            $today = now()->toDateString();
-    
-            $alreadyVisited = Visit::where('ip_address', request()->ip())
-                ->whereDate('visited_at', $today)
-                ->exists();
-    
-            if (!$alreadyVisited) {
-                Visit::create([
-                    'ip_address' => request()->ip(),
-                    'visited_at' => now(),
-                ]);
-            }
-        }
-    
-        $visitorCount = Visit::count();
+        $visitorCount = Visit::whereDate('visited_at', now()->toDateString())->count();
     
         return view('dashboard', compact('histories', 'productCount', 'carouselCount', 'visitorCount'));
     }

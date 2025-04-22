@@ -7,6 +7,7 @@ use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 
 class NewController extends Controller
@@ -38,6 +39,21 @@ class NewController extends Controller
         });
 
         $categories = $orderedCategories->concat($remainingCategories)->values();
+
+        if (request()->getHost() === 'vinsa.fr' && request()->path() === '/') {
+            $today = now()->toDateString();
+    
+            $alreadyVisited = Visit::where('ip_address', request()->ip())
+                ->whereDate('visited_at', $today)
+                ->exists();
+    
+            if (!$alreadyVisited) {
+                Visit::create([
+                    'ip_address' => request()->ip(),
+                    'visited_at' => now(),
+                ]);
+            }
+        }
 
         return view('new', compact('carousels', 'products', 'categories'));
     }
