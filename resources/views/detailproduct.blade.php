@@ -139,22 +139,16 @@
                         class="w-full lg:h-[325px] mx-0 lg:mx-10 flex flex-col justify-between gap-4 lg:overflow-y-auto pr-2">
                         <div class="border-b-[1.5px] border-white pb-3">
                             <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-left font-extrabold text-white">
-                                {{ $product->name }}
+                                {{ $product->name }} - {{ $product->custom_input }}
                             </p>
                             <p class="text-lg sm:text-xl lg:text-2xl text-left font-bold text-white">
                                 @if ($customInput)
                                     @foreach ($customInput as $key => $value)
-                                        <div class="capitalize text-white font-bold text-xl">{{ ucfirst($key) }}:
-                                            {{ $value }}</div>
+                                        <div class="capitalize text-white font-bold text-xl">{{ ucfirst($key) }}: {{ $value }}</div>
                                     @endforeach
                                     <div class="text-white font-bold text-xl">{{ $product->kode }}</div>
                                 @else
-                                    <p class="underline text-lg sm:text-xl lg:text-2xl text-left font-bold text-white">
-                                        {{ $product->custom_input }}<br>
-                                    </p>
-                                    <P class="text-lg sm:text-xl lg:text-2xl text-left font-bold text-white">
-                                        {{ $product->kode }}
-                                    </P>
+                                {{ $product->kode }}
                                 @endif
                             </p>
 
