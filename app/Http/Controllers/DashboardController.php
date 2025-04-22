@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Carousel;
 use App\Models\History;
 use App\Models\Product;
+use App\Models\Visit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -41,6 +42,9 @@ class DashboardController extends Controller
 
         $histories = $query->latest()->paginate(10);
 
-        return view('dashboard', compact('histories', 'productCount', 'carouselCount'));
+        $visitorCount = Visit::count();
+
+
+        return view('dashboard', compact('histories', 'productCount', 'carouselCount', 'visitorCount'));
     }
 }
