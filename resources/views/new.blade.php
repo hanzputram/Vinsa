@@ -162,14 +162,14 @@
             style="background-image:url('/image/pabrik.jpg')">
             <div class="lg:w-[50%] w-full relative z-[10]">
                 <p class="shining-text text-xl text-center  font-medium">
-                    Penuhi Kebutuhan Listrik dengan Produk Terbaik
+                    Fulfill Your Electricity Needs with the Best Products
                 </p>
                 <p class="text-6xl text-center  font-extrabold  text-[#fff]">
                     Welcome<br> To<br> Vinsa
                 </p>
                 <p class="text-xl lg:text-lg text-center mx-4 lg:mx-auto text-[#fffffffe] pt-5 pb-15">
-                    "Vinsa: Dedikasi dalam Menyediakan Solusi Kelistrikan Premium, Menghadirkan Produk Berkualitas
-                    Tinggi untuk Kebutuhan Rumah, Bisnis, dan Industri Anda!
+                    "Vinsa: Dedication to Providing Premium Electrical Solutions, Delivering High Quality Products for
+                    Your Home, Business, and Industrial Needs!"
                 </p>
                 <div class="flex my-[2rem] justify-center ">
                     <a href="/product"
@@ -312,7 +312,7 @@
                                                     $customInput = json_decode($productItem->custom_input, true);
                                                 @endphp
                                                 <div
-                                                    class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                    class="flex-shrink-0 bg-[#5f5f5f60] mt-2 border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
                                                     <a href="/detail/{{ $productItem->id }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
@@ -366,7 +366,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                   <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->id }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -396,7 +396,7 @@
                                                                 {{ Str::limit($productItem->kode, 50) }}
                                                             </p>
                                                         @endif
-                                                    </a>    
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -417,7 +417,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                   <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->id }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -447,7 +447,7 @@
                                                                 {{ Str::limit($productItem->kode, 50) }}
                                                             </p>
                                                         @endif
-                                                    </a>    
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -470,7 +470,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                   <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->id }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -500,7 +500,7 @@
                                                                 {{ Str::limit($productItem->kode, 50) }}
                                                             </p>
                                                         @endif
-                                                    </a>    
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -521,7 +521,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                   <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->id }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -551,7 +551,7 @@
                                                                 {{ Str::limit($productItem->kode, 50) }}
                                                             </p>
                                                         @endif
-                                                    </a>    
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -574,7 +574,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                   <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->id }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -604,7 +604,7 @@
                                                                 {{ Str::limit($productItem->kode, 50) }}
                                                             </p>
                                                         @endif
-                                                    </a>    
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -625,7 +625,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                   <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->id }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -655,7 +655,7 @@
                                                                 {{ Str::limit($productItem->kode, 50) }}
                                                             </p>
                                                         @endif
-                                                    </a>    
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -678,7 +678,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                   <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->id }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -708,7 +708,7 @@
                                                                 {{ Str::limit($productItem->kode, 50) }}
                                                             </p>
                                                         @endif
-                                                    </a>    
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -729,7 +729,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                   <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->id }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -759,7 +759,7 @@
                                                                 {{ Str::limit($productItem->kode, 50) }}
                                                             </p>
                                                         @endif
-                                                    </a>    
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -782,7 +782,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                   <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->id }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -812,7 +812,7 @@
                                                                 {{ Str::limit($productItem->kode, 50) }}
                                                             </p>
                                                         @endif
-                                                    </a>    
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -834,7 +834,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                   <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->id }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -864,7 +864,7 @@
                                                                 {{ Str::limit($productItem->kode, 50) }}
                                                             </p>
                                                         @endif
-                                                    </a>    
+                                                    </a>
                                                 </div>
                                             @endforeach
                                         </div>
@@ -872,7 +872,7 @@
                                 </div>
                             @else
                                 {{-- Layout default jika bukan kategori Push Button --}}
-                                <div class="flex gap-4 overflow-x-auto pb-2">
+                                <div class="flex gap-4 overflow-x-auto pb-2 mt-4">
                                     @foreach ($category->products->sortBy(function ($item) {
         return $item->kode;
     }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
@@ -881,7 +881,8 @@
                                         @endphp
                                         <div
                                             class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                            <a href="/detail/{{ $productItem->id }}" class="group transition-transform transform hover:scale-[1.01]">
+                                            <a href="/detail/{{ $productItem->id }}"
+                                                class="group transition-transform transform hover:scale-[1.01]">
                                                 <p class="text-xs text-gray-300 mb-2">
                                                     {{ Str::limit($productItem->kode, 50) }}
                                                 </p>
@@ -891,7 +892,7 @@
                                                         class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
                                                     <div
                                                         class="w-full h-full underline  flex items-center justify-center text-white font-semibold text-sm  rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                                                Lihat Selengkapnya ↗
+                                                        Lihat Selengkapnya ↗
                                                     </div>
                                                 </div>
                                                 <h4 class="mt-2 text-white font-bold text-sm">
@@ -901,16 +902,17 @@
                                                 <p class="text-xs text-gray-300 mb-2">
                                                     {{ $productItem->custom_input }}
                                                 </p>
-                                            
+
                                                 @if ($customInput)
                                                     <div class="text-[10px] text-gray-300 mt-1">
                                                         @foreach ($customInput as $key => $value)
-                                                            <div class="capitalize">{{ ucfirst($key) }}: {{ Str::limit($value, 15) }}</div>
+                                                            <div class="capitalize">{{ ucfirst($key) }}:
+                                                                {{ Str::limit($value, 15) }}</div>
                                                         @endforeach
                                                     </div>
                                                 @endif
                                             </a>
-                                            
+
                                         </div>
                                     @endforeach
                                 </div>

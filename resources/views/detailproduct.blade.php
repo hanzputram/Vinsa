@@ -144,11 +144,12 @@
                             <p class="text-lg sm:text-xl lg:text-2xl text-left font-bold text-white">
                                 @if ($customInput)
                                     @foreach ($customInput as $key => $value)
-                                        <div class="capitalize text-white font-bold text-xl">{{ ucfirst($key) }}: {{ $value }}</div>
+                                        <div class="capitalize text-white font-bold text-xl">{{ ucfirst($key) }}:
+                                            {{ $value }}</div>
                                     @endforeach
                                     <div class="text-white font-bold text-xl">{{ $product->kode }}</div>
                                 @else
-                                {{ $product->kode }}
+                                    {{ $product->kode }}
                                 @endif
                             </p>
 
