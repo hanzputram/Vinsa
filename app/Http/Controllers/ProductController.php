@@ -30,13 +30,13 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with('attributes')->findOrFail($id);
+        $product = Product::with('attributes','category')->findOrFail($id);
         return view('detailproduct', compact('product'));
     }
 
     public function view()
     {
-        $categories = Category::all();
+        $categories = Category::with('product');
         return view('product-input', compact('categories'));
     }
 

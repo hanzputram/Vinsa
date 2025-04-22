@@ -138,8 +138,14 @@
                     <div
                         class="w-full lg:h-[325px] mx-0 lg:mx-10 flex flex-col justify-between gap-4 lg:overflow-y-auto pr-2">
                         <div class="border-b-[1.5px] border-white pb-3">
+                            @php
+                            $categoryName = strtolower($product->category?->name);
+                        @endphp
                             <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-left font-extrabold text-white">
                                 {{ $product->name }}
+                                @if(in_array($categoryName, ['cable tray', 'pilot lamp', 'accessories']))
+                                    - {{ $product->custom_input }}
+                                @endif
                             </p>
                             <p class="text-lg sm:text-xl lg:text-2xl text-left font-bold text-white">
                                 @if ($customInput)
