@@ -42,8 +42,12 @@ class DashboardController extends Controller
 
         $histories = $query->latest()->paginate(10);
 
+        Visit::create([
+            'ip_address' => request()->ip(),
+            'visited_at' => now(),
+        ]);
+    
         $visitorCount = Visit::count();
-
 
         return view('dashboard', compact('histories', 'productCount', 'carouselCount', 'visitorCount'));
     }
