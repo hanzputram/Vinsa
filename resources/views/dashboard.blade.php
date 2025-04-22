@@ -14,12 +14,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="mt-4 bg-white p-4 mb-10 rounded-md shadow-sm">
-                <p class="text-lg font-semibold">Jumlah Pengunjung: <span class="text-indigo-600">{{ $visitorCount }}</span></p>
-            </div>
-            
+    <div class="py-12">  
             <div class="flex justify-between gap-2">
                 <!-- Produk -->
                 <a href="/products/edit"

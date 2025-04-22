@@ -42,9 +42,7 @@ class DashboardController extends Controller
     
         $histories = $query->latest()->paginate(10);
     
-        $visitorCount = Visit::whereDate('visited_at', now()->toDateString())->count();
-    
-        return view('dashboard', compact('histories', 'productCount', 'carouselCount', 'visitorCount'));
+        return view('dashboard', compact('histories', 'productCount', 'carouselCount'));
     }
     
 }
