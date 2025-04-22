@@ -17,20 +17,20 @@ class DashboardController extends Controller
     {
         $productCount = Product::count();
         $carouselCount = Carousel::count();
-
+    
         $query = History::with('user');
-
+    
         // Filter berdasarkan tanggal
         if ($request->has('date') && $request->date != '') {
             $query->whereDate('created_at', $request->date);
         } else {
             $query->whereDate('created_at', Carbon::today());
         }
-
+    
         // Filter berdasarkan search query
         if ($request->has('search') && $request->search != '') {
             $search = $request->search;
-
+    
             $query->where(function ($q) use ($search) {
                 $q->whereHas('user', function ($uq) use ($search) {
                     $uq->where('name', 'like', '%' . $search . '%');
@@ -39,16 +39,28 @@ class DashboardController extends Controller
                     ->orWhereRaw("DATE_FORMAT(created_at, '%Y-%m-%d %H:%i:%s') like ?", ["%$search%"]);
             });
         }
-
+    
         $histories = $query->latest()->paginate(10);
-
-        Visit::create([
-            'ip_address' => request()->ip(),
-            'visited_at' => now(),
-        ]);
+    
+        // Catat visitor hanya jika domain = vinsa.fr dan path = /
+        if (request()->getHost() === 'vinsa.fr' && request()->path() === '/') {
+            $today = now()->toDateString();
+    
+            $alreadyVisited = Visit::where('ip_address', request()->ip())
+                ->whereDate('visited_at', $today)
+                ->exists();
+    
+            if (!$alreadyVisited) {
+                Visit::create([
+                    'ip_address' => request()->ip(),
+                    'visited_at' => now(),
+                ]);
+            }
+        }
     
         $visitorCount = Visit::count();
-
+    
         return view('dashboard', compact('histories', 'productCount', 'carouselCount', 'visitorCount'));
     }
+    
 }
