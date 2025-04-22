@@ -24,6 +24,9 @@ class NewController extends Controller
             'Selector Switch',
             'Illuminated Selector Switch',
             'Cable Ties',
+            'Box Panel',
+            'Cable Tray',
+            'Accessories'
         ];
 
         $allCategories = Category::with('products')->get();
