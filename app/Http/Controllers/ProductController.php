@@ -31,7 +31,12 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::with('attributes','category')->findOrFail($id);
-        return view('detailproduct', compact('product'));
+        $barangs = Product::with('attributes')->get();
+        return view('detailproduct', [
+            'product' => $product,
+            'barangs' => $barangs,
+            'kodeAktif' => strtoupper($product->kode)
+        ]);
     }
 
     public function view()
