@@ -209,7 +209,7 @@
                         <img src="/image/detail.png" alt="" width="600px">
                     </div>
                     <div class="flex justify-center w-full p-4 mb-10">
-                        <table class="table-auto scale-[0.8] md:scale-[1] border-collapse border w-full border-gray-400 text-sm text-center">
+                        <table class="table-auto scale-[0.5] md:scale-[1] border-collapse border w-full border-gray-400 text-sm text-center">
                             <thead class="bg-[#066C5F] text-white">
                                 <tr>
                                     <th rowspan="3" class="border border-gray-400 p-2 text-xl">Tipe</th>
