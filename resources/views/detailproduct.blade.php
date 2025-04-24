@@ -166,29 +166,48 @@
                                     Spesifikasi :
                                 </p>
                                 @foreach ($product->attributes as $attributes)
-                                    <li>{{ $attributes->field_name }} : {{ $attributes->field_value }}</li>
+                                    <li class="border-b-[1px] py-3">{{ $attributes->field_name }} : {{ $attributes->field_value }}</li>
                                 @endforeach
                             </ul>
                         </div>
-                        <div class="border-t-[1.5px] pt-3 border-white text-sm sm:text-base">
+                        <div class="border-t-[1.5px] pt-3 mt-7 border-white text-sm sm:text-base">
                             <p class="font-semibold text-white text-xl underline">
                                 Deskripsi :
                             </p>
                             <ul class="text-white">
-                                <li>{!! nl2br(e($product->description)) !!}</li>
+                                @foreach(explode("\n", $product->description) as $line)
+                                    <li class="border-b-[1px] border-white py-3">{!! e($line) !!}</li>
+                                @endforeach
                             </ul>
+                            
                         </div>
                     </div>
-                </div>
+                </div>  
 
-                <div class="text-center lg:text-left px-4">
-                    <p class="text-3xl sm:text-5xl lg:text-6xl font-bold text-white">
-                        Interest With This?
+                @if (strtolower($product->category->name) === 'box panel')
+                    <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-left font-extrabold text-white">
+                        Kenapa Harus Box Panel Vinsa?
                     </p>
-                    <p class="text-xl sm:text-3xl lg:text-4xl font-bold text-white">
-                        Contact Us
-                    </p>
-                </div>
+                    <div class="flex justify-center">
+                        <img src="/image/detail.png" alt="" width="600px">
+                    </div>
+
+                @endif
+                    <div class="flex flex-col md:flex md:flex-row md:justify-between">
+                        <div class="text-center lg:text-left px-4">
+                            <p class="text-3xl sm:text-5xl lg:text-6xl font-bold text-white">
+                                Tertarik Dengan Ini?
+                            </p>
+                            <p class="text-xl sm:text-3xl lg:text-4xl font-bold text-white">
+                                Kontak Kami
+                            </p>
+                        </div>
+                        <div class="flex justify-center mt-5 md:mt-0 md:flex md:items-center">
+                            <a href="https://wa.me/6281335715398" class="border-[3px] bg-[#ffffff54] rounded-full p-3 text-lg font-bold text-[#000] hover:bg-[#00000054] hover:text-white transition-all duration-150">
+                                Kontak Kami ↗
+                            </a>
+                        </div>
+                    </div>
             </div>
         </div>
     </div>
