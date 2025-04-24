@@ -210,7 +210,7 @@
                     </div>
                     <div class="overflow-x-auto p-4 mb-10">
                         <table class="table-auto border-collapse border w-full border-gray-400 text-sm text-center">
-                            <thead class="bg-green-700 text-white">
+                            <thead class="bg-[#066C5F] text-white">
                                 <tr>
                                     <th rowspan="3" class="border border-gray-400 p-2 text-xl">Tipe</th>
                                     <th colspan="3" class="border border-gray-400 p-2 text-lg">Ukuran (mm)</th>
