@@ -8,7 +8,7 @@
             @csrf
             @method('PUT')
 
-            <a href="{{ route('products.edit') }}" class="group">
+            <a href="javascript:window.history.back()" class="group">
                 <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none" xmlns="http://www.w3.org/2000/svg"
                     class="stroke-black group-hover:stroke-gray-400 transition-colors duration-300">
                     <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke-width="2" stroke-linecap="round"
