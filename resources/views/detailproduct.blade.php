@@ -185,7 +185,7 @@
                 </div>  
 
                 @if (strtolower($product->category->name) === 'box panel')
-                    <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-left font-extrabold text-white">
+                    <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-center font-extrabold text-white">
                         Kenapa Harus Box Panel Vinsa?
                     </p>
                     <div class="flex justify-center">
