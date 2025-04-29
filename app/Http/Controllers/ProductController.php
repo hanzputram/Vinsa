@@ -41,9 +41,11 @@ class ProductController extends Controller
 
     public function view()
     {
-        $categories = Category::with('product');
+        $categories = Category::with('products')->get();
         return view('product-input', compact('categories'));
     }
+    
+    
 
     public function store(Request $request)
     {

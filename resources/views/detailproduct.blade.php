@@ -201,14 +201,83 @@
                     </div>
                 </div>
 
-                @if (strtolower($product->category->name) === 'box panel')
+                @if (Str::contains(strtoupper($product->kode), 'VHB200'))
+                    <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-center font-extrabold text-white">
+                        Kenapa Harus Box Panel Vinsa?
+                    </p>
+                    <div class="flex justify-center">
+                        <img src="/image/fs.png" alt="" width="600px">
+                    </div>
+                    <div class="flex justify-center w-full md:p-4 md:mb-10">
+                        <table class="table-auto scale-[0.65] md:scale-[1] border-collapse border w-full border-gray-400 text-sm text-center">
+                            <thead class="bg-[#066C5F] text-white">
+                                <tr>
+                                    <th rowspan="3" class="border border-gray-400 p-2 text-xl">Tipe</th>
+                                    <th colspan="3" class="border border-gray-400 p-2 text-lg">Ukuran (mm)</th>
+                                    <th rowspan="3" class="border border-gray-400 p-2 text-xl">Berat (Kg)</th>
+                                    <th colspan="2" rowspan="2" class="border border-gray-400 p-2 text-lg">
+                                        Ketebalan (mm)</th>
+                                    <th rowspan="3" class="border border-gray-400 p-2 text-xl">Base Plate</th>
+                                </tr>
+                                <tr>
+                                    <th rowspan="2" class="border border-gray-400 p-2">Tinggi</th>
+                                    <th rowspan="2" class="border border-gray-400 p-2">Lebar</th>
+                                    <th rowspan="2" class="border border-gray-400 p-2">Tebal</th>
+                                </tr>
+                                <tr>
+                                    <th class="border border-gray-400 p-2">Pintu</th>
+                                    <th class="border border-gray-400 p-2">Bodi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($barangs as $barang)
+                                    @php
+                                        $isActive = isset($kodeAktif) && strtoupper($barang->kode) === $kodeAktif;
+                                    @endphp
+
+                                    @if (Str::contains(strtolower($barang->name), 'box'))
+                                        <tr
+                                            class="{{ $isActive ? 'pulse-bg' : 'bg-white hover:bg-gray-100' }}">
+                                            <td class="border border-gray-400 p-2">{{ $barang->kode }}</td>
+                                            <td class="border border-gray-400 p-2">
+                                                {{ $barang->attributes->firstWhere('field_name', 'Height')->field_value ?? '-' }}
+                                            </td>
+                                            <td class="border border-gray-400 p-2">
+                                                {{ $barang->attributes->firstWhere('field_name', 'Widht')->field_value ?? '-' }}
+                                            </td>
+                                            <td class="border border-gray-400 p-2">
+                                                {{ $barang->attributes->firstWhere('field_name', 'Depth')->field_value ?? '-' }}
+                                            </td>
+
+                                            <td class="border border-gray-400 p-2">
+                                                {{ $barang->attributes->firstWhere('field_name', 'Net Weight')->field_value ?? '-' }}
+                                            </td>
+
+                                            <td class="border border-gray-400 p-2">
+                                                {{ $barang->attributes->firstWhere('field_name', 'Door Thickness')->field_value ?? '-' }}
+                                            </td>
+                                            <td class="border border-gray-400 p-2">
+                                                {{ $barang->attributes->firstWhere('field_name', 'Body Thickness')->field_value ?? '-' }}
+                                            </td>
+
+                                            <td class="border border-gray-400 p-2">
+                                                {{ $barang->attributes->firstWhere('field_name', 'Base Plate Thickness')->field_value ?? '-' }}
+                                            </td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+
+                    @elseif (Str::contains(strtoupper($product->kode), 'VHB'))
                     <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-center font-extrabold text-white">
                         Kenapa Harus Box Panel Vinsa?
                     </p>
                     <div class="flex justify-center">
                         <img src="/image/bvin.png" alt="" width="600px">
                     </div>
-                    <div class="flex justify-center w-full md:p-4 mb-10">
+                    <div class="flex justify-center w-full md:p-4 md:mb-10">
                         <table class="table-auto scale-[0.65] md:scale-[1] border-collapse border w-full border-gray-400 text-sm text-center">
                             <thead class="bg-[#066C5F] text-white">
                                 <tr>
