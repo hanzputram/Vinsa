@@ -20,6 +20,7 @@ class CategorySeeder extends Seeder
             'Cable Ties',
             'Cable Tray',
             'Accessories',
+            'Rak',
         ];
 
         foreach ($categories as $name) {

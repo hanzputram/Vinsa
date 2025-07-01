@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CarouselController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SliderController;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [NewController::class, 'show']);
@@ -14,6 +16,7 @@ Route::get('/about', [AboutController::class, 'show']);
 Route::get('/product', [ProductController::class, 'index'])->name('products.view.user');
 Route::get('/detail/{id}', [ProductController::class, 'show']);
 Route::get('/new', [NewController::class, 'show']);
+Route::get('/blogDetail/{id}', [BlogController::class, 'showDetail'])->name('blog.detail');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -37,6 +40,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/carousels/{id}/edit', [CarouselController::class, 'edit'])->name('carousels.edit');
     Route::put('/carousels/{id}', [CarouselController::class, 'update'])->name('carousels.update');
     Route::delete('/carousels/{id}', [CarouselController::class, 'destroy'])->name('carousels.destroy');
+
+    //Blog Routes
+    Route::get('/blogInputView', [BlogController::class, 'show'])->name('blog.view');
+    Route::post('/blogCreate', [BlogController::class, 'store'])->name('blogs.store');
+    Route::put('/blogUpdate/{id}', [BlogController::class, 'update'])->name('blog.update');
+    Route::get('/blogUpdateView', [BlogController::class, 'updateView'])->name('blog.updateview');
+    Route::get('/blogEdit/{id}', [BlogController::class, 'edit'])->name('blog.editview');
 
 });
 

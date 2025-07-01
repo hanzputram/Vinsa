@@ -206,7 +206,7 @@
                         Kenapa Harus Box Panel Vinsa?
                     </p>
                     <div class="flex justify-center">
-                        {{-- <img src="/image/a43.png" alt="" width="600px"> --}}
+                        <img src="/image/fs.png" alt="" width="600px">
                     </div>
                     <div class="flex justify-center w-full md:p-4 md:mb-10">
                         <table class="table-auto scale-[0.65] md:scale-[1] border-collapse border w-full border-gray-400 text-sm text-center">

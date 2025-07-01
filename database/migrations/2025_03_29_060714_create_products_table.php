@@ -18,14 +18,15 @@ return new class extends Migration
             $table->integer('stock')->nullable();
             $table->string('kode');
             $table->string('image');
-            $table->unsignedBigInteger('category_id')->nullable(); // Relasi ke categories
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
 
-            // Tambahan kolom untuk spesifikasi
-            $table->string('u_c_series')->nullable(); // Kolom untuk cable tray
-            $table->string('push_button_type')->nullable(); // Kolom untuk push button
-            $table->string('selector_switch_type')->nullable(); // Kolom untuk selector switch
-            $table->string('pilot_lamp_type')->nullable(); // Kolom untuk pilot lamp
+            // HANYA kolom kategori ID tanpa foreign key
+            $table->unsignedBigInteger('category_id')->nullable(); // Tanpa foreign key
+
+            // Spesifikasi
+            $table->string('u_c_series')->nullable();
+            $table->string('push_button_type')->nullable();
+            $table->string('selector_switch_type')->nullable();
+            $table->string('pilot_lamp_type')->nullable();
 
             $table->timestamps();
         });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\Product;
@@ -16,6 +17,7 @@ class NewController extends Controller
     {
         $carousels = Carousel::all();
         $products = Product::all();
+        $blogs = Blog::with('sections')->latest()->get(); // Tambahkan ini
 
         $customOrder = [
             'Push Button',
@@ -43,6 +45,6 @@ class NewController extends Controller
 
         $categories = $orderedCategories->concat($remainingCategories)->values();
 
-        return view('new', compact('carousels', 'products', 'categories'));
+        return view('new', compact('carousels', 'products', 'categories', 'blogs'));
     }
 }
