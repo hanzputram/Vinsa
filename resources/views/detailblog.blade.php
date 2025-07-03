@@ -51,7 +51,7 @@
                 {{-- Konten Sub Judul & Isi --}}
                 @foreach ($blog->sections as $section)
                     <div class="mb-8">
-                        <h2 class="text-2xl font-bold text-[#FDFBEE] border-l-4 border-red-600 pl-3 mb-2">
+                        <h2 class="text-2xl font-bold text-[#FDFBEE] border-l-4 border-[#f4752c] pl-3 mb-2">
                             {{ $section->subtitle }}
                         </h2>
                         <img src="{{ asset('storage/' . $section->image) }}" alt="" width="300px">
