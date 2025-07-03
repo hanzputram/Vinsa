@@ -122,4 +122,28 @@ class BlogController extends Controller
         $blog = Blog::with('sections')->findOrFail($id);
         return view('detailblog', compact('blog'));
     }
+
+    public function destroy($id)
+{
+    $blog = Blog::with('sections')->findOrFail($id);
+
+    // Hapus gambar utama blog jika ada
+    if ($blog->image && Storage::disk('public')->exists($blog->image)) {
+        Storage::disk('public')->delete($blog->image);
+    }
+
+    // Hapus gambar dan data setiap section
+    foreach ($blog->sections as $section) {
+        if ($section->image && Storage::disk('public')->exists($section->image)) {
+            Storage::disk('public')->delete($section->image);
+        }
+        $section->delete();
+    }
+
+    // Hapus blog
+    $blog->delete();
+
+    return redirect()->back()->with('success', 'Blog berhasil dihapus.');
+}
+
 }

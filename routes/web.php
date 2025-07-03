@@ -47,6 +47,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/blogUpdate/{id}', [BlogController::class, 'update'])->name('blog.update');
     Route::get('/blogUpdateView', [BlogController::class, 'updateView'])->name('blog.updateview');
     Route::get('/blogEdit/{id}', [BlogController::class, 'edit'])->name('blog.editview');
+    Route::delete('/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+
 
 });
 
