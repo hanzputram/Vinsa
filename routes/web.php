@@ -15,7 +15,7 @@ Route::get('/', [NewController::class, 'show']);
 Route::get('/about', [AboutController::class, 'show']);
 Route::get('/product', [ProductController::class, 'index'])->name('products.view.user');
 Route::get('/detail/{id}', [ProductController::class, 'show']);
-Route::get('/new', [NewController::class, 'show']);
+Route::get('/new', [NewController::class, 'show'])->name('home');
 Route::get('/blogDetail/{id}', [BlogController::class, 'showDetail'])->name('blog.detail');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

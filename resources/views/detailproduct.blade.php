@@ -209,7 +209,8 @@
                         <img src="/image/fs.png" alt="" width="600px">
                     </div>
                     <div class="flex justify-center w-full md:p-4 md:mb-10">
-                        <table class="table-auto scale-[0.65] md:scale-[1] border-collapse border w-full border-gray-400 text-sm text-center">
+                        <table
+                            class="table-auto scale-[0.65] md:scale-[1] border-collapse border w-full border-gray-400 text-sm text-center">
                             <thead class="bg-[#066C5F] text-white">
                                 <tr>
                                     <th rowspan="3" class="border border-gray-400 p-2 text-xl">Tipe</th>
@@ -236,8 +237,7 @@
                                     @endphp
 
                                     @if (Str::contains(strtolower($barang->name), 'box'))
-                                        <tr
-                                            class="{{ $isActive ? 'pulse-bg' : 'bg-white hover:bg-gray-100' }}">
+                                        <tr class="{{ $isActive ? 'pulse-bg' : 'bg-white hover:bg-gray-100' }}">
                                             <td class="border border-gray-400 p-2">{{ $barang->kode }}</td>
                                             <td class="border border-gray-400 p-2">
                                                 {{ $barang->attributes->firstWhere('field_name', 'Height')->field_value ?? '-' }}
@@ -269,8 +269,7 @@
                             </tbody>
                         </table>
                     </div>
-
-                    @elseif (Str::contains(strtoupper($product->kode), 'VHB'))
+                @elseif (Str::contains(strtoupper($product->kode), 'VHB'))
                     <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-center font-extrabold text-white">
                         Kenapa Harus Box Panel Vinsa?
                     </p>
@@ -278,7 +277,8 @@
                         <img src="/image/bvin.png" alt="" width="600px">
                     </div>
                     <div class="flex justify-center w-full md:p-4 md:mb-10">
-                        <table class="table-auto scale-[0.65] md:scale-[1] border-collapse border w-full border-gray-400 text-sm text-center">
+                        <table
+                            class="table-auto scale-[0.65] md:scale-[1] border-collapse border w-full border-gray-400 text-sm text-center">
                             <thead class="bg-[#066C5F] text-white">
                                 <tr>
                                     <th rowspan="3" class="border border-gray-400 p-2 text-xl">Tipe</th>
@@ -305,8 +305,7 @@
                                     @endphp
 
                                     @if (Str::contains(strtolower($barang->name), 'box'))
-                                        <tr
-                                            class="{{ $isActive ? 'pulse-bg' : 'bg-white hover:bg-gray-100' }}">
+                                        <tr class="{{ $isActive ? 'pulse-bg' : 'bg-white hover:bg-gray-100' }}">
                                             <td class="border border-gray-400 p-2">{{ $barang->kode }}</td>
                                             <td class="border border-gray-400 p-2">
                                                 {{ $barang->attributes->firstWhere('field_name', 'Height')->field_value ?? '-' }}
@@ -337,6 +336,16 @@
                                 @endforeach
                             </tbody>
                         </table>
+                    </div>
+                @elseif (Str::contains(strtoupper($product->name), 'WAREHOUSE'))
+                  <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-center font-extrabold text-white">
+                        Kenapa Harus Warehouse Rack Vinsa?
+                    </p>
+                    <div class="flex justify-center">
+                        <img src="/image/9.png" alt="" width="900px">
+                    </div>
+                    <div class="flex justify-center">
+                        <img src="/image/10.png" alt="" width="900px">
                     </div>
                 @endif
                 <div class="flex flex-col md:flex md:flex-row md:justify-between">
