@@ -15,7 +15,7 @@
             clearTimeout(this.resetTimer);
             this.resetTimer = setTimeout(() => this.clickCount = 0, 3000);
             if (this.clickCount >= 1) {
-                window.location.href = '{{ route('home') }}';
+                window.location.href = '/';
             }
         }
     }"
