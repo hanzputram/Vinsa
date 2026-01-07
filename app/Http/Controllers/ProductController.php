@@ -30,7 +30,7 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with('attributes','category')->findOrFail($id);
+        $product = Product::with('attributes', 'category')->findOrFail($id);
         $barangs = Product::with('attributes')->get();
         return view('detailproduct', [
             'product' => $product,
@@ -44,8 +44,6 @@ class ProductController extends Controller
         $categories = Category::with('products')->get();
         return view('product-input', compact('categories'));
     }
-    
-    
 
     public function store(Request $request)
     {
@@ -55,6 +53,11 @@ class ProductController extends Controller
             'stock' => 'nullable|integer|min:0',
             'kode' => 'required|string|unique:products,kode',
             'category_id' => 'required|exists:categories,id',
+
+            // ✅ META (AMAN: nullable)
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:500',
+
             'image' => [
                 'required',
                 'image',
@@ -137,6 +140,10 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'custom_input' => $customInput,
             'image' => $imagePath,
+
+            // ✅ META (langsung simpan, nullable)
+            'meta_title' => $request->meta_title,
+            'meta_description' => $request->meta_description,
         ]);
 
         if ($request->has('specifications')) {
@@ -161,8 +168,6 @@ class ProductController extends Controller
         return redirect()->route('products.view', $product->id)->with('success', 'Produk berhasil ditambahkan!');
     }
 
-
-
     public function edit()
     {
         $products = Product::with('attributes')->get();
@@ -184,6 +189,11 @@ class ProductController extends Controller
             'stock' => 'nullable|integer|min:0',
             'kode' => 'required|string|unique:products,kode,' . $id,
             'category_id' => 'required|exists:categories,id',
+
+            // ✅ META (AMAN: nullable)
+            'meta_title' => 'nullable|string|max:255',
+            'meta_description' => 'nullable|string|max:500',
+
             'image' => [
                 'nullable',
                 'image',
@@ -245,6 +255,21 @@ class ProductController extends Controller
             $product->custom_input = $customInput;
         }
 
+        // ✅ META CHANGES
+        if ($product->meta_title !== $request->meta_title) {
+            $old = $product->meta_title ?? '(kosong)';
+            $new = $request->meta_title ?? '(kosong)';
+            $historyChanges[] = 'meta title dari "' . $old . '" menjadi "' . $new . '"';
+            $product->meta_title = $request->meta_title;
+        }
+
+        if ($product->meta_description !== $request->meta_description) {
+            $old = $product->meta_description ?? '(kosong)';
+            $new = $request->meta_description ?? '(kosong)';
+            $historyChanges[] = 'meta description dari "' . $old . '" menjadi "' . $new . '"';
+            $product->meta_description = $request->meta_description;
+        }
+
         if ($request->hasFile('image')) {
             $newImagePath = $request->file('image')->store('products', 'public');
             if ($product->image && Storage::disk('public')->exists($product->image)) {
@@ -287,9 +312,6 @@ class ProductController extends Controller
 
         return redirect()->route('products.edit')->with('success', 'Produk berhasil diperbarui!');
     }
-
-
-
 
     public function destroy($id)
     {

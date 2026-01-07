@@ -17,13 +17,13 @@
 
         <div class="max-w-[90%]">
             <label class="block text-gray-600 mb-1">Nama Produk</label>
-            <input type="text" name="name" required
+            <input type="text" name="name" required value="{{ old('name') }}"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
 
         <div class="max-w-[90%]">
             <label class="block text-gray-600 mb-1">Kode Produk</label>
-            <input type="text" name="kode" required
+            <input type="text" name="kode" required value="{{ old('kode') }}"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
         </div>
 
@@ -44,15 +44,37 @@
             <label class="block text-gray-600 mb-1">Deskripsi</label>
             <textarea name="description" rows="3"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="Deskripsi Produk"></textarea>
+                placeholder="Deskripsi Produk">{{ old('description') }}</textarea>
         </div>
+
+        {{-- ✅ SEO META INPUT (DITAMBAHKAN) --}}
+        <div class="max-w-[90%]">
+            <label class="block text-gray-600 mb-1">Meta Title</label>
+            <p class="text-sm text-gray-500 mt-1">Disarankan 50–60 karakter. Kosongkan jika ingin otomatis dari Nama Produk.</p>
+            <input type="text" name="meta_title" value="{{ old('meta_title') }}"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                maxlength="255"
+                placeholder="Contoh: Jual MCB Schneider iC60H 2A 1P | ATS Tekno">
+        </div>
+
+        <div class="max-w-[90%]">
+            <label class="block text-gray-600 mb-1">Meta Description</label>
+            <p class="text-sm text-gray-500 mt-1">Disarankan 140–155 karakter. Kosongkan jika ingin otomatis dari Deskripsi.</p>
+            <textarea name="meta_description" rows="3"
+                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+                maxlength="500"
+                placeholder="Ringkasan singkat produk untuk hasil pencarian Google...">{{ old('meta_description') }}</textarea>
+        </div>
+        {{-- ✅ END SEO META INPUT --}}
 
         <div class="max-w-[90%]" id="specifications">
             <label class="block text-gray-600 mb-1">Spesifikasi</label>
             <div class="flex gap-2 mb-2 spec-row">
                 <input type="text" name="specifications[0][field_name]" placeholder="Nama Spesifikasi"
+                    value="{{ old('specifications.0.field_name') }}"
                     class="w-1/2 px-4 py-2 border border-gray-300 rounded-lg spec-field">
                 <input type="text" name="specifications[0][field_value]" placeholder="mm, Kg, °C ..."
+                    value="{{ old('specifications.0.field_value') }}"
                     class="w-1/2 px-4 py-2 border border-gray-300 rounded-lg spec-value">
             </div>
         </div>

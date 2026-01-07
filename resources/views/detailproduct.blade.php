@@ -11,6 +11,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <title>Vinsa</title>
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
+    @php
+    use Illuminate\Support\Str;
+
+    $metaTitle = $product->meta_title ?: ($product->name . ' | Vinsa Electric');
+    $metaDesc  = $product->meta_description ?: Str::limit(strip_tags($product->description ?? ''), 155);
+@endphp
+
+<title>{{ $metaTitle }}</title>
+<meta name="description" content="{{ $metaDesc }}">
+<link rel="canonical" href="{{ url()->current() }}">
+
     <style>
         .outfit {
             font-family: "Outfit", sans-serif;

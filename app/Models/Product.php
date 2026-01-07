@@ -16,7 +16,9 @@ class Product extends Model
         'kode',
         'category_id',
         'image',
-        'custom_input', // ✅ Tambahkan ini
+        'custom_input',
+        'meta_title',
+        'meta_description', // ✅ Tambahkan ini
     ];
 
     public function attributes()
