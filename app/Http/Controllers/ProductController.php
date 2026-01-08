@@ -53,8 +53,6 @@ class ProductController extends Controller
             'stock' => 'nullable|integer|min:0',
             'kode' => 'required|string|unique:products,kode',
             'category_id' => 'required|exists:categories,id',
-
-            // ✅ META (AMAN: nullable)
             'meta_title' => 'nullable|string|max:255',
             'meta_description' => 'nullable|string|max:500',
 
@@ -94,6 +92,7 @@ class ProductController extends Controller
         $customInput = null;
 
         $category = Category::find($request->category_id);
+        // dd($request->all());
 
         if ($category) {
             $categoryName = strtolower($category->name);
@@ -108,6 +107,20 @@ class ProductController extends Controller
             } elseif ($categoryName === 'selector switch') {
                 $type = $request->input('selector_switch_type');
                 $series = $request->input('selector_switch_series');
+                $customInput = json_encode([
+                    'tipe' => $type,
+                    'series' => $series,
+                ]);
+            } elseif ($categoryName === 'cable lug') {
+                $type = $request->input('cable_lug_type');
+                $series = $request->input('cabe_lug_series');
+                $customInput = json_encode([
+                    'tipe' => $type,
+                    'series' => $series,
+                ]);
+            } elseif ($categoryName === 'terminal block') {
+                $type = $request->input('terminal_block_type');
+                $series = $request->input('terminal_block_series');
                 $customInput = json_encode([
                     'tipe' => $type,
                     'series' => $series,

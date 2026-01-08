@@ -283,6 +283,33 @@
                         tipe,
                         series
                     });
+                } else if (category === 'terminal block') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">Tipe Terminal Block</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
+                            placeholder="Masukkan tipe terminal block"
+                            value="${tipe}"
+                            oninput="updatePushButtonValue(this.value, null)">
+                        
+                        <label class="block text-gray-600">Series</label>
+                        <select class="w-full px-4 py-2 border rounded-lg"
+                            onchange="updatePushButtonValue(null, this.value)">
+                            <option value="">Pilih Series</option>
+                            <option value="Terminal Strip" ${series === 'Terminal Strip' ? 'selected' : ''}>Terminal Strip</option>
+                            <option value="Terminal Block TB" ${series === 'Terminal Block TB' ? 'selected' : ''}>Terminal Block TB</option>
+                            <option value="Terminal Block TBC" ${series === 'Terminal Block TBC' ? 'selected' : ''}>Terminal Block TBC</option>
+                            <option value="Terminal Block TBR" ${series === 'Terminal Block TBR' ? 'selected' : ''}>Terminal Block TBR</option>
+                            <option value="Terminal Block TUK" ${series === 'Terminal Block TUK' ? 'selected' : ''}>Terminal Block TUK</option>
+                            <option value="Terminal Block TUSLKG" ${series === 'Terminal Block TUSLKG' ? 'selected' : ''}>Terminal Block TUSLKG</option>
+                            <option value="Terminal Block KLUS" ${series === 'Terminal Block KLUS' ? 'selected' : ''}>Terminal Block KLUS</option>
+                        </select>
+                    `;
+                    customInputHidden.value = JSON.stringify({
+                        tipe,
+                        series
+                    });
                 } else if (category === 'selector switch') {
                     const tipe = parsedOld.tipe || '';
                     const series = parsedOld.series || '';

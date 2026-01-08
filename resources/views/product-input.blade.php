@@ -50,20 +50,20 @@
         {{-- ✅ SEO META INPUT (DITAMBAHKAN) --}}
         <div class="max-w-[90%]">
             <label class="block text-gray-600 mb-1">Meta Title</label>
-            <p class="text-sm text-gray-500 mt-1">Disarankan 50–60 karakter. Kosongkan jika ingin otomatis dari Nama Produk.</p>
+            <p class="text-sm text-gray-500 mt-1">Disarankan 50–60 karakter. Kosongkan jika ingin otomatis dari Nama
+                Produk.</p>
             <input type="text" name="meta_title" value="{{ old('meta_title') }}"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                maxlength="255"
-                placeholder="Contoh: Jual MCB Schneider iC60H 2A 1P | ATS Tekno">
+                maxlength="255" placeholder="Contoh: Jual MCB Schneider iC60H 2A 1P | ATS Tekno">
         </div>
 
         <div class="max-w-[90%]">
             <label class="block text-gray-600 mb-1">Meta Description</label>
-            <p class="text-sm text-gray-500 mt-1">Disarankan 140–155 karakter. Kosongkan jika ingin otomatis dari Deskripsi.</p>
+            <p class="text-sm text-gray-500 mt-1">Disarankan 140–155 karakter. Kosongkan jika ingin otomatis dari
+                Deskripsi.</p>
             <textarea name="meta_description" rows="3"
                 class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                maxlength="500"
-                placeholder="Ringkasan singkat produk untuk hasil pencarian Google...">{{ old('meta_description') }}</textarea>
+                maxlength="500" placeholder="Ringkasan singkat produk untuk hasil pencarian Google...">{{ old('meta_description') }}</textarea>
         </div>
         {{-- ✅ END SEO META INPUT --}}
 
@@ -221,6 +221,42 @@
                             <option value="">Pilih Series</option>
                             <option value="KB 5 Series">KB 5 Series</option>
                             <option value="KB 2 Series">KB 2 Series</option>
+                        </select>
+                    `;
+                } else if (selectedCategory === 'terminal block') {
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">Tipe Terminal Block</label>
+                        <input type="text" name="terminal_block_type"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                            placeholder="Masukkan tipe selector switch">
+                            <label class="block text-gray-600">Series</label>
+                        <select name="terminal_block_series"
+                            class="w-full px-4 py-2 border rounded-lg">
+                            <option value="">Pilih Series</option>
+                            <option value="Terminal Strip">Terminal Strip</option>
+                            <option value="Terminal Block TB">Terminal Block TB</option>
+                            <option value="Terminal Block TBC">Terminal Block TBC</option>
+                            <option value="Terminal Block TBR">Terminal Block TBR</option>
+                            <option value="Terminal Block TUK">Terminal Block TUK</option>
+                            <option value="Terminal Block TUSLKG">Terminal Block TUSLKG</option>
+                            <option value="Terminal Block KLUS">Terminal Block KLUS</option>
+                        </select>
+                    `;
+                } else if (selectedCategory === 'cable lug') {
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">Tipe Cable Lug</label>
+                        <input type="text" name="cable_lug_type"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                            placeholder="Masukkan tipe Cable Lug">
+                            <label class="block text-gray-600">Series</label>
+                        <select name="cable_lug_series"
+                            class="w-full px-4 py-2 border rounded-lg">
+                            <option value="">Pilih Series</option>
+                            <option value="SC Cable Lug">SC Cable Lug</option>
+                            <option value="SV Cable Lug">SV Cable Lug</option>
+                            <option value="RV Cable Lug">RV Cable Lug</option>
+                            <option value="PTV Cable Lug">PTV Cable Lug</option>
+                            <option value="DBV Cable Lug">DBV Cable Lug</option>
                         </select>
                     `;
                 } else if (selectedCategory === 'pilot lamp') {

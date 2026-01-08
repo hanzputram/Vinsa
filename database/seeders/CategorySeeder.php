@@ -21,6 +21,14 @@ class CategorySeeder extends Seeder
             'Cable Tray',
             'Accessories',
             'Rak',
+            'Flashing Buzzer',
+            'MCCB',
+            'MCCB Accessories',
+            'Contactor',
+            'Contactor Accessories',
+            'Empty Control Panel',
+            'Cable Lug',
+            'Terminal Block',
         ];
 
         foreach ($categories as $name) {

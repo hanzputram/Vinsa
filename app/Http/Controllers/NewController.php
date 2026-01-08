@@ -28,7 +28,15 @@ class NewController extends Controller
             'Cable Ties',
             'Box Panel',
             'Cable Tray',
-            'Accessories'
+            'Accessories',
+            'Flashing Buzzer',
+            'MCCB',
+            'MCCB Accessories',
+            'Contactor',
+            'Contactor Accessories',
+            'Empty Control Panel',
+            'Cable Lug',
+            'Terminal Block',
         ];
 
         $allCategories = Category::with('products')->get();
