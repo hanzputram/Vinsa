@@ -1004,10 +1004,6 @@
                                                     {{ Str::limit($productItem->name, 10) }}
                                                 </h4>
 
-                                                <p class="text-xs text-gray-300 mb-2">
-                                                    {{ $productItem->custom_input }}
-                                                </p>
-
                                                 @if ($customInput)
                                                     <div class="text-[10px] text-gray-300 mt-1">
                                                         @foreach ($customInput as $key => $value)
