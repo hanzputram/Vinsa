@@ -963,7 +963,7 @@
                             @elseif (strtolower($category->name) === 'terminal block')
                                 @php
                                     $tbSeries = [
-                                        'Terminal Block Strip',
+                                        'Terminal Strip',
                                         'Terminal Block TB',
                                         'Terminal Block TBC',
                                         'Terminal Block TBR',
