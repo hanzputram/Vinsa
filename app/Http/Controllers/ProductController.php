@@ -107,13 +107,14 @@ class ProductController extends Controller
             } elseif ($categoryName === 'selector switch') {
                 $type = $request->input('selector_switch_type');
                 $series = $request->input('selector_switch_series');
+
                 $customInput = json_encode([
                     'tipe' => $type,
                     'series' => $series,
                 ]);
             } elseif ($categoryName === 'cable lug') {
                 $type = $request->input('cable_lug_type');
-                $series = $request->input('cabe_lug_series');
+                $series = $request->input('cable_lug_series');
                 $customInput = json_encode([
                     'tipe' => $type,
                     'series' => $series,

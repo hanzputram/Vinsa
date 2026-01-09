@@ -310,6 +310,31 @@
                         tipe,
                         series
                     });
+                } else if (category === 'cable lug') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">Tipe Cable Lug</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
+                            placeholder="Masukkan tipe cable lug"
+                            value="${tipe}"
+                            oninput="updatePushButtonValue(this.value, null)">
+                        
+                        <label class="block text-gray-600">Series</label>
+                        <select class="w-full px-4 py-2 border rounded-lg"
+                            onchange="updatePushButtonValue(null, this.value)">
+                            <option value="">Pilih Series</option>
+                            <option value="SC Cable Lug" ${series === 'SC Cable Lug' ? 'selected' : ''}>SC Cable Lug</option>
+                            <option value="SV Cable Lug" ${series === 'SV Cable Lug' ? 'selected' : ''}>SV Cable Lug</option>
+                            <option value="RV Cable Lug" ${series === 'RV Cable Lug' ? 'selected' : ''}>RV Cable Lug</option>
+                            <option value="PTV Cable Lug" ${series === 'PTV Cable Lug' ? 'selected' : ''}>PTV Cable Lug</option>
+                            <option value="DBV Cable Lug" ${series === 'DBV Cable Lug' ? 'selected' : ''}>DBV Cable Lug</option>
+                        </select>
+                    `;
+                    customInputHidden.value = JSON.stringify({
+                        tipe,
+                        series
+                    });
                 } else if (category === 'selector switch') {
                     const tipe = parsedOld.tipe || '';
                     const series = parsedOld.series || '';
