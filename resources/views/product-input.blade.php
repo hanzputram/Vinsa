@@ -280,7 +280,7 @@
                             class="w-full px-4 py-2 border border-gray-300 rounded-lg"
                             placeholder="Masukkan tipe Mccb Accessories">
                             <label class="block text-gray-600">Series</label>
-                        <select name="mccb_series"
+                        <select name="mccb_accessories_series"
                             class="w-full px-4 py-2 border rounded-lg">
                             <option value="">Pilih Series</option>
                             <option value="MAA Alarm Contact">MAA Alarm Contact</option>
