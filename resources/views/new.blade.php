@@ -1044,6 +1044,171 @@
                                         </div>
                                     @endforeach
                                 </div>
+                            @elseif (strtolower($category->name) === 'mccb')
+                                @php
+                                    $mccbSeries = [
+                                        'M12B 25kA',
+                                        'M16F 35kA',
+                                        'M25F 35kA',
+                                        'M40F 35kA',
+                                        'M63F 35kA',
+                                        'M80F 35kA',
+                                    ];
+
+                                    $getCI = function ($item) {
+                                        $ci = json_decode($item->custom_input, true);
+                                        return is_array($ci) ? $ci : [];
+                                    };
+                                @endphp
+
+                                {{-- CAROUSEL panel: tampil 2 panel, geser untuk lihat 6 panel --}}
+                                <div class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory">
+                                    @foreach ($mccbSeries as $seriesName)
+                                        @php
+                                            $items = $category->products
+                                                ->filter(function ($item) use ($getCI, $seriesName) {
+                                                    $ci = $getCI($item);
+                                                    $series = strtolower(trim((string) ($ci['series'] ?? '')));
+                                                    return $series === strtolower(trim($seriesName));
+                                                })
+                                                ->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+
+                                        {{-- panel ukurannya dibuat agar "terlihat 2" di desktop --}}
+                                        <div
+                                            class="snap-start w-[92%] sm:w-[70%] md:w-[calc(50%-0.5rem)] flex-shrink-0 bg-[#5f5f5f60] rounded-xl p-4">
+                                            <h4 class="text-md font-bold mb-2 text-white">
+                                                {{ $seriesName }}
+                                            </h4>
+
+                                            @if ($items->count())
+                                                <div class="flex gap-4 overflow-x-auto pb-2">
+                                                    @foreach ($items as $productItem)
+                                                        @php $ci = $getCI($productItem); @endphp
+
+                                                        <div
+                                                            class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e]
+                                                            transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                            <a href="/detail/{{ $productItem->id }}"
+                                                                class="group transition-transform transform hover:scale-[1.01]">
+                                                                <p class="text-xs text-gray-300 mb-2">
+                                                                    {{ Str::limit($productItem->kode, 50) }}
+                                                                </p>
+
+                                                                <div class="relative w-[120px] h-40">
+                                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                        alt="{{ $productItem->name }}"
+                                                                        class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                                    <div
+                                                                        class="w-full h-full underline flex items-center justify-center text-white font-semibold text-sm rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                        Lihat Selengkapnya ↗
+                                                                    </div>
+                                                                </div>
+
+                                                                <h4 class="mt-2 text-white font-bold text-sm">
+                                                                    {{ Str::limit($productItem->name, 10) }}
+                                                                </h4>
+
+                                                                <div class="text-xs text-gray-300 mt-1 space-y-0.5">
+                                                                    @if (!empty($ci['type']))
+                                                                        <div>Type: {{ Str::limit($ci['type'], 20) }}
+                                                                        </div>
+                                                                    @endif
+                                                                    <div>Series: {{ Str::limit($seriesName, 20) }}
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @else
+                                                <p class="text-sm text-gray-300 italic">Belum ada produk.</p>
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @elseif (strtolower($category->name) === 'mccb accessories')
+                                @php
+                                    $mccbSeries = [
+                                        'MAA Alarm Contact',
+                                        'MAS Shunt Release',
+                                        'MAAUX Auxiliary Contact',
+                                        'MAUVT Under Voltage',
+                                        'MARH Extended Rotary Handle',
+                                    ];
+
+                                    $getCI = function ($item) {
+                                        $ci = json_decode($item->custom_input, true);
+                                        return is_array($ci) ? $ci : [];
+                                    };
+                                @endphp
+
+                                {{-- CAROUSEL panel: tampil 2 panel, geser untuk lihat 6 panel --}}
+                                <div class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory">
+                                    @foreach ($mccbSeries as $seriesName)
+                                        @php
+                                            $items = $category->products
+                                                ->filter(function ($item) use ($getCI, $seriesName) {
+                                                    $ci = $getCI($item);
+                                                    $series = strtolower(trim((string) ($ci['series'] ?? '')));
+                                                    return $series === strtolower(trim($seriesName));
+                                                })
+                                                ->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+
+                                        {{-- panel ukurannya dibuat agar "terlihat 2" di desktop --}}
+                                        <div
+                                            class="snap-start w-[92%] sm:w-[70%] md:w-[calc(50%-0.5rem)] flex-shrink-0 bg-[#5f5f5f60] rounded-xl p-4">
+                                            <h4 class="text-md font-bold mb-2 text-white">
+                                                {{ $seriesName }}
+                                            </h4>
+
+                                            @if ($items->count())
+                                                <div class="flex gap-4 overflow-x-auto pb-2">
+                                                    @foreach ($items as $productItem)
+                                                        @php $ci = $getCI($productItem); @endphp
+
+                                                        <div
+                                                            class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e]
+                                                            transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
+                                                            <a href="/detail/{{ $productItem->id }}"
+                                                                class="group transition-transform transform hover:scale-[1.01]">
+                                                                <p class="text-xs text-gray-300 mb-2">
+                                                                    {{ Str::limit($productItem->kode, 50) }}
+                                                                </p>
+
+                                                                <div class="relative w-[120px] h-40">
+                                                                    <img src="{{ asset('storage/' . $productItem->image) }}"
+                                                                        alt="{{ $productItem->name }}"
+                                                                        class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
+                                                                    <div
+                                                                        class="w-full h-full underline flex items-center justify-center text-white font-semibold text-sm rounded absolute top-0 left-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                                                        Lihat Selengkapnya ↗
+                                                                    </div>
+                                                                </div>
+
+                                                                <h4 class="mt-2 text-white font-bold text-sm">
+                                                                    {{ Str::limit($productItem->name, 10) }}
+                                                                </h4>
+
+                                                                <div class="text-xs text-gray-300 mt-1 space-y-0.5">
+                                                                    @if (!empty($ci['type']))
+                                                                        <div>Type: {{ Str::limit($ci['type'], 20) }}
+                                                                        </div>
+                                                                    @endif
+                                                                    <div>Series: {{ Str::limit($seriesName, 20) }}
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            @else
+                                                <p class="text-sm text-gray-300 italic">Belum ada produk.</p>
+                                            @endif
+                                        </div>
+                                    @endforeach
+                                </div>
                             @elseif (strtolower($category->name) === 'box panel')
                                 <div class="flex flex-col md:flex-row gap-4">
                                     {{-- Wall Mounting IP65 --}}

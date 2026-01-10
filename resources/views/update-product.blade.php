@@ -325,7 +325,7 @@
                             onchange="updatePushButtonValue(null, this.value)">
                             <option value="">Pilih Series</option>
                             <option value="SC Cable Lug" ${series === 'SC Cable Lug' ? 'selected' : ''}>SC Cable Lug</option>
-                            <option value="SV Cable Lug" ${series === 'SV Cable Lug' ? 'selected' : ''}>SV Cable Lug</option>
+                            <option value="M16F 35kA" ${series === 'SV Cable Lug' ? 'selected' : ''}>SV Cable Lug</option>
                             <option value="RV Cable Lug" ${series === 'RV Cable Lug' ? 'selected' : ''}>RV Cable Lug</option>
                             <option value="PTV Cable Lug" ${series === 'PTV Cable Lug' ? 'selected' : ''}>PTV Cable Lug</option>
                             <option value="DBV Cable Lug" ${series === 'DBV Cable Lug' ? 'selected' : ''}>DBV Cable Lug</option>
@@ -333,6 +333,47 @@
                     `;
                     customInputHidden.value = JSON.stringify({
                         tipe,
+                        series
+                    });
+                } else if (category === 'mccb') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">Tipe MCCB</label>
+                        
+                        <label class="block text-gray-600">Series</label>
+                        <select class="w-full px-4 py-2 border rounded-lg"
+                            onchange="updatePushButtonValue(null, this.value)">
+                            <option value="">Pilih Series</option>
+                            <option value="M12B 25kA" ${series === 'M12B 25kA' ? 'selected' : ''}>M12B 25kA</option>
+                            <option value="M16F 35kA" ${series === 'M16F 35kA' ? 'selected' : ''}>M16F 35kA</option>
+                            <option value="M25F 35kA" ${series === 'M25F 35kA' ? 'selected' : ''}>M25F 35kA</option>
+                            <option value="M40F 35kA" ${series === 'M40F 35kA' ? 'selected' : ''}>M40F 35kA</option>
+                            <option value="M63F 35kA" ${series === 'M63F 35kA' ? 'selected' : ''}>M63F 35kA</option>
+                            <option value="M80F 35kA" ${series === 'M80F 35kA' ? 'selected' : ''}>M80F 35kA</option>
+                        </select>
+                    `;
+                    customInputHidden.value = JSON.stringify({
+                        series
+                    });
+                } else if (category === 'mccb accessories') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">Tipe MCCB</label>
+                        
+                        <label class="block text-gray-600">Series</label>
+                        <select class="w-full px-4 py-2 border rounded-lg"
+                            onchange="updatePushButtonValue(null, this.value)">
+                            <option value="">Pilih Series</option>
+                            <option value="MAA Alarm Contact" ${series === 'MAA Alarm Contact' ? 'selected' : ''}>MAA Alarm Contact</option>
+                            <option value="MAS Shunt Release" ${series === 'MAS Shunt Release' ? 'selected' : ''}>MAS Shunt Release</option>
+                            <option value="MAAUX Auxiliary Contact" ${series === 'MAAUX Auxiliary Contact' ? 'selected' : ''}>MAAUX Auxiliary Contact</option>
+                            <option value="MAUVT Under Voltage" ${series === 'MAUVT Under Voltage' ? 'selected' : ''}>MAUVT Under Voltage</option>
+                            <option value="MARH Extended Rotary Handle" ${series === 'MARH Extended Rotary Handle' ? 'selected' : ''}>MARH Extended Rotary Handle</option>
+                        </select>
+                    `;
+                    customInputHidden.value = JSON.stringify({
                         series
                     });
                 } else if (category === 'selector switch') {

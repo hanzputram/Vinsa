@@ -151,7 +151,7 @@
             const extraContainer = document.getElementById('category-extra');
 
             categorySelect.addEventListener('change', function() {
-                const selectedCategory = this.options[this.selectedIndex].text.toLowerCase();
+                const selectedCategory = this.options[this.selectedIndex].text.toLowerCase().trim();
                 extraContainer.innerHTML = '';
 
                 if (selectedCategory === 'cable tray') {
@@ -259,6 +259,33 @@
                             <option value="DBV Cable Lug">DBV Cable Lug</option>
                         </select>
                     `;
+                } else if (selectedCategory === 'mccb') {
+                    extraContainer.innerHTML = `
+                            <label class="block text-gray-600">Series</label>
+                        <select name="mccb_series"
+                            class="w-full px-4 py-2 border rounded-lg">
+                            <option value="">Pilih Series</option>
+                            <option value="M12B 25kA">M12B 25kA</option>
+                            <option value="M16F 35kA">M16F 35kA</option>
+                            <option value="M25F 35kA">M25F 35kA</option>
+                            <option value="M40F 35kA">M40F 35kA</option>
+                            <option value="M63F 35kA">M63F 35kA</option>
+                            <option value="M80F 35kA">M80F 35kA</option>
+                        </select>
+                    `;
+                } else if (selectedCategory === 'mccb accessories') {
+                    extraContainer.innerHTML = `
+                            <label class="block text-gray-600">Series</label>
+                        <select name="mccb_series"
+                            class="w-full px-4 py-2 border rounded-lg">
+                            <option value="">Pilih Series</option>
+                            <option value="MAA Alarm Contact">MAA Alarm Contact</option>
+                            <option value="MAS Shunt Release">MAS Shunt Release</option>
+                            <option value="MAAUX Auxiliary Contact">MAAUX Auxiliary Contact</option>
+                            <option value="MAUVT Under Voltage">MAUVT Under Voltage</option>
+                            <option value="MARH Extended Rotary Handle">MARH Extended Rotary Handle</option>
+                        </select>
+                    `;
                 } else if (selectedCategory === 'pilot lamp') {
                     extraContainer.innerHTML = `
                         <label class="block text-gray-600">Tipe Pilot Lamp</label>
@@ -276,5 +303,9 @@
                 }
             });
         });
+
+        console.log('selectedCategory:', selectedCategory);
+
     </script>
+    
 </x-app-layout>
