@@ -119,6 +119,27 @@ class ProductController extends Controller
                     'tipe' => $type,
                     'series' => $series,
                 ]);
+            } elseif ($categoryName === 'mccb') {
+                $type = $request->input('mccb_type');
+                $series = $request->input('mccb_series');
+                $customInput = json_encode([
+                    'tipe' => $type,
+                    'series' => $series,
+                ]);
+            } elseif ($categoryName === 'mccb accessories') {
+                $type = $request->input('mccb_accessories_type');
+                $series = $request->input('mccb_accessories_series');
+                $customInput = json_encode([
+                    'tipe' => $type,
+                    'series' => $series,
+                ]);
+            } elseif ($categoryName === 'cable lug') {
+                $type = $request->input('cable_lug_type');
+                $series = $request->input('cable_lug_series');
+                $customInput = json_encode([
+                    'tipe' => $type,
+                    'series' => $series,
+                ]);
             } elseif ($categoryName === 'terminal block') {
                 $type = $request->input('terminal_block_type');
                 $series = $request->input('terminal_block_series');
