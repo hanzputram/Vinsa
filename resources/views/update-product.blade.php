@@ -361,7 +361,10 @@
                     const series = parsedOld.series || '';
                     extraContainer.innerHTML = `
                         <label class="block text-gray-600">Tipe MCCB</label>
-                        
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
+                            placeholder="Masukkan tipe cable lug"
+                            value="${tipe}"
+                            oninput="updatePushButtonValue(this.value, null)">
                         <label class="block text-gray-600">Series</label>
                         <select class="w-full px-4 py-2 border rounded-lg"
                             onchange="updatePushButtonValue(null, this.value)">

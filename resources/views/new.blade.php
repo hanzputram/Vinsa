@@ -1095,7 +1095,7 @@
                                                                     {{ Str::limit($productItem->kode, 50) }}
                                                                 </p>
 
-                                                                <div class="relative w-[120px] h-40">
+                                                                <div class="relative w-auto h-40">
                                                                     <img src="{{ asset('storage/' . $productItem->image) }}"
                                                                         alt="{{ $productItem->name }}"
                                                                         class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
@@ -1129,7 +1129,7 @@
                                 </div>
                             @elseif (strtolower($category->name) === 'mccb accessories')
                                 @php
-                                    $mccbSeries = [
+                                    $mccbacSeries = [
                                         'MAA Alarm Contact',
                                         'MAS Shunt Release',
                                         'MAAUX Auxiliary Contact',
@@ -1145,7 +1145,7 @@
 
                                 {{-- CAROUSEL panel: tampil 2 panel, geser untuk lihat 6 panel --}}
                                 <div class="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory">
-                                    @foreach ($mccbSeries as $seriesName)
+                                    @foreach ($mccbacSeries as $seriesName)
                                         @php
                                             $items = $category->products
                                                 ->filter(function ($item) use ($getCI, $seriesName) {
@@ -1177,7 +1177,7 @@
                                                                     {{ Str::limit($productItem->kode, 50) }}
                                                                 </p>
 
-                                                                <div class="relative w-[120px] h-40">
+                                                                <div class="relative w-auto h-40">
                                                                     <img src="{{ asset('storage/' . $productItem->image) }}"
                                                                         alt="{{ $productItem->name }}"
                                                                         class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">

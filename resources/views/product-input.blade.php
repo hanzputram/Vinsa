@@ -275,6 +275,10 @@
                     `;
                 } else if (selectedCategory === 'mccb accessories') {
                     extraContainer.innerHTML = `
+                    <label class="block text-gray-600">Tipe Cable Lug</label>
+                        <input type="text" name="cable_lug_type"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                            placeholder="Masukkan tipe Cable Lug">
                             <label class="block text-gray-600">Series</label>
                         <select name="mccb_series"
                             class="w-full px-4 py-2 border rounded-lg">
