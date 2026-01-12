@@ -1015,7 +1015,7 @@
                                                                     {{ Str::limit($productItem->kode, 50) }}
                                                                 </p>
 
-                                                                <div class="relative w-[120px] h-40">
+                                                                <div class="relative w-auto h-40">
                                                                     <img src="{{ asset('storage/' . $productItem->image) }}"
                                                                         alt="{{ $productItem->name }}"
                                                                         class="w-full h-full object-cover rounded absolute top-0 left-0 group-hover:opacity-0 transition-opacity duration-300">
