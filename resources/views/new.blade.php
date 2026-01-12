@@ -1209,7 +1209,7 @@
                                         </div>
                                     @endforeach
                                 </div>
-                            @elseif (strtolower($category->name) === 'mccb accessories')
+                            @elseif (strtolower($category->name) === 'contactor accessories')
                                 @php
                                     $caSeries = [
                                         'Coil Contactor',
