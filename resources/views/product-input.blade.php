@@ -290,6 +290,22 @@
                             <option value="MARH Extended Rotary Handle">MARH Extended Rotary Handle</option>
                         </select>
                     `;
+                } else if (selectedCategory === 'contactor accessories') {
+                    extraContainer.innerHTML = `
+                    <label class="block text-gray-600">Tipe Contactor Accessories</label>
+                        <input type="text" name="contactor_accessories_type"
+                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                            placeholder="Masukkan tipe Contactor Accessories">
+                            <label class="block text-gray-600">Series</label>
+                        <select name="contactor_accessories_series"
+                            class="w-full px-4 py-2 border rounded-lg">
+                            <option value="">Pilih Series</option>
+                            <option value="Coil Contactor">Coil Contactor</option>
+                            <option value="Auxiliary Contact">Auxiliary Contact</option>
+                            <option value="Time Delay">Time Delay</option>
+                            <option value="Thermal Overload relay">Thermal Overload relay</option>
+                        </select>
+                    `;
                 } else if (selectedCategory === 'pilot lamp') {
                     extraContainer.innerHTML = `
                         <label class="block text-gray-600">Tipe Pilot Lamp</label>

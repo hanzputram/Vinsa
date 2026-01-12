@@ -325,10 +325,34 @@
                             onchange="updatePushButtonValue(null, this.value)">
                             <option value="">Pilih Series</option>
                             <option value="SC Cable Lug" ${series === 'SC Cable Lug' ? 'selected' : ''}>SC Cable Lug</option>
-                            <option value="M16F 35kA" ${series === 'SV Cable Lug' ? 'selected' : ''}>SV Cable Lug</option>
+                            <option value="SV Cable Lug" ${series === 'SV Cable Lug' ? 'selected' : ''}>SV Cable Lug</option>
                             <option value="RV Cable Lug" ${series === 'RV Cable Lug' ? 'selected' : ''}>RV Cable Lug</option>
                             <option value="PTV Cable Lug" ${series === 'PTV Cable Lug' ? 'selected' : ''}>PTV Cable Lug</option>
                             <option value="DBV Cable Lug" ${series === 'DBV Cable Lug' ? 'selected' : ''}>DBV Cable Lug</option>
+                        </select>
+                    `;
+                    customInputHidden.value = JSON.stringify({
+                        tipe,
+                        series
+                    });
+                } else if (category === 'contactor accessories') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    extraContainer.innerHTML = `
+                        <label class="block text-gray-600">Tipe Contactor Accessories</label>
+                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
+                            placeholder="Masukkan tipe Contactor Accessories"
+                            value="${tipe}"
+                            oninput="updatePushButtonValue(this.value, null)">
+                        
+                        <label class="block text-gray-600">Series</label>
+                        <select class="w-full px-4 py-2 border rounded-lg"
+                            onchange="updatePushButtonValue(null, this.value)">
+                            <option value="">Pilih Series</option>
+                            <option value="Coil Contactor" ${series === 'Coil Contactor' ? 'selected' : ''}>Coil Contactor</option>
+                            <option value="Auxiliary Contact" ${series === 'Auxiliary Contact' ? 'selected' : ''}>Auxiliary Contact</option>
+                            <option value="Time Delay" ${series === 'Time Delay' ? 'selected' : ''}>Time Delay</option>
+                            <option value="Thermal Overload relay" ${series === 'Thermal Overload relay' ? 'selected' : ''}>Thermal Overload relay</option>
                         </select>
                     `;
                     customInputHidden.value = JSON.stringify({

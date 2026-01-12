@@ -133,6 +133,13 @@ class ProductController extends Controller
                     'tipe' => $type,
                     'series' => $series,
                 ]);
+            } elseif ($categoryName === 'contactor accessories') {
+                $type = $request->input('contactor_accessories_type');
+                $series = $request->input('contactor_accessories_series');
+                $customInput = json_encode([
+                    'tipe' => $type,
+                    'series' => $series,
+                ]);
             } elseif ($categoryName === 'cable lug') {
                 $type = $request->input('cable_lug_type');
                 $series = $request->input('cable_lug_series');
