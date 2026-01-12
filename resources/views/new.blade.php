@@ -1174,7 +1174,7 @@
                                                             <a href="/detail/{{ $productItem->id }}"
                                                                 class="group transition-transform transform hover:scale-[1.01]">
                                                                 <p class="text-xs text-gray-300 mb-2">
-                                                                    {{ Str::limit($productItem->kode, 50) }}
+                                                                    {{ Str::limit($productItem->kode, 16) }}
                                                                 </p>
 
                                                                 <div class="relative w-auto h-40">
@@ -1196,7 +1196,7 @@
                                                                         <div>Type: {{ Str::limit($ci['type'], 20) }}
                                                                         </div>
                                                                     @endif
-                                                                    <div>Series: {{ Str::limit($seriesName, 20) }}
+                                                                    <div>Series: {{ Str::limit($seriesName, 16) }}
                                                                     </div>
                                                                 </div>
                                                             </a>
