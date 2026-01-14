@@ -262,7 +262,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -313,7 +313,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -366,7 +366,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -417,7 +417,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -470,7 +470,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -521,7 +521,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -574,7 +574,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -625,7 +625,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -678,7 +678,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -729,7 +729,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -782,7 +782,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -834,10 +834,10 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
-                                                            {{ Str::limit($productItem->kode, 50) }}
+                                                            {{ Str::limit($productItem->kode, 16) }}
                                                         </p>
                                                         <div class="relative w-[120px] h-40">
                                                             <img src="{{ asset('storage/' . $productItem->image) }}"
@@ -920,7 +920,7 @@
                                                         <div
                                                             class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e]
                                 transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                            <a href="/detail/{{ $productItem->id }}"
+                                                            <a href="{{ route('product.show', $productItem->slug ?? $productItem->id) }}"
                                                                 class="group transition-transform transform hover:scale-[1.01]">
 
                                                                 <p class="text-xs text-gray-300 mb-2">
@@ -1006,7 +1006,7 @@
                                                         <div
                                                             class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e]
                                                             transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                            <a href="/detail/{{ $productItem->id }}"
+                                                            <a href="/detail/{{ $productItem->slug }}"
                                                                 class="group transition-transform transform hover:scale-[1.01]">
                                                                 <p class="text-xs text-gray-300 mb-2">
                                                                     {{ Str::limit($productItem->kode, 12) }}
@@ -1089,7 +1089,7 @@
                                                         <div
                                                             class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e]
                                                             transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                            <a href="/detail/{{ $productItem->id }}"
+                                                            <a href="/detail/{{ $productItem->slug }}"
                                                                 class="group transition-transform transform hover:scale-[1.01]">
                                                                 <p class="text-xs text-gray-300 mb-2">
                                                                     {{ Str::limit($productItem->kode, 16) }}
@@ -1171,7 +1171,7 @@
                                                         <div
                                                             class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e]
                                                             transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                            <a href="/detail/{{ $productItem->id }}"
+                                                            <a href="/detail/{{ $productItem->slug }}"
                                                                 class="group transition-transform transform hover:scale-[1.01]">
                                                                 <p class="text-xs text-gray-300 mb-2">
                                                                     {{ Str::limit($productItem->kode, 16) }}
@@ -1252,7 +1252,7 @@
                                                         <div
                                                             class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e]
                                                             transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                            <a href="/detail/{{ $productItem->id }}"
+                                                            <a href="/detail/{{ $productItem->slug }}"
                                                                 class="group transition-transform transform hover:scale-[1.01]">
                                                                 <p class="text-xs text-gray-300 mb-2">
                                                                     {{ Str::limit($productItem->kode, 15) }}
@@ -1307,7 +1307,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -1359,7 +1359,7 @@
                                                 @endphp
                                                 <div
                                                     class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                                    <a href="/detail/{{ $productItem->id }}"
+                                                    <a href="/detail/{{ $productItem->slug }}"
                                                         class="group transition-transform transform hover:scale-[1.01]">
                                                         <p class="text-xs text-gray-300 mb-2">
                                                             {{ Str::limit($productItem->kode, 50) }}
@@ -1406,7 +1406,7 @@
                                         @endphp
                                         <div
                                             class="flex-shrink-0 bg-[#5f5f5f60] border-white border-[1px] hover:bg-[#4646466e] transition-all duration-[200ms] rounded-lg shadow-md flex flex-col items-center text-center justify-center py-3 w-40">
-                                            <a href="/detail/{{ $productItem->id }}"
+                                            <a href="/detail/{{ $productItem->slug }}"
                                                 class="group transition-transform transform hover:scale-[1.01]">
                                                 <p class="text-xs text-gray-300 mb-2">
                                                     {{ Str::limit($productItem->kode, 15) }}
@@ -1497,38 +1497,52 @@
 
         <div class="grid md:grid-cols-3 gap-6 rounded-3xl">
             @foreach ($blogs as $blog)
-                <a href="{{ route('blog.detail', $blog->id) }}"
-                    class="rounded-3xl transition-transform duration-300 hover:-translate-y-2 hover:shadow-[#00000046] hover:shadow-xl">
-                    <div
-                        class="bg-[#ffffff60] backdrop-blur-sm border-[1.5px] border-[#066c5f] p-6 rounded-3xl shadow-lg">
 
-                        {{-- gambar --}}
-                        <img src="{{ asset('storage/' . $blog->image) }}" alt="" width="200px"
-                            class="mx-auto rounded-lg">
+                @if (!empty($blog->is_published))
+                    <a href="{{ route('blog.public', ['slug' => $blog->slug]) }}"
+                        class="rounded-3xl transition-transform duration-300 hover:-translate-y-2 hover:shadow-[#00000046] hover:shadow-xl">
 
-                        {{-- judul --}}
-                        <p class="font-bold mt-2">{{ $blog->title }}</p>
+                        <div
+                            class="bg-[#ffffff60] backdrop-blur-sm border-[1.5px] border-[#066c5f] p-6 rounded-3xl shadow-lg">
 
-                        {{-- preview isi section pertama --}}
-                        @php
-                            $firstSection = $blog->sections->first();
-                        @endphp
+                            {{-- gambar --}}
+                            @if (!empty($blog->image))
+                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
+                                    width="200px" class="mx-auto rounded-lg">
+                            @else
+                                <div
+                                    class="w-[200px] h-[120px] mx-auto rounded-lg bg-white/60 flex items-center justify-center text-xs text-gray-500">
+                                    No Image
+                                </div>
+                            @endif
 
-                        @if ($firstSection)
-                            <p class="text-[11px] text-gray-700 mt-1">
-                                <span class="font-semibold">{{ $firstSection->subtitle }}:</span>
-                                {{ Str::limit(strip_tags($firstSection->content), 200) }}
-                            </p>
-                        @else
-                            <p class="text-[11px] text-gray-500 italic">Tidak ada konten</p>
-                        @endif
-                    </div>
-                </a>
+                            {{-- judul --}}
+                            <p class="font-bold mt-2">{{ $blog->title }}</p>
+
+                            {{-- preview --}}
+                            @php
+                                $firstSection = $blog->sections->first();
+                                $previewHtml = $blog->content ?? (optional($firstSection)->content ?? '');
+                                $previewText = Str::limit(strip_tags($previewHtml), 200);
+                            @endphp
+
+                            @if (!empty($previewText))
+                                <p class="text-[11px] text-gray-700 mt-1">
+                                    @if (!empty(optional($firstSection)->subtitle))
+                                        <span class="font-semibold">{{ $firstSection->subtitle }}:</span>
+                                    @endif
+                                    {{ $previewText }}
+                                </p>
+                            @else
+                                <p class="text-[11px] text-gray-500 italic">Tidak ada konten</p>
+                            @endif
+
+                        </div>
+                    </a>
+                @endif
+
             @endforeach
         </div>
-
-
-
     </div>
     </div>
     </div>

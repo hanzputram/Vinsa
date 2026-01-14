@@ -28,16 +28,30 @@ class ProductController extends Controller
         return view('product', compact('products', 'categories'));
     }
 
-    public function show($id)
-    {
-        $product = Product::with('attributes', 'category')->findOrFail($id);
-        $barangs = Product::with('attributes')->get();
-        return view('detailproduct', [
-            'product' => $product,
-            'barangs' => $barangs,
-            'kodeAktif' => strtoupper($product->kode)
-        ]);
+public function show($param)
+{
+    $product = Product::with('attributes', 'category')
+        ->where('slug', $param)
+        ->orWhere('id', $param)
+        ->firstOrFail();
+
+    // Kalau akses pakai ID, redirect ke slug
+    if ((string)$product->id === (string)$param) {
+        return redirect()
+            ->route('product.show', $product->slug)
+            ->setStatusCode(301);
     }
+
+    $barangs = Product::with('attributes')->get();
+
+    return view('detailproduct', [
+        'product' => $product,
+        'barangs' => $barangs,
+        'kodeAktif' => strtoupper($product->kode),
+    ]);
+}
+
+
 
     public function view()
     {

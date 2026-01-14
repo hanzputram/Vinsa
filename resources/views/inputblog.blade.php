@@ -1,147 +1,130 @@
 <x-app-layout>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <div class="mx-auto p-6">
 
-    <form action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data"
-        class="max-w-screen min-h-[calc(100vh-66px)] p-6 bg-white space-y-4">
-        @csrf
-        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Tambah Artikel Blog</h2>
+        <h1 class="text-2xl font-semibold mb-6">Tambah Blog</h1>
 
-        {{-- Gambar --}}
-        <div class="max-w-[90%]">
-            <label class="block text-gray-600 mb-1">Gambar untuk Artikel</label>
-            <input type="file" name="image" required
-                class="block w-full file:cursor-pointer text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
-                file:rounded-lg file:border-0
-                file:text-sm file:font-semibold
-                file:bg-blue-50 file:text-blue-700
-                hover:file:bg-blue-100">
-        </div>
-
-        {{-- Judul --}}
-        <div class="max-w-[90%]">
-            <label class="block text-gray-600 mb-1">Judul Artikel</label>
-            <input type="text" name="title" required
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-
-        {{-- Section Dinamis --}}
-        <h2 class="border-t-[1.5px] py-4 text-2xl font-semibold text-gray-700 mb-4">Sub Judul & Isi</h2>
-
-        <div id="blog-sections" class="space-y-4">
-            <div class="section-row space-y-2">
-                <div>
-                    <label class="block text-gray-600">Sub Judul</label>
-                    <input type="text" name="sections[0][subtitle]" placeholder="Sub Judul"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-                </div>
-
-                <div>
-                    <label class="block text-gray-600">Isi</label>
-                    <input type="text" name="sections[0][content]" placeholder="Isi Konten"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-                </div>
-
-                <div>
-                    <label class="block text-gray-600">Gambar (opsional)</label>
-                    <input type="file" name="sections[0][image]"
-                        class="block w-full file:cursor-pointer text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
-                       file:rounded-lg file:border-0
-                       file:text-sm file:font-semibold
-                       file:bg-blue-50 file:text-blue-700
-                       hover:file:bg-blue-100">
-                </div>
-
-                <hr class="mt-4 border-gray-300">
+        @if(session('success'))
+            <div class="mb-4 p-3 rounded-xl bg-green-100 text-green-800">
+                {{ session('success') }}
             </div>
-        </div>
+        @endif
 
+        @if ($errors->any())
+            <div class="mb-4 p-3 rounded-xl bg-red-100 text-red-800">
+                <ul class="list-disc ml-5">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
 
+        <form action="{{ route('blog.store') }}" method="POST" enctype="multipart/form-data" class="space-y-6">
+            @csrf
 
-        </div>
+            {{-- Judul --}}
+            <div>
+                <label class="block text-sm text-gray-600 mb-1">Judul Blog</label>
+                <input type="text" name="title" value="{{ old('title') }}" required
+                       class="w-full rounded-xl border-gray-300 focus:border-gray-400 focus:ring-0">
+            </div>
 
+            {{-- Gambar utama --}}
+            <div>
+                <label class="block text-sm text-gray-600 mb-1">Gambar Utama</label>
+                <input type="file" name="image" accept=".jpg,.jpeg,.png,.webp"
+                       class="w-full rounded-xl border-gray-300">
+            </div>
 
-        <button type="submit"
-            class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200">
-            Simpan Artikel
-        </button>
-    </form>
+            {{-- Konten utama --}}
+            <div>
+                <label class="block text-sm text-gray-600 mb-1">Konten Utama</label>
+                <textarea id="content" name="content">{{ old('content') }}</textarea>
+            </div>
 
-    {{-- SweetAlert --}}
-    @if ($errors->any())
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal Menyimpan Artikel',
-                html: `{!! implode('<br>', $errors->all()) !!}`,
-                confirmButtonColor: '#3085d6',
-            });
-        </script>
-    @endif
+            {{-- Publish --}}
+            <div class="flex items-center gap-2">
+                <input type="checkbox" id="is_published" name="is_published" value="1"
+                       class="rounded border-gray-300" {{ old('is_published') ? 'checked' : '' }}>
+                <label for="is_published" class="text-sm text-gray-700">Publish</label>
+            </div>
 
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil!',
-                text: '{{ session('success') }}',
-                confirmButtonColor: '#3085d6',
-            });
-        </script>
-    @endif
+            {{-- Submit --}}
+            <div class="flex gap-2">
+                <button type="submit"
+                        class="px-5 py-2 rounded-xl bg-black text-white">
+                    Simpan Blog
+                </button>
+                <a href="{{ route('blog.index') }}"
+                   class="px-5 py-2 rounded-xl border">
+                    Batal
+                </a>
+            </div>
 
-    {{-- Script untuk section dinamis --}}
+        </form>
+    </div>
+
+    {{-- TinyMCE --}}
+    <script src="https://cdn.tiny.cloud/1/dcolkzxvp2hqqbnwtk2bo4utnxtiraex0wcohpee9povnm2p/tinymce/8/tinymce.min.js"
+        referrerpolicy="origin" crossorigin="anonymous"></script>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let sectionContainer = document.getElementById("blog-sections");
+        document.addEventListener('DOMContentLoaded', () => {
 
-            function addNewSectionRow() {
-                let index = document.querySelectorAll(".section-row").length;
-                let div = document.createElement("div");
-                div.classList.add("section-row", "space-y-2", "mt-4");
-                div.innerHTML = `
-                <div>
-                    <label class="block text-gray-600">Sub Judul</label>
-                    <input type="text" name="sections[${index}][subtitle]" placeholder="Sub Judul"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+            tinymce.init({
+                selector: '#content',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                height: 450,
+
+                branding: false,
+            });
+
+            let sectionIndex = 0;
+
+            const wrapper = document.getElementById('sectionsWrapper');
+            const addBtn = document.getElementById('addSection');
+
+            addBtn.addEventListener('click', () => addSection());
+
+            function addSection() {
+                const idx = sectionIndex++;
+
+                const html = `
+                <div class="p-4 border rounded-2xl relative bg-gray-50">
+                    <button type="button"
+                        class="absolute top-2 right-2 text-red-600 text-sm"
+                        onclick="this.closest('.section-item').remove()">
+                        ✕
+                    </button>
+
+                    <div class="section-item space-y-3">
+                        <input type="hidden" name="sections[${idx}][position]" value="${idx}">
+
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">Sub Judul</label>
+                            <input type="text" name="sections[${idx}][subtitle]"
+                                class="w-full rounded-xl border-gray-300">
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">Isi Section</label>
+                            <textarea name="sections[${idx}][content]" rows="4"
+                                class="w-full rounded-xl border-gray-300"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block text-sm text-gray-600 mb-1">Gambar Section</label>
+                            <input type="file" name="sections[${idx}][image]"
+                                accept=".jpg,.jpeg,.png,.webp"
+                                class="w-full rounded-xl border-gray-300">
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <label class="block text-gray-600">Isi</label>
-                    <input type="text" name="sections[${index}][content]" placeholder="Isi Konten"
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-                </div>
-                <div>
-                    <label class="block text-gray-600">Gambar (opsional)</label>
-                    <input type="file" name="sections[${index}][image]"
-                        class="block w-full file:cursor-pointer text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
-                               file:rounded-lg file:border-0
-                               file:text-sm file:font-semibold
-                               file:bg-blue-50 file:text-blue-700
-                               hover:file:bg-blue-100">
-                </div>
-                <hr class="mt-4 border-gray-300">
-            `;
-                sectionContainer.appendChild(div);
-                addInputListenersToLast();
+                `;
+
+                wrapper.insertAdjacentHTML('beforeend', html);
             }
-
-            function addInputListenersToLast() {
-                let sections = sectionContainer.querySelectorAll(".section-row");
-                let lastInputs = sections[sections.length - 1].querySelectorAll("input[type='text']");
-
-                function triggerAdd(e) {
-                    if (lastInputs[0].value !== "" || lastInputs[1].value !== "") {
-                        lastInputs[0].removeEventListener("input", triggerAdd);
-                        lastInputs[1].removeEventListener("input", triggerAdd);
-                        addNewSectionRow();
-                    }
-                }
-
-                lastInputs[0].addEventListener("input", triggerAdd);
-                lastInputs[1].addEventListener("input", triggerAdd);
-            }
-
-            addInputListenersToLast();
         });
     </script>
-
 </x-app-layout>

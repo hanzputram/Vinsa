@@ -2,20 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'title',
-        'image',
+        'title','slug','content','image','is_published','published_at'
+    ];
+
+    protected $casts = [
+        'is_published' => 'boolean',
+        'published_at' => 'datetime',
     ];
 
     public function sections()
     {
-        return $this->hasMany(BlogSection::class);
+        return $this->hasMany(BlogSection::class)->orderBy('position');
     }
 }

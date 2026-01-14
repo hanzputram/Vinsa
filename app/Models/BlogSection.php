@@ -2,18 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class BlogSection extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
-        'blog_id',
-        'subtitle',
-        'content',
-        'image',
+        'blog_id','position','subtitle','content','image'
     ];
 
     public function blog()

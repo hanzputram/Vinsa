@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [NewController::class, 'show']);
 Route::get('/about', [AboutController::class, 'show']);
 Route::get('/product', [ProductController::class, 'index'])->name('products.view.user');
-Route::get('/detail/{id}', [ProductController::class, 'show']);
+Route::get('/detail/{slug}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/new', [NewController::class, 'show'])->name('home');
-Route::get('/blogDetail/{id}', [BlogController::class, 'showDetail'])->name('blog.detail');
+Route::get('/blog/{slug}', [BlogController::class, 'showPublic'])->name('blog.public');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -42,12 +42,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/carousels/{id}', [CarouselController::class, 'destroy'])->name('carousels.destroy');
 
     //Blog Routes
-    Route::get('/blogInputView', [BlogController::class, 'show'])->name('blog.view');
-    Route::post('/blogCreate', [BlogController::class, 'store'])->name('blogs.store');
-    Route::put('/blogUpdate/{id}', [BlogController::class, 'update'])->name('blog.update');
-    Route::get('/blogUpdateView', [BlogController::class, 'updateView'])->name('blog.updateview');
-    Route::get('/blogEdit/{id}', [BlogController::class, 'edit'])->name('blog.editview');
-    Route::delete('/blogs/{id}', [BlogController::class, 'destroy'])->name('blogs.destroy');
+    Route::get('/admin/blog', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('/admin/blog/create', [BlogController::class, 'create'])->name('blog.create');
+    Route::post('/admin/blog', [BlogController::class, 'store'])->name('blog.store');
+    Route::get('/admin/blog/{id}/edit', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::put('/admin/blog/{id}', [BlogController::class, 'update'])->name('blog.update');
+    Route::delete('/admin/blog/{id}', [BlogController::class, 'destroy'])->name('blog.destroy');
 
 
 });

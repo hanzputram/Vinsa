@@ -94,12 +94,12 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('blog.view')">
+                            <x-dropdown-link :href="route('blog.create')">
                                 {{ __('Tambah Blog') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->
-                            <x-dropdown-link :href="route('blog.updateview')">
+                            <x-dropdown-link :href="route('blog.index')">
                                 {{ __('Perbarui Blog') }}
                             </x-dropdown-link>
                         </x-slot>

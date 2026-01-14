@@ -12,13 +12,93 @@
     <title>Vinsa</title>
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
 </head>
+
 <style>
     .outfit {
         font-family: "Outfit", sans-serif;
         font-optical-sizing: auto;
-        font-weight: <weight>;
+        font-weight: 400;
         font-style: normal;
     }
+
+    /* Biar hasil WYSIWYG tetap enak dibaca & tidak merusak style halaman */
+    .wysiwyg {
+        color: #fff;
+        line-height: 1.75;
+    }
+
+    .wysiwyg h1,
+    .wysiwyg h2,
+    .wysiwyg h3,
+    .wysiwyg h4,
+    .wysiwyg h5,
+    .wysiwyg h6 {
+        color: #FDFBEE;
+        font-weight: 700;
+        margin: 0.75rem 0 0.5rem;
+    }
+
+    .wysiwyg p {
+        margin: 0 0 0.75rem;
+    }
+
+    .wysiwyg a {
+        color: #0dd8bd;
+        text-decoration: underline;
+    }
+
+    .wysiwyg ul,
+    .wysiwyg ol {
+        margin: 0.5rem 0 0.75rem 1.25rem;
+    }
+
+    .wysiwyg li {
+        margin: 0.25rem 0;
+    }
+
+    .wysiwyg img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 12px;
+        margin: 0.75rem 0;
+        display: block;
+    }
+
+    .wysiwyg table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 0.75rem 0;
+    }
+
+    .wysiwyg table,
+    .wysiwyg th,
+    .wysiwyg td {
+        border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .wysiwyg th,
+    .wysiwyg td {
+        padding: 10px;
+        vertical-align: top;
+    }
+
+    .wysiwyg blockquote {
+        border-left: 4px solid #f4752c;
+        padding-left: 12px;
+        margin: 0.75rem 0;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .wysiwyg ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+}
+
+.wysiwyg ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+}
+
 </style>
 
 <body class="outfit bg-[#FDFBEE]">
@@ -26,8 +106,17 @@
         <div class="flex justify-between items-center py-3">
             <x-navUser></x-navUser>
         </div>
-        <div
-            class="overflow-hidden p-6 sm:p-10 lg:p-[5rem] lg:justify-between py-[80px] relative bg-no-repeat bg-cover w-full min-h-screen after:content-[''] bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] after:w-full after:h-full after:absolute after:top-0 after:left-0 rounded-[40px]">
+
+<div
+ class="overflow-hidden p-6 sm:p-10 lg:p-[5rem] lg:justify-between py-[80px]
+        relative bg-no-repeat bg-cover w-full min-h-screen
+        after:content-['']
+        after:w-full after:h-full after:absolute after:top-0 after:left-0
+        after:pointer-events-none
+        bg-gradient-to-r from-[#066c5f] to-[#0dd8bd]
+        rounded-[40px]">
+
+
             <div class="w-full relative z-[10]">
                 <a href="javascript:window.history.back()" class="group">
                     <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none"
@@ -38,26 +127,47 @@
                     </svg>
                 </a>
             </div>
+
             <div class="p-6 max-w-5xl mx-auto">
                 <h1 class="text-3xl font-bold text-[#FDFBEE] mb-2">{{ $blog->title }}</h1>
-                <p class="text-sm text-white mb-4">Published on: {{ $blog->created_at->format('F d, Y') }}</p>
+                <p class="text-sm text-white mb-4">
+                    Published on: {{ $blog->created_at->format('F d, Y') }}
+                </p>
 
                 {{-- Banner atau Gambar Utama --}}
-                <div class="relative w-full mb-6">
-                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->judul }}"
-                        class="w-full rounded-xl shadow-md">
-                </div>
+                @if(!empty($blog->image))
+                    <div class="relative w-[50%] mb-6">
+                        <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
+                            class="w-full rounded-xl shadow-md">
+                    </div>
+                @endif
+
+                {{-- ✅ Konten utama dari WYSIWYG (TinyMCE) --}}
+                @if(!empty($blog->content))
+                    <div class="wysiwyg mb-10">
+                        {!! $blog->content !!}
+                    </div>
+                @endif
 
                 {{-- Konten Sub Judul & Isi --}}
                 @foreach ($blog->sections as $section)
                     <div class="mb-8">
-                        <h2 class="text-2xl font-bold text-[#FDFBEE] border-l-4 border-[#f4752c] pl-3 mb-2">
-                            {{ $section->subtitle }}
-                        </h2>
-                        <img src="{{ asset('storage/' . $section->image) }}" alt="" width="300px">
-                        <p class="text-justify text-white leading-relaxed">
-                            {!! nl2br(e($section->content)) !!}
-                        </p>
+                        @if(!empty($section->subtitle))
+                            <h2 class="text-2xl font-bold text-[#FDFBEE] border-l-4 border-[#f4752c] pl-3 mb-2">
+                                {{ $section->subtitle }}
+                            </h2>
+                        @endif
+
+                        @if(!empty($section->image))
+                            <img src="{{ asset('storage/' . $section->image) }}" alt="" width="300px" class="rounded-xl mb-3">
+                        @endif
+
+                        {{-- ✅ Render HTML dari TinyMCE TANPA merusak style --}}
+                        @if(!empty($section->content))
+                            <div class="wysiwyg">
+                                {!! $section->content !!}
+                            </div>
+                        @endif
                     </div>
                 @endforeach
 
@@ -71,6 +181,7 @@
                         </svg>
                     </a>
                 </div>
+
             </div>
         </div>
     </div>
