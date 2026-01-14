@@ -99,6 +99,47 @@
     padding-left: 1.5rem;
 }
 
+ .wa-text-curv {
+            width: 100%;
+            position: absolute;
+            top: 0%;
+            -webkit-animation: spin 6s linear infinite;
+            -moz-animation: spin 6s linear infinite;
+            animation: spin 6s linear infinite;
+        }
+
+        @-moz-keyframes spin {
+            100% {
+                -moz-transform: rotate(360deg);
+            }
+        }
+
+        @-webkit-keyframes spin {
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+
+        @keyframes spin {
+            100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse-bg {
+
+            0%,
+            100% {
+                background-color: #F77F1E;
+            }
+
+            50% {
+                background-color: #ffa459;
+            }
+        }
+
+
 </style>
 
 <body class="outfit bg-[#FDFBEE]">
@@ -185,7 +226,8 @@
             </div>
         </div>
     </div>
-    <x-footer></x-footer>
+        <x-footer></x-footer>
+    @stack('scripts')
 </body>
 
 </html>
