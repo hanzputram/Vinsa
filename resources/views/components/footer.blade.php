@@ -47,7 +47,7 @@
                 <a href="https://wa.me/6281335715398" class="hover:text-[#066C5F]">Whats App</a>
                 {{-- <a href="#" class="hover:text-[#066C5F]">Instagram</a> --}}
             </div>
-            &copy; 2025 Vinsa. All rights reserved.
+            &copy; {{ date('Y') }} Vinsa. All rights reserved.
         </div>
         {{-- <div class="lg:text-right mt-5 lg:w-1/3 w-full flex lg:justify-end">
             J - 1 Ruko Galaxi Bumi Permai No.23,<br> Semolowaru, Kec. Sukolilo, Surabaya,<br> Jawa Timur 60119
