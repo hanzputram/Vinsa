@@ -1493,56 +1493,76 @@
                     Product More →</a>
             </div>
         </div>
-        <p class="font-bold text-[28px] border-b-[1.5px] mb-5 pb-4 border-[#0000006a]">From Our Blog</p>
+      <p class="font-bold text-[28px] border-b-[1.5px] mb-5 pb-4 border-[#0000006a]">From Our Blog</p>
 
-        <div class="grid md:grid-cols-3 gap-6 rounded-3xl">
-            @foreach ($blogs as $blog)
+<div class="grid md:grid-cols-3 gap-6 items-stretch">
+    @foreach ($blogs as $blog)
+        @if (!empty($blog->is_published))
+            <a href="{{ route('blog.public', ['slug' => $blog->slug]) }}"
+               class="group block w-full h-full">
 
-                @if (!empty($blog->is_published))
-                    <a href="{{ route('blog.public', ['slug' => $blog->slug]) }}"
-                        class="rounded-3xl transition-transform duration-300 hover:-translate-y-2 hover:shadow-[#00000046] hover:shadow-xl">
+                <div
+                    class="mx-auto w-full max-w-[420px]
+                           min-h-[420px] max-h-[420px]
+                           bg-[#ffffff60] backdrop-blur-sm
+                           border-[1.5px] border-[#066c5f]
+                           p-6 rounded-3xl shadow-lg
+                           flex flex-col overflow-hidden
+                           transition-all duration-300
+                           group-hover:shadow-xl group-hover:shadow-[#00000046]
+                           group-hover:ring-2 group-hover:ring-[#066c5f]/30
+                           group-hover:scale-[1.01]">
 
-                        <div
-                            class="bg-[#ffffff60] backdrop-blur-sm border-[1.5px] border-[#066c5f] p-6 rounded-3xl shadow-lg">
+                    {{-- FRAME GAMBAR (fix) --}}
+                    <div class="w-full h-[190px] rounded-2xl overflow-hidden bg-white/60 flex items-center justify-center">
+                        @if (!empty($blog->image))
+                            <img src="{{ asset('storage/' . $blog->image) }}"
+                                 alt="{{ $blog->title }}"
+                                 class="w-full h-full object-cover">
+                        @else
+                            <div class="text-xs text-gray-500">No Image</div>
+                        @endif
+                    </div>
 
-                            {{-- gambar --}}
-                            @if (!empty($blog->image))
-                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
-                                    width="200px" class="mx-auto rounded-lg">
-                            @else
-                                <div
-                                    class="w-[200px] h-[120px] mx-auto rounded-lg bg-white/60 flex items-center justify-center text-xs text-gray-500">
-                                    No Image
-                                </div>
-                            @endif
+                    {{-- KONTEN (dibatasi) --}}
+                    <div class="mt-4 flex-1 flex flex-col">
+                        {{-- Judul max 2 baris --}}
+                        <p class="font-bold text-base leading-snug line-clamp-2">
+                            {{ $blog->title }}
+                        </p>
 
-                            {{-- judul --}}
-                            <p class="font-bold mt-2">{{ $blog->title }}</p>
+                        @php
+                            $firstSection = $blog->sections->first();
+                            $previewHtml = $blog->content ?? (optional($firstSection)->content ?? '');
+                            $previewText = trim(preg_replace('/\s+/', ' ', strip_tags($previewHtml)));
+                        @endphp
 
-                            {{-- preview --}}
-                            @php
-                                $firstSection = $blog->sections->first();
-                                $previewHtml = $blog->content ?? (optional($firstSection)->content ?? '');
-                                $previewText = Str::limit(strip_tags($previewHtml), 200);
-                            @endphp
+                        {{-- Preview max 5 baris --}}
+                        @if (!empty($previewText))
+                            <p class="text-[11px] text-gray-700 mt-2 line-clamp-5">
+                                @if (!empty(optional($firstSection)->subtitle))
+                                    <span class="font-semibold">{{ $firstSection->subtitle }}:</span>
+                                @endif
+                                {{ $previewText }}
+                            </p>
+                        @else
+                            <p class="text-[11px] text-gray-500 italic mt-2">Tidak ada konten</p>
+                        @endif
 
-                            @if (!empty($previewText))
-                                <p class="text-[11px] text-gray-700 mt-1">
-                                    @if (!empty(optional($firstSection)->subtitle))
-                                        <span class="font-semibold">{{ $firstSection->subtitle }}:</span>
-                                    @endif
-                                    {{ $previewText }}
-                                </p>
-                            @else
-                                <p class="text-[11px] text-gray-500 italic">Tidak ada konten</p>
-                            @endif
-
+                        {{-- Footer spacer biar konsisten --}}
+                        <div class="mt-auto pt-3">
+                            <span class="text-[11px] text-[#066c5f] font-semibold opacity-80 group-hover:opacity-100">
+                                Baca selengkapnya →
+                            </span>
                         </div>
-                    </a>
-                @endif
+                    </div>
 
-            @endforeach
-        </div>
+                </div>
+            </a>
+        @endif
+    @endforeach
+</div>
+
     </div>
     </div>
     </div>
