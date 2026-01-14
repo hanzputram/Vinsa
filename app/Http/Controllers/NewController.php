@@ -20,23 +20,25 @@ class NewController extends Controller
         $blogs = Blog::with('sections')->latest()->get(); // Tambahkan ini
 
         $customOrder = [
+            'Contactor',
+            'Contactor Accessories',
+            'MCCB',
+            'MCCB Accessories',
+            'Box Panel',
+            'Cable Lug',
             'Push Button',
             'Illuminated Push Button',
             'Emergency Push Button',
-            'Selector Switch',
+            'Pilot Lamp',
             'Illuminated Selector Switch',
+            'Selector Switch',
+            'Flashing Buzzer',
+            'Terminal Block',
+            'Empty Control Panel',
             'Cable Ties',
-            'Box Panel',
             'Cable Tray',
             'Accessories',
-            'Flashing Buzzer',
-            'MCCB',
-            'MCCB Accessories',
-            'Contactor',
-            'Contactor Accessories',
-            'Empty Control Panel',
-            'Cable Lug',
-            'Terminal Block',
+            'Rak',
         ];
 
         $allCategories = Category::with('products')->get();
