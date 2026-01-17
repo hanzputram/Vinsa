@@ -73,6 +73,7 @@
         <!-- Link Menu -->
         <a href="{{ url('/') }}" class="block py-2 text-[#066C5F] border-b-[1.5px] hover:text-[#066c5fad] font-bold">Home</a>
         {{-- <a href="{{ url('/about') }}" class="block py-2 border-b-[1.5px] text-[#066C5F] hover:text-[#066c5fad] font-bold">About Us</a> --}}
+        <li><a href="/blog" class="font-bold text-xl hover:text-[#066c5fad]">Blog</a></li>
         <a href="{{ url('/contact') }}" class="block py-2 text-[#066C5F] hover:text-[#066c5fad] font-bold">Contact Us</a>
     </div>
 </nav>

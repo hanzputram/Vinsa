@@ -17,6 +17,19 @@ class BlogController extends Controller
         return view('inputblog');
     }
 
+        public function blogCollection()
+{
+    $blogs = Blog::with('sections')
+        ->where('is_published', true)
+        ->latest()
+        ->get();
+
+    // kalau kamu belum punya kategori blog, hapus ini saja
+    $categories = []; // atau BlogCategory::all();
+
+    return view('blogcollection', compact('blogs', 'categories'));
+}
+
     // List untuk admin
     public function index()
     {
@@ -81,18 +94,7 @@ class BlogController extends Controller
         return view('blogupdate', compact('blog'));
     }
 
-    public function blogCollection()
-{
-    $blogs = Blog::with('sections')
-        ->where('is_published', true)
-        ->latest()
-        ->get();
 
-    // kalau kamu belum punya kategori blog, hapus ini saja
-    $categories = []; // atau BlogCategory::all();
-
-    return view('blogcollection', compact('blogs', 'categories'));
-}
 
 
     // Update (tidak delete semua)
