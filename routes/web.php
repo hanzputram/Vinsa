@@ -17,6 +17,7 @@ Route::get('/product', [ProductController::class, 'index'])->name('products.view
 Route::get('/detail/{slug}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/new', [NewController::class, 'show'])->name('home');
 Route::get('/blog/{slug}', [BlogController::class, 'showPublic'])->name('blog.public');
+Route::get('/blog', [BlogController::class, 'blogCollection'])->name('blog.collection');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 

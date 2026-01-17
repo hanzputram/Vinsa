@@ -41,6 +41,7 @@
         <ul class="hidden md:flex space-x-6">
             <li><a href="{{ url('/') }}" class="font-bold text-xl hover:text-[#066c5fad]">Home</a></li>
             {{-- <li><a href="/about" class="font-bold text-xl hover:text-[#066c5fad]">About Us</a></li> --}}
+            <li><a href="/blog" class="font-bold text-xl hover:text-[#066c5fad]">Blog</a></li>
             <li><a href="https://wa.me/6281335715398" class="font-bold text-xl hover:text-[#066c5fad]">Contact Us</a></li>
         </ul>
     </div>
