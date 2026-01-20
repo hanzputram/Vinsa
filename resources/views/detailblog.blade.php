@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-55S5JHNQLG"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+        dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+
+    gtag('config', 'G-55S5JHNQLG');
+</script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -90,56 +103,54 @@
     }
 
     .wysiwyg ol {
-    list-style-type: decimal;
-    padding-left: 1.5rem;
-}
+        list-style-type: decimal;
+        padding-left: 1.5rem;
+    }
 
-.wysiwyg ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-}
+    .wysiwyg ul {
+        list-style-type: disc;
+        padding-left: 1.5rem;
+    }
 
- .wa-text-curv {
-            width: 100%;
-            position: absolute;
-            top: 0%;
-            -webkit-animation: spin 6s linear infinite;
-            -moz-animation: spin 6s linear infinite;
-            animation: spin 6s linear infinite;
+    .wa-text-curv {
+        width: 100%;
+        position: absolute;
+        top: 0%;
+        -webkit-animation: spin 6s linear infinite;
+        -moz-animation: spin 6s linear infinite;
+        animation: spin 6s linear infinite;
+    }
+
+    @-moz-keyframes spin {
+        100% {
+            -moz-transform: rotate(360deg);
+        }
+    }
+
+    @-webkit-keyframes spin {
+        100% {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+
+    @keyframes spin {
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
+    }
+
+    @keyframes pulse-bg {
+
+        0%,
+        100% {
+            background-color: #F77F1E;
         }
 
-        @-moz-keyframes spin {
-            100% {
-                -moz-transform: rotate(360deg);
-            }
+        50% {
+            background-color: #ffa459;
         }
-
-        @-webkit-keyframes spin {
-            100% {
-                -webkit-transform: rotate(360deg);
-            }
-        }
-
-        @keyframes spin {
-            100% {
-                -webkit-transform: rotate(360deg);
-                transform: rotate(360deg);
-            }
-        }
-
-        @keyframes pulse-bg {
-
-            0%,
-            100% {
-                background-color: #F77F1E;
-            }
-
-            50% {
-                background-color: #ffa459;
-            }
-        }
-
-
+    }
 </style>
 
 <body class="outfit bg-[#FDFBEE]">
@@ -148,8 +159,8 @@
             <x-navUser></x-navUser>
         </div>
 
-<div
- class="overflow-hidden p-6 sm:p-10 lg:p-[5rem] lg:justify-between py-[80px]
+        <div
+            class="overflow-hidden p-6 sm:p-10 lg:p-[5rem] lg:justify-between py-[80px]
         relative bg-no-repeat bg-cover w-full min-h-screen
         after:content-['']
         after:w-full after:h-full after:absolute after:top-0 after:left-0
@@ -176,7 +187,7 @@
                 </p>
 
                 {{-- Banner atau Gambar Utama --}}
-                @if(!empty($blog->image))
+                @if (!empty($blog->image))
                     <div class="relative w-[50%] mb-6">
                         <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
                             class="w-full rounded-xl shadow-md">
@@ -184,7 +195,7 @@
                 @endif
 
                 {{-- ✅ Konten utama dari WYSIWYG (TinyMCE) --}}
-                @if(!empty($blog->content))
+                @if (!empty($blog->content))
                     <div class="wysiwyg mb-10">
                         {!! $blog->content !!}
                     </div>
@@ -193,18 +204,19 @@
                 {{-- Konten Sub Judul & Isi --}}
                 @foreach ($blog->sections as $section)
                     <div class="mb-8">
-                        @if(!empty($section->subtitle))
+                        @if (!empty($section->subtitle))
                             <h2 class="text-2xl font-bold text-[#FDFBEE] border-l-4 border-[#f4752c] pl-3 mb-2">
                                 {{ $section->subtitle }}
                             </h2>
                         @endif
 
-                        @if(!empty($section->image))
-                            <img src="{{ asset('storage/' . $section->image) }}" alt="" width="300px" class="rounded-xl mb-3">
+                        @if (!empty($section->image))
+                            <img src="{{ asset('storage/' . $section->image) }}" alt="" width="300px"
+                                class="rounded-xl mb-3">
                         @endif
 
                         {{-- ✅ Render HTML dari TinyMCE TANPA merusak style --}}
-                        @if(!empty($section->content))
+                        @if (!empty($section->content))
                             <div class="wysiwyg">
                                 {!! $section->content !!}
                             </div>
@@ -226,7 +238,7 @@
             </div>
         </div>
     </div>
-        <x-footer></x-footer>
+    <x-footer></x-footer>
     @stack('scripts')
 </body>
 

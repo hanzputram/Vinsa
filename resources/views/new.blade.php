@@ -2,6 +2,18 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-55S5JHNQLG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-55S5JHNQLG');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -1493,27 +1505,26 @@
                     Product More →</a>
             </div>
         </div>
-   <p class="font-bold text-[28px] border-b-[1.5px] mb-5 pb-4 border-[#0000006a]">From Our Blog</p>
+        <p class="font-bold text-[28px] border-b-[1.5px] mb-5 pb-4 border-[#0000006a]">From Our Blog</p>
 
-@php
-    // Ambil hanya yang published
-    $publishedBlogs = $blogs->filter(fn($b) => !empty($b->is_published))->values();
-    $count = $publishedBlogs->count();
+        @php
+            // Ambil hanya yang published
+            $publishedBlogs = $blogs->filter(fn($b) => !empty($b->is_published))->values();
+            $count = $publishedBlogs->count();
 
-    // Max 3 jika tidak carousel
-    $displayBlogs = $count <= 3 ? $publishedBlogs : $publishedBlogs; // carousel: tampil semua
-@endphp
+            // Max 3 jika tidak carousel
+            $displayBlogs = $count <= 3 ? $publishedBlogs : $publishedBlogs; // carousel: tampil semua
+        @endphp
 
-@if($count === 0)
-    <p class="text-sm text-gray-500">Belum ada blog.</p>
-
-@elseif($count <= 3)
-    {{-- GRID MAX 3 --}}
-    <div class="grid md:grid-cols-3 gap-6 items-stretch">
-        @foreach ($displayBlogs as $blog)
-            <a href="{{ route('blog.public', ['slug' => $blog->slug]) }}" class="group block w-full h-full">
-                <div
-                    class="mx-auto w-full max-w-[420px]
+        @if ($count === 0)
+            <p class="text-sm text-gray-500">Belum ada blog.</p>
+        @elseif($count <= 3)
+            {{-- GRID MAX 3 --}}
+            <div class="grid md:grid-cols-3 gap-6 items-stretch">
+                @foreach ($displayBlogs as $blog)
+                    <a href="{{ route('blog.public', ['slug' => $blog->slug]) }}" class="group block w-full h-full">
+                        <div
+                            class="mx-auto w-full max-w-[420px]
                            min-h-[420px] max-h-[420px]
                            bg-[#ffffff60] backdrop-blur-sm
                            border-[1.5px] border-[#066c5f]
@@ -1524,83 +1535,84 @@
                            group-hover:ring-2 group-hover:ring-[#066c5f]/30
                            group-hover:scale-[1.01]">
 
-                    <div class="w-full h-[190px] rounded-2xl overflow-hidden bg-white/60 flex items-center justify-center">
-                        @if (!empty($blog->image))
-                            <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
-                                 class="w-full h-full object-cover">
-                        @else
-                            <div class="text-xs text-gray-500">No Image</div>
-                        @endif
-                    </div>
-
-                    <div class="mt-4 flex-1 flex flex-col">
-                        <p class="font-bold text-base leading-snug line-clamp-2">{{ $blog->title }}</p>
-
-                        @php
-                            $firstSection = $blog->sections->first();
-                            $previewHtml = $blog->content ?? (optional($firstSection)->content ?? '');
-                            $previewText = trim(preg_replace('/\s+/', ' ', strip_tags($previewHtml)));
-                        @endphp
-
-                        @if (!empty($previewText))
-                            <p class="text-[11px] text-gray-700 mt-2 line-clamp-5">
-                                @if (!empty(optional($firstSection)->subtitle))
-                                    <span class="font-semibold">{{ $firstSection->subtitle }}:</span>
+                            <div
+                                class="w-full h-[190px] rounded-2xl overflow-hidden bg-white/60 flex items-center justify-center">
+                                @if (!empty($blog->image))
+                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
+                                        class="w-full h-full object-cover">
+                                @else
+                                    <div class="text-xs text-gray-500">No Image</div>
                                 @endif
-                                {{ $previewText }}
-                            </p>
-                        @else
-                            <p class="text-[11px] text-gray-500 italic mt-2">Tidak ada konten</p>
-                        @endif
+                            </div>
 
-                        <div class="mt-auto pt-3">
-                            <span class="text-[11px] text-[#066c5f] font-semibold opacity-80 group-hover:opacity-100">
-                                Baca selengkapnya →
-                            </span>
+                            <div class="mt-4 flex-1 flex flex-col">
+                                <p class="font-bold text-base leading-snug line-clamp-2">{{ $blog->title }}</p>
+
+                                @php
+                                    $firstSection = $blog->sections->first();
+                                    $previewHtml = $blog->content ?? (optional($firstSection)->content ?? '');
+                                    $previewText = trim(preg_replace('/\s+/', ' ', strip_tags($previewHtml)));
+                                @endphp
+
+                                @if (!empty($previewText))
+                                    <p class="text-[11px] text-gray-700 mt-2 line-clamp-5">
+                                        @if (!empty(optional($firstSection)->subtitle))
+                                            <span class="font-semibold">{{ $firstSection->subtitle }}:</span>
+                                        @endif
+                                        {{ $previewText }}
+                                    </p>
+                                @else
+                                    <p class="text-[11px] text-gray-500 italic mt-2">Tidak ada konten</p>
+                                @endif
+
+                                <div class="mt-auto pt-3">
+                                    <span
+                                        class="text-[11px] text-[#066c5f] font-semibold opacity-80 group-hover:opacity-100">
+                                        Baca selengkapnya →
+                                    </span>
+                                </div>
+                            </div>
+
                         </div>
-                    </div>
-
-                </div>
-            </a>
-        @endforeach
-    </div>
-
-@else
-    {{-- CAROUSEL (jika lebih dari 3) --}}
-    <div class="relative">
-        {{-- tombol kiri --}}
-        <button type="button"
-            class="hidden md:flex items-center justify-center absolute -left-3 top-1/2 -translate-y-1/2 z-10
+                    </a>
+                @endforeach
+            </div>
+        @else
+            {{-- CAROUSEL (jika lebih dari 3) --}}
+            <div class="relative">
+                {{-- tombol kiri --}}
+                <button type="button"
+                    class="hidden md:flex items-center justify-center absolute -left-3 top-1/2 -translate-y-1/2 z-10
                    w-10 h-10 rounded-full bg-white/80 backdrop-blur border border-black/10 shadow
                    hover:bg-white transition"
-            onclick="blogCarouselScroll(-1)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="stroke-black">
-                <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
+                    onclick="blogCarouselScroll(-1)">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="stroke-black">
+                        <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
 
-        {{-- tombol kanan --}}
-        <button type="button"
-            class="hidden md:flex items-center justify-center absolute -right-3 top-1/2 -translate-y-1/2 z-10
+                {{-- tombol kanan --}}
+                <button type="button"
+                    class="hidden md:flex items-center justify-center absolute -right-3 top-1/2 -translate-y-1/2 z-10
                    w-10 h-10 rounded-full bg-white/80 backdrop-blur border border-black/10 shadow
                    hover:bg-white transition"
-            onclick="blogCarouselScroll(1)">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="stroke-black">
-                <path d="M9 6l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-        </button>
+                    onclick="blogCarouselScroll(1)">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="stroke-black">
+                        <path d="M9 6l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
 
-        {{-- track --}}
-        <div id="blogCarousel"
-             class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory
+                {{-- track --}}
+                <div id="blogCarousel"
+                    class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory
                     py-10 -mx-1 px-1
                     [scrollbar-width:none] [-ms-overflow-style:none]
                     [&::-webkit-scrollbar]:hidden">
-            @foreach ($displayBlogs as $blog)
-                <a href="{{ route('blog.public', ['slug' => $blog->slug]) }}"
-                   class="group block snap-start shrink-0 w-[88%] sm:w-[60%] md:w-[420px]">
-                    <div
-                        class="w-full
+                    @foreach ($displayBlogs as $blog)
+                        <a href="{{ route('blog.public', ['slug' => $blog->slug]) }}"
+                            class="group block snap-start shrink-0 w-[88%] sm:w-[60%] md:w-[420px]">
+                            <div
+                                class="w-full
                                min-h-[420px] max-h-[420px]
                                bg-[#ffffff60] backdrop-blur-sm
                                border-[1.5px] border-[#066c5f]
@@ -1611,69 +1623,74 @@
                                group-hover:ring-2 group-hover:ring-[#066c5f]/30
                                group-hover:scale-[1.01]">
 
-                        <div class="w-full h-[190px] rounded-2xl overflow-hidden bg-white/60 flex items-center justify-center">
-                            @if (!empty($blog->image))
-                                <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
-                                     class="w-full h-full object-cover">
-                            @else
-                                <div class="text-xs text-gray-500">No Image</div>
-                            @endif
-                        </div>
-
-                        <div class="mt-4 flex-1 flex flex-col">
-                            <p class="font-bold text-base leading-snug line-clamp-2">{{ $blog->title }}</p>
-
-                            @php
-                                $firstSection = $blog->sections->first();
-                                $previewHtml = $blog->content ?? (optional($firstSection)->content ?? '');
-                                $previewText = trim(preg_replace('/\s+/', ' ', strip_tags($previewHtml)));
-                            @endphp
-
-                            @if (!empty($previewText))
-                                <p class="text-[11px] text-gray-700 mt-2 line-clamp-5">
-                                    @if (!empty(optional($firstSection)->subtitle))
-                                        <span class="font-semibold">{{ $firstSection->subtitle }}:</span>
+                                <div
+                                    class="w-full h-[190px] rounded-2xl overflow-hidden bg-white/60 flex items-center justify-center">
+                                    @if (!empty($blog->image))
+                                        <img src="{{ asset('storage/' . $blog->image) }}"
+                                            alt="{{ $blog->title }}" class="w-full h-full object-cover">
+                                    @else
+                                        <div class="text-xs text-gray-500">No Image</div>
                                     @endif
-                                    {{ $previewText }}
-                                </p>
-                            @else
-                                <p class="text-[11px] text-gray-500 italic mt-2">Tidak ada konten</p>
-                            @endif
+                                </div>
 
-                            <div class="mt-auto pt-3">
-                                <span class="text-[11px] text-[#066c5f] font-semibold opacity-80 group-hover:opacity-100">
-                                    Baca selengkapnya →
-                                </span>
+                                <div class="mt-4 flex-1 flex flex-col">
+                                    <p class="font-bold text-base leading-snug line-clamp-2">{{ $blog->title }}</p>
+
+                                    @php
+                                        $firstSection = $blog->sections->first();
+                                        $previewHtml = $blog->content ?? (optional($firstSection)->content ?? '');
+                                        $previewText = trim(preg_replace('/\s+/', ' ', strip_tags($previewHtml)));
+                                    @endphp
+
+                                    @if (!empty($previewText))
+                                        <p class="text-[11px] text-gray-700 mt-2 line-clamp-5">
+                                            @if (!empty(optional($firstSection)->subtitle))
+                                                <span class="font-semibold">{{ $firstSection->subtitle }}:</span>
+                                            @endif
+                                            {{ $previewText }}
+                                        </p>
+                                    @else
+                                        <p class="text-[11px] text-gray-500 italic mt-2">Tidak ada konten</p>
+                                    @endif
+
+                                    <div class="mt-auto pt-3">
+                                        <span
+                                            class="text-[11px] text-[#066c5f] font-semibold opacity-80 group-hover:opacity-100">
+                                            Baca selengkapnya →
+                                        </span>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
+                        </a>
+                    @endforeach
+                </div>
 
-                    </div>
-                </a>
-            @endforeach
-        </div>
+                {{-- dots (optional simple) --}}
+                <div class="flex justify-center mt-4 gap-2 md:hidden">
+                    <span class="w-2 h-2 rounded-full bg-[#066c5f]/40"></span>
+                    <span class="w-2 h-2 rounded-full bg-[#066c5f]/20"></span>
+                    <span class="w-2 h-2 rounded-full bg-[#066c5f]/20"></span>
+                </div>
+            </div>
 
-        {{-- dots (optional simple) --}}
-        <div class="flex justify-center mt-4 gap-2 md:hidden">
-            <span class="w-2 h-2 rounded-full bg-[#066c5f]/40"></span>
-            <span class="w-2 h-2 rounded-full bg-[#066c5f]/20"></span>
-            <span class="w-2 h-2 rounded-full bg-[#066c5f]/20"></span>
-        </div>
-    </div>
+            <script>
+                function blogCarouselScroll(direction) {
+                    const el = document.getElementById('blogCarousel');
+                    if (!el) return;
 
-    <script>
-        function blogCarouselScroll(direction) {
-            const el = document.getElementById('blogCarousel');
-            if (!el) return;
+                    // scroll 1 card (mendekati 420px + gap)
+                    const cardWidth = 420;
+                    const gap = 24; // gap-6
+                    const amount = (cardWidth + gap) * direction;
 
-            // scroll 1 card (mendekati 420px + gap)
-            const cardWidth = 420;
-            const gap = 24; // gap-6
-            const amount = (cardWidth + gap) * direction;
-
-            el.scrollBy({ left: amount, behavior: 'smooth' });
-        }
-    </script>
-@endif
+                    el.scrollBy({
+                        left: amount,
+                        behavior: 'smooth'
+                    });
+                }
+            </script>
+        @endif
 
 
     </div>

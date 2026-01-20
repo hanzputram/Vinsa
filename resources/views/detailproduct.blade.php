@@ -2,6 +2,18 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-55S5JHNQLG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-55S5JHNQLG');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -11,15 +23,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
     @php
-    use Illuminate\Support\Str;
+        use Illuminate\Support\Str;
 
-    $metaTitle = $product->meta_title ?: ($product->name . ' | Vinsa Electric');
-    $metaDesc  = $product->meta_description ?: Str::limit(strip_tags($product->description ?? ''), 155);
-@endphp
+        $metaTitle = $product->meta_title ?: $product->name . ' | Vinsa Electric';
+        $metaDesc = $product->meta_description ?: Str::limit(strip_tags($product->description ?? ''), 155);
+    @endphp
 
-<title>{{ $metaTitle }}</title>
-<meta name="description" content="{{ $metaDesc }}">
-<link rel="canonical" href="{{ url()->current() }}">
+    <title>{{ $metaTitle }}</title>
+    <meta name="description" content="{{ $metaDesc }}">
+    <link rel="canonical" href="{{ url()->current() }}">
 
     <style>
         .outfit {
@@ -348,7 +360,7 @@
                         </table>
                     </div>
                 @elseif (Str::contains(strtoupper($product->name), 'WAREHOUSE'))
-                  <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-center font-extrabold text-white">
+                    <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-center font-extrabold text-white">
                         Kenapa Harus Warehouse Rack Vinsa?
                     </p>
                     <div class="flex justify-center">

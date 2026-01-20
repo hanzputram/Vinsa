@@ -2,6 +2,18 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-55S5JHNQLG"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-55S5JHNQLG');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
@@ -17,7 +29,7 @@
             font-family: "Outfit", sans-serif;
         }
 
-         .wa-text-curv {
+        .wa-text-curv {
             width: 100%;
             position: absolute;
             top: 0%;
@@ -55,7 +67,7 @@
             50% {
                 background-color: #ffa459;
             }
-        }   
+        }
     </style>
 </head>
 
