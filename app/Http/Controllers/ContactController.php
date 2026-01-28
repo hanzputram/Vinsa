@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Mail\ContactMail;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Log;
 
 class ContactController extends Controller
 {
@@ -27,7 +28,8 @@ class ContactController extends Controller
             Mail::to($recipientEmail)->send(new ContactMail($validated));
             return back()->with('success', 'Your message has been sent successfully!');
         } catch (\Exception $e) {
-            return back()->with('error', 'Sorry, there was an error sending your message. Please try again later.');
+            Log::error('Mail Error: ' . $e->getMessage());
+            return back()->with('error', 'Sorry, there was an error sending your message: ' . $e->getMessage());
         }
     }
 }
