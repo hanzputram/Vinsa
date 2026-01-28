@@ -105,6 +105,18 @@
             
             <!-- Hero Section -->
             <div class="w-full relative z-[10] text-center py-16 lg:py-20">
+                @if(session('success'))
+                    <div class="mb-8 p-4 bg-green-500/20 border border-green-500/50 rounded-2xl text-white backdrop-blur-md">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if(session('error'))
+                    <div class="mb-8 p-4 bg-red-500/20 border border-red-500/50 rounded-2xl text-white backdrop-blur-md">
+                        {{ session('error') }}
+                    </div>
+                @endif
+                
                 <a href="javascript:window.history.back()" class="absolute left-0 top-0 group inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm border border-white/20 transition-all">
                     <svg viewBox="0 0 24 24" width="20px" height="20px" fill="none"
                         xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +203,8 @@
 
                 <!-- Contact Form - Right Side -->
                 <div class="lg:col-span-3">
-                    <form action="#" method="POST" class="bg-white/10 backdrop-blur-xl p-8 lg:p-10 rounded-3xl border border-white/20 shadow-2xl space-y-6">
+                    <form action="{{ route('contact.send') }}" method="POST" class="bg-white/10 backdrop-blur-xl p-8 lg:p-10 rounded-3xl border border-white/20 shadow-2xl space-y-6">
+                        @csrf
                         <div class="mb-8">
                             <h3 class="text-3xl font-bold text-white mb-2">Send us a Message</h3>
                             <p class="text-white/70">Fill out the form below and we'll get back to you within 24 hours.</p>

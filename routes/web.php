@@ -21,6 +21,7 @@ Route::get('/blog', [BlogController::class, 'blogCollection'])->name('blog.colle
 Route::get('/contact-us', function () {
     return view('contactus');
 })->name('contact-us');
+Route::post('/contact-us', [App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
