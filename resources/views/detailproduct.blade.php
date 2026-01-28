@@ -281,7 +281,7 @@
                     <div id="comparison" class="tab-content hidden">
                         <h2 class="text-4xl font-bold text-gray-900 mb-6">Why Choose Vinsa Box Panel?</h2>
                         <div class="mb-8 flex justify-center">
-                            <img src="/image/fs.png" alt="Vinsa Features" class="max-w-full h-auto rounded-2xl shadow-lg">
+                            <img src="/image/fs.png" alt="Vinsa Features" class="max-w-full h-auto">
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full border-collapse bg-white rounded-xl overflow-hidden">
@@ -330,7 +330,7 @@
                     <div id="comparison" class="tab-content hidden">
                         <h2 class="text-2xl font-bold text-gray-900 mb-6">Why Choose Vinsa Box Panel?</h2>
                         <div class="mb-8 flex justify-center">
-                            <img src="/image/bvin.png" alt="Vinsa Features" class="max-w-full h-auto rounded-2xl shadow-lg">
+                            <img src="/image/bvin.png" alt="Vinsa Features" class="max-w-full h-auto">
                         </div>
                         <div class="overflow-x-auto">
                             <table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-lg">
