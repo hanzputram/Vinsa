@@ -155,8 +155,8 @@
                             </div>
                             <div>
                                 <h3 class="text-sm font-bold text-white/60 uppercase tracking-wider mb-1">Office Location</h3>
-                                <h2 class="text-xl font-bold text-white mb-2">PT. Anugerah Tama Sejati</h2>
-                                <p class="text-white/80 leading-relaxed">The Taman Dayu, Cluster Palazio Boulevard, J-1 No. 06, Pandaan, Pasuruan, Jawa Timur 67156</p>
+                                <h2 class="text-xl font-bold text-white mb-2">Head Quarter</h2>
+                                <p class="text-white/80 leading-relaxed">Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur</p>
                             </div>
                         </div>
                     </div>
