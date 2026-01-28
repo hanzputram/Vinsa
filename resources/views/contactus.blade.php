@@ -215,14 +215,14 @@
                                 <label for="name" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">Full Name *</label>
                                 <input type="text" id="name" name="name" required
                                     class="w-full px-5 py-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/25 transition-all"
-                                    placeholder="John Doe">
+                                    placeholder="Your Name">
                             </div>
 
                             <div>
                                 <label for="email" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">Email Address *</label>
                                 <input type="email" id="email" name="email" required
                                     class="w-full px-5 py-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/25 transition-all"
-                                    placeholder="john@example.com">
+                                    placeholder="your.email@example.com">
                             </div>
                         </div>
 
