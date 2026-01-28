@@ -32,7 +32,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Gagal Menambahkan Gambar',
-                html: `{!! implode('<br>', $errors->all()) !!}`,
+                html: <?php echo json_encode(implode('<br>', $errors->all())); ?>,
                 confirmButtonColor: '#d33',
             });
         </script>

@@ -38,6 +38,16 @@
                 hover:file:bg-blue-100">
         </div>
 
+        <div class="max-w-[90%]">
+            <label class="block text-gray-600 mb-1">Datasheet (PDF)</label>
+            <input type="file" name="datasheet" accept="application/pdf"
+                class="block w-full file:cursor-pointer text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
+                file:rounded-lg file:border-0
+                file:text-sm file:font-semibold
+                file:bg-green-50 file:text-green-700
+                hover:file:bg-green-100">
+        </div>
+
         <h2 class="border-t-[1.5px] py-4 text-2xl font-semibold text-gray-700 mb-4">Tambah Spesifikasi</h2>
 
         <div class="max-w-[90%]">
@@ -92,7 +102,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Gagal Menyimpan Produk',
-                html: `{!! implode('<br>', $errors->all()) !!}`,
+                html: <?php echo json_encode(implode('<br>', $errors->all())); ?>,
                 confirmButtonColor: '#3085d6',
             });
         </script>

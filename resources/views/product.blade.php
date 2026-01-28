@@ -45,6 +45,7 @@
             background-image: linear-gradient(90deg, #9e9e9e 25%, #ffffff 50%, #9e9e9e 75%);
             background-size: 200% auto;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: shine 6s linear infinite;
         }
@@ -131,7 +132,7 @@
                         class="block py-2 text-[#066C5F] border-b-[1.5px] hover:text-[#066c5fad] font-bold">Home</a>
                     <a href="{{ url('/about') }}"
                         class="block py-2 border-b-[1.5px] text-[#066C5F] hover:text-[#066c5fad] font-bold">About Us</a>
-                    <a href="{{ url('/contact') }}"
+                    <a href="{{ route('contact-us') }}"
                         class="block py-2 text-[#066C5F] hover:text-[#066c5fad] font-bold">Contact Us</a>
 
                     <div class="mt-6">

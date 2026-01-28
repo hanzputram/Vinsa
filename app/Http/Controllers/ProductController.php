@@ -87,6 +87,7 @@ public function show($param)
             'specifications' => 'nullable|array',
             'specifications.*.field_name' => 'nullable|string',
             'specifications.*.field_value' => 'nullable|string',
+            'datasheet' => 'nullable|file|mimes:pdf|max:10240', // max 10MB PDF
         ]);
 
         foreach ($request->specifications ?? [] as $index => $spec) {
@@ -188,6 +189,11 @@ public function show($param)
 
         $imagePath = $request->file('image')->store('products', 'public');
 
+        $datasheetPath = null;
+        if ($request->hasFile('datasheet')) {
+            $datasheetPath = $request->file('datasheet')->store('datasheets', 'public');
+        }
+
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -196,6 +202,7 @@ public function show($param)
             'category_id' => $request->category_id,
             'custom_input' => $customInput,
             'image' => $imagePath,
+            'datasheet' => $datasheetPath,
 
             // ✅ META (langsung simpan, nullable)
             'meta_title' => $request->meta_title,
@@ -267,6 +274,7 @@ public function show($param)
             'specifications' => 'nullable|array',
             'specifications.*.field_name' => 'required_with:specifications.*.field_value',
             'specifications.*.field_value' => 'required_with:specifications.*.field_name',
+            'datasheet' => 'nullable|file|mimes:pdf|max:10240', // max 10MB PDF
         ]);
 
         $product = Product::findOrFail($id);
@@ -333,6 +341,15 @@ public function show($param)
             }
             $product->image = $newImagePath;
             $historyChanges[] = 'gambar produk telah diperbarui';
+        }
+
+        if ($request->hasFile('datasheet')) {
+            $newDatasheetPath = $request->file('datasheet')->store('datasheets', 'public');
+            if ($product->datasheet && Storage::disk('public')->exists($product->datasheet)) {
+                Storage::disk('public')->delete($product->datasheet);
+            }
+            $product->datasheet = $newDatasheetPath;
+            $historyChanges[] = 'datasheet produk telah diperbarui';
         }
 
         $product->save();

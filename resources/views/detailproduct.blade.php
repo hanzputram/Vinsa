@@ -38,26 +38,8 @@
         .outfit {
             font-family: "Outfit", sans-serif;
             font-optical-sizing: auto;
-            font-weight: <weight>;
+            font-weight: 400;
             font-style: normal;
-        }
-
-        @keyframes shine {
-            0% {
-                background-position: -200%;
-            }
-
-            100% {
-                background-position: 200%;
-            }
-        }
-
-        .shining-text {
-            background-image: linear-gradient(90deg, #9e9e9e 25%, #ffffff 50%, #9e9e9e 75%);
-            background-size: 200% auto;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: shine 6s linear infinite;
         }
 
         ::-webkit-scrollbar {
@@ -65,34 +47,66 @@
             height: 7px;
         }
 
-        ::-webkit-scrollbar-button {
-            display: block;
-            background-color: #cccccc00;
-            border-radius: 10px;
-            width: 10px;
-        }
-
         ::-webkit-scrollbar-thumb {
-            background: #ffffff84;
-            /* Warna thumb */
+            background: #066c5f;
             border-radius: 100px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #ffffffd6;
-            /* Warna saat hover */
+            background: #0dd8bd;
         }
 
         ::-webkit-scrollbar-track {
             background: transparent;
         }
 
-        .scroll-container {
-            scrollbar-width: thin;
-            scrollbar-color: #888 transparent;
+        @keyframes pulse-bg {
+            0%, 100% {
+                background-color: #0dd8bd;
+            }
+            50% {
+                background-color: #066c5f;
+            }
         }
 
-        .wa-text-curv {
+        .pulse-bg {
+            animation: pulse-bg 1.5s infinite;
+        }
+
+        .tab-button.active {
+            background: white;
+            color: #066c5f;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .gradient-animated {
+            background-size: 200% 200%;
+            animation: gradient-shift 8s ease infinite;
+        }
+
+        .tab-button {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .tab-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-glow {
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3), 
+                        0 20px 60px rgba(6, 108, 95, 0.15);
+        }
+
+          .wa-text-curv {
             width: 100%;
             position: absolute;
             top: 0%;
@@ -119,22 +133,6 @@
                 transform: rotate(360deg);
             }
         }
-
-        @keyframes pulse-bg {
-
-            0%,
-            100% {
-                background-color: #F77F1E;
-            }
-
-            50% {
-                background-color: #ffa459;
-            }
-        }
-
-        .pulse-bg {
-            animation: pulse-bg 1.5s infinite;
-        }
     </style>
 </head>
 
@@ -144,258 +142,294 @@
             <x-navUser></x-navUser>
         </div>
 
-        {{-- isi web --}}
-        <div
-            class="overflow-hidden p-6 sm:p-10 lg:p-[5rem] lg:justify-between py-[80px] relative bg-no-repeat bg-cover w-full min-h-screen after:content-[''] bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] after:w-full after:h-full after:absolute after:top-0 after:left-0 rounded-[40px]">
-            <div class="w-full relative z-[10]">
-                <a href="javascript:window.history.back()" class="group">
-                    <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="stroke-white group-hover:stroke-gray-400 transition-colors duration-300">
-                        <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
+        <!-- Product Detail Container -->
+        <div class="bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] gradient-animated rounded-[40px] shadow-2xl overflow-hidden mb-10">
+            <!-- Header with Back Button -->
+            <div class="p-6 lg:p-10">
+                <a href="javascript:window.history.back()" class="inline-flex items-center gap-2 text-white hover:text-white/80 transition-all group mb-6">
+                    <svg viewBox="0 0 24 24" width="24px" height="24px" fill="none" xmlns="http://www.w3.org/2000/svg" class="stroke-current transition-transform group-hover:-translate-x-1">
+                        <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
+                    <span class="font-semibold">Back to Products</span>
                 </a>
+            </div>
 
-                {{-- Produk --}}
-                <div
-                    class="w-full min-h-full flex flex-col justify-center items-center gap-6 lg:flex-row lg:items-start lg:justify-start mx-auto my-10">
-                    <div
-                        class="w-full sm:w-72 md:w-80 h-auto bg-[#FDFBEE]/40 border border-white text-white p-4 sm:p-5 rounded-2xl shadow-lg flex flex-col justify-start relative overflow-hidden backdrop-blur-[8px]">
-                        @php
-                            $customInput = json_decode($product->custom_input, true);
-                        @endphp
+            <!-- Product Overview Section -->
+            <div class="backdrop-blur-sm rounded-3xl mx-6 lg:mx-10 mb-8">
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 p-6 lg:p-12">
+                <!-- Product Image -->
+                <div class="flex items-center justify-center rounded-3xl p-8 lg:p-12 bg-white/50">
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="max-w-full h-auto max-h-[400px] object-contain drop-shadow-2xl">
+                </div>
 
-                        <h2 class="text-base sm:text-lg text-center text-white font-bold">
-                            {{ $product->name }}
-                        </h2>
-
-                        <p class="mt-2 flex-grow text-xs flex justify-center items-center sm:text-sm">
-                            <img src="{{ asset('storage/' . $product->image) }}" width="180px" alt="Vinsa">
-                        </p>
+                <!-- Product Info -->
+                <div class="flex flex-col justify-center space-y-6">
+                    @php
+                        $categoryName = strtolower($product->category?->name);
+                    @endphp
+                    
+                    <!-- Product Category Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-bold tracking-wider uppercase w-fit">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M7 3a1 1 0 000 2h6a1 1 0 100-2H7zM4 7a1 1 0 011-1h10a1 1 0 110 2H5a1 1 0 01-1-1zM2 11a2 2 0 012-2h12a2 2 0 012 2v4a2 2 0 01-2 2H4a2 2 0 01-2-2v-4z"/>
+                        </svg>
+                        {{ $product->category?->name ?? 'Product' }}
                     </div>
-                    <div
-                        class="w-full lg:h-[325px] mx-0 lg:mx-10 flex flex-col justify-between gap-4 lg:overflow-y-auto pr-2">
-                        <div class="border-b-[1.5px] border-white pb-3">
-                            @php
-                                $categoryName = strtolower($product->category?->name);
-                            @endphp
-                            <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-left font-extrabold text-white">
-                                {{ $product->name }}
-                                @if (in_array($categoryName, ['cable tray', 'pilot lamp', 'accessories']))
-                                    - {{ $product->custom_input }}
-                                @endif
-                            </p>
-                            <p class="text-lg sm:text-xl lg:text-2xl text-left font-bold text-white">
-                                @if ($customInput)
-                                    @foreach ($customInput as $key => $value)
-                                        <div class="capitalize text-white font-bold text-xl">{{ ucfirst($key) }}:
-                                            {{ $value }}</div>
-                                    @endforeach
-                                    <div class="text-white font-bold text-xl">{{ $product->kode }}</div>
-                                @else
-                                    {{ $product->kode }}
-                                @endif
-                            </p>
 
-                        </div>
-                        <div>
-                            <ul class="text-white text-sm sm:text-base">
-                                <p class="font-semibold text-xl underline">
-                                    Spesifikasi :
-                                </p>
-                                @foreach ($product->attributes as $attributes)
-                                    <li class="border-b-[1px] py-3">{{ $attributes->field_name }} :
-                                        {{ $attributes->field_value }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                        <div class="border-t-[1.5px] pt-3 mt-7 border-white text-sm sm:text-base">
-                            <p class="font-semibold text-white text-xl underline">
-                                Deskripsi :
-                            </p>
-                            <ul class="text-white">
-                                @foreach (explode("\n", $product->description) as $line)
-                                    <li class="border-b-[1px] border-white py-3">{!! e($line) !!}</li>
-                                @endforeach
-                            </ul>
+                    <!-- Product Name -->
+                    <h1 class="text-4xl lg:text-5xl font-black text-gray-900 leading-tight">
+                        {{ $product->name }}
+                        @if (in_array($categoryName, ['cable tray', 'pilot lamp', 'accessories']))
+                            <span class="text-[#0dd8bd]">- {{ $product->custom_input }}</span>
+                        @endif
+                    </h1>
 
+                    <!-- Product Code -->
+                    <div class="flex items-center gap-3">
+                        <span class="text-sm font-semibold text-gray-100 uppercase tracking-wider">Product Code:</span>
+                        <span class="text-xl font-bold text-white">{{ $product->kode }}</span>
+                    </div>
+
+                    <!-- Custom Input Fields -->
+                    @php
+                        $customInput = json_decode($product->custom_input, true);
+                    @endphp
+                    @if ($customInput)
+                        <div class="grid grid-cols-2 gap-4 p-6 bg-white/20 rounded-2xl">
+                            @foreach ($customInput as $key => $value)
+                                <div>
+                                    <p class="text-xs font-semibold text-gray-200 uppercase tracking-wider mb-1">{{ ucfirst($key) }}</p>
+                                    <p class="text-lg font-bold text-white">{{ $value }}</p>
+                                </div>
+                            @endforeach
                         </div>
+                    @endif
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-wrap gap-4 pt-4">
+                        <a href="https://wa.me/6281335715398" class="inline-flex items-center justify-center gap-3 bg-white text-[#066c5f] px-8 py-4 rounded-full text-lg font-bold hover:shadow-2xl hover:scale-105 transition-all shadow-lg">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L0 24l6.335-1.662c1.72.937 3.659 1.432 5.631 1.433h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                            </svg>
+                            Contact Us
+                        </a>
+
+                        @if($product->datasheet)
+                        <a href="{{ asset('storage/' . $product->datasheet) }}" target="_blank" class="inline-flex items-center justify-center gap-3 bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full text-lg font-bold hover:bg-white/30 hover:shadow-2xl hover:scale-105 transition-all">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            Datasheet
+                        </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+            </div>
+
+            <!-- Tabs Section -->
+            <div class="rounded-3xl mx-6 lg:mx-10 mb-8">
+            <div class="px-6 lg:px-12 pb-12">
+                <div class="border-b border-gray-200 mb-8">
+                    <div class="flex gap-4 overflow-x-auto">
+                        <button onclick="switchTab('specifications')" class="tab-button active px-6 py-3 font-bold text-gray-100 hover:text-[#066c5f] border-b-2 border-transparent hover:border-[#066c5f] transition-all whitespace-nowrap">
+                            Specifications
+                        </button>
+                        <button onclick="switchTab('description')" class="tab-button px-6 py-3 font-bold text-gray-100 hover:text-[#066c5f] border-b-2 border-transparent hover:border-[#066c5f] transition-all whitespace-nowrap">
+                            Description
+                        </button>
+                        @if (Str::contains(strtoupper($product->kode), 'VHB') || Str::contains(strtoupper($product->name), 'WAREHOUSE'))
+                            <button onclick="switchTab('comparison')" class="tab-button px-6 py-3 font-bold text-gray-100 hover:text-[#066c5f] border-b-2 border-transparent hover:border-[#066c5f] transition-all whitespace-nowrap">
+                                Product Comparison
+                            </button>
+                        @endif
+                    </div>
+                </div>
+
+                <!-- Tab Content -->
+                <div id="specifications" class="tab-content">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Technical Specifications</h2>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        @foreach ($product->attributes as $attribute)
+                            <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                                <span class="font-semibold text-gray-700">{{ $attribute->field_name }} :</span>
+                                <span class="font-bold text-[#066c5f]">{{ $attribute->field_value }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div id="description" class="tab-content hidden">
+                    <h2 class="text-4xl font-bold text-gray-900 mb-6">Product Description</h2>
+                    <div class="prose prose-lg max-w-none">
+                        <ul class="space-y-3">
+                            @foreach (explode("\n", $product->description) as $line)
+                                @if(trim($line))
+                                    <li class="flex items-start gap-3">
+                                        <svg class="w-5 h-5 text-[#0dd8bd] mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                                        </svg>
+                                        <span class="text-gray-100">{{ $line }}</span>
+                                    </li>
+                                @endif
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
 
                 @if (Str::contains(strtoupper($product->kode), 'VHB200'))
-                    <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-center font-extrabold text-white">
-                        Kenapa Harus Box Panel Vinsa?
-                    </p>
-                    <div class="flex justify-center">
-                        <img src="/image/fs.png" alt="" width="600px">
-                    </div>
-                    <div class="flex justify-center w-full md:p-4 md:mb-10">
-                        <table
-                            class="table-auto scale-[0.65] md:scale-[1] border-collapse border w-full border-gray-400 text-sm text-center">
-                            <thead class="bg-[#066C5F] text-white">
-                                <tr>
-                                    <th rowspan="3" class="border border-gray-400 p-2 text-xl">Tipe</th>
-                                    <th colspan="3" class="border border-gray-400 p-2 text-lg">Ukuran (mm)</th>
-                                    <th rowspan="3" class="border border-gray-400 p-2 text-xl">Berat (Kg)</th>
-                                    <th colspan="2" rowspan="2" class="border border-gray-400 p-2 text-lg">
-                                        Ketebalan (mm)</th>
-                                    <th rowspan="3" class="border border-gray-400 p-2 text-xl">Base Plate</th>
-                                </tr>
-                                <tr>
-                                    <th rowspan="2" class="border border-gray-400 p-2">Tinggi</th>
-                                    <th rowspan="2" class="border border-gray-400 p-2">Lebar</th>
-                                    <th rowspan="2" class="border border-gray-400 p-2">Tebal</th>
-                                </tr>
-                                <tr>
-                                    <th class="border border-gray-400 p-2">Pintu</th>
-                                    <th class="border border-gray-400 p-2">Bodi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($barangs as $barang)
-                                    @php
-                                        $isActive = isset($kodeAktif) && strtoupper($barang->kode) === $kodeAktif;
-                                    @endphp
+                    <div id="comparison" class="tab-content hidden">
+                        <h2 class="text-4xl font-bold text-gray-900 mb-6">Why Choose Vinsa Box Panel?</h2>
+                        <div class="mb-8 flex justify-center">
+                            <img src="/image/fs.png" alt="Vinsa Features" class="max-w-full h-auto rounded-2xl shadow-lg">
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse bg-white rounded-xl overflow-hidden">
+                                <thead class="bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] text-white">
+                                    <tr>
+                                        <th rowspan="3" class="border border-gray-300 p-4 text-lg font-bold">Type</th>
+                                        <th colspan="3" class="border border-gray-300 p-4 text-lg font-bold">Dimensions (mm)</th>
+                                        <th rowspan="3" class="border border-gray-300 p-4 text-lg font-bold">Weight (Kg)</th>
+                                        <th colspan="2" rowspan="2" class="border border-gray-300 p-4 text-lg font-bold">Thickness (mm)</th>
+                                        <th rowspan="3" class="border border-gray-300 p-4 text-lg font-bold">Base Plate</th>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="2" class="border border-gray-300 p-3">Height</th>
+                                        <th rowspan="2" class="border border-gray-300 p-3">Width</th>
+                                        <th rowspan="2" class="border border-gray-300 p-3">Depth</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="border border-gray-300 p-3">Door</th>
+                                        <th class="border border-gray-300 p-3">Body</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($barangs as $barang)
+                                        @php
+                                            $isActive = isset($kodeAktif) && strtoupper($barang->kode) === $kodeAktif;
+                                        @endphp
 
-                                    @if (Str::contains(strtolower($barang->name), 'box'))
-                                        <tr class="{{ $isActive ? 'pulse-bg' : 'bg-white hover:bg-gray-100' }}">
-                                            <td class="border border-gray-400 p-2">{{ $barang->kode }}</td>
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Height')->field_value ?? '-' }}
-                                            </td>
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Widht')->field_value ?? '-' }}
-                                            </td>
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Depth')->field_value ?? '-' }}
-                                            </td>
-
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Net Weight')->field_value ?? '-' }}
-                                            </td>
-
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Door Thickness')->field_value ?? '-' }}
-                                            </td>
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Body Thickness')->field_value ?? '-' }}
-                                            </td>
-
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Base Plate Thickness')->field_value ?? '-' }}
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                            </tbody>
-                        </table>
+                                        @if (Str::contains(strtolower($barang->name), 'box'))
+                                            <tr class="{{ $isActive ? 'pulse-bg text-white' : 'bg-white hover:bg-gray-50' }} transition-colors">
+                                                <td class="border border-gray-300 p-3 font-bold">{{ $barang->kode }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Height')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Widht')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Depth')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Net Weight')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Door Thickness')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Body Thickness')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Base Plate Thickness')->field_value ?? '-' }}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 @elseif (Str::contains(strtoupper($product->kode), 'VHB'))
-                    <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-center font-extrabold text-white">
-                        Kenapa Harus Box Panel Vinsa?
-                    </p>
-                    <div class="flex justify-center">
-                        <img src="/image/bvin.png" alt="" width="600px">
-                    </div>
-                    <div class="flex justify-center w-full md:p-4 md:mb-10">
-                        <table
-                            class="table-auto scale-[0.65] md:scale-[1] border-collapse border w-full border-gray-400 text-sm text-center">
-                            <thead class="bg-[#066C5F] text-white">
-                                <tr>
-                                    <th rowspan="3" class="border border-gray-400 p-2 text-xl">Tipe</th>
-                                    <th colspan="3" class="border border-gray-400 p-2 text-lg">Ukuran (mm)</th>
-                                    <th rowspan="3" class="border border-gray-400 p-2 text-xl">Berat (Kg)</th>
-                                    <th colspan="2" rowspan="2" class="border border-gray-400 p-2 text-lg">
-                                        Ketebalan (mm)</th>
-                                    <th rowspan="3" class="border border-gray-400 p-2 text-xl">Base Plate</th>
-                                </tr>
-                                <tr>
-                                    <th rowspan="2" class="border border-gray-400 p-2">Tinggi</th>
-                                    <th rowspan="2" class="border border-gray-400 p-2">Lebar</th>
-                                    <th rowspan="2" class="border border-gray-400 p-2">Tebal</th>
-                                </tr>
-                                <tr>
-                                    <th class="border border-gray-400 p-2">Pintu</th>
-                                    <th class="border border-gray-400 p-2">Bodi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($barangs as $barang)
-                                    @php
-                                        $isActive = isset($kodeAktif) && strtoupper($barang->kode) === $kodeAktif;
-                                    @endphp
+                    <div id="comparison" class="tab-content hidden">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Why Choose Vinsa Box Panel?</h2>
+                        <div class="mb-8 flex justify-center">
+                            <img src="/image/bvin.png" alt="Vinsa Features" class="max-w-full h-auto rounded-2xl shadow-lg">
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-lg">
+                                <thead class="bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] text-white">
+                                    <tr>
+                                        <th rowspan="3" class="border border-gray-300 p-4 text-lg font-bold">Type</th>
+                                        <th colspan="3" class="border border-gray-300 p-4 text-lg font-bold">Dimensions (mm)</th>
+                                        <th rowspan="3" class="border border-gray-300 p-4 text-lg font-bold">Weight (Kg)</th>
+                                        <th colspan="2" rowspan="2" class="border border-gray-300 p-4 text-lg font-bold">Thickness (mm)</th>
+                                        <th rowspan="3" class="border border-gray-300 p-4 text-lg font-bold">Base Plate</th>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="2" class="border border-gray-300 p-3">Height</th>
+                                        <th rowspan="2" class="border border-gray-300 p-3">Width</th>
+                                        <th rowspan="2" class="border border-gray-300 p-3">Depth</th>
+                                    </tr>
+                                    <tr>
+                                        <th class="border border-gray-300 p-3">Door</th>
+                                        <th class="border border-gray-300 p-3">Body</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($barangs as $barang)
+                                        @php
+                                            $isActive = isset($kodeAktif) && strtoupper($barang->kode) === $kodeAktif;
+                                        @endphp
 
-                                    @if (Str::contains(strtolower($barang->name), 'box'))
-                                        <tr class="{{ $isActive ? 'pulse-bg' : 'bg-white hover:bg-gray-100' }}">
-                                            <td class="border border-gray-400 p-2">{{ $barang->kode }}</td>
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Height')->field_value ?? '-' }}
-                                            </td>
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Widht')->field_value ?? '-' }}
-                                            </td>
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Depth')->field_value ?? '-' }}
-                                            </td>
-
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Net Weight')->field_value ?? '-' }}
-                                            </td>
-
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Door Thickness')->field_value ?? '-' }}
-                                            </td>
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Body Thickness')->field_value ?? '-' }}
-                                            </td>
-
-                                            <td class="border border-gray-400 p-2">
-                                                {{ $barang->attributes->firstWhere('field_name', 'Base Plate Thickness')->field_value ?? '-' }}
-                                            </td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                            </tbody>
-                        </table>
+                                        @if (Str::contains(strtolower($barang->name), 'box'))
+                                            <tr class="{{ $isActive ? 'pulse-bg text-white' : 'bg-white hover:bg-gray-50' }} transition-colors">
+                                                <td class="border border-gray-300 p-3 font-bold">{{ $barang->kode }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Height')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Widht')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Depth')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Net Weight')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Door Thickness')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Body Thickness')->field_value ?? '-' }}</td>
+                                                <td class="border border-gray-300 p-3">{{ $barang->attributes->firstWhere('field_name', 'Base Plate Thickness')->field_value ?? '-' }}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 @elseif (Str::contains(strtoupper($product->name), 'WAREHOUSE'))
-                    <p class="text-2xl sm:text-4xl lg:text-5xl mb-2 text-center font-extrabold text-white">
-                        Kenapa Harus Warehouse Rack Vinsa?
-                    </p>
-                    <div class="flex justify-center">
-                        <img src="/image/9.png" alt="" width="900px">
-                    </div>
-                    <div class="flex justify-center">
-                        <img src="/image/10.png" alt="" width="900px">
+                    <div id="comparison" class="tab-content hidden">
+                        <h2 class="text-2xl font-bold text-gray-900 mb-6">Why Choose Vinsa Warehouse Rack?</h2>
+                        <div class="space-y-6">
+                            <img src="/image/9.png" alt="Warehouse Rack Features" class="w-full h-auto rounded-2xl shadow-lg">
+                            <img src="/image/10.png" alt="Warehouse Rack Specifications" class="w-full h-auto rounded-2xl shadow-lg">
+                        </div>
                     </div>
                 @endif
-                <div class="flex flex-col md:flex md:flex-row md:justify-between">
-                    <div class="text-center lg:text-left px-4">
-                        <p class="text-3xl sm:text-5xl lg:text-6xl font-bold text-white">
-                            Tertarik Dengan Ini?
-                        </p>
-                        <p class="text-xl sm:text-3xl lg:text-4xl font-bold text-white">
-                            Kontak Kami
-                        </p>
+            </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="p-12 lg:p-12">
+                <div class="max-w-[93%] mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+                    <div class="text-center md:text-left">
+                        <h3 class="text-3xl lg:text-4xl font-black text-white mb-2">Interested in This Product?</h3>
+                        <p class="text-xl text-white/90">Contact us for pricing and availability</p>
                     </div>
-                    <div class="flex justify-center mt-5 md:mt-0 md:flex md:items-center">
-                        <a href="https://wa.me/6281335715398"
-                            class="border-[3px] bg-[#ffffff54] rounded-full p-3 text-lg font-bold text-[#000] hover:bg-[#00000054] hover:text-white transition-all duration-150">
-                            Kontak Kami ↗
-                        </a>
-                    </div>
+                    <a href="https://wa.me/6281335715398" class="inline-flex items-center gap-3 bg-white text-[#066c5f] px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-100 hover:scale-105 transition-all shadow-xl">
+                        Contact Us
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
+
     <x-footer></x-footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active', 'border-[#066c5f]');
+            });
+
+            // Show selected tab content
+            document.getElementById(tabName).classList.remove('hidden');
+
+            // Add active class to clicked button
+            event.target.classList.add('active', 'border-[#066c5f]');
+        }
+
+        document.getElementById('menu-toggle')?.addEventListener('click', function() {
+            document.getElementById('mobile-menu')?.classList.toggle('hidden');
+        });
+    </script>
 </body>
 
 </html>
-<script>
-    document.getElementById('menu-toggle').addEventListener('click', function() {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-</script>

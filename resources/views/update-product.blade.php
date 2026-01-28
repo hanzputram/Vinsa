@@ -86,6 +86,29 @@
                     class="w-40 border-[1.5px] mt-2 rounded-lg">
             </div>
 
+            <div class="max-w-[90%]">
+                <label class="block text-gray-600 mb-1">Datasheet (PDF)</label>
+                <input type="file" name="datasheet" accept="application/pdf"
+                    class="block w-full file:cursor-pointer text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
+                file:rounded-lg file:border-0
+                file:text-sm file:font-semibold
+                file:bg-green-50 file:text-green-700
+                hover:file:bg-green-100">
+                <p class="text-gray-500 text-sm">*Biarkan kosong jika tidak ingin mengganti datasheet</p>
+                @if($product->datasheet)
+                    <div class="mt-2 flex items-center gap-2">
+                        <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M7 2a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V8l-6-6H7zm7 7V3.5L18.5 9H14z"/>
+                        </svg>
+                        <a href="{{ asset('storage/' . $product->datasheet) }}" target="_blank" class="text-blue-600 hover:underline font-semibold">
+                            Lihat Datasheet Saat Ini
+                        </a>
+                    </div>
+                @else
+                    <p class="text-gray-400 text-sm mt-1">Belum ada datasheet.</p>
+                @endif
+            </div>
+
             <div class="max-w-[90%]" id="specifications">
                 <label class="block text-gray-600 mb-1">Spesifikasi</label>
                 @foreach ($product->attributes as $index => $attribute)
@@ -126,7 +149,7 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Gagal Mengupdate Produk',
-                html: `{!! implode('<br>', $errors->all()) !!}`,
+                html: <?php echo json_encode(implode('<br>', $errors->all())); ?>,
                 confirmButtonColor: '#d33',
             });
         </script>

@@ -18,6 +18,7 @@ class Product extends Model
         'kode',
         'category_id',
         'image',
+        'datasheet',
         'custom_input',
         'meta_title',
         'meta_description',

@@ -46,7 +46,7 @@
         .outfit {
             font-family: "Outfit", sans-serif;
             font-optical-sizing: auto;
-            font-weight: <weight>;
+            font-weight: 400;
             font-style: normal;
         }
 
@@ -64,6 +64,7 @@
             background-image: linear-gradient(90deg, #9e9e9e 25%, #ffffff 50%, #9e9e9e 75%);
             background-size: 200% auto;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: shine 6s linear infinite;
         }
@@ -1484,7 +1485,7 @@
                 <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
                 <p class="mb-[1.5rem]">Get the best products and the best quality at affordable prices and you will be
                     able to feel the advantages yourself.</p>
-                <a href="https://wa.me/6281335715398"
+                <a href="{{ route('contact-us') }}"
                     class="border-2 bg-white underline hover:text-blue-500 text-[#000] px-6 py-2 rounded-full transition-all duration-300 ease-in-out shadow border-[#fff]">Contact
                     Us →</a>
             </div>
@@ -1742,7 +1743,7 @@
     });
 </script>
 <script>
-    const categoryIds = @json($categories->pluck('id'));
+    const categoryIds = <?php echo json_encode($categories->pluck('id')); ?>;
 
     categoryIds.forEach(id => {
         new Swiper(`.mySwiper-${id}`, {
