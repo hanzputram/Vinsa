@@ -22,45 +22,105 @@
             </div>
         </div>
 
-        <!-- Product Grid -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-            @foreach ($products as $product)
-                <div x-show="{{ json_encode(Str::lower($product->name . ' ' . $product->kode . ' ' . ($product->custom_input ?? ''))) }}.includes(search.toLowerCase())"
-                    x-transition:enter="transition ease-out duration-300"
-                    x-transition:enter-start="opacity-0 scale-95"
-                    x-transition:enter-end="opacity-100 scale-100"
-                    class="group relative bg-white rounded-[2rem] border border-slate-200 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 overflow-hidden">
-                    
-                    <!-- Image Container -->
-                    <div class="aspect-[8/11] relative overflow-hidden bg-slate-100 border-b border-slate-100">
-                        <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" 
-                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-gradient-to-t from-slate-900/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        
-                        <!-- Quick Actions Overlay -->
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 scale-90 group-hover:scale-100">
-                            <a href="/products/{{ $product->id }}/edit" class="px-6 py-2.5 bg-white text-slate-900 rounded-xl font-bold shadow-2xl hover:bg-[#066c5f] hover:text-white transition-colors">Edit Product</a>
-                        </div>
-                    </div>
+        <!-- Horizontal List Container -->
+        <div class="space-y-4">
+            <!-- List Header (Desktop Only) -->
+            <div class="hidden lg:grid grid-cols-12 gap-4 px-8 py-4 text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">
+                <div class="col-span-1">Preview</div>
+                <div class="col-span-4">Product Details</div>
+                <div class="col-span-2">Category</div>
+                <div class="col-span-2">Ref Code</div>
+                <div class="col-span-2">Attributes</div>
+                <div class="col-span-1 text-right">Action</div>
+            </div>
 
-                    <!-- Content -->
-                    <div class="p-6">
-                        <p class="text-[10px] font-black text-[#F77F1E] uppercase tracking-[0.2em] mb-2">{{ $product->category->name ?? 'Product' }}</p>
-                        <h2 class="text-lg font-black text-slate-900 leading-tight mb-4 group-hover:text-[#066c5f] transition-colors">
-                            {{ $product->name }}
-                        </h2>
+            @foreach ($products as $product)
+                @php
+                    $details = json_decode($product->custom_input, true);
+                    $isJson = (json_last_error() == JSON_ERROR_NONE && is_array($details));
+                    
+                    $detailString = '';
+                    if ($isJson) {
+                        $detailString = implode(' ', array_keys($details)) . ' ' . implode(' ', array_values($details));
+                    } else {
+                        $detailString = $product->custom_input ?? '';
+                    }
+                    $searchContext = Str::lower($product->name . ' ' . $product->kode . ' ' . $detailString . ' ' . ($product->category->name ?? ''));
+                @endphp
+                <div x-show="{{ json_encode($searchContext) }}.includes(search.toLowerCase())"
+                    x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 translate-y-4"
+                    x-transition:enter-end="opacity-100 translate-y-0"
+                    class="group relative bg-white rounded-[1.5rem] border border-slate-200 shadow-sm hover:shadow-xl hover:border-[#066c5f]/20 transition-all duration-300 overflow-hidden">
+                    
+                    <div class="lg:grid grid-cols-12 items-center gap-4 p-4 lg:px-8">
                         
-                        <div class="flex items-center justify-between border-t border-slate-50 pt-4">
-                            <div>
-                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest pl-1">Reference Code</p>
-                                <p class="text-sm font-black text-slate-900 uppercase">#{{ $product->kode }}</p>
+                        <!-- Thumbnail (Mobile + Desktop) -->
+                        <div class="col-span-1 mb-4 lg:mb-0">
+                            <div class="w-16 h-16 rounded-xl bg-slate-100 overflow-hidden border border-slate-100 group-hover:scale-105 transition-transform">
+                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" 
+                                     class="w-full h-full object-cover">
                             </div>
-                            @if($product->custom_input)
-                                <div class="text-right">
-                                    <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Detail</p>
-                                    <p class="text-xs font-bold text-slate-600 truncate max-w-[100px]">{{ $product->custom_input }}</p>
-                                </div>
-                            @endif
+                        </div>
+
+                        <!-- Info (Mobile + Desktop) -->
+                        <div class="col-span-4 mb-4 lg:mb-0">
+                            <h2 class="text-sm font-black text-slate-900 leading-tight group-hover:text-[#066c5f] transition-colors truncate">
+                                {{ $product->name }}
+                            </h2>
+                            <p class="text-[10px] font-bold text-slate-400 mt-0.5 truncate">{{ Str::limit($product->description, 60) }}</p>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="col-span-2 mb-4 lg:mb-0 relative">
+                            <span class="lg:hidden text-[8px] font-black text-slate-400 uppercase block mb-1">Category</span>
+                            <span class="inline-flex px-3 py-1 bg-slate-50 text-[#F77F1E] rounded-full text-[9px] font-black uppercase tracking-widest border border-slate-100">
+                                {{ $product->category->name ?? 'Product' }}
+                            </span>
+                        </div>
+
+                        <!-- Ref Code -->
+                        <div class="col-span-2 mb-4 lg:mb-0">
+                            <span class="lg:hidden text-[8px] font-black text-slate-400 uppercase block mb-1">Ref Code</span>
+                            <p class="text-xs font-black text-slate-900 font-mono tracking-tight">#{{ $product->kode }}</p>
+                        </div>
+
+                        <!-- Dynamic Attributes / Decoded JSON -->
+                        <div class="col-span-2 mb-6 lg:mb-0">
+                            <span class="lg:hidden text-[8px] font-black text-slate-400 uppercase block mb-2">Attributes</span>
+                            <div class="flex flex-wrap gap-1.5">
+                                @if($product->custom_input)
+                                    @if($isJson)
+                                        @foreach($details as $key => $value)
+                                            @if(!empty($value))
+                                                @php
+                                                    $label = match(strtolower($key)) {
+                                                        'tipe' => 'Type',
+                                                        'series' => 'Series',
+                                                        default => str_replace('_', ' ', $key)
+                                                    };
+                                                @endphp
+                                                <div class="flex items-center gap-1.5 bg-slate-50 px-2 py-0.5 rounded-md border border-slate-100">
+                                                    <span class="text-[7px] font-black text-slate-400 uppercase">{{ $label }}:</span>
+                                                    <span class="text-[9px] font-bold text-slate-700 truncate max-w-[80px] capitalize">{{ $value }}</span>
+                                                </div>
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        <p class="text-[10px] font-bold text-slate-500 italic">{{ Str::limit($product->custom_input, 30) }}</p>
+                                    @endif
+                                @else
+                                    <span class="text-[10px] text-slate-300 italic">No extra data</span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="col-span-1 text-right">
+                            <a href="/products/{{ $product->id }}/edit" 
+                               class="inline-flex items-center justify-center w-full lg:w-auto px-6 py-2 bg-slate-900 text-white rounded-xl font-black text-[10px] uppercase tracking-widest hover:bg-[#066c5f] transition-all shadow-sm">
+                                Edit
+                            </a>
                         </div>
                     </div>
                 </div>

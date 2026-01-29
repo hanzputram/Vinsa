@@ -201,7 +201,6 @@
                         <div class="bg-slate-900 rounded-[2rem] p-8 shadow-2xl shadow-slate-200">
                              <button type="submit"
                                 class="w-full py-4 bg-[#066c5f] text-white rounded-2xl font-black uppercase tracking-[0.2em] shadow-lg shadow-[#066c5f]/30 hover:bg-[#F77F1E] hover:text-white transition-all duration-300 flex items-center justify-center gap-3">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
                                 Save Changes
                             </button>
                         </div>
