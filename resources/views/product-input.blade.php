@@ -1,124 +1,194 @@
 <x-app-layout>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data"
-        class="max-w-screen min-h-[calc(100vh-66px)] p-6 bg-white space-y-4">
-        @csrf
-        <h2 class="text-2xl font-semibold text-gray-700 mb-4">Tambah Produk</h2>
-
-        <select name="category_id" id="categorySelect" required class="form-select rounded-xl">
-            <option value=""> Pilih Kategori </option>
-            @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->name }}</option>
-            @endforeach
-        </select>
-
-        <div id="category-extra" class="max-w-[90%] space-y-2 mt-2"></div>
-
-        <div class="max-w-[90%]">
-            <label class="block text-gray-600 mb-1">Nama Produk</label>
-            <input type="text" name="name" required value="{{ old('name') }}"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-
-        <div class="max-w-[90%]">
-            <label class="block text-gray-600 mb-1">Kode Produk</label>
-            <input type="text" name="kode" required value="{{ old('kode') }}"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
-        </div>
-
-        <div class="max-w-[90%]">
-            <label class="block text-gray-600 mb-1">Gambar</label>
-            <p class="text-sm text-red-500 mt-1">*Wajib menggunakan dimensi 8:11</p>
-            <input type="file" name="image" required
-                class="block w-full file:cursor-pointer text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
-                file:rounded-lg file:border-0
-                file:text-sm file:font-semibold
-                file:bg-blue-50 file:text-blue-700
-                hover:file:bg-blue-100">
-        </div>
-
-        <div class="max-w-[90%]">
-            <label class="block text-gray-600 mb-1">Datasheet (PDF)</label>
-            <input type="file" name="datasheet" accept="application/pdf"
-                class="block w-full file:cursor-pointer text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
-                file:rounded-lg file:border-0
-                file:text-sm file:font-semibold
-                file:bg-green-50 file:text-green-700
-                hover:file:bg-green-100">
-        </div>
-
-        <h2 class="border-t-[1.5px] py-4 text-2xl font-semibold text-gray-700 mb-4">Tambah Spesifikasi</h2>
-
-        <div class="max-w-[90%]">
-            <label class="block text-gray-600 mb-1">Deskripsi</label>
-            <textarea name="description" rows="3"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="Deskripsi Produk">{{ old('description') }}</textarea>
-        </div>
-
-        {{-- ✅ SEO META INPUT (DITAMBAHKAN) --}}
-        <div class="max-w-[90%]">
-            <label class="block text-gray-600 mb-1">Meta Title</label>
-            <p class="text-sm text-gray-500 mt-1">Disarankan 50–60 karakter. Kosongkan jika ingin otomatis dari Nama
-                Produk.</p>
-            <input type="text" name="meta_title" value="{{ old('meta_title') }}"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                maxlength="255" placeholder="Contoh: Jual MCB Schneider iC60H 2A 1P | ATS Tekno">
-        </div>
-
-        <div class="max-w-[90%]">
-            <label class="block text-gray-600 mb-1">Meta Description</label>
-            <p class="text-sm text-gray-500 mt-1">Disarankan 140–155 karakter. Kosongkan jika ingin otomatis dari
-                Deskripsi.</p>
-            <textarea name="meta_description" rows="3"
-                class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-                maxlength="500" placeholder="Ringkasan singkat produk untuk hasil pencarian Google...">{{ old('meta_description') }}</textarea>
-        </div>
-        {{-- ✅ END SEO META INPUT --}}
-
-        <div class="max-w-[90%]" id="specifications">
-            <label class="block text-gray-600 mb-1">Spesifikasi</label>
-            <div class="flex gap-2 mb-2 spec-row">
-                <input type="text" name="specifications[0][field_name]" placeholder="Nama Spesifikasi"
-                    value="{{ old('specifications.0.field_name') }}"
-                    class="w-1/2 px-4 py-2 border border-gray-300 rounded-lg spec-field">
-                <input type="text" name="specifications[0][field_value]" placeholder="mm, Kg, °C ..."
-                    value="{{ old('specifications.0.field_value') }}"
-                    class="w-1/2 px-4 py-2 border border-gray-300 rounded-lg spec-value">
+    <div class="p-6 md:p-10">
+        <div class="max-w-5xl mx-auto">
+            
+            <!-- Page Header -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+                <div>
+                    <h1 class="text-3xl font-black text-slate-900 tracking-tight">Create Product</h1>
+                    <p class="text-slate-500 font-medium">Add a new item to the Vinsa catalog.</p>
+                </div>
+                <a href="{{ route('products.edit') }}" class="group inline-flex items-center gap-2 text-slate-500 hover:text-[#066c5f] font-bold transition-all">
+                    <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                    Back to Catalog
+                </a>
             </div>
+
+            <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data" class="space-y-10">
+                @csrf
+                
+                <!-- Main Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                    
+                    <!-- Left Column: Primary Info -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                            <h2 class="text-xl font-black text-slate-900 flex items-center gap-3">
+                                <span class="w-8 h-8 bg-[#066c5f]/10 text-[#066c5f] rounded-lg flex items-center justify-center text-sm font-bold">01</span>
+                                General Information
+                            </h2>
+
+                            <div class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Product Name</label>
+                                        <input type="text" name="name" required value="{{ old('name') }}"
+                                            class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold"
+                                            placeholder="e.g. MCB Schneider iC60H">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Product Code</label>
+                                        <input type="text" name="kode" required value="{{ old('kode') }}"
+                                            class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold uppercase"
+                                            placeholder="e.g. VHB-200">
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Description</label>
+                                    <textarea name="description" rows="5"
+                                        class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold"
+                                        placeholder="Detailed description of the product...">{{ old('description') }}</textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Specifications Section -->
+                        <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-xl font-black text-slate-900 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center text-sm font-bold">02</span>
+                                    Specifications
+                                </h2>
+                                <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Add as many as needed</p>
+                            </div>
+
+                            <div id="specifications" class="space-y-3">
+                                <div class="flex gap-3 spec-row animate-in fade-in slide-in-from-top-2 duration-300">
+                                    <input type="text" name="specifications[0][field_name]" placeholder="Property (e.g. Voltage)"
+                                        value="{{ old('specifications.0.field_name') }}"
+                                        class="w-1/2 px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-emerald-500 font-semibold spec-field">
+                                    <input type="text" name="specifications[0][field_value]" placeholder="Value (e.g. 230V)"
+                                        value="{{ old('specifications.0.field_value') }}"
+                                        class="w-1/2 px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-emerald-500 font-semibold spec-value">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- SEO Metadata -->
+                        <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                            <h2 class="text-xl font-black text-slate-900 flex items-center gap-3">
+                                <span class="w-8 h-8 bg-[#F77F1E]/10 text-[#F77F1E] rounded-lg flex items-center justify-center text-sm font-bold">03</span>
+                                SEO Optimization
+                            </h2>
+
+                            <div class="space-y-4">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-end pl-1">
+                                        <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Meta Title</label>
+                                        <span class="text-[10px] font-black text-slate-400 tracking-widest uppercase"><span id="meta_title_count">0</span> / 255</span>
+                                    </div>
+                                    <input type="text" name="meta_title" id="meta_title" value="{{ old('meta_title') }}"
+                                        class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#F77F1E] font-semibold"
+                                        maxlength="255" placeholder="MCB Schneider iC60H | Buy at Vinsa Electric">
+                                </div>
+
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-end pl-1">
+                                        <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Meta Description</label>
+                                        <span class="text-[10px] font-black text-slate-400 tracking-widest uppercase"><span id="meta_desc_count">0</span> / 500</span>
+                                    </div>
+                                    <textarea name="meta_description" id="meta_description" rows="4"
+                                        class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#F77F1E] font-semibold"
+                                        maxlength="500" placeholder="Meta description for search engine results..."></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Media & Category -->
+                    <div class="space-y-6">
+                        <!-- Category Section -->
+                        <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                            <h2 class="text-xl font-black text-slate-900">Classification</h2>
+                            <div class="space-y-4">
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Category</label>
+                                    <select name="category_id" id="categorySelect" required 
+                                            class="w-full px-5 py-3 bg-slate-100 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-bold appearance-none">
+                                        <option value="">Choose a category</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div id="category-extra" class="space-y-4 animate-in fade-in duration-300"></div>
+                            </div>
+                        </div>
+
+                        <!-- Media Section -->
+                        <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                            <h2 class="text-xl font-black text-slate-900">Media Assets</h2>
+                            
+                            <div class="space-y-6">
+                                <div class="space-y-4">
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">Product Image</label>
+                                    <div class="relative group">
+                                        <div class="absolute inset-0 bg-[#066c5f] rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none"></div>
+                                        <input type="file" name="image" required
+                                            class="block w-full text-xs text-slate-500 
+                                            file:mr-4 file:py-3 file:px-6 
+                                            file:rounded-xl file:border-0 
+                                            file:text-xs file:font-black file:uppercase file:tracking-widest
+                                            file:bg-[#066c5f] file:text-white 
+                                            hover:file:bg-[#088a7a]
+                                            transition-all cursor-pointer">
+                                    </div>
+                                    <p class="text-[10px] font-black text-rose-500 uppercase tracking-widest">* Required: 8:11 Ratio</p>
+                                </div>
+
+                                <div class="border-t border-slate-100 pt-6 space-y-4">
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">Technical Datasheet</label>
+                                    
+                                    <div class="space-y-4">
+                                        <div class="space-y-2">
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Option A: Upload PDF</p>
+                                            <input type="file" name="datasheet" accept="application/pdf"
+                                                class="block w-full text-xs text-slate-500 
+                                                file:mr-4 file:py-2 file:px-4 
+                                                file:rounded-xl file:border-0 
+                                                file:text-[10px] file:font-bold file:uppercase file:tracking-widest
+                                                file:bg-slate-900 file:text-white 
+                                                hover:file:bg-slate-800
+                                                cursor-pointer">
+                                        </div>
+                                        <div class="space-y-2">
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Option B: External Link</p>
+                                            <input type="url" name="datasheet_link" value="{{ old('datasheet_link') }}"
+                                                placeholder="https://example.com/spec.pdf"
+                                                class="w-full px-4 py-2.5 bg-slate-50 border-0 rounded-xl focus:ring-2 focus:ring-slate-900 text-xs font-bold">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Section -->
+                        <div class="bg-slate-900 rounded-[2rem] p-8 shadow-2xl shadow-slate-200">
+                             <button type="submit"
+                                class="w-full py-4 bg-[#066c5f] text-white rounded-2xl font-black uppercase tracking-[0.2em] shadow-lg shadow-[#066c5f]/30 hover:bg-[#F77F1E] hover:text-white transition-all duration-300 flex items-center justify-center gap-3">
+                                Create Product
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
+    </div>
 
-        <div class="">
-            <button type="submit"
-                class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200">
-                Tambah Produk
-            </button>
-        </div>
-    </form>
-
-    @if ($errors->any())
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal Menyimpan Produk',
-                html: <?php echo json_encode(implode('<br>', $errors->all())); ?>,
-                confirmButtonColor: '#3085d6',
-            });
-        </script>
-    @endif
-
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil!',
-                text: '{{ session('success') }}',
-                confirmButtonColor: '#3085d6',
-            });
-        </script>
-    @endif
-
+    <!-- Scripts remain same but updated identifiers -->
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let specContainer = document.getElementById('specifications');
@@ -126,12 +196,12 @@
             function addNewSpecificationRow() {
                 let specCount = document.querySelectorAll('.spec-row').length;
                 let div = document.createElement('div');
-                div.classList.add('flex', 'gap-2', 'mb-2', 'spec-row');
+                div.classList.add('flex', 'gap-3', 'spec-row', 'animate-in', 'fade-in', 'slide-in-from-top-2', 'duration-300');
                 div.innerHTML = `
-                    <input type="text" name="specifications[${specCount}][field_name]" placeholder="Nama Spesifikasi"
-                        class="w-1/2 px-4 py-2 border border-gray-300 rounded-lg spec-field">
-                    <input type="text" name="specifications[${specCount}][field_value]" placeholder="mm, Kg, °C ..."
-                        class="w-1/2 px-4 py-2 border border-gray-300 rounded-lg spec-value">
+                    <input type="text" name="specifications[${specCount}][field_name]" placeholder="Property"
+                        class="w-1/2 px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-emerald-500 font-semibold spec-field">
+                    <input type="text" name="specifications[${specCount}][field_value]" placeholder="Value"
+                        class="w-1/2 px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-emerald-500 font-semibold spec-value">
                 `;
                 specContainer.appendChild(div);
                 addListenerToLastInput();
@@ -157,6 +227,30 @@
 
             addListenerToLastInput();
 
+            // Meta character counter logic
+            const metaTitle = document.getElementById('meta_title');
+            const metaTitleCount = document.getElementById('meta_title_count');
+            const metaDesc = document.getElementById('meta_description');
+            const metaDescCount = document.getElementById('meta_desc_count');
+
+            if (metaTitle && metaTitleCount) {
+                const updateMetaTitle = () => {
+                    metaTitleCount.textContent = metaTitle.value.length;
+                    metaTitleCount.classList.toggle('text-[#066c5f]', metaTitle.value.length >= 50 && metaTitle.value.length <= 60);
+                };
+                metaTitle.addEventListener('input', updateMetaTitle);
+                updateMetaTitle();
+            }
+
+            if (metaDesc && metaDescCount) {
+                const updateMetaDesc = () => {
+                    metaDescCount.textContent = metaDesc.value.length;
+                    metaDescCount.classList.toggle('text-[#066c5f]', metaDesc.value.length >= 140 && metaDesc.value.length <= 155);
+                };
+                metaDesc.addEventListener('input', updateMetaDesc);
+                updateMetaDesc();
+            }
+
             const categorySelect = document.getElementById('categorySelect');
             const extraContainer = document.getElementById('category-extra');
 
@@ -164,178 +258,58 @@
                 const selectedCategory = this.options[this.selectedIndex].text.toLowerCase().trim();
                 extraContainer.innerHTML = '';
 
+                // Extra Fields with Modern Styling
+                const fieldWrap = (label, input) => `
+                    <div class="space-y-2 animate-in fade-in slide-in-from-top-2">
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">${label}</label>
+                        ${input}
+                    </div>
+                `;
+
+                const selectStyled = (name, options) => `
+                    <select name="${name}" class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-bold">
+                        ${options.map(opt => `<option value="${opt}">${opt}</option>`).join('')}
+                    </select>
+                `;
+
+                const inputStyled = (name, placeholder) => `
+                    <input type="text" name="${name}" placeholder="${placeholder}" class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold">
+                `;
+
                 if (selectedCategory === 'cable tray') {
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">U & C Series</label>
-                        <select name="uc_series"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg">
-                            <option value="U Series">U Series</option>
-                            <option value="C Series">C Series</option>
-                        </select>
-                    `;
-                } else if (selectedCategory === 'push button') {
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Push Button</label>
-                        <input type="text" name="push_button_type"
-                            class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe push button">
-
-                        <label class="block text-gray-600">Series</label>
-                        <select name="push_button_series"
-                            class="w-full px-4 py-2 border rounded-lg">
-                            <option value="">Pilih Series</option>
-                            <option value="KB 5 Series">KB 5 Series</option>
-                            <option value="KB 2 Series">KB 2 Series</option>
-                        </select>
-                    `;
-                } else if (selectedCategory === 'illuminated push button') {
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Push Button</label>
-                        <input type="text" name="push_button_type"
-                            class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe push button">
-
-                        <label class="block text-gray-600">Series</label>
-                        <select name="push_button_series"
-                            class="w-full px-4 py-2 border rounded-lg">
-                            <option value="">Pilih Series</option>
-                            <option value="KB 5 Series">KB 5 Series</option>
-                            <option value="KB 2 Series">KB 2 Series</option>
-                        </select>
-                    `;
-                } else if (selectedCategory === 'emergency push button') {
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Push Button</label>
-                        <input type="text" name="push_button_type"
-                            class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe push button">
-
-                        <label class="block text-gray-600">Series</label>
-                        <select name="push_button_series"
-                            class="w-full px-4 py-2 border rounded-lg">
-                            <option value="">Pilih Series</option>
-                            <option value="KB 5 Series">KB 5 Series</option>
-                            <option value="KB 2 Series">KB 2 Series</option>
-                        </select>
-                    `;
+                    extraContainer.innerHTML = fieldWrap('U & C Series', selectStyled('uc_series', ['U Series', 'C Series']));
+                } else if (selectedCategory.includes('push button')) {
+                    extraContainer.innerHTML = 
+                        fieldWrap('Type', inputStyled('push_button_type', 'Enter type...')) +
+                        fieldWrap('Series', selectStyled('push_button_series', ['KB 2 Series', 'KB 5 Series']));
                 } else if (selectedCategory === 'selector switch') {
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Selector Switch</label>
-                        <input type="text" name="selector_switch_type"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                            placeholder="Masukkan tipe selector switch">
-                            <label class="block text-gray-600">Series</label>
-                        <select name="selector_switch_series
-                        "
-                            class="w-full px-4 py-2 border rounded-lg">
-                            <option value="">Pilih Series</option>
-                            <option value="KB 5 Series">KB 5 Series</option>
-                            <option value="KB 2 Series">KB 2 Series</option>
-                        </select>
-                    `;
+                    extraContainer.innerHTML = 
+                        fieldWrap('Type', inputStyled('selector_switch_type', 'Enter type...')) +
+                        fieldWrap('Series', selectStyled('selector_switch_series', ['KB 2 Series', 'KB 5 Series']));
                 } else if (selectedCategory === 'terminal block') {
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Terminal Block</label>
-                        <input type="text" name="terminal_block_type"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                            placeholder="Masukkan tipe selector switch">
-                            <label class="block text-gray-600">Series</label>
-                        <select name="terminal_block_series"
-                            class="w-full px-4 py-2 border rounded-lg">
-                            <option value="">Pilih Series</option>
-                            <option value="Terminal Strip">Terminal Strip</option>
-                            <option value="Terminal Block TB">Terminal Block TB</option>
-                            <option value="Terminal Block TBC">Terminal Block TBC</option>
-                            <option value="Terminal Block TBR">Terminal Block TBR</option>
-                            <option value="Terminal Block TUK">Terminal Block TUK</option>
-                            <option value="Terminal Block TUSLKG">Terminal Block TUSLKG</option>
-                            <option value="Terminal Block KLUS">Terminal Block KLUS</option>
-                        </select>
-                    `;
+                    extraContainer.innerHTML = 
+                        fieldWrap('Type', inputStyled('terminal_block_type', 'Enter type...')) +
+                        fieldWrap('Series', selectStyled('terminal_block_series', ['Terminal Strip', 'Terminal Block TB', 'Terminal Block TBC', 'Terminal Block TBR', 'Terminal Block TUK', 'Terminal Block TUSLKG', 'Terminal Block KLUS']));
                 } else if (selectedCategory === 'cable lug') {
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Cable Lug</label>
-                        <input type="text" name="cable_lug_type"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                            placeholder="Masukkan tipe Cable Lug">
-                            <label class="block text-gray-600">Series</label>
-                        <select name="cable_lug_series"
-                            class="w-full px-4 py-2 border rounded-lg">
-                            <option value="">Pilih Series</option>
-                            <option value="SC Cable Lug">SC Cable Lug</option>
-                            <option value="SV Cable Lug">SV Cable Lug</option>
-                            <option value="RV Cable Lug">RV Cable Lug</option>
-                            <option value="PTV Cable Lug">PTV Cable Lug</option>
-                            <option value="DBV Cable Lug">DBV Cable Lug</option>
-                        </select>
-                    `;
+                    extraContainer.innerHTML = 
+                        fieldWrap('Type', inputStyled('cable_lug_type', 'Enter type...')) +
+                        fieldWrap('Series', selectStyled('cable_lug_series', ['SC Cable Lug', 'SV Cable Lug', 'RV Cable Lug', 'PTV Cable Lug', 'DBV Cable Lug']));
                 } else if (selectedCategory === 'mccb') {
-                    extraContainer.innerHTML = `
-                            <label class="block text-gray-600">Series</label>
-                        <select name="mccb_series"
-                            class="w-full px-4 py-2 border rounded-lg">
-                            <option value="">Pilih Series</option>
-                            <option value="M12B 25kA">M12B 25kA</option>
-                            <option value="M16F 35kA">M16F 35kA</option>
-                            <option value="M25F 35kA">M25F 35kA</option>
-                            <option value="M40F 35kA">M40F 35kA</option>
-                            <option value="M63F 35kA">M63F 35kA</option>
-                            <option value="M80F 35kA">M80F 35kA</option>
-                        </select>
-                    `;
+                    extraContainer.innerHTML = fieldWrap('Series', selectStyled('mccb_series', ['M12B 25kA', 'M16F 35kA', 'M25F 35kA', 'M40F 35kA', 'M63F 35kA', 'M80F 35kA']));
                 } else if (selectedCategory === 'mccb accessories') {
-                    extraContainer.innerHTML = `
-                    <label class="block text-gray-600">Tipe MCCB Accessories</label>
-                        <input type="text" name="mccb_accessories_type"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                            placeholder="Masukkan tipe Mccb Accessories">
-                            <label class="block text-gray-600">Series</label>
-                        <select name="mccb_accessories_series"
-                            class="w-full px-4 py-2 border rounded-lg">
-                            <option value="">Pilih Series</option>
-                            <option value="MAA Alarm Contact">MAA Alarm Contact</option>
-                            <option value="MAS Shunt Release">MAS Shunt Release</option>
-                            <option value="MAAUX Auxiliary Contact">MAAUX Auxiliary Contact</option>
-                            <option value="MAUVT Under Voltage">MAUVT Under Voltage</option>
-                            <option value="MARH Extended Rotary Handle">MARH Extended Rotary Handle</option>
-                        </select>
-                    `;
+                    extraContainer.innerHTML = 
+                        fieldWrap('Type', inputStyled('mccb_accessories_type', 'Enter type...')) +
+                        fieldWrap('Series', selectStyled('mccb_accessories_series', ['MAA Alarm Contact', 'MAS Shunt Release', 'MAAUX Auxiliary Contact', 'MAUVT Under Voltage', 'MARH Extended Rotary Handle']));
                 } else if (selectedCategory === 'contactor accessories') {
-                    extraContainer.innerHTML = `
-                    <label class="block text-gray-600">Tipe Contactor Accessories</label>
-                        <input type="text" name="contactor_accessories_type"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                            placeholder="Masukkan tipe Contactor Accessories">
-                            <label class="block text-gray-600">Series</label>
-                        <select name="contactor_accessories_series"
-                            class="w-full px-4 py-2 border rounded-lg">
-                            <option value="">Pilih Series</option>
-                            <option value="Coil Contactor">Coil Contactor</option>
-                            <option value="Auxiliary Contact">Auxiliary Contact</option>
-                            <option value="Time Delay">Time Delay</option>
-                            <option value="Thermal Overload relay">Thermal Overload relay</option>
-                        </select>
-                    `;
+                    extraContainer.innerHTML = 
+                        fieldWrap('Type', inputStyled('contactor_accessories_type', 'Enter type...')) +
+                        fieldWrap('Series', selectStyled('contactor_accessories_series', ['Coil Contactor', 'Auxiliary Contact', 'Time Delay', 'Thermal Overload relay']));
                 } else if (selectedCategory === 'pilot lamp') {
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Pilot Lamp</label>
-                        <input type="text" name="pilot_lamp_type"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                            placeholder="Masukkan tipe pilot lamp">
-                    `;
+                    extraContainer.innerHTML = fieldWrap('Type', inputStyled('pilot_lamp_type', 'Enter type...'));
                 } else if (selectedCategory === 'accessories') {
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Accessories</label>
-                        <input type="text" name="accessories_type"
-                            class="w-full px-4 py-2 border border-gray-300 rounded-lg"
-                            placeholder="Masukkan tipe accessories">
-                    `;
+                    extraContainer.innerHTML = fieldWrap('Type', inputStyled('accessories_type', 'Enter type...'));
                 }
             });
         });
-
-        console.log('selectedCategory:', selectedCategory);
-
     </script>
-    
 </x-app-layout>

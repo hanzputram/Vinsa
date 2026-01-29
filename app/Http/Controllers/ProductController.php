@@ -88,6 +88,7 @@ public function show($param)
             'specifications.*.field_name' => 'nullable|string',
             'specifications.*.field_value' => 'nullable|string',
             'datasheet' => 'nullable|file|mimes:pdf|max:10240', // max 10MB PDF
+            'datasheet_link' => 'nullable|url',
         ]);
 
         foreach ($request->specifications ?? [] as $index => $spec) {
@@ -192,6 +193,8 @@ public function show($param)
         $datasheetPath = null;
         if ($request->hasFile('datasheet')) {
             $datasheetPath = $request->file('datasheet')->store('datasheets', 'public');
+        } elseif ($request->datasheet_link) {
+            $datasheetPath = $request->datasheet_link;
         }
 
         $product = Product::create([
@@ -275,6 +278,7 @@ public function show($param)
             'specifications.*.field_name' => 'required_with:specifications.*.field_value',
             'specifications.*.field_value' => 'required_with:specifications.*.field_name',
             'datasheet' => 'nullable|file|mimes:pdf|max:10240', // max 10MB PDF
+            'datasheet_link' => 'nullable|url',
         ]);
 
         $product = Product::findOrFail($id);
@@ -345,11 +349,19 @@ public function show($param)
 
         if ($request->hasFile('datasheet')) {
             $newDatasheetPath = $request->file('datasheet')->store('datasheets', 'public');
-            if ($product->datasheet && Storage::disk('public')->exists($product->datasheet)) {
+            if ($product->datasheet && !filter_var($product->datasheet, FILTER_VALIDATE_URL) && Storage::disk('public')->exists($product->datasheet)) {
                 Storage::disk('public')->delete($product->datasheet);
             }
             $product->datasheet = $newDatasheetPath;
-            $historyChanges[] = 'datasheet produk telah diperbarui';
+            $historyChanges[] = 'datasheet produk telah diperbarui (file)';
+        } elseif ($request->has('datasheet_link')) {
+            if ($product->datasheet !== $request->datasheet_link) {
+                if ($product->datasheet && !filter_var($product->datasheet, FILTER_VALIDATE_URL) && Storage::disk('public')->exists($product->datasheet)) {
+                    Storage::disk('public')->delete($product->datasheet);
+                }
+                $product->datasheet = $request->datasheet_link;
+                $historyChanges[] = 'datasheet produk telah diperbarui (link)';
+            }
         }
 
         $product->save();

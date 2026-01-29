@@ -21,8 +21,8 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
 
-        // Replace with the recipient email address
-        $recipientEmail = 'hanzputra06@gmail.com';
+        // Recipient email address from .env
+        $recipientEmail = env('MAIL_TO_ADDRESS', 'hanzputra06@gmail.com');
 
         try {
             Mail::to($recipientEmail)->send(new ContactMail($validated));

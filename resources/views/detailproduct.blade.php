@@ -215,7 +215,7 @@
                         </a>
 
                         @if($product->datasheet)
-                        <a href="{{ asset('storage/' . $product->datasheet) }}" target="_blank" class="inline-flex items-center justify-center gap-3 bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full text-lg font-bold hover:bg-white/30 hover:shadow-2xl hover:scale-105 transition-all">
+                        <a href="{{ filter_var($product->datasheet, FILTER_VALIDATE_URL) ? $product->datasheet : asset('storage/' . $product->datasheet) }}" target="_blank" class="inline-flex items-center justify-center gap-3 bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-4 rounded-full text-lg font-bold hover:bg-white/30 hover:shadow-2xl hover:scale-105 transition-all">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                             </svg>
@@ -240,7 +240,7 @@
                         </button>
                         @if (Str::contains(strtoupper($product->kode), 'VHB') || Str::contains(strtoupper($product->name), 'WAREHOUSE'))
                             <button onclick="switchTab('comparison')" class="tab-button px-6 py-3 font-bold text-gray-100 hover:text-[#066c5f] border-b-2 border-transparent hover:border-[#066c5f] transition-all whitespace-nowrap">
-                                Product Comparison
+                                Product Details
                             </button>
                         @endif
                     </div>

@@ -1,25 +1,11 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-
 <head>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-55S5JHNQLG"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-55S5JHNQLG');
-    </script>
-    <script src="https://analytics.ahrefs.com/analytics.js" data-key="+dmea0Inq5AGGqalX2/X/w" async></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Vinsa') }} | Admin Portal</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,54 +14,59 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
     <style>
-        .outfit {
-            font-family: "Outfit", sans-serif;
-            font-optical-sizing: auto;
-            font-style: normal;
+        .outfit { font-family: "Outfit", sans-serif; }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
     </style>
 </head>
+<body class="outfit antialiased bg-[#f8fafc] text-slate-900">
+    <div class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+        <!-- Abstract Background Orbs -->
+        <div class="absolute top-0 -left-4 w-72 h-72 bg-[#066c5f]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-0 -right-4 w-72 h-72 bg-[#F77F1E]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div class="absolute -bottom-8 left-20 w-72 h-72 bg-[#066c5f]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-4000"></div>
 
-<body class="outfit font-sans text-gray-900 bg-gray-100 antialiased">
-    <div
-        class="min-h-screen mx-auto max-w-[90%] lg:flex-row flex flex-col lg:justify-between items-center pt-6 sm:pt-0">
-
-        <div class="w-full flex justify-between lg:flex-row flex-col lg:justify-between lg:items-end">
-            <div class="flex h-full lg:w-1/2 flex-col items-center justify-center">
-                <div class="flex justify-center w-full">
-                    <x-application-logo class="w-[120px] h-auto" />
+        <div class="max-w-5xl w-full grid grid-cols-1 lg:grid-cols-2 bg-white rounded-[2.5rem] shadow-2xl shadow-slate-200 overflow-hidden relative z-10 border border-slate-100">
+            <!-- Form Section -->
+            <div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center">
+                <div class="mb-10 text-center lg:text-left">
+                    <div class="inline-flex items-center justify-center mb-6">
+                        <img src="/image/vinsalg.png" alt="Vinsa Logo" class="h-16 w-auto">
+                    </div>
                 </div>
-                <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden rounded-[1rem]">
-                    {{ $slot }}
+
+                {{ $slot }}
+                
+                <div class="mt-10 pt-8 border-t border-slate-50 text-center">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">&copy; {{ date('Y') }} Vinsa Electric. All Rights Reserved.</p>
                 </div>
             </div>
 
-
-            <div class="relative bg-center bg-cover w-full lg:w-1/2 h-[300px] lg:h-[440px] my-10 lg:my-0 rounded-[1rem] after:rounded-[1rem] after:w-full after:h-full after:content-[''] after:absolute after:top-0 after:left-0 after:bg-[#00000079]"
-                style="background-image:url('/image/81.jpg')">
-
-                <div class="w-full h-full">
-                    <!-- Mobile: Centered welcome text -->
-                    <div class="flex lg:hidden w-full h-full items-center justify-center">
-                        <p class="z-10 text-white text-4xl font-extrabold text-center">
-                            Welcome<br>To<br>Vinsa
+            <!-- Image/Welcome Section -->
+            <div class="hidden lg:block relative overflow-hidden bg-slate-900">
+                <img src="/image/81.jpg" alt="Vinsa Hero" class="absolute inset-0 w-full h-full object-cover opacity-60 scale-110">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/20 to-transparent"></div>
+                
+                <div class="absolute inset-0 p-16 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-1 bg-[#F77F1E] rounded-full"></div>
+                        <p class="text-4xl font-black text-white leading-tight italic">
+                            Elevating<br>Electronic<br>Commerce.
                         </p>
                     </div>
-
-                    <!-- Desktop: Top left and bottom right text -->
-                    <div class="hidden lg:flex flex-col justify-between w-full h-full">
-                        <p class="relative z-[10] font-extrabold text-4xl text-white text-left p-[2rem]">
-                            Welcome<br>To<br>Vinsa
-                        </p>
-                        <p class="relative z-[10] font-extrabold text-4xl text-white text-right p-[2rem]">
-                            Welcome<br>To<br>Vinsa
-                        </p>
+                    
+                    <div class="bg-white/10 backdrop-blur-md border border-white/20 p-8 rounded-[2rem]">
+                        <p class="text-white text-lg font-bold mb-1">Empowering the Grid.</p>
+                        <p class="text-slate-300 text-sm leading-relaxed">System administrator portal for managing product listings, marketing banners, and editorial content.</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-
 </html>

@@ -1,180 +1,225 @@
 <x-app-layout>
-    {{-- SweetAlert2 CDN --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <div class="max-w-screen min-h-[calc(100vh-66px)] bg-white p-6">
-        <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data"
-            class="space-y-4">
-            @csrf
-            @method('PUT')
-
-            <a href="javascript:window.history.back()" class="group">
-                <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none" xmlns="http://www.w3.org/2000/svg"
-                    class="stroke-black group-hover:stroke-gray-400 transition-colors duration-300">
-                    <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round"></path>
-                </svg>
-            </a>
-
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Edit Produk</h2>
-
-            <select name="category_id" id="categorySelect" required class="form-select rounded-xl">
-                <option value="" disabled
-                    {{ old('category_id', $product->category_id ?? '') == '' ? 'selected' : '' }}>Pilih Kategori
-                </option>
-                @foreach ($categories as $category)
-                    <option value="{{ $category->id }}"
-                        {{ old('category_id', $product->category_id ?? '') == $category->id ? 'selected' : '' }}
-                        data-name="{{ strtolower($category->name) }}">
-                        {{ $category->name }}
-                    </option>
-                @endforeach
-            </select>
-
-            <input type="hidden" name="custom_input" id="custom_input"
-                value="{{ old('custom_input', $product->custom_input ?? '') }}">
-
-            <div id="category-extra" class="max-w-[90%] space-y-2 mt-2"></div>
-
-            <div class="max-w-[90%]">
-                <label class="block text-gray-600 mb-1">Nama Produk</label>
-                <input type="text" name="name" value="{{ old('name', $product->name) }}" required
-                    class="w-full px-4 py-2 border rounded-lg">
+    <div class="p-6 md:p-10">
+        <div class="max-w-5xl mx-auto">
+            
+            <!-- Page Header -->
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
+                <div>
+                    <h1 class="text-3xl font-black text-slate-900 tracking-tight">Edit Product</h1>
+                    <p class="text-slate-500 font-medium">Updating details for <span class="text-[#066c5f]">#{{ $product->kode }}</span></p>
+                </div>
+                <div class="flex items-center gap-4">
+                    <form id="delete-product-form-{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}" method="POST" class="inline-block">
+                        @csrf
+                        @method('DELETE')
+                        <button type="button" class="delete-product-btn px-6 py-2.5 bg-rose-50 text-rose-600 rounded-xl font-bold text-sm hover:bg-rose-600 hover:text-white transition-all border border-rose-100" data-id="{{ $product->id }}">
+                            Delete Product
+                        </button>
+                    </form>
+                    <a href="{{ route('products.edit') }}" class="group inline-flex items-center gap-2 text-slate-500 hover:text-[#066c5f] font-bold transition-all">
+                        <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
+                        Back
+                    </a>
+                </div>
             </div>
 
-            <div class="max-w-[90%]">
-                <label class="block text-gray-600 mb-1">Referensi Kode Product</label>
-                <input type="text" name="kode" value="{{ old('kode', $product->kode) }}" required
-                    class="w-full px-4 py-2 border rounded-lg">
-            </div>
+            <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data" class="space-y-10">
+                @csrf
+                @method('PUT')
+                
+                <!-- Main Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+                    
+                    <!-- Left Column: Primary Info -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                            <h2 class="text-xl font-black text-slate-900 flex items-center gap-3">
+                                <span class="w-8 h-8 bg-[#066c5f]/10 text-[#066c5f] rounded-lg flex items-center justify-center text-sm font-bold">01</span>
+                                General Information
+                            </h2>
 
-            <div class="max-w-[90%]">
-                <label class="block text-gray-600 mb-1">Deskripsi</label>
-                <textarea name="description" rows="3" class="w-full px-4 py-2 border rounded-lg">{{ old('description', $product->description) }}</textarea>
-            </div>
+                            <div class="space-y-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div class="space-y-2">
+                                        <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Product Name</label>
+                                        <input type="text" name="name" required value="{{ old('name', $product->name) }}"
+                                            class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold"
+                                            placeholder="e.g. MCB Schneider iC60H">
+                                    </div>
+                                    <div class="space-y-2">
+                                        <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Product Code</label>
+                                        <input type="text" name="kode" required value="{{ old('kode', $product->kode) }}"
+                                            class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold uppercase"
+                                            placeholder="e.g. VHB-200">
+                                    </div>
+                                </div>
 
-            {{-- ✅ SEO META INPUT (DITAMBAHKAN) --}}
-            <div class="max-w-[90%]">
-                <label class="block text-gray-600 mb-1">Meta Title</label>
-                <p class="text-sm text-gray-500 mt-1">Disarankan 50–60 karakter. Kosongkan jika ingin otomatis dari Nama
-                    Produk.</p>
-                <input type="text" name="meta_title" value="{{ old('meta_title', $product->meta_title ?? '') }}"
-                    class="w-full px-4 py-2 border rounded-lg" maxlength="255"
-                    placeholder="Contoh: Jual MCB Schneider iC60H 2A 1P | ATS Tekno">
-            </div>
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Description</label>
+                                    <textarea name="description" rows="5"
+                                        class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold"
+                                        placeholder="Detailed description of the product...">{{ old('description', $product->description) }}</textarea>
+                                </div>
+                            </div>
+                        </div>
 
-            <div class="max-w-[90%]">
-                <label class="block text-gray-600 mb-1">Meta Description</label>
-                <p class="text-sm text-gray-500 mt-1">Disarankan 140–155 karakter. Kosongkan jika ingin otomatis dari
-                    Deskripsi.</p>
-                <textarea name="meta_description" rows="3" class="w-full px-4 py-2 border rounded-lg" maxlength="500"
-                    placeholder="Ringkasan singkat produk untuk hasil pencarian Google...">{{ old('meta_description', $product->meta_description ?? '') }}</textarea>
-            </div>
-            {{-- ✅ END SEO META INPUT --}}
+                        <!-- Specifications Section -->
+                        <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-xl font-black text-slate-900 flex items-center gap-3">
+                                    <span class="w-8 h-8 bg-emerald-50 text-emerald-600 rounded-lg flex items-center justify-center text-sm font-bold">02</span>
+                                    Specifications
+                                </h2>
+                                <button type="button" onclick="addSpecification()" class="px-4 py-2 bg-emerald-50 text-emerald-600 rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-emerald-600 hover:text-white transition-all">Add Field</button>
+                            </div>
 
-            <div class="max-w-[90%]">
-                <label class="block text-gray-600 mb-1">Gambar</label>
-                <input type="file" name="image"
-                    class="block w-full file:cursor-pointer text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
-                file:rounded-lg file:border-0
-                file:text-sm file:font-semibold
-                file:bg-blue-50 file:text-blue-700
-                hover:file:bg-blue-100">
-                <p class="text-gray-500 text-sm">*Biarkan kosong jika tidak ingin mengganti gambar</p>
-                <p class="text-red-500 text-sm">*Wajib menggunakan ratio 8:11</p>
-                <img src="{{ asset('storage/' . $product->image) }}" alt="Product Image"
-                    class="w-40 border-[1.5px] mt-2 rounded-lg">
-            </div>
+                            <div id="specifications" class="space-y-3">
+                                @foreach ($product->attributes as $index => $attribute)
+                                    <div class="flex gap-3 spec-row animate-in fade-in slide-in-from-top-2 duration-300">
+                                        <input type="text" name="specifications[{{ $index }}][field_name]" placeholder="Property"
+                                            value="{{ old("specifications.$index.field_name", $attribute->field_name) }}"
+                                            class="w-1/2 px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-emerald-500 font-semibold">
+                                        <input type="text" name="specifications[{{ $index }}][field_value]" placeholder="Value"
+                                            value="{{ old("specifications.$index.field_value", $attribute->field_value) }}"
+                                            class="w-1/2 px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-emerald-500 font-semibold">
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
 
-            <div class="max-w-[90%]">
-                <label class="block text-gray-600 mb-1">Datasheet (PDF)</label>
-                <input type="file" name="datasheet" accept="application/pdf"
-                    class="block w-full file:cursor-pointer text-sm text-gray-500 file:mr-4 file:py-2 file:px-4
-                file:rounded-lg file:border-0
-                file:text-sm file:font-semibold
-                file:bg-green-50 file:text-green-700
-                hover:file:bg-green-100">
-                <p class="text-gray-500 text-sm">*Biarkan kosong jika tidak ingin mengganti datasheet</p>
-                @if($product->datasheet)
-                    <div class="mt-2 flex items-center gap-2">
-                        <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M7 2a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V8l-6-6H7zm7 7V3.5L18.5 9H14z"/>
-                        </svg>
-                        <a href="{{ asset('storage/' . $product->datasheet) }}" target="_blank" class="text-blue-600 hover:underline font-semibold">
-                            Lihat Datasheet Saat Ini
-                        </a>
+                        <!-- SEO Metadata -->
+                        <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                            <h2 class="text-xl font-black text-slate-900 flex items-center gap-3">
+                                <span class="w-8 h-8 bg-[#F77F1E]/10 text-[#F77F1E] rounded-lg flex items-center justify-center text-sm font-bold">03</span>
+                                SEO Optimization
+                            </h2>
+
+                            <div class="space-y-4">
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-end pl-1">
+                                        <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Meta Title</label>
+                                        <span class="text-[10px] font-black text-slate-400 tracking-widest uppercase"><span id="meta_title_count">0</span> / 255</span>
+                                    </div>
+                                    <input type="text" name="meta_title" id="meta_title" value="{{ old('meta_title', $product->meta_title ?? '') }}"
+                                        class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#F77F1E] font-semibold"
+                                        maxlength="255" placeholder="MCB Schneider iC60H | Buy at Vinsa Electric">
+                                </div>
+
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-end pl-1">
+                                        <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Meta Description</label>
+                                        <span class="text-[10px] font-black text-slate-400 tracking-widest uppercase"><span id="meta_desc_count">0</span> / 500</span>
+                                    </div>
+                                    <textarea name="meta_description" id="meta_description" rows="4"
+                                        class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#F77F1E] font-semibold"
+                                        maxlength="500" placeholder="Meta description for search engine results...">{{ old('meta_description', $product->meta_description ?? '') }}</textarea>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                @else
-                    <p class="text-gray-400 text-sm mt-1">Belum ada datasheet.</p>
-                @endif
-            </div>
 
-            <div class="max-w-[90%]" id="specifications">
-                <label class="block text-gray-600 mb-1">Spesifikasi</label>
-                @foreach ($product->attributes as $index => $attribute)
-                    <div class="flex gap-2 mb-2">
-                        <input type="text" name="specifications[{{ $index }}][field_name]"
-                            value="{{ old("specifications.$index.field_name", $attribute->field_name) }}"
-                            placeholder="Nama Spesifikasi" class="w-1/2 px-4 py-2 border rounded-lg">
-                        <input type="text" name="specifications[{{ $index }}][field_value]"
-                            value="{{ old("specifications.$index.field_value", $attribute->field_value) }}"
-                            placeholder="mm, Kg, °C ..." class="w-1/2 px-4 py-2 border rounded-lg">
+                    <!-- Right Column: Media & Category -->
+                    <div class="space-y-6">
+                        <!-- Category Section -->
+                        <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                            <h2 class="text-xl font-black text-slate-900">Classification</h2>
+                            <div class="space-y-4">
+                                <div class="space-y-2">
+                                    <label class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Category</label>
+                                    <select name="category_id" id="categorySelect" required 
+                                            class="w-full px-5 py-3 bg-slate-100 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-bold appearance-none">
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }} data-name="{{ strtolower($category->name) }}">
+                                                {{ $category->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <input type="hidden" name="custom_input" id="custom_input" value="{{ old('custom_input', $product->custom_input ?? '') }}">
+                                <div id="category-extra" class="space-y-4 animate-in fade-in duration-300"></div>
+                            </div>
+                        </div>
+
+                        <!-- Media Section -->
+                        <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                            <h2 class="text-xl font-black text-slate-900">Media Assets</h2>
+                            
+                            <div class="space-y-6">
+                                <div class="space-y-4">
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">Update Image</label>
+                                    <div class="relative group aspect-[8/11] bg-slate-100 rounded-[2rem] overflow-hidden border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-4">
+                                        <img src="{{ asset('storage/' . $product->image) }}" alt="Current" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-500">
+                                        <div class="relative z-10 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl flex flex-col items-center gap-2">
+                                            <svg class="w-8 h-8 text-[#066c5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                            <span class="text-[10px] font-black text-slate-900 uppercase tracking-widest">Change Photo</span>
+                                        </div>
+                                        <input type="file" name="image" class="absolute inset-0 opacity-0 cursor-pointer">
+                                    </div>
+                                    <p class="text-[10px] font-black text-rose-500 uppercase tracking-widest">* Ratio 8:11 Only</p>
+                                </div>
+
+                                <div class="border-t border-slate-100 pt-6 space-y-4">
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">Update Datasheet</label>
+                                    
+                                    <div class="space-y-4">
+                                        <div class="space-y-2">
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Option A: Upload PDF</p>
+                                            <input type="file" name="datasheet" accept="application/pdf"
+                                                class="block w-full text-xs text-slate-500 
+                                                file:mr-4 file:py-2 file:px-4 
+                                                file:rounded-xl file:border-0 
+                                                file:text-[10px] file:font-bold file:uppercase file:tracking-widest
+                                                file:bg-slate-900 file:text-white 
+                                                hover:file:bg-slate-800
+                                                cursor-pointer">
+                                        </div>
+                                        <div class="space-y-2">
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Option B: External Link</p>
+                                            <input type="url" name="datasheet_link" value="{{ old('datasheet_link', (filter_var($product->datasheet, FILTER_VALIDATE_URL) ? $product->datasheet : '')) }}"
+                                                placeholder="https://example.com/spec.pdf"
+                                                class="w-full px-4 py-2.5 bg-slate-50 border-0 rounded-xl focus:ring-2 focus:ring-slate-900 text-xs font-bold">
+                                        </div>
+                                    </div>
+
+                                    @if($product->datasheet)
+                                        <a href="{{ filter_var($product->datasheet, FILTER_VALIDATE_URL) ? $product->datasheet : asset('storage/' . $product->datasheet) }}" target="_blank"
+                                           class="mt-4 flex items-center gap-3 p-4 bg-emerald-50 rounded-2xl border border-emerald-100 group hover:bg-emerald-600 transition-all duration-300">
+                                            <svg class="w-8 h-8 text-emerald-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>
+                                            <div>
+                                                <p class="text-[10px] font-black text-emerald-600 group-hover:text-emerald-100 uppercase tracking-widest mb-1">Current File</p>
+                                                <p class="text-xs font-bold text-slate-900 group-hover:text-white truncate max-w-[150px]">{{ basename($product->datasheet) }}</p>
+                                            </div>
+                                        </a>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Action Section -->
+                        <div class="bg-slate-900 rounded-[2rem] p-8 shadow-2xl shadow-slate-200">
+                             <button type="submit"
+                                class="w-full py-4 bg-[#066c5f] text-white rounded-2xl font-black uppercase tracking-[0.2em] shadow-lg shadow-[#066c5f]/30 hover:bg-[#F77F1E] hover:text-white transition-all duration-300 flex items-center justify-center gap-3">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" /></svg>
+                                Save Changes
+                            </button>
+                        </div>
                     </div>
-                @endforeach
-            </div>
-
-            <button type="button" onclick="addSpecification()"
-                class="bg-green-500 text-white px-4 py-2 rounded-lg">Tambah Spesifikasi</button>
-
-            <div>
-                <button type="submit" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Update
-                    Produk</button>
-            </div>
-        </form>
-
-        <form id="delete-product-form-{{ $product->id }}" action="{{ route('products.destroy', $product->id) }}"
-            method="POST" class="inline-block mt-4">
-            @csrf
-            @method('DELETE')
-            <button type="button"
-                class="delete-product-btn px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
-                data-id="{{ $product->id }}">
-                Hapus Produk
-            </button>
-        </form>
+                </div>
+            </form>
+        </div>
     </div>
-
-    @if ($errors->any())
-        <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Gagal Mengupdate Produk',
-                html: <?php echo json_encode(implode('<br>', $errors->all())); ?>,
-                confirmButtonColor: '#d33',
-            });
-        </script>
-    @endif
-
-    @if (session('success'))
-        <script>
-            Swal.fire({
-                icon: 'success',
-                title: 'Berhasil!',
-                text: '{{ session('success') }}',
-                confirmButtonColor: '#3085d6',
-            });
-        </script>
-    @endif
 
     <script>
         let specCount = {{ count($product->attributes) }};
 
         function addSpecification() {
             let div = document.createElement('div');
-            div.classList.add('flex', 'gap-2', 'mb-2');
+            div.classList.add('flex', 'gap-3', 'spec-row', 'animate-in', 'fade-in', 'slide-in-from-top-2', 'duration-300');
             div.innerHTML = `
-                <input type="text" name="specifications[${specCount}][field_name]" placeholder="Nama Spesifikasi" class="w-1/2 px-4 py-2 border rounded-lg">
-                <input type="text" name="specifications[${specCount}][field_value]" placeholder="mm, Kg, °C ..." class="w-1/2 px-4 py-2 border rounded-lg">
+                <input type="text" name="specifications[${specCount}][field_name]" placeholder="Property" class="w-1/2 px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-emerald-500 font-semibold">
+                <input type="text" name="specifications[${specCount}][field_value]" placeholder="Value" class="w-1/2 px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-emerald-500 font-semibold">
             `;
             document.getElementById('specifications').appendChild(div);
             specCount++;
@@ -183,292 +228,93 @@
         function updatePushButtonValue(tipe = null, series = null) {
             const hidden = document.getElementById('custom_input');
             let current = {};
-            try {
-                current = JSON.parse(hidden.value || '{}');
-            } catch {}
+            try { current = JSON.parse(hidden.value || '{}'); } catch {}
             if (tipe !== null) current.tipe = tipe;
             if (series !== null) current.series = series;
             hidden.value = JSON.stringify(current);
         }
 
         document.addEventListener("DOMContentLoaded", function() {
+            // Meta character counter logic
+            const metaTitle = document.getElementById('meta_title');
+            const metaTitleCount = document.getElementById('meta_title_count');
+            const metaDesc = document.getElementById('meta_description');
+            const metaDescCount = document.getElementById('meta_desc_count');
+
+            if (metaTitle && metaTitleCount) {
+                const updateMetaTitle = () => {
+                    metaTitleCount.textContent = metaTitle.value.length;
+                    metaTitleCount.classList.toggle('text-[#066c5f]', metaTitle.value.length >= 50 && metaTitle.value.length <= 60);
+                };
+                metaTitle.addEventListener('input', updateMetaTitle);
+                updateMetaTitle();
+            }
+
+            if (metaDesc && metaDescCount) {
+                const updateMetaDesc = () => {
+                    metaDescCount.textContent = metaDesc.value.length;
+                    metaDescCount.classList.toggle('text-[#066c5f]', metaDesc.value.length >= 140 && metaDesc.value.length <= 155);
+                };
+                metaDesc.addEventListener('input', updateMetaDesc);
+                updateMetaDesc();
+            }
+
             const categorySelect = document.getElementById('categorySelect');
             const extraContainer = document.getElementById('category-extra');
             const customInputHidden = document.getElementById('custom_input');
             const oldCategory = categorySelect.options[categorySelect.selectedIndex]?.dataset?.name;
             let oldValue = customInputHidden.value;
             let parsedOld = {};
-
-            try {
-                parsedOld = JSON.parse(oldValue);
-            } catch {}
+            try { parsedOld = JSON.parse(oldValue); } catch {}
 
             function renderExtraFields(category) {
                 extraContainer.innerHTML = '';
+                const fieldWrap = (label, input) => `
+                    <div class="space-y-2 animate-in fade-in slide-in-from-top-2">
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">${label}</label>
+                        ${input}
+                    </div>
+                `;
+
                 if (category === 'cable tray') {
-                    const selected = oldValue === 'U Series' ? 'U Series' : (oldValue === 'C Series' ? 'C Series' :
-                        '');
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">U & C Series</label>
-                        <select class="w-full px-4 py-2 border rounded-lg"
+                    const selected = oldValue === 'U Series' ? 'U Series' : (oldValue === 'C Series' ? 'C Series' : '');
+                    extraContainer.innerHTML = fieldWrap('U & C Series', `
+                        <select class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-bold"
                             onchange="document.getElementById('custom_input').value = this.value;">
                             <option value="">Pilih Series</option>
                             <option value="U Series" ${selected === 'U Series' ? 'selected' : ''}>U Series</option>
                             <option value="C Series" ${selected === 'C Series' ? 'selected' : ''}>C Series</option>
                         </select>
-                    `;
+                    `);
                     customInputHidden.value = selected;
-                } else if (category === 'push button') {
+                } else if (category.includes('push button') || category === 'selector switch') {
                     const tipe = parsedOld.tipe || '';
                     const series = parsedOld.series || '';
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Push Button</label>
-                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe push button"
-                            value="${tipe}"
-                            oninput="updatePushButtonValue(this.value, null)">
-                        
-                        <label class="block text-gray-600">Series</label>
-                        <select class="w-full px-4 py-2 border rounded-lg"
-                            onchange="updatePushButtonValue(null, this.value)">
-                            <option value="">Pilih Series</option>
-                            <option value="KB 5 Series" ${series === 'KB 5 Series' ? 'selected' : ''}>KB 5 Series</option>
-                            <option value="KB 2 Series" ${series === 'KB 2 Series' ? 'selected' : ''}>KB 2 Series</option>
-                        </select>
-                    `;
-                    customInputHidden.value = JSON.stringify({
-                        tipe,
-                        series
-                    });
-                } else if (category === 'illuminated push button') {
-                    const tipe = parsedOld.tipe || '';
-                    const series = parsedOld.series || '';
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Push Button</label>
-                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe push button"
-                            value="${tipe}"
-                            oninput="updatePushButtonValue(this.value, null)">
-                        
-                        <label class="block text-gray-600">Series</label>
-                        <select class="w-full px-4 py-2 border rounded-lg"
-                            onchange="updatePushButtonValue(null, this.value)">
-                            <option value="">Pilih Series</option>
-                            <option value="KB 5 Series" ${series === 'KB 5 Series' ? 'selected' : ''}>KB 5 Series</option>
-                            <option value="KB 2 Series" ${series === 'KB 2 Series' ? 'selected' : ''}>KB 2 Series</option>
-                        </select>
-                    `;
-                    customInputHidden.value = JSON.stringify({
-                        tipe,
-                        series
-                    });
-                } else if (category === 'emergency push button') {
-                    const tipe = parsedOld.tipe || '';
-                    const series = parsedOld.series || '';
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Push Button</label>
-                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe push button"
-                            value="${tipe}"
-                            oninput="updatePushButtonValue(this.value, null)">
-                        
-                        <label class="block text-gray-600">Series</label>
-                        <select class="w-full px-4 py-2 border rounded-lg"
-                            onchange="updatePushButtonValue(null, this.value)">
-                            <option value="">Pilih Series</option>
-                            <option value="KB 5 Series" ${series === 'KB 5 Series' ? 'selected' : ''}>KB 5 Series</option>
-                            <option value="KB 2 Series" ${series === 'KB 2 Series' ? 'selected' : ''}>KB 2 Series</option>
-                        </select>
-                    `;
-                    customInputHidden.value = JSON.stringify({
-                        tipe,
-                        series
-                    });
-                } else if (category === 'illuminated selector switch') {
-                    const tipe = parsedOld.tipe || '';
-                    const series = parsedOld.series || '';
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Selector Switch</label>
-                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe selector switch"
-                            value="${tipe}"
-                            oninput="updatePushButtonValue(this.value, null)">
-                        
-                        <label class="block text-gray-600">Series</label>
-                        <select class="w-full px-4 py-2 border rounded-lg"
-                            onchange="updatePushButtonValue(null, this.value)">
-                            <option value="">Pilih Series</option>
-                            <option value="KB 5 Series" ${series === 'KB 5 Series' ? 'selected' : ''}>KB 5 Series</option>
-                            <option value="KB 2 Series" ${series === 'KB 2 Series' ? 'selected' : ''}>KB 2 Series</option>
-                        </select>
-                    `;
-                    customInputHidden.value = JSON.stringify({
-                        tipe,
-                        series
-                    });
-                } else if (category === 'terminal block') {
-                    const tipe = parsedOld.tipe || '';
-                    const series = parsedOld.series || '';
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Terminal Block</label>
-                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe terminal block"
-                            value="${tipe}"
-                            oninput="updatePushButtonValue(this.value, null)">
-                        
-                        <label class="block text-gray-600">Series</label>
-                        <select class="w-full px-4 py-2 border rounded-lg"
-                            onchange="updatePushButtonValue(null, this.value)">
-                            <option value="">Pilih Series</option>
-                            <option value="Terminal Strip" ${series === 'Terminal Strip' ? 'selected' : ''}>Terminal Strip</option>
-                            <option value="Terminal Block TB" ${series === 'Terminal Block TB' ? 'selected' : ''}>Terminal Block TB</option>
-                            <option value="Terminal Block TBC" ${series === 'Terminal Block TBC' ? 'selected' : ''}>Terminal Block TBC</option>
-                            <option value="Terminal Block TBR" ${series === 'Terminal Block TBR' ? 'selected' : ''}>Terminal Block TBR</option>
-                            <option value="Terminal Block TUK" ${series === 'Terminal Block TUK' ? 'selected' : ''}>Terminal Block TUK</option>
-                            <option value="Terminal Block TUSLKG" ${series === 'Terminal Block TUSLKG' ? 'selected' : ''}>Terminal Block TUSLKG</option>
-                            <option value="Terminal Block KLUS" ${series === 'Terminal Block KLUS' ? 'selected' : ''}>Terminal Block KLUS</option>
-                        </select>
-                    `;
-                    customInputHidden.value = JSON.stringify({
-                        tipe,
-                        series
-                    });
-                } else if (category === 'cable lug') {
-                    const tipe = parsedOld.tipe || '';
-                    const series = parsedOld.series || '';
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Cable Lug</label>
-                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe cable lug"
-                            value="${tipe}"
-                            oninput="updatePushButtonValue(this.value, null)">
-                        
-                        <label class="block text-gray-600">Series</label>
-                        <select class="w-full px-4 py-2 border rounded-lg"
-                            onchange="updatePushButtonValue(null, this.value)">
-                            <option value="">Pilih Series</option>
-                            <option value="SC Cable Lug" ${series === 'SC Cable Lug' ? 'selected' : ''}>SC Cable Lug</option>
-                            <option value="SV Cable Lug" ${series === 'SV Cable Lug' ? 'selected' : ''}>SV Cable Lug</option>
-                            <option value="RV Cable Lug" ${series === 'RV Cable Lug' ? 'selected' : ''}>RV Cable Lug</option>
-                            <option value="PTV Cable Lug" ${series === 'PTV Cable Lug' ? 'selected' : ''}>PTV Cable Lug</option>
-                            <option value="DBV Cable Lug" ${series === 'DBV Cable Lug' ? 'selected' : ''}>DBV Cable Lug</option>
-                        </select>
-                    `;
-                    customInputHidden.value = JSON.stringify({
-                        tipe,
-                        series
-                    });
-                } else if (category === 'contactor accessories') {
-                    const tipe = parsedOld.tipe || '';
-                    const series = parsedOld.series || '';
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe Contactor Accessories</label>
-                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe Contactor Accessories"
-                            value="${tipe}"
-                            oninput="updatePushButtonValue(this.value, null)">
-                        
-                        <label class="block text-gray-600">Series</label>
-                        <select class="w-full px-4 py-2 border rounded-lg"
-                            onchange="updatePushButtonValue(null, this.value)">
-                            <option value="">Pilih Series</option>
-                            <option value="Coil Contactor" ${series === 'Coil Contactor' ? 'selected' : ''}>Coil Contactor</option>
-                            <option value="Auxiliary Contact" ${series === 'Auxiliary Contact' ? 'selected' : ''}>Auxiliary Contact</option>
-                            <option value="Time Delay" ${series === 'Time Delay' ? 'selected' : ''}>Time Delay</option>
-                            <option value="Thermal Overload relay" ${series === 'Thermal Overload relay' ? 'selected' : ''}>Thermal Overload relay</option>
-                        </select>
-                    `;
-                    customInputHidden.value = JSON.stringify({
-                        tipe,
-                        series
-                    });
-                } else if (category === 'mccb') {
-                    const tipe = parsedOld.tipe || '';
-                    const series = parsedOld.series || '';
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe MCCB</label>
-                        
-                        <label class="block text-gray-600">Series</label>
-                        <select class="w-full px-4 py-2 border rounded-lg"
-                            onchange="updatePushButtonValue(null, this.value)">
-                            <option value="">Pilih Series</option>
-                            <option value="M12B 25kA" ${series === 'M12B 25kA' ? 'selected' : ''}>M12B 25kA</option>
-                            <option value="M16F 35kA" ${series === 'M16F 35kA' ? 'selected' : ''}>M16F 35kA</option>
-                            <option value="M25F 35kA" ${series === 'M25F 35kA' ? 'selected' : ''}>M25F 35kA</option>
-                            <option value="M40F 35kA" ${series === 'M40F 35kA' ? 'selected' : ''}>M40F 35kA</option>
-                            <option value="M63F 35kA" ${series === 'M63F 35kA' ? 'selected' : ''}>M63F 35kA</option>
-                            <option value="M80F 35kA" ${series === 'M80F 35kA' ? 'selected' : ''}>M80F 35kA</option>
-                        </select>
-                    `;
-                    customInputHidden.value = JSON.stringify({
-                        series
-                    });
-                } else if (category === 'mccb accessories') {
-                    const tipe = parsedOld.tipe || '';
-                    const series = parsedOld.series || '';
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">Tipe MCCB</label>
-                        <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
-                            placeholder="Masukkan tipe cable lug"
-                            value="${tipe}"
-                            oninput="updatePushButtonValue(this.value, null)">
-                        <label class="block text-gray-600">Series</label>
-                        <select class="w-full px-4 py-2 border rounded-lg"
-                            onchange="updatePushButtonValue(null, this.value)">
-                            <option value="">Pilih Series</option>
-                            <option value="MAA Alarm Contact" ${series === 'MAA Alarm Contact' ? 'selected' : ''}>MAA Alarm Contact</option>
-                            <option value="MAS Shunt Release" ${series === 'MAS Shunt Release' ? 'selected' : ''}>MAS Shunt Release</option>
-                            <option value="MAAUX Auxiliary Contact" ${series === 'MAAUX Auxiliary Contact' ? 'selected' : ''}>MAAUX Auxiliary Contact</option>
-                            <option value="MAUVT Under Voltage" ${series === 'MAUVT Under Voltage' ? 'selected' : ''}>MAUVT Under Voltage</option>
-                            <option value="MARH Extended Rotary Handle" ${series === 'MARH Extended Rotary Handle' ? 'selected' : ''}>MARH Extended Rotary Handle</option>
-                        </select>
-                    `;
-                    customInputHidden.value = JSON.stringify({
-                        series
-                    });
-                } else if (category === 'selector switch') {
-                    const tipe = parsedOld.tipe || '';
-                    const series = parsedOld.series || '';
-                    extraContainer.innerHTML = `
-                            <label class="block text-gray-600">Tipe Selector Switch</label>
-                            <input type="text" class="w-full px-4 py-2 border rounded-lg mb-2"
-                                placeholder="Masukkan tipe selector switch"
-                                value="${tipe}"
-                                oninput="updatePushButtonValue(this.value, null)">
-                            
-                            <label class="block text-gray-600">Series</label>
-                            <select class="w-full px-4 py-2 border rounded-lg"
-                                onchange="updatePushButtonValue(null, this.value)">
+                    extraContainer.innerHTML = 
+                        fieldWrap('Type', `<input type="text" class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold" value="${tipe}" oninput="updatePushButtonValue(this.value, null)">`) +
+                        fieldWrap('Series', `
+                            <select class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-bold" onchange="updatePushButtonValue(null, this.value)">
                                 <option value="">Pilih Series</option>
                                 <option value="KB 5 Series" ${series === 'KB 5 Series' ? 'selected' : ''}>KB 5 Series</option>
                                 <option value="KB 2 Series" ${series === 'KB 2 Series' ? 'selected' : ''}>KB 2 Series</option>
                             </select>
-                        `;
-                    customInputHidden.value = JSON.stringify({
-                        tipe,
-                        series
-                    });
+                        `);
+                } else if (category === 'terminal block') {
+                    const series = parsedOld.series || '';
+                    const options = ['Terminal Strip', 'Terminal Block TB', 'Terminal Block TBC', 'Terminal Block TBR', 'Terminal Block TUK', 'Terminal Block TUSLKG', 'Terminal Block KLUS'];
+                    extraContainer.innerHTML = fieldWrap('Series', `
+                        <select class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-bold" onchange="updatePushButtonValue(null, this.value)">
+                            <option value="">Pilih Series</option>
+                            ${options.map(opt => `<option value="${opt}" ${series === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+                        </select>
+                    `);
                 } else if (['pilot lamp', 'accessories'].includes(category)) {
-                    let label = category === 'pilot lamp' ? 'Tipe Pilot Lamp' : 'Tipe Aksesoris';
-
-                    extraContainer.innerHTML = `
-                        <label class="block text-gray-600">${label}</label>
-                        <input type="text" class="w-full px-4 py-2 border rounded-lg"
-                            placeholder="Masukkan ${label.toLowerCase()}"
-                            value="${oldValue}"
-                            oninput="document.getElementById('custom_input').value = this.value">
-                    `;
+                    extraContainer.innerHTML = fieldWrap('Type', `<input type="text" class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold" value="${oldValue}" oninput="document.getElementById('custom_input').value = this.value">`);
                 }
             }
 
-            if (oldCategory) {
-                renderExtraFields(oldCategory);
-            }
-
-            categorySelect.addEventListener('change', function() {
-                const selected = this.options[this.selectedIndex].dataset.name;
-                renderExtraFields(selected);
-            });
+            if (oldCategory) renderExtraFields(oldCategory);
+            categorySelect.addEventListener('change', function() { renderExtraFields(this.options[this.selectedIndex].dataset.name); });
         });
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -477,21 +323,20 @@
                 button.addEventListener('click', function() {
                     const id = this.getAttribute('data-id');
                     const form = document.getElementById(`delete-product-form-${id}`);
-
                     Swal.fire({
-                        title: 'Yakin ingin menghapus produk ini?',
-                        text: "Data yang dihapus tidak bisa dikembalikan!",
+                        title: 'Are you sure?',
+                        text: "This removal is permanent!",
                         icon: 'warning',
                         showCancelButton: true,
-                        confirmButtonColor: '#d33',
-                        cancelButtonColor: '#6b7280',
-                        confirmButtonText: 'Ya, hapus!',
-                        cancelButtonText: 'Batal'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            form.submit();
+                        confirmButtonColor: '#e11d48',
+                        cancelButtonColor: '#64748b',
+                        confirmButtonText: 'Yes, delete it!',
+                        customClass: {
+                            popup: 'rounded-[2.5rem]',
+                            confirmButton: 'rounded-xl font-bold px-8 py-3',
+                            cancelButton: 'rounded-xl font-bold px-8 py-3'
                         }
-                    });
+                    }).then((result) => { if (result.isConfirmed) form.submit(); });
                 });
             });
         });
