@@ -199,7 +199,7 @@
                             @foreach ($customInput as $key => $value)
                                 <div>
                                     <p class="text-xs font-semibold text-gray-200 uppercase tracking-wider mb-1">{{ __(ucfirst($key)) }}</p>
-                                    <p class="text-lg font-bold text-white">{{ $value }}</p>
+                                    <p class="text-lg font-bold text-white">{{ __($value) }}</p>
                                 </div>
                             @endforeach
                         </div>
@@ -238,7 +238,7 @@
                         <button onclick="switchTab('description')" class="tab-button px-6 py-3 font-bold text-gray-100 hover:text-[#066c5f] border-b-2 border-transparent hover:border-[#066c5f] transition-all whitespace-nowrap">
                             {{ __('Description') }}
                         </button>
-                        @if (Str::contains(strtoupper($product->kode), 'VHB') || Str::contains(strtoupper($product->name), 'WAREHOUSE'))
+                        @if (Str::contains(strtoupper($product->kode), 'VHB') || Str::contains(strtoupper($product->name), 'WAREHOUSE') || $product->optional_image)
                             <button onclick="switchTab('comparison')" class="tab-button px-6 py-3 font-bold text-gray-100 hover:text-[#066c5f] border-b-2 border-transparent hover:border-[#066c5f] transition-all whitespace-nowrap">
                                 {{ __('Product Details') }}
                             </button>
@@ -253,7 +253,7 @@
                         @foreach ($product->attributes as $attribute)
                             <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
                                 <span class="font-semibold text-gray-700">{{ __($attribute->field_name) }} :</span>
-                                <span class="font-bold text-[#066c5f]">{{ $attribute->field_value }}</span>
+                                <span class="font-bold text-[#066c5f]">{{ __($attribute->field_value) }}</span>
                             </div>
                         @endforeach
                     </div>
@@ -379,8 +379,17 @@
                     <div id="comparison" class="tab-content hidden">
                         <h2 class="text-2xl font-bold text-gray-900 mb-6">{{ __('Why Choose Vinsa Warehouse Rack?') }}</h2>
                         <div class="space-y-6">
-                            <img src="/image/9.png" alt="Warehouse Rack Features" class="w-full h-auto rounded-2xl shadow-lg">
-                            <img src="/image/10.png" alt="Warehouse Rack Specifications" class="w-full h-auto rounded-2xl shadow-lg">
+                            <img src="/image/9.png" alt="Warehouse Rack Features" class="w-full h-auto rounded-2xl">
+                            <img src="/image/10.png" alt="Warehouse Rack Specifications" class="w-full h-auto rounded-2xl">
+                        </div>
+                    </div>
+                @elseif ($product->optional_image)
+                    <div id="comparison" class="tab-content hidden">
+                        <div class="flex flex-col items-center">
+                            <h2 class="text-4xl font-bold text-gray-900 mb-8 self-start">{{ __('Product Details') }}</h2>
+                            <div class="w-full max-w-4xl">
+                                <img src="{{ asset('storage/' . $product->optional_image) }}" alt="{{ $product->name }}" class="w-full h-auto rounded-[2rem]">
+                            </div>
                         </div>
                     </div>
                 @endif

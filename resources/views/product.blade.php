@@ -180,7 +180,7 @@
                                     @if ($customInput)
                                         @foreach ($customInput as $key => $value)
                                             <div class="capitalize">{{ __(ucfirst($key)) }}:
-                                                {{ \Illuminate\Support\Str::limit($value, 20) }}</div>
+                                                {{ \Illuminate\Support\Str::limit(__($value), 20) }}</div>
                                         @endforeach
                                     @else
                                         {{ $product->kode }}
@@ -198,7 +198,7 @@
                                         @if ($customInput)
                                             @foreach ($customInput as $key => $value)
                                                 <div class="capitalize">{{ __(ucfirst($key)) }}:
-                                                    {{ \Illuminate\Support\Str::limit($value, 15) }}</div>
+                                                    {{ \Illuminate\Support\Str::limit(__($value), 15) }}</div>
                                             @endforeach
                                             <div>{{ $product->kode }}</div>
                                         @else

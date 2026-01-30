@@ -89,6 +89,7 @@ public function show($param)
             'specifications.*.field_value' => 'nullable|string',
             'datasheet' => 'nullable|file|mimes:pdf|max:10240', // max 10MB PDF
             'datasheet_link' => 'nullable|url',
+            'optional_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120', // max 5MB
         ]);
 
         foreach ($request->specifications ?? [] as $index => $spec) {
@@ -197,6 +198,11 @@ public function show($param)
             $datasheetPath = $request->datasheet_link;
         }
 
+        $optionalImagePath = null;
+        if ($request->hasFile('optional_image')) {
+            $optionalImagePath = $request->file('optional_image')->store('products', 'public');
+        }
+
         $product = Product::create([
             'name' => $request->name,
             'description' => $request->description,
@@ -205,6 +211,7 @@ public function show($param)
             'category_id' => $request->category_id,
             'custom_input' => $customInput,
             'image' => $imagePath,
+            'optional_image' => $optionalImagePath,
             'datasheet' => $datasheetPath,
 
             // ✅ META (langsung simpan, nullable)
@@ -279,6 +286,7 @@ public function show($param)
             'specifications.*.field_value' => 'required_with:specifications.*.field_name',
             'datasheet' => 'nullable|file|mimes:pdf|max:10240', // max 10MB PDF
             'datasheet_link' => 'nullable|url',
+            'optional_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120', // max 5MB
         ]);
 
         $product = Product::findOrFail($id);
@@ -345,6 +353,15 @@ public function show($param)
             }
             $product->image = $newImagePath;
             $historyChanges[] = 'gambar produk telah diperbarui';
+        }
+
+        if ($request->hasFile('optional_image')) {
+            $newOptionalImagePath = $request->file('optional_image')->store('products', 'public');
+            if ($product->optional_image && Storage::disk('public')->exists($product->optional_image)) {
+                Storage::disk('public')->delete($product->optional_image);
+            }
+            $product->optional_image = $newOptionalImagePath;
+            $historyChanges[] = 'gambar opsional produk telah diperbarui';
         }
 
         if ($request->hasFile('datasheet')) {

@@ -149,6 +149,22 @@
                                     <p class="text-[10px] font-black text-rose-500 uppercase tracking-widest">* Required: 8:11 Ratio</p>
                                 </div>
 
+                                <div class="space-y-4">
+                                    <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">Optional Detail Image (Tab Detail)</label>
+                                    <div class="relative group">
+                                        <div class="absolute inset-0 bg-[#066c5f] rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none"></div>
+                                        <input type="file" name="optional_image"
+                                            class="block w-full text-xs text-slate-500 
+                                            file:mr-4 file:py-3 file:px-6 
+                                            file:rounded-xl file:border-0 
+                                            file:text-xs file:font-black file:uppercase file:tracking-widest
+                                            file:bg-slate-900 file:text-white 
+                                            hover:file:bg-slate-800
+                                            transition-all cursor-pointer">
+                                    </div>
+                                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Optional: This image will show in the "Product Detail" tab.</p>
+                                </div>
+
                                 <div class="border-t border-slate-100 pt-6 space-y-4">
                                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">Technical Datasheet</label>
                                     
