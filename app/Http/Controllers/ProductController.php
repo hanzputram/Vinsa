@@ -113,14 +113,14 @@ public function show($param)
         if ($category) {
             $categoryName = strtolower($category->name);
 
-            if ($categoryName === 'push button') {
+            if (str_contains($categoryName, 'push button')) {
                 $type = $request->input('push_button_type');
                 $series = $request->input('push_button_series');
                 $customInput = json_encode([
                     'tipe' => $type,
                     'series' => $series,
                 ]);
-            } elseif ($categoryName === 'selector switch') {
+            } elseif (str_contains($categoryName, 'selector switch')) {
                 $type = $request->input('selector_switch_type');
                 $series = $request->input('selector_switch_series');
 

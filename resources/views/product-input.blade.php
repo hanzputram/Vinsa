@@ -282,7 +282,7 @@
                     extraContainer.innerHTML = 
                         fieldWrap('Type', inputStyled('push_button_type', 'Enter type...')) +
                         fieldWrap('Series', selectStyled('push_button_series', ['KB 2 Series', 'KB 5 Series']));
-                } else if (selectedCategory === 'selector switch') {
+                } else if (selectedCategory.includes('selector switch')) {
                     extraContainer.innerHTML = 
                         fieldWrap('Type', inputStyled('selector_switch_type', 'Enter type...')) +
                         fieldWrap('Series', selectStyled('selector_switch_series', ['KB 2 Series', 'KB 5 Series']));

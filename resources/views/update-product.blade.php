@@ -286,7 +286,7 @@
                         </select>
                     `);
                     customInputHidden.value = selected;
-                } else if (category.includes('push button') || category === 'selector switch') {
+                } else if (category.includes('push button') || category.includes('selector switch')) {
                     const tipe = parsedOld.tipe || '';
                     const series = parsedOld.series || '';
                     extraContainer.innerHTML = 
@@ -298,6 +298,15 @@
                                 <option value="KB 2 Series" ${series === 'KB 2 Series' ? 'selected' : ''}>KB 2 Series</option>
                             </select>
                         `);
+                } else if (category === 'mccb') {
+                    const series = parsedOld.series || '';
+                    const options = ['M12B 25kA', 'M16F 35kA', 'M25F 35kA', 'M40F 35kA', 'M63F 35kA', 'M80F 35kA'];
+                    extraContainer.innerHTML = fieldWrap('Series', `
+                        <select class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-bold" onchange="updatePushButtonValue(null, this.value)">
+                            <option value="">Pilih Series</option>
+                            ${options.map(opt => `<option value="${opt}" ${series === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+                        </select>
+                    `);
                 } else if (category === 'terminal block') {
                     const series = parsedOld.series || '';
                     const options = ['Terminal Strip', 'Terminal Block TB', 'Terminal Block TBC', 'Terminal Block TBR', 'Terminal Block TUK', 'Terminal Block TUSLKG', 'Terminal Block KLUS'];
@@ -307,8 +316,48 @@
                             ${options.map(opt => `<option value="${opt}" ${series === opt ? 'selected' : ''}>${opt}</option>`).join('')}
                         </select>
                     `);
+                } else if (category === 'cable lug') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    const options = ['SC Cable Lug', 'SV Cable Lug', 'RV Cable Lug', 'PTV Cable Lug', 'DBV Cable Lug'];
+                    extraContainer.innerHTML = 
+                        fieldWrap('Type', `<input type="text" class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold" value="${tipe}" oninput="updatePushButtonValue(this.value, null)">`) +
+                        fieldWrap('Series', `
+                            <select class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-bold" onchange="updatePushButtonValue(null, this.value)">
+                                <option value="">Pilih Series</option>
+                                ${options.map(opt => `<option value="${opt}" ${series === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+                            </select>
+                        `);
+                } else if (category === 'mccb accessories') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    const options = ['MAA Alarm Contact', 'MAS Shunt Release', 'MAAUX Auxiliary Contact', 'MAUVT Under Voltage', 'MARH Extended Rotary Handle'];
+                    extraContainer.innerHTML = 
+                        fieldWrap('Type', `<input type="text" class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold" value="${tipe}" oninput="updatePushButtonValue(this.value, null)">`) +
+                        fieldWrap('Series', `
+                            <select class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-bold" onchange="updatePushButtonValue(null, this.value)">
+                                <option value="">Pilih Series</option>
+                                ${options.map(opt => `<option value="${opt}" ${series === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+                            </select>
+                        `);
+                } else if (category === 'contactor accessories') {
+                    const tipe = parsedOld.tipe || '';
+                    const series = parsedOld.series || '';
+                    const options = ['Coil Contactor', 'Auxiliary Contact', 'Time Delay', 'Thermal Overload relay'];
+                    extraContainer.innerHTML = 
+                        fieldWrap('Type', `<input type="text" class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold" value="${tipe}" oninput="updatePushButtonValue(this.value, null)">`) +
+                        fieldWrap('Series', `
+                            <select class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-bold" onchange="updatePushButtonValue(null, this.value)">
+                                <option value="">Pilih Series</option>
+                                ${options.map(opt => `<option value="${opt}" ${series === opt ? 'selected' : ''}>${opt}</option>`).join('')}
+                            </select>
+                        `);
                 } else if (['pilot lamp', 'accessories'].includes(category)) {
-                    extraContainer.innerHTML = fieldWrap('Type', `<input type="text" class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold" value="${oldValue}" oninput="document.getElementById('custom_input').value = this.value">`);
+                    const typedValue = parsedOld.tipe || (typeof oldValue === 'string' && !oldValue.startsWith('{') ? oldValue : '');
+                    extraContainer.innerHTML = fieldWrap('Type', `<input type="text" class="w-full px-5 py-3 bg-slate-50 border-0 rounded-2xl focus:ring-2 focus:ring-[#066c5f] font-semibold" value="${typedValue}" oninput="document.getElementById('custom_input').value = this.value">`);
+                    if (!customInputHidden.value || customInputHidden.value.startsWith('{')) {
+                        customInputHidden.value = typedValue;
+                    }
                 }
             }
 
