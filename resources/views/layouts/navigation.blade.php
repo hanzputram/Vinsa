@@ -38,14 +38,14 @@
                 <a href="{{ route('dashboard') }}" 
                    class="flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 {{ request()->routeIs('dashboard') ? 'bg-[#066c5f] text-white shadow-lg shadow-[#066c5f]/20' : 'hover:bg-slate-800 hover:text-white' }}">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
-                    <span class="font-medium">Dashboard</span>
+                    <span class="font-medium">{{ __('Dashboard') }}</span>
                 </a>
             </div>
         </div>
 
         <!-- Catalog Section -->
         <div x-data="{ open: {{ (request()->routeIs('products.*') ? 'true' : 'false') }} }">
-            <h3 class="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Catalog Management</h3>
+            <h3 class="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">{{ __('Catalog Management') }}</h3>
             <div class="space-y-1">
                 <button @click="open = !open" 
                    class="w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 hover:bg-slate-800 hover:text-white">
@@ -56,15 +56,15 @@
                     <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                 </button>
                 <div x-show="open" x-collapse class="pl-12 space-y-1">
-                    <a href="{{ route('products.view') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('products.view') ? 'text-[#F77F1E]' : 'hover:text-white' }}">Tambah Produk</a>
-                    <a href="{{ route('products.edit') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('products.edit') ? 'text-[#F77F1E]' : 'hover:text-white' }}">Perbarui Produk</a>
+                    <a href="{{ route('products.view') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('products.view') ? 'text-[#F77F1E]' : 'hover:text-white' }}">{{ __('Tambah Produk') }}</a>
+                    <a href="{{ route('products.edit') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('products.edit') ? 'text-[#F77F1E]' : 'hover:text-white' }}">{{ __('Perbarui Produk') }}</a>
                 </div>
             </div>
         </div>
 
         <!-- Marketing Section -->
         <div x-data="{ open: {{ (request()->routeIs('carousels.*') ? 'true' : 'false') }} }">
-            <h3 class="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Marketing</h3>
+            <h3 class="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">{{ __('Marketing') }}</h3>
             <div class="space-y-1">
                 <button @click="open = !open" 
                    class="w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 hover:bg-slate-800 hover:text-white">
@@ -75,15 +75,15 @@
                     <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                 </button>
                 <div x-show="open" x-collapse class="pl-12 space-y-1">
-                    <a href="{{ route('carousels.create') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('carousels.create') ? 'text-[#F77F1E]' : 'hover:text-white' }}">Tambah Banner</a>
-                    <a href="{{ route('carousels.index') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('carousels.index') ? 'text-[#F77F1E]' : 'hover:text-white' }}">Perbarui Banner</a>
+                    <a href="{{ route('carousels.create') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('carousels.create') ? 'text-[#F77F1E]' : 'hover:text-white' }}">{{ __('Tambah Banner') }}</a>
+                    <a href="{{ route('carousels.index') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('carousels.index') ? 'text-[#F77F1E]' : 'hover:text-white' }}">{{ __('Perbarui Banner') }}</a>
                 </div>
             </div>
         </div>
 
         <!-- Content Section -->
         <div x-data="{ open: {{ (request()->routeIs('blog.*') ? 'true' : 'false') }} }">
-            <h3 class="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">Content</h3>
+            <h3 class="px-4 text-xs font-semibold text-slate-500 uppercase tracking-wider mb-4">{{ __('Content') }}</h3>
             <div class="space-y-1">
                 <button @click="open = !open" 
                    class="w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 hover:bg-slate-800 hover:text-white">
@@ -94,8 +94,8 @@
                     <svg :class="open ? 'rotate-180' : ''" class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
                 </button>
                 <div x-show="open" x-collapse class="pl-12 space-y-1">
-                    <a href="{{ route('blog.create') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('blog.create') ? 'text-[#F77F1E]' : 'hover:text-white' }}">Tambah Blog</a>
-                    <a href="{{ route('blog.index') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('blog.index') ? 'text-[#F77F1E]' : 'hover:text-white' }}">Perbarui Blog</a>
+                    <a href="{{ route('blog.create') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('blog.create') ? 'text-[#F77F1E]' : 'hover:text-white' }}">{{ __('Tambah Blog') }}</a>
+                    <a href="{{ route('blog.index') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('blog.index') ? 'text-[#F77F1E]' : 'hover:text-white' }}">{{ __('Perbarui Blog') }}</a>
                 </div>
             </div>
         </div>
@@ -123,10 +123,10 @@
                      x-transition:enter-start="opacity-0 scale-95"
                      x-transition:enter-end="opacity-100 scale-100"
                      class="absolute bottom-full right-0 mb-2 w-48 bg-slate-800 border border-slate-700 rounded-xl shadow-2xl py-2 z-50">
-                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm hover:bg-slate-700 text-slate-300 hover:text-white">Profile</a>
+                    <a href="{{ route('profile.edit') }}" class="block px-4 py-2 text-sm hover:bg-slate-700 text-slate-300 hover:text-white">{{ __('Profile') }}</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="w-full text-left px-4 py-2 text-sm hover:bg-rose-500/10 text-rose-400 hover:text-rose-500 transition-colors">Log Out</button>
+                        <button type="submit" class="w-full text-left px-4 py-2 text-sm hover:bg-rose-500/10 text-rose-400 hover:text-rose-500 transition-colors">{{ __('Log Out') }}</button>
                     </form>
                 </div>
             </div>

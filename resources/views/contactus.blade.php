@@ -124,19 +124,19 @@
                         <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke-width="2" stroke-linecap="round"
                             stroke-linejoin="round"></path>
                     </svg>
-                    <span class="text-white text-sm font-semibold">Back</span>
+                    <span class="text-white text-sm font-semibold">{{ __('Back') }}</span>
                 </a>
                 
                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-xs font-bold tracking-widest uppercase backdrop-blur-md border border-white/30 mb-6">
                     <span class="w-2 h-2 rounded-full bg-[#0dd8bd] animate-pulse"></span>
-                    Get in Touch
+                    {{ __('Get in Touch') }}
                 </div>
                 
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tight mb-6 leading-none">
-                    Contact Us
+                    {{ __('Contact Us') }}
                 </h1>
                 <p class="text-lg md:text-xl lg:text-2xl w-full md:w-[85%] lg:w-[70%] text-white/90 mx-auto leading-relaxed font-medium">
-                    Have a question or ready to power up your project? We're here to help with premium electrical solutions.
+                    {{ __("Have a question or ready to power up your project? We're here to help with premium electrical solutions.") }}
                 </p>
             </div>
 
@@ -154,8 +154,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-sm font-bold text-white/60 uppercase tracking-wider mb-1">Office Location</h3>
-                                <h2 class="text-xl font-bold text-white mb-2">Head Quarter</h2>
+                                <h3 class="text-sm font-bold text-white/60 uppercase tracking-wider mb-1">{{ __('Office Location') }}</h3>
+                                <h2 class="text-xl font-bold text-white mb-2">{{ __('Head Quarter') }}</h2>
                                 <p class="text-white/80 leading-relaxed">Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur</p>
                             </div>
                         </div>
@@ -170,7 +170,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-white/60 uppercase tracking-wider">Phone</p>
+                                <p class="text-xs font-bold text-white/60 uppercase tracking-wider">{{ __('Phone') }}</p>
                                 <p class="text-lg font-semibold text-white">034-34857758</p>
                             </div>
                         </a>
@@ -182,7 +182,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-white/60 uppercase tracking-wider">WhatsApp</p>
+                                <p class="text-xs font-bold text-white/60 uppercase tracking-wider">{{ __('WhatsApp') }}</p>
                                 <p class="text-lg font-semibold text-white">+62 813-3571-5398</p>
                             </div>
                         </a>
@@ -194,7 +194,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-xs font-bold text-white/60 uppercase tracking-wider">Email</p>
+                                <p class="text-xs font-bold text-white/60 uppercase tracking-wider">{{ __('Email') }}</p>
                                 <p class="text-lg font-semibold text-white">sales@ATstekno.com</p>
                             </div>
                         </a>
@@ -206,52 +206,52 @@
                     <form action="{{ route('contact.send') }}" method="POST" class="bg-white/10 backdrop-blur-xl p-8 lg:p-10 rounded-3xl border border-white/20 shadow-2xl space-y-6">
                         @csrf
                         <div class="mb-8">
-                            <h3 class="text-3xl font-bold text-white mb-2">Send us a Message</h3>
-                            <p class="text-white/70">Fill out the form below and we'll get back to you within 24 hours.</p>
+                            <h3 class="text-3xl font-bold text-white mb-2">{{ __('Send us a Message') }}</h3>
+                            <p class="text-white/70">{{ __('Fill out the form below and we\'ll get back to you within 24 hours.') }}</p>
                         </div>
                         
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label for="name" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">Full Name *</label>
+                                <label for="name" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">{{ __('Full Name *') }}</label>
                                 <input type="text" id="name" name="name" required
                                     class="w-full px-5 py-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/25 transition-all"
-                                    placeholder="Your Name">
+                                    placeholder="{{ __('Your Name') }}">
                             </div>
 
                             <div>
-                                <label for="email" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">Email Address *</label>
+                                <label for="email" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">{{ __('Email Address *') }}</label>
                                 <input type="email" id="email" name="email" required
                                     class="w-full px-5 py-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/25 transition-all"
-                                    placeholder="your.email@example.com">
+                                    placeholder="{{ __('your.email@example.com') }}">
                             </div>
                         </div>
 
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label for="phone" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">Phone Number</label>
+                                <label for="phone" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">{{ __('Phone Number') }}</label>
                                 <input type="tel" id="phone" name="phone"
                                     class="w-full px-5 py-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/25 transition-all"
                                     placeholder="+62 812-3456-7890">
                             </div>
 
                             <div>
-                                <label for="subject" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">Subject</label>
+                                <label for="subject" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">{{ __('Subject') }}</label>
                                 <input type="text" id="subject" name="subject"
                                     class="w-full px-5 py-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/25 transition-all"
-                                    placeholder="Project Inquiry">
+                                    placeholder="{{ __('Project Inquiry') }}">
                             </div>
                         </div>
 
                         <div>
-                            <label for="message" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">Your Message *</label>
+                            <label for="message" class="block text-white font-semibold mb-2 text-sm uppercase tracking-wider">{{ __('Your Message *') }}</label>
                             <textarea id="message" name="message" rows="5" required
                                 class="w-full px-5 py-4 rounded-xl bg-white/20 border border-white/30 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-white/50 focus:bg-white/25 transition-all resize-none"
-                                placeholder="Tell us about your electrical needs and how we can help you..."></textarea>
+                                placeholder="{{ __('Tell us about your electrical needs and how we can help you...') }}"></textarea>
                         </div>
 
                         <button type="submit"
                             class="group w-full bg-white text-[#066c5f] px-8 py-5 rounded-xl text-lg font-black hover:bg-[#FDFBEE] transition-all transform hover:scale-[1.02] shadow-2xl flex items-center justify-center gap-3 relative overflow-hidden">
-                            <span class="relative z-10">Send Message</span>
+                            <span class="relative z-10">{{ __('Send Message') }}</span>
                             <svg class="relative z-10 w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                             </svg>

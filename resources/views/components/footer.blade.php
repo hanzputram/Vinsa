@@ -33,7 +33,7 @@
             <div class="lg:col-span-1 border-r border-gray-200 pr-10">
                 <img width="160px" src="/image/vinsalg.png" alt="Vinsa Logo" class="mb-8">
                 <p class="text-gray-500 leading-relaxed mb-8 font-medium">
-                    Vinsa is dedicated to providing premium electrical solutions, delivering high-quality products for your home, business, and industrial needs.
+                    {{ __('Vinsa is dedicated to providing premium electrical solutions, delivering high-quality products for your home, business, and industrial needs.') }}
                 </p>
                 <div class="flex gap-4">
                     <a href="https://wa.me/6281335715398" class="p-3 bg-gray-50 rounded-2xl hover:bg-[#0dd8bd] hover:text-white transition-all group border border-gray-200">
@@ -57,7 +57,7 @@
                         <span class="p-2 rounded-xl bg-[#066c5f]/10 text-[#066c5f]">
                             <svg class="w-5 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                         </span>
-                        Head Quarter
+                        {{ __('Head Quarter') }}
                     </h3>
                     <p class="text-sm text-gray-500 mb-4 h-12">Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur</p>
                     <div class="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-gray-100 group">
@@ -73,7 +73,7 @@
                         <span class="p-2 rounded-xl bg-[#066c5f]/10 text-[#066c5f]">
                             <svg class="w-5 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
                         </span>
-                        Showroom Surabaya
+                        {{ __('Showroom Surabaya') }}
                     </h3>
                     <p class="text-sm text-gray-500 mb-4 h-12">Jl. Jagalan No.38, Bongkaran, Kec. Pabean Cantian, Surabaya, Jawa Timur</p>
                     <div class="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-gray-100 group">
@@ -89,7 +89,7 @@
                         <span class="p-2 rounded-xl bg-[#066c5f]/10 text-[#066c5f]">
                             <svg class="w-5 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
                         </span>
-                        Showroom Pandaan
+                        {{ __('Showroom Pandaan') }}
                     </h3>
                     <p class="text-sm text-gray-500 mb-4 h-12">The Taman Dayu, Cluster Palazio Boulevard, J-1 No. 06, Pandaan, Pasuruan</p>
                     <div class="w-full h-40 rounded-2xl overflow-hidden shadow-sm border border-gray-100 group">
@@ -105,13 +105,13 @@
         <div class="grid lg:grid-cols-4 gap-12 border-t border-gray-200 pt-16">
             <!-- Quick Links -->
             <div class="lg:col-span-1">
-                <h3 class="text-lg font-bold mb-8 text-gray-900 border-b-2 border-[#0dd8bd] inline-block">Menu Utama</h3>
+                <h3 class="text-lg font-bold mb-8 text-gray-900 border-b-2 border-[#0dd8bd] inline-block">{{ __('Menu Utama') }}</h3>
                 <ul class="grid grid-cols-2 gap-x-4 gap-y-4 text-gray-500 font-medium">
-                    <li><a href="/new" class="hover:text-[#066c5f]  transition-colors flex items-center gap-2 text-sm"> Home</a></li>
+                    <li><a href="/new" class="hover:text-[#066c5f]  transition-colors flex items-center gap-2 text-sm"> {{ __('Home') }}</a></li>
                     <!-- <li><a href="/about" class="hover:text-[#066c5f] transition-colors flex items-center gap-2 text-sm"> Tentang Kami</a></li> -->
-                    <li><a href="/product" class="hover:text-[#066c5f] transition-colors flex items-center gap-2 text-sm"> Products</a></li>
-                    <li><a href="/blog" class="hover:text-[#066c5f] transition-colors flex items-center gap-2 text-sm"> Blog</a></li>
-                    <li><a href="/contact-us" class="hover:text-[#066c5f] transition-colors flex items-center gap-2 text-sm"> Contact</a></li>
+                    <li><a href="/product" class="hover:text-[#066c5f] transition-colors flex items-center gap-2 text-sm"> {{ __('Products') }}</a></li>
+                    <li><a href="/blog" class="hover:text-[#066c5f] transition-colors flex items-center gap-2 text-sm"> {{ __('Blog') }}</a></li>
+                    <li><a href="/contact-us" class="hover:text-[#066c5f] transition-colors flex items-center gap-2 text-sm"> {{ __('Contact') }}</a></li>
                 </ul>
             </div>
             
@@ -120,20 +120,20 @@
             <div class="lg:col-span-2">
                 <div class="p-8 bg-gradient-to-br from-[#066c5f] to-[#0dd8bd] rounded-[30px] shadow-xl text-white transform hover:scale-[1.01] transition-all duration-500 flex flex-col md:flex-row items-center justify-between gap-6">
                     <div>
-                        <p class="text-xs font-bold text-white/80 uppercase tracking-widest mb-2">Need Assistance?</p>
-                        <h4 class="text-2xl font-bold">Consultation Now!</h4>
+                        <p class="text-xs font-bold text-white/80 uppercase tracking-widest mb-2">{{ __('Need Assistance?') }}</p>
+                        <h4 class="text-2xl font-bold">{{ __('Consultation Now!') }}</h4>
                     </div>
-                    <a href="https://wa.me/6281335715398" class="whitespace-nowrap px-8 py-4 bg-white text-[#066c5f] font-black rounded-xl hover:shadow-2xl transition-all">Contact Us</a>
+                    <a href="https://wa.me/6281335715398" class="whitespace-nowrap px-8 py-4 bg-white text-[#066c5f] font-black rounded-xl hover:shadow-2xl transition-all">{{ __('Contact Us') }}</a>
                 </div>
             </div>
         </div>
 
         <!-- Footer Bottom -->
         <div class="mt-20 pt-10 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-gray-400 font-medium">
-            <p>&copy; {{ date('Y') }} Vinsa. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} Vinsa. {{ __('All rights reserved.') }}</p>
             <div class="flex gap-10">
-                <a href="#" class="hover:text-[#066c5f] transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-[#066c5f] transition-colors">Terms of Service</a>
+                <a href="#" class="hover:text-[#066c5f] transition-colors">{{ __('Privacy Policy') }}</a>
+                <a href="#" class="hover:text-[#066c5f] transition-colors">{{ __('Terms of Service') }}</a>
             </div>
         </div>
     </div>

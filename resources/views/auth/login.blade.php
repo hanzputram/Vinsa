@@ -7,7 +7,7 @@
 
         <!-- Email Address -->
         <div class="space-y-2">
-            <label for="email" class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">Email Address</label>
+            <label for="email" class="block text-xs font-black text-slate-500 uppercase tracking-widest pl-1">{{ __('Email Address') }}</label>
             <div class="relative group">
                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                     <svg class="w-5 h-5 text-slate-400 group-focus-within:text-[#066c5f] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.206" /></svg>
@@ -22,10 +22,10 @@
         <!-- Password -->
         <div class="space-y-2">
             <div class="flex items-center justify-between pl-1">
-                <label for="password" class="block text-xs font-black text-slate-500 uppercase tracking-widest">Security Pin</label>
+                <label for="password" class="block text-xs font-black text-slate-500 uppercase tracking-widest">{{ __('Security Pin') }}</label>
                 @if (Route::has('password.request'))
                     <a class="text-[10px] font-bold text-[#F77F1E] hover:text-[#066c5f] uppercase tracking-wider transition-colors" href="{{ route('password.request') }}">
-                        Recovery?
+                        {{ __('Recovery?') }}
                     </a>
                 @endif
             </div>
@@ -47,13 +47,13 @@
                     <input id="remember_me" type="checkbox" name="remember" class="sr-only peer">
                     <div class="w-10 h-5 bg-slate-200 rounded-full peer peer-checked:bg-[#066c5f] transition-colors after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:after:translate-x-5"></div>
                 </div>
-                <span class="ms-3 text-[11px] font-black text-slate-500 uppercase tracking-widest group-hover:text-slate-900 transition-colors">Remember Session</span>
+                <span class="ms-3 text-[11px] font-black text-slate-500 uppercase tracking-widest group-hover:text-slate-900 transition-colors">{{ __('Remember Session') }}</span>
             </label>
         </div>
 
         <button type="submit" class="w-full py-5 bg-[#066c5f] text-white rounded-[1.5rem] font-black uppercase tracking-[0.2em] shadow-lg shadow-[#066c5f]/30 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
-            Unlock Access
+            {{ __('Unlock Access') }}
         </button>
     </form>
 </x-guest-layout>

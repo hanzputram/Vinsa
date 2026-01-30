@@ -29,7 +29,7 @@
         .outfit {
             font-family: "Outfit", sans-serif;
             font-optical-sizing: auto;
-            font-weight: <weight>;
+            font-weight: 400;
             font-style: normal;
         }
 
@@ -47,6 +47,7 @@
             background-image: linear-gradient(90deg, #9e9e9e 25%, #ffffff 50%, #9e9e9e 75%);
             background-size: 200% auto;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: shine 6s linear infinite;
         }
@@ -137,7 +138,7 @@
                     </svg>
                 </a>
                 <p class="text-6xl text-center font-extrabold  text-[#fff]">
-                    About Us
+                    {{ __('About Us') }}
                 </p>
                 <p class="text-xl w-[90%] text-center text-[#fffffffe] pt-5 mx-auto pb-15">
                     {{-- "Vinsa: Dedikasi dalam Menyediakan Solusi Kelistrikan Premium, Menghadirkan Produk Berkualitas

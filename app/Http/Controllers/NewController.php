@@ -7,7 +7,6 @@ use App\Models\Blog;
 use App\Models\Carousel;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\Slider;
 use App\Models\Visit;
 use Illuminate\Http\Request;
 

@@ -185,7 +185,7 @@
             <div class="p-6 max-w-5xl mx-auto">
                 <h1 class="text-3xl font-bold text-[#FDFBEE] mb-2">{{ $blog->title }}</h1>
                 <p class="text-sm text-white mb-4">
-                    Published on: {{ $blog->created_at->format('F d, Y') }}
+                    {{ __('Published on:') }} {{ $blog->created_at->format('F d, Y') }}
                 </p>
 
                 {{-- Banner atau Gambar Utama --}}

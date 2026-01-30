@@ -176,22 +176,19 @@
             style="background-image:url('/image/pabrik.jpg')">
             <div class="lg:w-[50%] w-full relative z-[10]">
                 <p class="shining-text text-xl text-center  font-medium">
-                    Fulfill Your Electricity Needs with the Best Products
+                    {{ __('Fulfill Your Electricity Needs with the Best Products') }}
                 </p>
                 <p class="text-6xl text-center  font-extrabold  text-[#fff]">
                     Welcome<br> To<br> Vinsa
                 </p>
                 <p class="text-xl lg:text-lg text-center mx-4 lg:mx-auto text-[#fffffffe] pt-5 pb-15">
-                    "Vinsa: Dedication to Providing Premium Electrical Solutions, Delivering High Quality Products for
-                    Your Home, Business, and Industrial Needs!"
+                    "{{ __('Vinsa: Dedication to Providing Premium Electrical Solutions, Delivering High Quality Products for Your Home, Business, and Industrial Needs!') }}"
                 </p>
                 <div class="flex my-[2rem] justify-center ">
                     <a href="/product"
-                        class="bg-green-600 text-white px-6 py-3 transition-all mr-5 duration-100 ease-in-out rounded-full shadow hover:bg-green-700">Our
-                        Product</a>
+                        class="bg-green-600 text-white px-6 py-3 transition-all mr-5 duration-100 ease-in-out rounded-full shadow hover:bg-green-700">{{ __('Our Product') }}</a>
                     <a href="https://wa.me/6281335715398"
-                        class="border-2 border-[#F77F1E] text-[#fff] px-6 py-3 rounded-full transition-all duration-300 ease-in-out shadow hover:bg-[#F77F1E] hover:text-white">Contact
-                        Us</a>
+                        class="border-2 border-[#F77F1E] text-[#fff] px-6 py-3 rounded-full transition-all duration-300 ease-in-out shadow hover:bg-[#F77F1E] hover:text-white">{{ __('Contact Us') }}</a>
                 </div>
             </div>
         </div>

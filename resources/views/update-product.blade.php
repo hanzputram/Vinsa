@@ -4,6 +4,21 @@
     <div class="p-6 md:p-10">
         <div class="max-w-5xl mx-auto">
             
+            <!-- Error Messages -->
+            @if ($errors->any())
+                <div class="mb-6 p-4 bg-rose-50 border border-rose-100 rounded-2xl animate-in fade-in duration-300">
+                    <div class="flex items-center gap-3 text-rose-600 font-bold mb-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        Please correct the following errors:
+                    </div>
+                    <ul class="list-disc list-inside text-sm text-rose-500 font-medium space-y-1">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
             <!-- Page Header -->
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
                 <div>

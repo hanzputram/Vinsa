@@ -121,7 +121,7 @@
                             stroke-linejoin="round"></path>
                     </svg>
                 </a>
-                <p class="text-6xl pb-10 text-center font-extrabold text-[#fff]">Our Collection</p>
+                <p class="text-6xl pb-10 text-center font-extrabold text-[#fff]">{{ __('Our Collection') }}</p>
 
                 <div class="fixed inset-0 bg-black bg-opacity-30 z-[29]" x-show="sidebarOpen" x-transition.opacity
                     @click="sidebarOpen = false" x-cloak></div>
@@ -129,20 +129,19 @@
                 <div class="fixed top-0 left-0 w-64 h-full bg-[#FFFCF0] shadow-lg p-4 z-[30] transform transition-transform duration-300 ease-in-out"
                     :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }" x-cloak>
                     <a href="{{ url('/') }}"
-                        class="block py-2 text-[#066C5F] border-b-[1.5px] hover:text-[#066c5fad] font-bold">Home</a>
+                        class="block py-2 text-[#066C5F] border-b-[1.5px] hover:text-[#066c5fad] font-bold">{{ __('Home') }}</a>
                     <a href="{{ url('/about') }}"
-                        class="block py-2 border-b-[1.5px] text-[#066C5F] hover:text-[#066c5fad] font-bold">About Us</a>
+                        class="block py-2 border-b-[1.5px] text-[#066C5F] hover:text-[#066c5fad] font-bold">{{ __('About Us') }}</a>
                     <a href="{{ route('contact-us') }}"
-                        class="block py-2 text-[#066C5F] hover:text-[#066c5fad] font-bold">Contact Us</a>
+                        class="block py-2 text-[#066C5F] hover:text-[#066c5fad] font-bold">{{ __('Contact Us') }}</a>
 
                     <div class="mt-6">
-                        <label for="categoryFilter" class="block text-sm font-semibold text-[#066C5F] mb-2">Pilih
-                            Kategori</label>
+                        <label for="categoryFilter" class="block text-sm font-semibold text-[#066C5F] mb-2">{{ __('Pilih Kategori') }}</label>
                         <select id="categoryFilter" onchange="filterProducts()"
                             class="w-full p-2 border border-gray-300 rounded-lg text-[#066C5F] focus:outline-none focus:ring-2 focus:ring-[#0dd8bd]">
-                            <option value="">Semua Kategori</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            <option value="">{{ __('Semua Kategori') }}</option>
+                             @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ __($category->name) }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -156,7 +155,7 @@
                     </svg>
                 </button>
 
-                <input type="text" id="searchInput" placeholder="Cari produk..."
+                <input type="text" id="searchInput" placeholder="{{ __('Cari produk...') }}"
                     class="my-6 w-full max-w-sm mx-auto block rounded-full px-8 py-4 text-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0dd8bd] shadow"
                     oninput="filterProducts()">
 
@@ -180,7 +179,7 @@
                                     class="font-semibold text-base hidden sm:block sm:text-[13px] sm:text-gray-300 product-code">
                                     @if ($customInput)
                                         @foreach ($customInput as $key => $value)
-                                            <div class="capitalize">{{ ucfirst($key) }}:
+                                            <div class="capitalize">{{ __(ucfirst($key)) }}:
                                                 {{ \Illuminate\Support\Str::limit($value, 20) }}</div>
                                         @endforeach
                                     @else
@@ -198,7 +197,7 @@
                                     <div class="text-[12px] sm:hidden text-gray-200">
                                         @if ($customInput)
                                             @foreach ($customInput as $key => $value)
-                                                <div class="capitalize">{{ ucfirst($key) }}:
+                                                <div class="capitalize">{{ __(ucfirst($key)) }}:
                                                     {{ \Illuminate\Support\Str::limit($value, 15) }}</div>
                                             @endforeach
                                             <div>{{ $product->kode }}</div>
@@ -217,7 +216,7 @@
                                 <div class="flex justify-end sm:justify-center items-center">
                                     <a href="/detail/{{ $product->id }}"
                                         class="py-2 px-4 md:mt-3 text-sm font-semibold rounded-lg bg-white text-[#066c5f] hover:bg-gray-200 transition hidden sm:block">
-                                        Spesifikasi Product
+                                        {{ __('Spesifikasi Product') }}
                                     </a>
 
                                     <a href="/detail/{{ $product->id }}"
@@ -239,7 +238,7 @@
                         </div>
                     @empty
                         <div class="col-span-4 text-center text-white py-8">
-                            Belum ada produk yang ditambahkan.
+                            {{ __('Belum ada produk yang ditambahkan.') }}
                         </div>
                     @endforelse
                 </div>

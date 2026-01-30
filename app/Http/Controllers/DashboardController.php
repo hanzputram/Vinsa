@@ -19,6 +19,7 @@ class DashboardController extends Controller
         $productCount = Product::count();
         $carouselCount = Carousel::count();
         $blogCount = Blog::count();
+        $visitCount = Visit::count();
     
         $query = History::with('user');
     
@@ -44,7 +45,7 @@ class DashboardController extends Controller
     
         $histories = $query->latest()->paginate(10);
     
-        return view('dashboard', compact('histories', 'productCount', 'carouselCount', 'blogCount'));
+        return view('dashboard', compact('histories', 'productCount', 'carouselCount', 'blogCount', 'visitCount'));
     }
     
 }

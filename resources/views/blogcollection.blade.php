@@ -100,7 +100,7 @@
 
                 {{-- TITLE --}}
                 <h1 class="text-5xl font-extrabold text-white mb-14 text-center">
-                    From Our Blog
+                    {{ __('From Our Blog') }}
                 </h1>
 
                 @php
@@ -109,7 +109,7 @@
                 @endphp
 
                 @if ($count === 0)
-                    <p class="text-sm text-gray-500">Belum ada blog.</p>
+                    <p class="text-sm text-gray-500">{{ __('Belum ada blog.') }}</p>
                 @endif
 
                 <div class="grid md:grid-cols-3 gap-6 items-stretch">
@@ -133,7 +133,7 @@
                                         <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
                                             class="w-full h-full object-cover">
                                     @else
-                                        <div class="text-xs text-gray-500">No Image</div>
+                                        <div class="text-xs text-gray-500">{{ __('No Image') }}</div>
                                     @endif
                                 </div>
 
@@ -154,13 +154,13 @@
                                             {{ $previewText }}
                                         </p>
                                     @else
-                                        <p class="text-[11px] text-gray-500 italic mt-2">Tidak ada konten</p>
+                                        <p class="text-[11px] text-gray-500 italic mt-2">{{ __('Tidak ada konten') }}</p>
                                     @endif
 
                                     <div class="mt-auto pt-3">
                                         <span
                                             class="text-[11px] text-[#066c5f] font-semibold opacity-80 group-hover:opacity-100">
-                                            Baca selengkapnya →
+                                            {{ __('Baca selengkapnya →') }}
                                         </span>
                                     </div>
                                 </div>

@@ -7,9 +7,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\NewController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\SliderController;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
+
+Route::get('locale/{locale}', [LocaleController::class, 'setLocale'])->name('locale.set');
 
 Route::get('/', [NewController::class, 'show']);
 Route::get('/about', [AboutController::class, 'show']);
