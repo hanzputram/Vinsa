@@ -136,6 +136,8 @@
     "Tipe": "Type",
     "frekuensi": "Frequency",
     "Frekuensi": "Frequency",
+    "Phase": "Phase",
+    "Fase": "Phase",
     "tipe push button": "Push Button Type",
     "seri push button": "Push Button Series",
     "Resistive Load": "Resistive Load",
@@ -150,6 +152,15 @@
     "Rated Operational Current": "Rated Operational Current",
     "Rated Operational Power": "Rated Operational Power",
     "Rated Operational Frequency": "Rated Operational Frequency",
-    "Rated Operational Power Factor": "Rated Operational Power Factor"
-    
+    "Rated Operational Power Factor": "Rated Operational Power Factor",
+    "Suite For": "Suite For",
+    "Frame Size": "Frame Size",
+    "Cocok Untuk": "Suite For",
+    "Ukuran Frame": "Frame Size",
+    "Ukuran Frame 63A": "Frame Size 63A",
+    "Ukuran Frame 100-125A": "Frame Size 100-125A",
+    "Ukuran Frame 225-250A": "Frame Size 225-250A",
+    "Ukuran Frame 400A": "Frame Size 400A",
+    "Ukuran Frame 630A": "Frame Size 630A",
+    "Ukuran Frame 800A": "Frame Size 800A"
 }

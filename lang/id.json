@@ -48,7 +48,7 @@
     "Contact Details": "Detail Kontak",
     "Back": "Kembali",
     "Get in Touch": "Hubungi Kami",
-    "Have a question or ready to power up your project? We're here to help with premium electrical solutions.": "Ada pertanyaan atau siap untuk memulai proyek Anda? Kami siap membantu dengan solusi listrik premium.",
+    "Have a question or ready to power up your project? We're here to help with premium electrical solutions.": "Ada pertanyaan atau siap untuk memulai proyek Anda? We're here to help with premium electrical solutions.",
     "Office Location": "Lokasi Kantor",
     "Phone": "Telepon",
     "WhatsApp": "WhatsApp",
@@ -147,5 +147,13 @@
     "Rated Operational Voltage": "Tegangan Operasional Pengenal",
     "Rated Operational Current": "Arus Operasional Pengenal",
     "Rated Operational Power": "Daya Operasional Pengenal",
-    "Rated Operational Frequency": "Frekuensi Operasional Pengenal"
+    "Rated Operational Frequency": "Frekuensi Operasional Pengenal",
+    "Suite For": "Cocok Untuk",
+    "Frame Size": "Ukuran Frame",
+    "Frame Size 63A": "Ukuran Frame 63A",
+    "Frame Size 100-125A": "Ukuran Frame 100-125A",
+    "Frame Size 225-250A": "Ukuran Frame 225-250A",
+    "Frame Size 400A": "Ukuran Frame 400A",
+    "Frame Size 630A": "Ukuran Frame 630A",
+    "Frame Size 800A": "Ukuran Frame 800A"
 }
