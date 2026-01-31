@@ -2,6 +2,13 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-6" :status="session('status')" />
 
+    @if (session('error'))
+        <div class="mb-6 p-4 bg-red-50 border border-red-100 text-red-600 text-sm font-bold rounded-2xl flex items-center gap-3">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            {{ __(session('error')) }}
+        </div>
+    @endif
+
     <form method="POST" action="{{ route('login') }}" class="space-y-6">
         @csrf
 
@@ -51,9 +58,27 @@
             </label>
         </div>
 
-        <button type="submit" class="w-full py-5 bg-[#066c5f] text-white rounded-[1.5rem] font-black uppercase tracking-[0.2em] shadow-lg shadow-[#066c5f]/30 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
-            {{ __('Unlock Access') }}
-        </button>
+        <div class="flex flex-col space-y-4">
+            <button type="submit" class="w-full py-4 md:py-5 bg-[#066c5f] text-white rounded-[1.5rem] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] shadow-lg shadow-[#066c5f]/30 hover:scale-[1.02] active:scale-95 transition-all flex items-center justify-center gap-3 text-sm md:text-base">
+                <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" /></svg>
+                {{ __('Unlock Access') }}
+            </button>
+        </div>
     </form>
+
+    <script>
+        // Handle CSRF expiration gracefully
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const button = this.querySelector('button[type="submit"]');
+            button.disabled = true;
+            button.innerHTML = '<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> {{ __("Processing...") }}';
+        });
+
+        // If the page was loaded from cache, it might have an old CSRF token
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+    </script>
 </x-guest-layout>

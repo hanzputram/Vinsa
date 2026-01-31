@@ -18,5 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->append(\App\Http\Middleware\TrackVisits::class);
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        //
+        $exceptions->render(function (\Illuminate\Session\TokenMismatchException $e, $request) {
+            return back()->withInput()->with('error', 'Sesi Anda telah kedaluwarsa. Silakan coba lagi.');
+        });
     })->create();

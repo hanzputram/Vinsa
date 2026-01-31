@@ -22,9 +22,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="{{ asset('image/sa.png') }}">
-    <title>Vinsa</title>
+    <title>{{ __('Vinsa | Our Collection') }}</title>
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
+        [x-cloak] { display: none !important; }
+
         .outfit {
             font-family: "Outfit", sans-serif;
             font-optical-sizing: auto;
@@ -32,13 +37,8 @@
         }
 
         @keyframes shine {
-            0% {
-                background-position: -200%;
-            }
-
-            100% {
-                background-position: 200%;
-            }
+            0% { background-position: -200%; }
+            100% { background-position: 200%; }
         }
 
         .shining-text {
@@ -51,24 +51,19 @@
         }
 
         ::-webkit-scrollbar {
-            width: 6px;
-            height: 7px;
-        }
-
-        ::-webkit-scrollbar-button {
-            display: block;
-            background-color: #cccccc00;
-            border-radius: 10px;
             width: 10px;
+            height: 10px;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #ffffff53;
-            border-radius: 100px;
+            background-color: #79B0A9;
+            border-radius: 20px;
+            border: 3px solid transparent;
+            background-clip: content-box;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #ffffffb5;
+            background-color: #8CBBB5;
         }
 
         ::-webkit-scrollbar-track {
@@ -83,164 +78,192 @@
         }
 
         @keyframes spin {
-            100% {
-                transform: rotate(360deg);
-            }
+            100% { transform: rotate(360deg); }
         }
 
         @keyframes rotate-border {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .animate-rotate-border {
             animation: rotate-border var(--speed) linear infinite;
         }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-pill.active {
+            background-color: #F77F1E !important;
+            color: white !important;
+            border-color: #F77F1E !important;
+            box-shadow: 0 10px 20px rgba(247, 127, 30, 0.4) !important;
+        }
     </style>
 </head>
 
-<body class="outfit bg-[#FDFBEE]">
-    <div class="max-w-[93%] mx-auto">
-        <div class="flex justify-between items-center py-3">
-            <x-navUser class="relative z-10"></x-navUser>
+<body class="outfit bg-[#FDFBEE] min-h-screen">
+    <div class="max-w-[95%] mx-auto">
+        <!-- Navigation -->
+        <div class="flex justify-between items-center py-4">
+            <x-navUser class="relative z-50"></x-navUser>
         </div>
 
-        <div
-            class="overflow-hidden p-10 lg:p-[5rem] lg:justify-between py-[80px] flex justify-center relative bg-no-repeat bg-cover w-full min-h-screen after:content-[''] bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] after:w-full after:h-full after:absolute after:top-0 after:left-0 rounded-[40px]">
-            <div class="w-full relative z-[10]">
-                <a href="/" class="group mb-4 inline-block">
-                    <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="stroke-white group-hover:stroke-gray-400 transition-colors duration-300">
-                        <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                    </svg>
-                </a>
-                <p class="text-6xl pb-10 text-center font-extrabold text-[#fff]">{{ __('Our Collection') }}</p>
+        <!-- Hero Section -->
+        <div class="relative overflow-hidden bg-gradient-to-br from-[#066C5F] via-[#098d7c] to-[#0dd8bd] rounded-[40px] px-6 py-20 md:py-32 mb-12 shadow-[0_20px_50px_rgba(6,108,95,0.3)]" data-aos="zoom-in-up">
+            <!-- Decorative Elements -->
+            <div class="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-white opacity-10 rounded-full blur-[120px] animate-pulse"></div>
+            <div class="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-[#F77F1E] opacity-10 rounded-full blur-[150px]"></div>
+            
+            <!-- Animated Background Shapes -->
+            <div class="absolute top-1/4 left-10 w-4 h-4 bg-white/20 rounded-full animate-bounce"></div>
+            <div class="absolute bottom-1/4 right-20 w-6 h-6 bg-white/10 rounded-full animate-ping" style="animation-duration: 3s;"></div>
 
-                <div class="fixed inset-0 bg-black bg-opacity-30 z-[29]" x-show="sidebarOpen" x-transition.opacity
-                    @click="sidebarOpen = false" x-cloak></div>
+            <div class="relative z-10 text-center max-w-4xl mx-auto">
+                <div class="inline-block px-4 py-1.5 mb-6 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-bold tracking-widest uppercase" data-aos="fade-down">
+                    {{ __('Premium Electrical Solutions') }}
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black text-white mb-8 uppercase tracking-tighter leading-none" data-aos="fade-up" data-aos-delay="100">
+                    {{ __('Our') }} <span class="shining-text">{{ __('Collection') }}</span>
+                </h1>
+                <p class="text-lg md:text-2xl text-white/80 mb-12 font-medium max-w-2xl mx-auto leading-relaxed" data-aos="fade-up" data-aos-delay="200">
+                    {{ __('Elevating industry standards with precision-engineered products designed for reliability and safety.') }}
+                </p>
 
-                <div class="fixed top-0 left-0 w-64 h-full bg-[#FFFCF0] shadow-lg p-4 z-[30] transform transition-transform duration-300 ease-in-out"
-                    :class="{ 'translate-x-0': sidebarOpen, '-translate-x-full': !sidebarOpen }" x-cloak>
-                    <a href="{{ url('/') }}"
-                        class="block py-2 text-[#066C5F] border-b-[1.5px] hover:text-[#066c5fad] font-bold">{{ __('Home') }}</a>
-                    <a href="{{ url('/about') }}"
-                        class="block py-2 border-b-[1.5px] text-[#066C5F] hover:text-[#066c5fad] font-bold">{{ __('About Us') }}</a>
-                    <a href="{{ route('contact-us') }}"
-                        class="block py-2 text-[#066C5F] hover:text-[#066c5fad] font-bold">{{ __('Contact Us') }}</a>
-
-                    <div class="mt-6">
-                        <label for="categoryFilter" class="block text-sm font-semibold text-[#066C5F] mb-2">{{ __('Pilih Kategori') }}</label>
-                        <select id="categoryFilter" onchange="filterProducts()"
-                            class="w-full p-2 border border-gray-300 rounded-lg text-[#066C5F] focus:outline-none focus:ring-2 focus:ring-[#0dd8bd]">
-                            <option value="">{{ __('Semua Kategori') }}</option>
-                             @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ __($category->name) }}</option>
-                            @endforeach
-                        </select>
+                <!-- Search Container -->
+                <div class="relative max-w-2xl mx-auto group shadow-2xl rounded-3xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="absolute inset-y-0 left-0 pl-7 flex items-center pointer-events-none">
+                        <svg class="h-6 w-6 text-gray-400 group-focus-within:text-[#066C5F] transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <input type="text" id="searchInput" 
+                        placeholder="{{ __('Search by name or product code...') }}"
+                        class="w-full pl-16 pr-8 py-6 rounded-3xl text-xl text-gray-800 bg-white/95 backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-[#F77F1E]/40 transition-all border-none placeholder-gray-400"
+                        oninput="filterProducts()">
+                </div>
+            </div>
+            <div class="px-4">
+            <!-- Filters Section -->
+            <div class="mb-16" data-aos="fade-up">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-8 mb-10 border-b border-gray-100 pb-10">
+                    <div class="flex flex-col items-center lg:items-start">
+                        <div class="flex items-center gap-3 mb-2">
+                             <div class="w-2 h-8 bg-[#F77F1E] rounded-full"></div>
+                             <h2 class="text-3xl font-black text-white tracking-tight">{{ __('Product Categories') }}</h2>
+                        </div>
+                        <p class="text-gray-200 font-medium">{{ __('Browse by series and technical classification') }}</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-3 overflow-x-auto pb-4 lg:pb-0 no-scrollbar w-full lg:w-auto scroll-smooth">
+                        <button onclick="filterByCategory('')" 
+                            class="category-pill active whitespace-nowrap px-8 py-3 rounded-2xl border-2 border-transparent font-bold bg-white text-gray-600 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-2" id="cat-all">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+                            {{ __('All Products') }}
+                        </button>
+                        @foreach ($categories as $category)
+                            <button onclick="filterByCategory('{{ $category->id }}')" 
+                                class="category-pill whitespace-nowrap px-8 py-3 rounded-2xl border-2 border-transparent font-bold bg-white text-gray-600 shadow-sm hover:shadow-md transition-all duration-300" id="cat-{{ $category->id }}">
+                                {{ __($category->name) }}
+                            </button>
+                        @endforeach
                     </div>
                 </div>
 
-                <button class="z-[31] text-white bg-[#0dd8bd] p-2 rounded-full" @click="sidebarOpen = true">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-
-                <input type="text" id="searchInput" placeholder="{{ __('Cari produk...') }}"
-                    class="my-6 w-full max-w-sm mx-auto block rounded-full px-8 py-4 text-lg text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#0dd8bd] shadow"
-                    oninput="filterProducts()">
-
-                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Product Grid -->
+                <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
                     @forelse ($products as $product)
                         @php
-                            $searchText = strtolower(
-                                $product->name . ' ' . $product->kode . ' ' . ($product->custom_input ?? ''),
-                            );
+                            $searchText = strtolower($product->name . ' ' . $product->kode . ' ' . ($product->custom_input ?? ''));
                             $customInput = json_decode($product->custom_input, true);
                         @endphp
-                        <div class="product-card w-full bg-[#fdfbee68] border border-[#ffffff] text-white sm:p-4 px-7 sm:rounded-2xl rounded-full shadow-lg flex flex-row sm:flex-col justify-between relative overflow-hidden backdrop-blur-[8px] transition-transform transform hover:scale-[1.01] hover:shadow-xl duration-300"
-                            data-category-id="{{ $product->category_id }}" data-search="{{ $searchText }}">
-                            <div
-                                class="sm:flex sm:flex-col flex justify-between items-center sm:justify-between flex-grow sm:items-center sm:text-center">
-                                <div class="font-bold text-base hidden sm:block sm:text-lg product-name">
-                                    {{ \Illuminate\Support\Str::limit($product->name, 19) }}
-                                </div>
+                        <div class="product-card group relative bg-white rounded-[32px] shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(6,108,95,0.12)] transition-all duration-500 overflow-hidden border border-gray-50 flex flex-col h-full" 
+                             data-category-id="{{ $product->category_id }}" 
+                             data-search="{{ $searchText }}"
+                             data-aos="fade-up"
+                             data-aos-delay="{{ ($loop->index % 4) * 100 }}">
+                            
+                            <!-- Category Badge Float -->
+                            <div class="absolute top-6 left-6 z-20">
+                                <span class="bg-white/80 backdrop-blur-md px-4 py-1.5 rounded-full text-[10px] font-black text-[#066C5F] uppercase tracking-widest border border-gray-100 shadow-sm">
+                                    {{ __($product->category->name ?? '') }}
+                                </span>
+                            </div>
 
-                                <div
-                                    class="font-semibold text-base hidden sm:block sm:text-[13px] sm:text-gray-300 product-code">
-                                    @if ($customInput)
-                                        @foreach ($customInput as $key => $value)
-                                            <div class="capitalize">{{ __(ucfirst($key)) }}:
-                                                {{ \Illuminate\Support\Str::limit(__($value), 20) }}</div>
-                                        @endforeach
-                                    @else
-                                        {{ $product->kode }}
-                                    @endif
-                                </div>
+                            <!-- Product Image Container -->
+                            <div class="relative h-72 overflow-hidden bg-gray-50/50 group-hover:bg-white transition-colors duration-500 flex items-center justify-center p-12">
+                                <img src="{{ asset('storage/' . $product->image) }}" 
+                                     alt="{{ $product->name }}" 
+                                     class="max-w-full max-h-full object-contain transform group-hover:scale-110 group-hover:rotate-2 transition-all duration-700 ease-out">
+                                
+                                <!-- Decorative background circle -->
+                                <div class="absolute inset-0 bg-radial-gradient from-[#066C5F]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                            </div>
 
-                                <img class="w-16 h-1w-16 object-contain md:rounded-lg rounded-full sm:w-full"
-                                    src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" />
-
-                                <div>
-                                    <div class="font-bold text-base sm:hidden block sm:text-lg">
-                                        {{ \Illuminate\Support\Str::limit($product->name, 10) }}
+                            <!-- Product Info -->
+                            <div class="p-8 flex flex-col flex-grow">
+                                <div class="mb-6 flex-grow">
+                                    <div class="text-[11px] font-bold text-[#F77F1E] mb-2 tracking-widest uppercase flex items-center gap-2">
+                                        <span class="w-1.5 h-1.5 bg-[#F77F1E] rounded-full"></span>
+                                        {{ $product->kode ?? 'SKU-VINSA' }}
                                     </div>
-                                    <div class="text-[12px] sm:hidden text-gray-200">
+                                    <h3 class="text-2xl font-black text-gray-900 group-hover:text-[#066C5F] transition-colors duration-300 leading-tight mb-4" title="{{ $product->name }}">
+                                        {{ $product->name }}
+                                    </h3>
+
+                                    <!-- Technical Details Pills -->
+                                    <div class="flex flex-wrap gap-2">
                                         @if ($customInput)
+                                            @php $count = 0; @endphp
                                             @foreach ($customInput as $key => $value)
-                                                <div class="capitalize">{{ __(ucfirst($key)) }}:
-                                                    {{ \Illuminate\Support\Str::limit(__($value), 15) }}</div>
+                                                @if($count < 3)
+                                                    <span class="px-3 py-1 bg-gray-50 rounded-lg text-[10px] font-bold text-gray-500 border border-gray-100">
+                                                        {{ __(ucfirst($key)) }}: {{ \Illuminate\Support\Str::limit(__($value), 15) }}
+                                                    </span>
+                                                @endif
+                                                @php $count++; @endphp
                                             @endforeach
-                                            <div>{{ $product->kode }}</div>
-                                        @else
-                                            {{ $product->kode }}
                                         @endif
                                     </div>
                                 </div>
 
-                                <div class="text-[12px] hidden sm:block">
-                                    @if ($customInput)
-                                        {{ $product->kode }}
-                                    @endif
-                                </div>
-
-                                <div class="flex justify-end sm:justify-center items-center">
-                                    <a href="/detail/{{ $product->id }}"
-                                        class="py-2 px-4 md:mt-3 text-sm font-semibold rounded-lg bg-white text-[#066c5f] hover:bg-gray-200 transition hidden sm:block">
-                                        {{ __('Spesifikasi Product') }}
-                                    </a>
-
-                                    <a href="/detail/{{ $product->id }}"
-                                        class="group relative h-10 w-10 flex justify-center items-center sm:hidden overflow-hidden cursor-pointer rounded-full"
-                                        style="--spread: 90deg; --shimmer-color: #fff; --radius: 99999px; --speed: 2.7s; --cut: 0.05em;">
-                                        <div class="absolute inset-0 rounded-full animate-rotate-border -z-10"
-                                            style="background: conic-gradient(from calc(270deg - (var(--spread) * 0.5)), transparent 0, var(--shimmer-color) var(--spread), transparent var(--spread));">
-                                        </div>
-                                        <div class="relative z-10 p-2 rounded-full bg-[#6CD6C2]">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white"
-                                                fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M9 5l7 7-7 7" />
-                                            </svg>
-                                        </div>
-                                    </a>
-                                </div>
+                                <!-- Action Button -->
+                                <a href="{{ route('product.show', $product->id) }}" 
+                                   class="group/btn relative overflow-hidden flex items-center justify-center gap-3 w-full py-4 bg-[#066C5F] text-white rounded-2xl font-black text-sm tracking-wide shadow-lg shadow-[#066C5F]/20 hover:shadow-[#F77F1E]/30 transition-all duration-500">
+                                    <span class="relative z-10">{{ __('VIEW SPECIFICATIONS') }}</span>
+                                    <svg class="w-5 h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                                    </svg>
+                                    <div class="absolute inset-0 bg-[#F77F1E] translate-y-full group-hover/btn:translate-y-0 transition-transform duration-500"></div>
+                                </a>
                             </div>
                         </div>
                     @empty
-                        <div class="col-span-4 text-center text-white py-8">
-                            {{ __('Belum ada produk yang ditambahkan.') }}
+                        <div class="col-span-full flex flex-col items-center justify-center py-32 text-center" data-aos="fade-up">
+                            <div class="w-32 h-32 bg-gray-50 rounded-[40px] flex items-center justify-center mb-8 border border-gray-100 shadow-inner">
+                               <svg class="w-16 h-16 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 00-2 2H6a2 2 0 00-2 2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                                </svg>
+                            </div>
+                            <h3 class="text-3xl font-black text-gray-300 mb-4">{{ __('No Products Found') }}</h3>
+                            <p class="text-gray-400 max-w-sm mx-auto font-medium">{{ __('Our engineering team is currently updating this collection. Please check back soon.') }}</p>
                         </div>
                     @endforelse
+
+                    <!-- Empty Search Result -->
+                    <div id="noResults" class="col-span-full hidden flex-col items-center justify-center py-32 text-center">
+                        <div class="w-32 h-32 bg-gray-50 rounded-[40px] flex items-center justify-center mb-8 border border-gray-100">
+                            <svg class="w-16 h-16 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </div>
+                        <h3 class="text-3xl font-black text-gray-300 mb-4">{{ __('Search Not Found') }}</h3>
+                        <p class="text-gray-400 max-w-sm mx-auto font-medium">{{ __('Try different keywords or browse our categories to find what you need.') }}</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -248,19 +271,64 @@
 
     <x-footer></x-footer>
 
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-expo'
+        });
+
+        let currentCategory = "";
+
+        function filterByCategory(id) {
+            currentCategory = id;
+            
+            // Reset all pills
+            document.querySelectorAll('.category-pill').forEach(pill => {
+                pill.classList.remove('active', 'bg-[#F77F1E]', 'text-white', 'shadow-[#F77F1E]/30', 'border-[#F77F1E]');
+                pill.classList.add('bg-white', 'text-gray-600');
+            });
+            
+            // Set active pill
+            const targetPill = id === "" ? document.getElementById('cat-all') : document.getElementById('cat-' + id);
+            if (targetPill) {
+                targetPill.classList.add('active');
+                targetPill.classList.remove('bg-white', 'text-gray-600');
+            }
+
+            filterProducts();
+        }
+
         function filterProducts() {
             const searchInput = document.getElementById('searchInput').value.toLowerCase();
-            const categoryFilter = document.getElementById('categoryFilter')?.value;
             const cards = document.querySelectorAll('.product-card');
+            const noResults = document.getElementById('noResults');
+            let foundCount = 0;
 
             cards.forEach(card => {
                 const searchData = card.getAttribute('data-search') || '';
                 const category = card.getAttribute('data-category-id');
+                
                 const matchesSearch = searchData.includes(searchInput);
-                const matchesCategory = categoryFilter === "" || category === categoryFilter;
-                card.style.display = (matchesSearch && matchesCategory) ? '' : 'none';
+                const matchesCategory = currentCategory === "" || category === currentCategory;
+
+                if (matchesSearch && matchesCategory) {
+                    card.style.display = 'flex';
+                    foundCount++;
+                } else {
+                    card.style.display = 'none';
+                }
             });
+
+            if (foundCount === 0 && cards.length > 0) {
+                noResults.classList.remove('hidden');
+                noResults.classList.add('flex');
+            } else {
+                noResults.classList.add('hidden');
+                noResults.classList.remove('flex');
+            }
         }
     </script>
     <script src="https://unpkg.com/alpinejs" defer></script>
