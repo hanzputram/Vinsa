@@ -13,7 +13,8 @@ use App\Http\Controllers\SitemapController;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/sitemap.xml', [SitemapController::class, 'index']);
+Route::get('/sitemap.xml', [SitemapController::class, 'index'])
+    ->name('sitemap');
 
 Route::get('locale/{locale}', [LocaleController::class, 'setLocale'])->name('locale.set');
 

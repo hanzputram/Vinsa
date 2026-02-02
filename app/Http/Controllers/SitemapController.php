@@ -10,12 +10,16 @@ class SitemapController extends Controller
 {
     public function index(): Response
     {
-        $products = Product::all();
-        $blogs = Blog::where('is_published', true)->get();
+        $products = Product::select('slug', 'updated_at')->get();
 
-        return response()->view('sitemap', [
-            'products' => $products,
-            'blogs' => $blogs,
-        ])->header('Content-Type', 'text/xml');
+        $blogs = Blog::select('slug', 'updated_at', 'published_at')
+            ->where('is_published', true)
+            ->get();
+
+        return response()
+            ->view('sitemap', compact('products', 'blogs'))
+            ->header('Content-Type', 'application/xml; charset=UTF-8')
+            ->header('Cache-Control', 'public, max-age=3600');
     }
 }
+    
