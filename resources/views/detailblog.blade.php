@@ -168,7 +168,7 @@
         after:w-full after:h-full after:absolute after:top-0 after:left-0
         after:pointer-events-none
         bg-gradient-to-r from-[#066c5f] to-[#0dd8bd]
-        rounded-[40px]">
+        rounded-[40px] mb-10">
 
 
             <div class="w-full relative z-[10]">

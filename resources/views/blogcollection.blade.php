@@ -85,7 +85,7 @@
         <div
             class="relative bg-gradient-to-r from-[#066c5f] to-[#0dd8bd]
                    rounded-[40px] px-6 sm:px-10 lg:px-[5rem] py-[80px]
-                   min-h-screen">
+                   min-h-screen mb-10">
 
             <div class="relative z-10">
 
