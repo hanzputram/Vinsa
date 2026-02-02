@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Blog;
+use App\Models\Product;
+use Illuminate\Http\Response;
+
+class SitemapController extends Controller
+{
+    public function index(): Response
+    {
+        $products = Product::all();
+        $blogs = Blog::where('is_published', true)->get();
+
+        return response()->view('sitemap', [
+            'products' => $products,
+            'blogs' => $blogs,
+        ])->header('Content-Type', 'text/xml');
+    }
+}

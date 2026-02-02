@@ -9,8 +9,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\SitemapController;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/sitemap.xml', [SitemapController::class, 'index']);
 
 Route::get('locale/{locale}', [LocaleController::class, 'setLocale'])->name('locale.set');
 
