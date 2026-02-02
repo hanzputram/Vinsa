@@ -14,13 +14,7 @@ use App\Models\Blog;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/sitemap.xml', [SitemapController::class, 'index'])
-    ->name('sitemap')
-    ->withoutMiddleware([
-        \Illuminate\Cookie\Middleware\EncryptCookies::class,
-        \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
-        \Illuminate\Session\Middleware\StartSession::class,
-        \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-    ]);
+    ->name('sitemap');
 
 Route::get('locale/{locale}', [LocaleController::class, 'setLocale'])->name('locale.set');
 
