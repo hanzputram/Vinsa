@@ -1,12 +1,13 @@
 # Serve sitemap.xml as static file (bypass Laravel)
 RewriteRule ^sitemap\.xml$ - [L]
 
-<IfModule mod_headers.c>
-  <Files "sitemap.xml">
-    Header set Cache-Control "public, max-age=3600"
-  </Files>
-</IfModule>
+<IfModule mod_rewrite.c>
+    RewriteEngine On
 
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^ index.php [L]
+</IfModule>
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
