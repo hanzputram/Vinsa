@@ -22,16 +22,16 @@ Route::middleware('guest')->group(function () {
 
     Route::post('v1n544dm1n', [AuthenticatedSessionController::class, 'store']);
 
-    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
+    Route::get('v1n54-f0rg0t', [PasswordResetLinkController::class, 'create'])
         ->name('password.request');
 
-    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
+    Route::post('v1n54-f0rg0t', [PasswordResetLinkController::class, 'store'])
         ->name('password.email');
 
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+    Route::get('v1n54-r3s3t/{token}', [NewPasswordController::class, 'create'])
         ->name('password.reset');
 
-    Route::post('reset-password', [NewPasswordController::class, 'store'])
+    Route::post('v1n54-r3s3t', [NewPasswordController::class, 'store'])
         ->name('password.store');
 });
 
