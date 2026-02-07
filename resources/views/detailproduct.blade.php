@@ -251,7 +251,7 @@
                     <h2 class="text-4xl font-bold text-gray-900 mb-6">{{ __('Technical Specifications') }}</h2>
                     <div class="grid md:grid-cols-2 gap-4">
                         @foreach ($product->attributes as $attribute)
-                            <div class="flex items-center text-sm justify-between p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
+                            <div class="flex items-center text-sm justify-between space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
                                 <span class="font-semibold text-gray-700">{{ __($attribute->field_name) }} :</span>
                                 <span class="font-bold text-[#066c5f]">{{ __($attribute->field_value) }}</span>
                             </div>
