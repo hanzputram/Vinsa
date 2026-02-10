@@ -143,7 +143,7 @@
         </div>
 
         <!-- Product Detail Container -->
-        <div class="bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] gradient-animated rounded-[40px] shadow-2xl overflow-hidden mb-10">
+        <div class="bg-[#0dd8bd] rounded-[40px] shadow-2xl overflow-hidden mb-10">
             <!-- Header with Back Button -->
             <div class="p-6 lg:p-10">
                 <a href="javascript:window.history.back()" class="inline-flex items-center gap-2 text-white hover:text-white/80 transition-all group mb-6">
