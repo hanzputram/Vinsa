@@ -20,7 +20,7 @@ Route::get('locale/{locale}', [LocaleController::class, 'setLocale'])->name('loc
 
 Route::get('/', [NewController::class, 'show']);
 Route::get('/about', [AboutController::class, 'show']);
-Route::get('/product', [ProductController::class, 'index'])->name('products.view.user');
+Route::get('/product/{category?}', [ProductController::class, 'index'])->name('products.view.user');
 Route::get('/detail/{slug}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/new', [NewController::class, 'show'])->name('home');
 Route::get('/blog/{slug}', [BlogController::class, 'showPublic'])->name('blog.public');

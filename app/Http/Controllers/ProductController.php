@@ -7,12 +7,30 @@ use App\Models\ProductAtribute;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $category = null)
     {
-        $query = Product::with('attributes');
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $query = Product::with('attributes', 'category');
+
+        if ($category) {
+            $categoryModel = Category::all()->filter(function ($c) use ($category) {
+                return Str::slug($c->name) === $category;
+            })->first();
+
+            if ($categoryModel) {
+                $query->where('category_id', $categoryModel->id);
+            }
+        }
+
+        if ($request->has('category') && $request->category !== null) {
+            $query->where('category_id', $request->category);
+        }
 
         if ($request->has('search') && $request->search !== null) {
             $searchTerm = $request->search;
@@ -231,11 +249,13 @@ public function show($param)
             }
         }
 
-        auth()->user()->histories()->create([
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->histories()->create([
             'action' => 'create',
             'entity_type' => 'product',
             'entity_id' => $product->id,
-            'description' => auth()->user()->name . ' menambahkan produk baru: ' . $product->name,
+            'description' => $user->name . ' menambahkan produk baru: ' . $product->name,
         ]);
 
         return redirect()->route('products.view', $product->id)->with('success', 'Produk berhasil ditambahkan!');
@@ -404,11 +424,13 @@ public function show($param)
         }
 
         if (!empty($historyChanges)) {
-            auth()->user()->histories()->create([
+            /** @var \App\Models\User $user */
+            $user = Auth::user();
+            $user->histories()->create([
                 'action' => 'update',
                 'entity_type' => 'product',
                 'entity_id' => $product->id,
-                'description' => auth()->user()->name . ' memperbarui produk "' . $product->name . '" dengan perubahan: ' . implode(', ', $historyChanges),
+                'description' => $user->name . ' memperbarui produk "' . $product->name . '" dengan perubahan: ' . implode(', ', $historyChanges),
             ]);
         }
 
@@ -427,11 +449,13 @@ public function show($param)
         $product->attributes()->delete();
         $product->delete();
 
-        auth()->user()->histories()->create([
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $user->histories()->create([
             'action' => 'delete',
             'entity_type' => 'product',
             'entity_id' => $id,
-            'description' => auth()->user()->name . ' menghapus produk: ' . $productName,
+            'description' => $user->name . ' menghapus produk: ' . $productName,
         ]);
 
         return redirect()->route('products.edit')->with('success', 'Produk berhasil dihapus.');

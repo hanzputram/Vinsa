@@ -17,7 +17,7 @@
     <script src="https://analytics.ahrefs.com/analytics.js" data-key="+dmea0Inq5AGGqalX2/X/w" async></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
@@ -105,6 +105,7 @@
 </head>
 
 <body class="outfit bg-[#FDFBEE] min-h-screen">
+    <x-app-loader />
     <div class="max-w-[95%] mx-auto">
         <!-- Navigation -->
         <div class="flex justify-between items-center py-4">

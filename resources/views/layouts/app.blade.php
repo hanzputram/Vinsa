@@ -28,6 +28,7 @@
 </head>
 
 <body class="outfit antialiased bg-[#f8fafc] text-slate-900" x-data="{ sidebarOpen: false }">
+    <x-app-loader />
     <div class="flex min-h-screen">
         <!-- Sidebar container -->
         @include('layouts.navigation')

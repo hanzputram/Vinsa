@@ -25,6 +25,7 @@
     </style>
 </head>
 <body class="outfit antialiased bg-[#f8fafc] text-slate-900">
+    <x-app-loader />
     <div class="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
         <!-- Abstract Background Orbs -->
         <div class="absolute top-0 -left-4 w-72 h-72 bg-[#066c5f]/10 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
