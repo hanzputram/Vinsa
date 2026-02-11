@@ -5,7 +5,7 @@
         <div class="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#066c5f] rounded-full blur-[120px]"></div>
     </div>
 
-    <div class="mx-auto w-[93%] relative z-10">
+    <div class="mx-auto w-[95%] relative z-10">
         <!-- Floating WhatsApp Section (Reverted to Original Style & Position) -->
         <a href="https://wa.me/6281335715398" id="fixedWhatsapp">
             <div class="w-[75px] h-[75px] fixed bottom-[20px] left-[20px] z-[1000] bg-[#ffffff4d] rounded-full backdrop-blur-[2px] flex items-center justify-center border border-gray-200/50 shadow-lg">

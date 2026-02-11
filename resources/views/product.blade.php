@@ -106,7 +106,7 @@
 
 <body class="outfit bg-[#FDFBEE] min-h-screen">
     <x-app-loader />
-    <div class="max-w-[95%] mx-auto">
+    <main class="max-w-[95%] mx-auto">
         <!-- Navigation -->
         <div class="flex justify-between items-center py-4">
             <x-navUser class="relative z-50"></x-navUser>
@@ -268,9 +268,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
-    <x-footer></x-footer>
+    <x-footer />
 
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -334,5 +334,6 @@
     </script>
     <script src="https://unpkg.com/alpinejs" defer></script>
 </body>
+
 
 </html>
