@@ -119,7 +119,7 @@
             <div class="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-[#F77F1E] opacity-10 rounded-full blur-[150px]"></div>
             
             <!-- Animated Background Shapes -->
-            <div class="absolute top-1/4 left-10 w-4 h-4 bg-white/20 rounded-full animate-bounce"></div>
+            <!-- <div class="absolute top-1/4 left-10 w-4 h-4 bg-white/20 rounded-full animate-bounce"></div> -->
             <div class="absolute bottom-1/4 right-20 w-6 h-6 bg-white/10 rounded-full animate-ping" style="animation-duration: 3s;"></div>
 
             <div class="relative z-10 text-center max-w-4xl mx-auto">
@@ -151,7 +151,7 @@
             <div class="mb-16" data-aos="fade-up">
                 <div class="flex flex-col lg:flex-row items-center justify-between gap-8 mb-10 border-b border-gray-100 pb-10">
                     <div class="flex flex-col items-center lg:items-start">
-                        <div class="flex items-center gap-3 mb-2">
+                        <div class="flex items-center gap-3 mb-2 md:mt-10 lg:mt-0">
                              <div class="w-2 h-8 bg-[#F77F1E] rounded-full"></div>
                              <h2 class="text-3xl font-black text-white tracking-tight">{{ __('Product Categories') }}</h2>
                         </div>

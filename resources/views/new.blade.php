@@ -235,8 +235,8 @@
                     $categorySlug = \Illuminate\Support\Str::slug($category->name);
                 @endphp
 
-                <div class="grid grid-cols-12 row-span-1 gap-4">
-                    {{-- KIRI: Gambar dan nama kategori --}}
+                <div class="grid grid-cols-12 gap-4 row-span-1  ">
+                    <!-- {{-- KIRI: Gambar dan nama kategori --}}
                     @if (strtolower($category->name) === 'accessories')
                         <div
                             class="bg-[#5f5f5f60] border-white border-[1.5px] col-span-2 hidden p-4 text-center rounded-xl overflow-hidden shadow-md md:flex md:flex-col items-center justify-start md:hidden lg:block">
@@ -273,10 +273,10 @@
                                 </div>
                             @endif
                         </div>
-                    @endif
+                    @endif -->
 
                     {{-- KANAN: Produk dalam slider horizontal --}}
-                    <div class="col-span-12 lg:col-span-10 bg-[#5f5f5f60]/30 backdrop-blur-sm rounded-3xl p-6 md:hidden lg:block shadow-xl border border-white/10">
+                    <div class="col-span-12 bg-[#5f5f5f60]/30 backdrop-blur-sm w-full rounded-3xl p-6 md:hidden lg:block shadow-xl border border-white/10">
                         <h3 class="text-xl font-bold mb-4 border-b-[1.5px] pb-3 border-white/20 flex items-center gap-2">
                             <span class="w-1.5 h-6 bg-[#066c5f] rounded-full"></span>
                             <a href="{{ route('products.view.user', \Illuminate\Support\Str::slug($category->name)) }}" class="hover:text-[#066C5F] transition-colors uppercase">

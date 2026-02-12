@@ -9,14 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+public function up(): void
+{
+    if (!Schema::hasTable('visits')) {
         Schema::create('visits', function (Blueprint $table) {
             $table->id();
             $table->string('ip_address');
             $table->timestamp('visited_at');
         });
     }
+}
 
     /**
      * Reverse the migrations.
