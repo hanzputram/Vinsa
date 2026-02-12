@@ -257,7 +257,11 @@
                     @else
                         <div
                             class="bg-[#5f5f5f60] border-white border-[1.5px] col-span-2 hidden p-4 text-center rounded-xl overflow-hidden shadow-md items-center justify-start md:hidden lg:block">
-                            <h3 class="text-lg font-bold mb-2">{{ $category->name }}</h3>
+                            <h3 class="text-lg font-bold mb-2">
+                                <a href="{{ route('products.view.user', \Illuminate\Support\Str::slug($category->name)) }}" class="hover:text-[#066C5F] transition-colors uppercase">
+                                    {{ $category->name }}
+                                </a>
+                            </h3>
 
                             @if ($firstProduct && $firstProduct->image)
                                 <img src="{{ asset('storage/' . $firstProduct->image) }}"
@@ -275,7 +279,9 @@
                     <div class="col-span-12 lg:col-span-10 bg-[#5f5f5f60]/30 backdrop-blur-sm rounded-3xl p-6 md:hidden lg:block shadow-xl border border-white/10">
                         <h3 class="text-xl font-bold mb-4 border-b-[1.5px] pb-3 border-white/20 flex items-center gap-2">
                             <span class="w-1.5 h-6 bg-[#066c5f] rounded-full"></span>
-                            {{ $category->name }}
+                            <a href="{{ route('products.view.user', \Illuminate\Support\Str::slug($category->name)) }}" class="hover:text-[#066C5F] transition-colors uppercase">
+                                {{ $category->name }}
+                            </a>
                         </h3>
 
                         @if ($category->products->count())

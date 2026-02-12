@@ -159,18 +159,18 @@
                     </div>
                     
                     <div class="flex items-center gap-3 overflow-x-auto pb-4 lg:pb-0 no-scrollbar w-full lg:w-auto scroll-smooth">
-                        <button onclick="filterByCategory('')" 
-                            class="category-pill active whitespace-nowrap px-8 py-3 rounded-2xl border-2 border-transparent font-bold bg-white text-gray-600 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-2" id="cat-all">
+                        <a href="{{ route('products.view.user') }}" 
+                            class="category-pill {{ !$activeCategoryId ? 'active' : '' }} whitespace-nowrap px-8 py-3 rounded-2xl border-2 border-transparent font-bold bg-white text-gray-600 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-2" id="cat-all">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                             </svg>
                             {{ __('All Products') }}
-                        </button>
+                        </a>
                         @foreach ($categories as $category)
-                            <button onclick="filterByCategory('{{ $category->id }}')" 
-                                class="category-pill whitespace-nowrap px-8 py-3 rounded-2xl border-2 border-transparent font-bold bg-white text-gray-600 shadow-sm hover:shadow-md transition-all duration-300" id="cat-{{ $category->id }}">
+                            <a href="{{ route('products.view.user', \Illuminate\Support\Str::slug($category->name)) }}" 
+                                class="category-pill {{ $activeCategoryId == $category->id ? 'active' : '' }} whitespace-nowrap px-8 py-3 rounded-2xl border-2 border-transparent font-bold bg-white text-gray-600 shadow-sm hover:shadow-md transition-all duration-300" id="cat-{{ $category->id }}">
                                 {{ __($category->name) }}
-                            </button>
+                            </a>
                         @endforeach
                     </div>
                 </div>
@@ -212,8 +212,8 @@
                                         <span class="w-1.5 h-1.5 bg-[#F77F1E] rounded-full"></span>
                                         {{ $product->kode ?? 'SKU-VINSA' }}
                                     </div>
-                                    <h3 class="text-2xl font-black text-gray-900 group-hover:text-[#066C5F] transition-colors duration-300 leading-tight mb-4" title="{{ $product->name }}">
-                                        {{ $product->name }}
+                                    <h3 class="text-2xl font-black text-gray-900 group-hover:text-[#066C5F] transition-colors duration-300 leading-tight mb-4 line-clamp-2 h-16" title="{{ $product->name }}">
+                                        {{ \Illuminate\Support\Str::limit($product->name, 50) }}
                                     </h3>
 
                                     <!-- Technical Details Pills -->
@@ -281,7 +281,7 @@
             easing: 'ease-out-expo'
         });
 
-        let currentCategory = "";
+        let currentCategory = "{{ $activeCategoryId ?? '' }}";
 
         function filterByCategory(id) {
             currentCategory = id;

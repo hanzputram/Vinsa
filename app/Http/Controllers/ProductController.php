@@ -17,6 +17,7 @@ class ProductController extends Controller
         /** @var \App\Models\User $user */
         $user = Auth::user();
         $query = Product::with('attributes', 'category');
+        $activeCategoryId = null;
 
         if ($category) {
             $categoryModel = Category::all()->filter(function ($c) use ($category) {
@@ -25,11 +26,13 @@ class ProductController extends Controller
 
             if ($categoryModel) {
                 $query->where('category_id', $categoryModel->id);
+                $activeCategoryId = $categoryModel->id;
             }
         }
 
         if ($request->has('category') && $request->category !== null) {
             $query->where('category_id', $request->category);
+            $activeCategoryId = $request->category;
         }
 
         if ($request->has('search') && $request->search !== null) {
@@ -43,7 +46,7 @@ class ProductController extends Controller
         $products = $query->get();
         $categories = Category::all();
 
-        return view('product', compact('products', 'categories'));
+        return view('product', compact('products', 'categories', 'activeCategoryId'));
     }
 
 public function show($param)
