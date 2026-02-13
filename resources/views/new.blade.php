@@ -2101,11 +2101,74 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const sliders = document.querySelectorAll('.slider-container');
+        
+        // Function to check and toggle navigation buttons visibility
+        function updateNavigationButtons() {
+            document.querySelectorAll('.group\\/slider, .group\\/outer-slider').forEach(sliderGroup => {
+                const container = sliderGroup.querySelector('.slider-container');
+                if (!container) return;
+                
+                const hasScroll = container.scrollWidth > container.clientWidth;
+                const buttons = sliderGroup.querySelectorAll('button[onclick*="scrollSlider"]');
+                
+                buttons.forEach(button => {
+                    if (hasScroll) {
+                        button.style.display = 'flex';
+                    } else {
+                        button.style.display = 'none';
+                    }
+                });
+            });
+        }
+        
+        // Initial check
+        updateNavigationButtons();
+        
+        // Recheck on window resize
+        window.addEventListener('resize', updateNavigationButtons);
+        
         sliders.forEach(slider => {
+            // Block vertical scroll completely on horizontal sliders
             slider.addEventListener('wheel', function(e) {
-                if (e.deltaY !== 0) {
+                const hasHorizontalScroll = slider.scrollWidth > slider.clientWidth;
+                
+                if (hasHorizontalScroll) {
+                    // Only allow horizontal wheel scrolling (trackpad horizontal swipe)
+                    if (e.deltaX !== 0) {
+                        // Allow horizontal scrolling
+                        slider.scrollLeft += e.deltaX;
+                    }
+                    
+                    // Block vertical wheel completely - don't convert it
+                    if (e.deltaY !== 0) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // Do nothing - vertical scroll is blocked
+                    }
+                }
+            }, { passive: false });
+
+            // Prevent vertical scroll on touch devices during horizontal swipe
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let scrollStartLeft = 0;
+            
+            slider.addEventListener('touchstart', function(e) {
+                touchStartX = e.touches[0].clientX;
+                touchStartY = e.touches[0].clientY;
+                scrollStartLeft = slider.scrollLeft;
+            }, { passive: true });
+            
+            slider.addEventListener('touchmove', function(e) {
+                const touchX = e.touches[0].clientX;
+                const touchY = e.touches[0].clientY;
+                const deltaX = touchStartX - touchX;
+                const deltaY = touchStartY - touchY;
+                
+                // If horizontal movement is greater than vertical, prevent page scroll
+                if (Math.abs(deltaX) > Math.abs(deltaY)) {
                     e.preventDefault();
-                    slider.scrollLeft += e.deltaY * 0.8;
+                    slider.scrollLeft = scrollStartLeft + deltaX;
                 }
             }, { passive: false });
         });
