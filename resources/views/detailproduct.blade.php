@@ -28,6 +28,21 @@
 
         $metaTitle = $product->meta_title ?: $product->name . ' | Vinsa Electric';
         $metaDesc = $product->meta_description ?: Str::limit(strip_tags($product->description ?? ''), 155);
+
+        if (!function_exists('formatToTitleCase')) {
+            function formatToTitleCase($text) {
+                return preg_replace_callback('/[a-zA-Z0-9]+/', function($matches) {
+                    $word = $matches[0];
+                    if (preg_match('/[0-9]/', $word)) {
+                        return $word;
+                    }
+                    if (preg_match('/[A-Z]{2,}/', $word)) {
+                        return $word;
+                    }
+                    return ucfirst(strtolower($word));
+                }, $text);
+            }
+        }
     @endphp
 
     <title>{{ $metaTitle }}</title>
@@ -253,8 +268,8 @@
                     <div class="grid md:grid-cols-2 gap-4">
                         @foreach ($product->attributes as $attribute)
                             <div class="flex items-center text-sm justify-between space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-                                <span class="font-semibold text-gray-700">{{ __($attribute->field_name) }} :</span>
-                                <span class="font-bold text-right text-[#066c5f]">{{ __($attribute->field_value) }}</span>
+                                <span class="font-semibold text-gray-700">{{ formatToTitleCase(__($attribute->field_name)) }} :</span>
+                                <span class="font-bold text-right text-[#066c5f]">{{ formatToTitleCase(__($attribute->field_value)) }}</span>
                             </div>
                         @endforeach
                     </div>
