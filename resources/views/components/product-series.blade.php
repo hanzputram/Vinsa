@@ -9,9 +9,9 @@
     // Convert to collection if it's an array
     $itemCollection = collect($items)->values();
     
-    $hasMore = $itemCollection->count() > 3;
-    $initial = $itemCollection->take(3);
-    $rest = $itemCollection->skip(3);
+    $hasMore = $itemCollection->count() > 2;
+    $initial = $itemCollection->take(2);
+    $rest = $itemCollection->skip(2);
     $dropdownId = 'dropdown-' . Str::slug($seriesName) . '-' . uniqid();
 @endphp
 
@@ -42,7 +42,7 @@
                 </div>
 
                 {{-- Trigger Button --}}
-                <div class="flex justify-center mt-auto group w-full pt-2">
+                <div class="flex justify-center mt-auto group w-full pt-2 pb-3">
                     <button type="button" 
                         onclick="toggleProductDropdown('{{ $dropdownId }}', this)" 
                         class="px-5 py-2 w-full bg-white/10 hover:bg-white/20 rounded-xl text-white font-semibold text-xs shadow-md backdrop-blur transition-all duration-300 flex items-center justify-center gap-2">

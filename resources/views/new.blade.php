@@ -1845,24 +1845,12 @@
         window.addEventListener('resize', updateNavigationButtons);
         
         sliders.forEach(slider => {
-            // Block vertical scroll completely on horizontal sliders
             slider.addEventListener('wheel', function(e) {
-                const hasHorizontalScroll = slider.scrollWidth > slider.clientWidth;
-                
-                if (hasHorizontalScroll) {
-                    // Only allow horizontal wheel scrolling (trackpad horizontal swipe)
-                    if (e.deltaX !== 0) {
-                        // Allow horizontal scrolling
-                        slider.scrollLeft += e.deltaX;
-                    }
-                    
-                    // Block vertical wheel completely - don't convert it
-                    if (e.deltaY !== 0) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        // Do nothing - vertical scroll is blocked
-                    }
+                // Cegah pergerakan horizontal dari touchpad atau mouse (shift+scroll)
+                if (Math.abs(e.deltaX) !== 0) {
+                    e.preventDefault();
                 }
+                // Biarkan vertical scroll (e.deltaY) lolos agar seluruh halaman ikut terscroll
             }, { passive: false });
 
             // Prevent vertical scroll on touch devices during horizontal swipe
