@@ -15,7 +15,7 @@
     $dropdownId = 'dropdown-' . Str::slug($seriesName) . '-' . uniqid();
 @endphp
 
-<div class="snap-start w-[100%] sm:w-[80%] md:w-[calc(50%-0.5rem)] flex-shrink-0 bg-white/5 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-lg relative flex flex-col transition-all duration-500">
+<div class="snap-start w-[100%] sm:w-[80%] md:w-[calc(50%-0.5rem)] flex-shrink-0 bg-white/5 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-lg relative flex flex-col h-fit transition-all duration-500">
     <h4 class="text-md font-bold mb-4 text-white">
         {{ $seriesName }}
     </h4>
