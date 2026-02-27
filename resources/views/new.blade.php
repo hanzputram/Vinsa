@@ -296,9 +296,9 @@
 
                         @if ($category->products->count())
                             @if (strtolower($category->name) === 'push button')
-                                <div class="flex flex-col md:flex-row gap-4 mb-10">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                                     {{-- KB 5 Series --}}
-                                    <div class="w-full md:w-1/2 md:border-r-[1.5px] md:border-white/10 text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 5 Series
@@ -363,7 +363,7 @@
                                     </div>
 
                                     {{-- KB 2 Series --}}
-                                    <div class="w-full md:w-1/2 md:pl-[13.5px] text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 2 Series
@@ -426,9 +426,9 @@
                                     </div>
                                 </div>
                             @elseif (strtolower($category->name) === 'illuminated push button')
-                                <div class="flex flex-col md:flex-row gap-4 mb-10">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                                     {{-- KB 5 Series --}}
-                                    <div class="w-full md:w-1/2 md:border-r-[1.5px] md:border-white/10 text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 5 Series
@@ -493,7 +493,7 @@
                                     </div>
 
                                     {{-- KB 2 Series --}}
-                                    <div class="w-full md:w-1/2 md:pl-[13.5px] text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 2 Series
@@ -556,9 +556,9 @@
                                     </div>
                                 </div>
                             @elseif (strtolower($category->name) === 'emergency push button')
-                                <div class="flex flex-col md:flex-row gap-4 mb-10">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                                     {{-- KB 5 Series --}}
-                                    <div class="w-full md:w-1/2 md:border-r-[1.5px] md:border-white/10 text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 5 Series
@@ -623,7 +623,7 @@
                                     </div>
 
                                     {{-- KB 2 Series --}}
-                                    <div class="w-full md:w-1/2 md:pl-[13.5px] text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 2 Series
@@ -686,9 +686,9 @@
                                     </div>
                                 </div>
                             @elseif (strtolower($category->name) === 'illuminated selector switch')
-                                <div class="flex flex-col md:flex-row gap-4 mb-10">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                                     {{-- KB 5 Series --}}
-                                    <div class="w-full md:w-1/2 md:border-r-[1.5px] md:border-white/10 text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 5 Series
@@ -753,7 +753,7 @@
                                     </div>
 
                                     {{-- KB 2 Series --}}
-                                    <div class="w-full md:w-1/2 md:pl-[13.5px] text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 2 Series
@@ -816,9 +816,9 @@
                                     </div>
                                 </div>
                             @elseif (strtolower($category->name) === 'cable ties')
-                                <div class="flex flex-col md:flex-row gap-4 mb-10">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                                     {{-- Nylon --}}
-                                    <div class="w-full md:w-1/2 md:border-r-[1.5px] md:border-white/10 text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             Nylon Cable Ties
@@ -883,7 +883,7 @@
                                     </div>
 
                                     {{-- Stainless Steel --}}
-                                    <div class="w-full md:w-1/2 md:pl-[13.5px] text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             Stainless Steel Cable Ties
@@ -946,9 +946,9 @@
                                     </div>
                                 </div>
                             @elseif (strtolower($category->name) === 'selector switch')
-                                <div class="flex flex-col md:flex-row gap-4 mb-10">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-10">
                                     {{-- KB 5 Series --}}
-                                    <div class="w-full md:w-1/2 md:border-r-[1.5px] md:border-white/10 text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 5 Series
@@ -1013,7 +1013,7 @@
                                     </div>
 
                                     {{-- KB 2 Series --}}
-                                    <div class="w-full md:w-1/2 md:pl-[13.5px] text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 2 Series
@@ -1284,10 +1284,9 @@
                                     </button>
                                 </div>
                             @elseif (strtolower($category->name) === 'box panel')
-                                <div class="flex flex-col md:flex-row gap-4 mt-4">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                                     {{-- Wall Mounting IP65 --}}
-                                    <div
-                                        class="w-full md:w-1/2 md:border-r-[1.5px] md:border-white/10 text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             Box Panel Wall Mounting IP65
@@ -1352,8 +1351,7 @@
                                     </div>
 
                                     {{-- Free Standing IP55 --}}
-                                    <div
-                                        class="w-full md:w-[calc(50%-1rem)] md:pl-[13.5px] mr-6 text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
+                                    <div class="w-full text-white bg-white/5 backdrop-blur-md p-6 rounded-[2rem] border border-white/10">
                                         <h4 class="text-lg font-bold mb-4 flex items-center gap-2">
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             Box Panel Free Standing IP55
