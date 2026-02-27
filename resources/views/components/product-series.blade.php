@@ -9,9 +9,9 @@
     // Convert to collection if it's an array
     $itemCollection = collect($items)->values();
     
-    $hasMore = $itemCollection->count() > 2;
-    $initial = $itemCollection->take(2);
-    $rest = $itemCollection->skip(2);
+    $hasMore = $itemCollection->count() > 3;
+    $initial = $itemCollection->take(3);
+    $rest = $itemCollection->skip(3);
     $dropdownId = 'dropdown-' . Str::slug($seriesName) . '-' . uniqid();
 @endphp
 
