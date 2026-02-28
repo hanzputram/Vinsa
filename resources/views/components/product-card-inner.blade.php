@@ -3,7 +3,13 @@
         class="flex flex-col h-full bg-white/10 backdrop-blur-md border border-white/20 hover:bg-white/20 hover:border-white/40 transition-all duration-300 rounded-2xl p-4 shadow-lg">
         <div class="w-full h-32 sm:h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
             @if (!empty($productItem->image))
-                <img src="{{ asset('storage/' . $productItem->image) }}" alt="{{ $productItem->name ?? '' }}"
+                <img src="{{ asset('storage/' . $productItem->image) }}" 
+                    srcset="{{ asset('storage/' . $productItem->image) }}?w=300 300w,
+                            {{ asset('storage/' . $productItem->image) }}?w=600 600w,
+                            {{ asset('storage/' . $productItem->image) }} 1000w"
+                    sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                    loading="{{ isset($isLazy) && !$isLazy ? 'eager' : 'lazy' }}"
+                    alt="{{ $productItem->name ?? '' }}"
                     class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
             @else
                 <div class="text-xs text-white/50">{{ __('No image') }}</div>
