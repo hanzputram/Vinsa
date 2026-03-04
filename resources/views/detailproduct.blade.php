@@ -33,12 +33,23 @@
             function formatToTitleCase($text) {
                 return preg_replace_callback('/[a-zA-Z0-9]+/', function($matches) {
                     $word = $matches[0];
+                    
+                    // If it contains numbers (e.g., 9A, 65.5, IP65), keep as is
                     if (preg_match('/[0-9]/', $word)) {
                         return $word;
                     }
-                    if (preg_match('/[A-Z]{2,}/', $word)) {
-                        return $word;
+                    
+                    // Handle abbreviations/units (singkatan)
+                    $len = strlen($word);
+                    $isAllUpper = ($word === strtoupper($word));
+                    $noVowels = !preg_match('/[aeiouAEIOU]/', $word);
+                    
+                    // Units/abbreviations are usually short (1-2 chars), or 3-4 chars with no vowels or already all caps
+                    if ($len <= 2 || ($isAllUpper && $len <= 4) || ($len <= 3 && $noVowels)) {
+                        return strtoupper($word);
                     }
+                    
+                    // Otherwise, Title Case for regular words (kata-kata)
                     return ucfirst(strtolower($word));
                 }, $text);
             }
