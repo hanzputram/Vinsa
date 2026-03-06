@@ -21,6 +21,8 @@ class SetLocale
             App::setLocale(Session::get('locale'));
         }
 
+        \Carbon\Carbon::setLocale(App::getLocale());
+
         return $next($request);
     }
 }
