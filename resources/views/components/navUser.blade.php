@@ -58,10 +58,10 @@
                  x-transition:enter-end="opacity-100 scale-100"
                  class="absolute right-0 mt-2 w-32 bg-[#FFFCF0] border border-[#066c5f20] rounded-xl shadow-xl py-2 z-50">
                 <a href="{{ route('locale.set', 'id') }}" class="flex items-center px-4 py-2 hover:bg-[#066c5f10] {{ App::getLocale() == 'id' ? 'font-bold text-[#066C5F]' : '' }}">
-                    <span class="mr-2">🇮🇩</span> Indonesia
+                    <span class="mr-2">🇮🇩</span> {{ __('Indonesia') }}
                 </a>
                 <a href="{{ route('locale.set', 'en') }}" class="flex items-center px-4 py-2 hover:bg-[#066c5f10] {{ App::getLocale() == 'en' ? 'font-bold text-[#066C5F]' : '' }}">
-                    <span class="mr-2">🇺🇸</span> English
+                    <span class="mr-2">🇺🇸</span> {{ __('English') }}
                 </a>
             </div>
         </div>
@@ -101,11 +101,11 @@
             <p class="text-xs uppercase tracking-widest text-[#066c5f60] font-bold mb-3">{{ __('Language') }}</p>
             <div class="flex flex-col space-y-2">
                 <a href="{{ route('locale.set', 'id') }}" class="flex items-center justify-between px-4 py-2 rounded-lg {{ App::getLocale() == 'id' ? 'bg-[#066C5F] text-white' : 'text-[#066C5F] hover:bg-[#066c5f10]' }}">
-                    <span>Indonesia</span>
+                    <span>{{ __('Indonesia') }}</span>
                     <span>🇮🇩</span>
                 </a>
                 <a href="{{ route('locale.set', 'en') }}" class="flex items-center justify-between px-4 py-2 rounded-lg {{ App::getLocale() == 'en' ? 'bg-[#066C5F] text-white' : 'text-[#066C5F] hover:bg-[#066c5f10]' }}">
-                    <span>English</span>
+                    <span>{{ __('English') }}</span>
                     <span>🇺🇸</span>
                 </a>
             </div>
