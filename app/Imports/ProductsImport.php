@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductAtribute;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Str;
@@ -29,8 +30,12 @@ class ProductsImport implements ToModel, WithHeadingRow
             $categoryId = $category->id;
         }
 
-        // Process image (supports Google Drive links or local path)
+        // Process images (supports Google Drive links or local path)
         $imageValue = $this->processImage($row['image'] ?? null);
+        $optionalImageValue = $this->processImage($row['optional_image'] ?? null);
+
+        // Parse specifications from "field_name:field_value|field_name:field_value" format
+        $specifications = $this->parseSpecifications($row['specifications'] ?? null);
 
         // Find existing product by kode
         $product = Product::where('kode', $row['kode'])->first();
@@ -51,12 +56,31 @@ class ProductsImport implements ToModel, WithHeadingRow
                 $updateData['image'] = $imageValue;
             }
 
+            // Only update optional_image if a new one is provided
+            if (!empty($optionalImageValue)) {
+                $updateData['optional_image'] = $optionalImageValue;
+            }
+
             $product->update($updateData);
+
+            // Update specifications if provided
+            if (!empty($specifications)) {
+                // Delete existing attributes and re-create
+                $product->attributes()->delete();
+                foreach ($specifications as $spec) {
+                    ProductAtribute::create([
+                        'product_id' => $product->id,
+                        'field_name' => $spec['field_name'],
+                        'field_value' => $spec['field_value'],
+                    ]);
+                }
+            }
+
             return null; // Return null so ToModel doesn't try to insert
         }
 
         // Create new product
-        return new Product([
+        $newProduct = Product::create([
             'name'             => $row['name'],
             'kode'             => $row['kode'],
             'description'      => $row['description'] ?? null,
@@ -65,7 +89,62 @@ class ProductsImport implements ToModel, WithHeadingRow
             'meta_title'       => $row['meta_title'] ?? null,
             'meta_description' => $row['meta_description'] ?? null,
             'image'            => $imageValue ?: 'default.png',
+            'optional_image'   => $optionalImageValue,
         ]);
+
+        // Create specifications for new product
+        if (!empty($specifications)) {
+            foreach ($specifications as $spec) {
+                ProductAtribute::create([
+                    'product_id' => $newProduct->id,
+                    'field_name' => $spec['field_name'],
+                    'field_value' => $spec['field_value'],
+                ]);
+            }
+        }
+
+        return null; // We already created the product manually
+    }
+
+    /**
+     * Parse specifications string into array
+     * Format: "field_name:field_value|field_name:field_value"
+     *
+     * @param string|null $specString
+     * @return array
+     */
+    private function parseSpecifications(?string $specString): array
+    {
+        if (empty($specString)) {
+            return [];
+        }
+
+        $specString = trim($specString);
+        $specs = [];
+
+        // Split by pipe
+        $pairs = explode('|', $specString);
+
+        foreach ($pairs as $pair) {
+            $pair = trim($pair);
+            if (empty($pair)) continue;
+
+            // Split by first colon only (value might contain colons)
+            $colonPos = strpos($pair, ':');
+            if ($colonPos !== false) {
+                $fieldName = trim(substr($pair, 0, $colonPos));
+                $fieldValue = trim(substr($pair, $colonPos + 1));
+
+                if (!empty($fieldName) && !empty($fieldValue)) {
+                    $specs[] = [
+                        'field_name' => $fieldName,
+                        'field_value' => $fieldValue,
+                    ];
+                }
+            }
+        }
+
+        return $specs;
     }
 
     /**
@@ -96,8 +175,13 @@ class ProductsImport implements ToModel, WithHeadingRow
             return 'https://lh3.googleusercontent.com/d/' . $matches[1];
         }
 
-        // Google Drive: /uc?id=FILE_ID (already correct format, ensure export=view)
+        // Google Drive: /uc?id=FILE_ID
         if (preg_match('#drive\.google\.com/uc\?.*id=([a-zA-Z0-9_-]+)#', $image, $matches)) {
+            return 'https://lh3.googleusercontent.com/d/' . $matches[1];
+        }
+
+        // Already lh3 format
+        if (preg_match('#lh3\.googleusercontent\.com/d/([a-zA-Z0-9_-]+)#', $image, $matches)) {
             return 'https://lh3.googleusercontent.com/d/' . $matches[1];
         }
 

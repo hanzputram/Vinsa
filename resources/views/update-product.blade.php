@@ -194,16 +194,34 @@
 
                                 <div class="space-y-4">
                                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">Optional Detail Image (Tab Detail)</label>
-                                    <div class="relative group aspect-video bg-slate-100 rounded-[2rem] overflow-hidden border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-4">
-                                        @if($product->optional_image)
-                                            <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->optional_image) }}" alt="Optional" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-500">
-
-                                        @endif
-                                        <div class="relative z-10 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl flex flex-col items-center gap-2">
-                                            <svg class="w-8 h-8 text-[#066c5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                                            <span class="text-[10px] font-black text-slate-900 uppercase tracking-widest">{{ $product->optional_image ? 'Change Detail Photo' : 'Upload Detail Photo' }}</span>
+                                    
+                                    <div class="space-y-3">
+                                        <div class="space-y-1">
+                                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Option A: Upload File</label>
+                                            <div class="relative group aspect-video bg-slate-100 rounded-[2rem] overflow-hidden border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-4">
+                                                @if($product->optional_image)
+                                                    <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->optional_image) }}" alt="Optional" {!! \App\Helpers\ProductHelper::imgAttrs($product->optional_image) !!} class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-500">
+                                                @endif
+                                                <div class="relative z-10 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl flex flex-col items-center gap-2">
+                                                    <svg class="w-8 h-8 text-[#066c5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                    <span class="text-[10px] font-black text-slate-900 uppercase tracking-widest">{{ $product->optional_image ? 'Change Detail Photo' : 'Upload Detail Photo' }}</span>
+                                                </div>
+                                                <input type="file" name="optional_image" class="absolute inset-0 opacity-0 cursor-pointer">
+                                            </div>
                                         </div>
-                                        <input type="file" name="optional_image" class="absolute inset-0 opacity-0 cursor-pointer">
+
+                                        <div class="flex items-center gap-4">
+                                            <div class="flex-1 h-px bg-slate-200"></div>
+                                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">or</span>
+                                            <div class="flex-1 h-px bg-slate-200"></div>
+                                        </div>
+
+                                        <div class="space-y-1">
+                                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Option B: Image URL (Google Drive supported)</label>
+                                            <input type="url" name="optional_image_link" placeholder="https://drive.google.com/file/d/.../view"
+                                                value="{{ filter_var($product->optional_image, FILTER_VALIDATE_URL) ? $product->optional_image : '' }}"
+                                                class="w-full px-5 py-3 bg-white border border-slate-200 rounded-2xl text-sm font-medium text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-[#066c5f] focus:border-[#066c5f] transition-all">
+                                        </div>
                                     </div>
                                     <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Optional: This image will show in the "Product Detail" tab.</p>
                                 </div>

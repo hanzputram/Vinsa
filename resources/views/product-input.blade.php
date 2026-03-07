@@ -164,16 +164,34 @@
 
                                 <div class="space-y-4">
                                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">Optional Detail Image (Tab Detail)</label>
-                                    <div class="relative group">
-                                        <div class="absolute inset-0 bg-[#066c5f] rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none"></div>
-                                        <input type="file" name="optional_image"
-                                            class="block w-full text-xs text-slate-500 
-                                            file:mr-4 file:py-3 file:px-6 
-                                            file:rounded-xl file:border-0 
-                                            file:text-xs file:font-black file:uppercase file:tracking-widest
-                                            file:bg-slate-900 file:text-white 
-                                            hover:file:bg-slate-800
-                                            transition-all cursor-pointer">
+                                    
+                                    <div class="space-y-3">
+                                        <div class="space-y-1">
+                                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Option A: Upload File</label>
+                                            <div class="relative group">
+                                                <div class="absolute inset-0 bg-[#066c5f] rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none"></div>
+                                                <input type="file" name="optional_image"
+                                                    class="block w-full text-xs text-slate-500 
+                                                    file:mr-4 file:py-3 file:px-6 
+                                                    file:rounded-xl file:border-0 
+                                                    file:text-xs file:font-black file:uppercase file:tracking-widest
+                                                    file:bg-slate-900 file:text-white 
+                                                    hover:file:bg-slate-800
+                                                    transition-all cursor-pointer">
+                                            </div>
+                                        </div>
+
+                                        <div class="flex items-center gap-4">
+                                            <div class="flex-1 h-px bg-slate-200"></div>
+                                            <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">or</span>
+                                            <div class="flex-1 h-px bg-slate-200"></div>
+                                        </div>
+
+                                        <div class="space-y-1">
+                                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest pl-1">Option B: Image URL (Google Drive supported)</label>
+                                            <input type="url" name="optional_image_link" placeholder="https://drive.google.com/file/d/.../view"
+                                                class="w-full px-5 py-3 bg-white border border-slate-200 rounded-2xl text-sm font-medium text-slate-800 placeholder:text-slate-300 focus:ring-2 focus:ring-[#066c5f] focus:border-[#066c5f] transition-all">
+                                        </div>
                                     </div>
                                     <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Optional: This image will show in the "Product Detail" tab.</p>
                                 </div>

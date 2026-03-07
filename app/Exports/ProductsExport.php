@@ -14,7 +14,7 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping
     */
     public function collection()
     {
-        return Product::with('category')->get();
+        return Product::with(['category', 'attributes'])->get();
     }
 
     public function headings(): array
@@ -28,6 +28,8 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping
             'meta_title',
             'meta_description',
             'image',
+            'optional_image',
+            'specifications',
         ];
     }
 
@@ -36,6 +38,14 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping
     */
     public function map($product): array
     {
+        // Format specifications as "field_name:field_value|field_name:field_value"
+        $specs = '';
+        if ($product->attributes && $product->attributes->count() > 0) {
+            $specs = $product->attributes->map(function ($attr) {
+                return $attr->field_name . ':' . $attr->field_value;
+            })->implode('|');
+        }
+
         return [
             $product->kode,
             $product->name,
@@ -45,7 +55,8 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping
             $product->meta_title,
             $product->meta_description,
             $product->image,
+            $product->optional_image,
+            $specs,
         ];
     }
 }
-

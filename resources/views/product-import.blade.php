@@ -81,7 +81,7 @@
                         </a>
                     </div>
 
-                    <div class="mt-10 pt-10 border-t border-white/10 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="mt-10 pt-10 border-t border-white/10 grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div class="space-y-2">
                             <h4 class="font-black uppercase tracking-widest text-[10px] text-emerald-200">System Logic</h4>
                             <p class="text-sm font-bold">Existing <span class="bg-white/10 px-2 py-1 rounded">KODE</span> will trigger an <u>Update</u>. New codes will trigger a <u>Creation</u>.</p>
@@ -91,8 +91,13 @@
                             <p class="text-sm font-bold">If a category name in Excel doesn't exist, the system will <u>generate it</u> automatically.</p>
                         </div>
                         <div class="space-y-2">
-                            <h4 class="font-black uppercase tracking-widest text-[10px] text-emerald-200">Images</h4>
-                            <p class="text-sm font-bold">Supports <span class="bg-white/10 px-2 py-1 rounded">Google Drive</span> share links. Paste the share URL and it will be auto-converted.</p>
+                            <h4 class="font-black uppercase tracking-widest text-[10px] text-emerald-200">Images (image & optional_image)</h4>
+                            <p class="text-sm font-bold">Both <span class="bg-white/10 px-2 py-1 rounded">image</span> and <span class="bg-white/10 px-2 py-1 rounded">optional_image</span> support <span class="bg-white/10 px-2 py-1 rounded">Google Drive</span> share links. Paste the share URL and it will be auto-converted.</p>
+                        </div>
+                        <div class="space-y-2">
+                            <h4 class="font-black uppercase tracking-widest text-[10px] text-emerald-200">Specifications (Attributes)</h4>
+                            <p class="text-sm font-bold">Use format: <span class="bg-white/10 px-2 py-1 rounded font-mono text-xs">name:value|name:value</span></p>
+                            <p class="text-xs text-emerald-100/60 font-medium">Example: <span class="font-mono">Voltage:220V|Power:500W|Weight:2.5kg</span></p>
                         </div>
                     </div>
 

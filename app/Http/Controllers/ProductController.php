@@ -231,6 +231,8 @@ public function show($param)
         $optionalImagePath = null;
         if ($request->hasFile('optional_image')) {
             $optionalImagePath = $request->file('optional_image')->store('products', 'public');
+        } elseif ($request->optional_image_link) {
+            $optionalImagePath = $this->processImageUrl($request->optional_image_link);
         }
 
         $product = Product::create([
@@ -399,11 +401,20 @@ public function show($param)
 
         if ($request->hasFile('optional_image')) {
             $newOptionalImagePath = $request->file('optional_image')->store('products', 'public');
-            if ($product->optional_image && Storage::disk('public')->exists($product->optional_image)) {
+            if ($product->optional_image && !filter_var($product->optional_image, FILTER_VALIDATE_URL) && Storage::disk('public')->exists($product->optional_image)) {
                 Storage::disk('public')->delete($product->optional_image);
             }
             $product->optional_image = $newOptionalImagePath;
             $historyChanges[] = 'gambar opsional produk telah diperbarui';
+        } elseif ($request->filled('optional_image_link')) {
+            $newOptionalImageUrl = $this->processImageUrl($request->optional_image_link);
+            if ($newOptionalImageUrl !== $product->optional_image) {
+                if ($product->optional_image && !filter_var($product->optional_image, FILTER_VALIDATE_URL) && Storage::disk('public')->exists($product->optional_image)) {
+                    Storage::disk('public')->delete($product->optional_image);
+                }
+                $product->optional_image = $newOptionalImageUrl;
+                $historyChanges[] = 'gambar opsional produk diperbarui ke URL eksternal';
+            }
         }
 
         if ($request->hasFile('datasheet')) {
