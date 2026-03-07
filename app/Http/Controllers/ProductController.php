@@ -371,7 +371,7 @@ public function show($param)
 
         if ($request->hasFile('image')) {
             $newImagePath = $request->file('image')->store('products', 'public');
-            if ($product->image && Storage::disk('public')->exists($product->image)) {
+            if ($product->image && !filter_var($product->image, FILTER_VALIDATE_URL) && Storage::disk('public')->exists($product->image)) {
                 Storage::disk('public')->delete($product->image);
             }
             $product->image = $newImagePath;
@@ -445,7 +445,7 @@ public function show($param)
         $product = Product::findOrFail($id);
         $productName = $product->name;
 
-        if ($product->image && Storage::disk('public')->exists($product->image)) {
+        if ($product->image && !filter_var($product->image, FILTER_VALIDATE_URL) && Storage::disk('public')->exists($product->image)) {
             Storage::disk('public')->delete($product->image);
         }
 

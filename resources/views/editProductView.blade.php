@@ -58,7 +58,8 @@
                         <!-- Thumbnail (Mobile + Desktop) -->
                         <div class="col-span-1 mb-4 lg:mb-0">
                             <div class="w-16 h-16 rounded-xl bg-slate-100 overflow-hidden border border-slate-100 group-hover:scale-105 transition-transform">
-                                <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" 
+                                <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->image) }}" alt="{{ $product->name }}" 
+
                                      class="w-full h-full object-cover">
                             </div>
                         </div>
