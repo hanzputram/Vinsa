@@ -484,7 +484,8 @@ public function show($param)
     }
 
     /**
-     * Process image URL - convert Google Drive share links to direct view URLs
+     * Process image URL - convert Google Drive share links to direct embeddable URLs
+     * Uses lh3.googleusercontent.com format which is most reliable for img embedding
      */
     private function processImageUrl(string $url): string
     {
@@ -492,17 +493,17 @@ public function show($param)
 
         // Google Drive: /file/d/FILE_ID/view
         if (preg_match('#drive\.google\.com/file/d/([a-zA-Z0-9_-]+)#', $url, $matches)) {
-            return 'https://drive.google.com/uc?export=view&id=' . $matches[1];
+            return 'https://lh3.googleusercontent.com/d/' . $matches[1];
         }
 
         // Google Drive: /open?id=FILE_ID
         if (preg_match('#drive\.google\.com/open\?id=([a-zA-Z0-9_-]+)#', $url, $matches)) {
-            return 'https://drive.google.com/uc?export=view&id=' . $matches[1];
+            return 'https://lh3.googleusercontent.com/d/' . $matches[1];
         }
 
-        // Google Drive: /uc?id=FILE_ID
+        // Google Drive: /uc?id=FILE_ID or /uc?export=view&id=FILE_ID
         if (preg_match('#drive\.google\.com/uc\?.*id=([a-zA-Z0-9_-]+)#', $url, $matches)) {
-            return 'https://drive.google.com/uc?export=view&id=' . $matches[1];
+            return 'https://lh3.googleusercontent.com/d/' . $matches[1];
         }
 
         // Return as-is for other URLs

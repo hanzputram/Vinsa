@@ -186,7 +186,7 @@
                 <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 p-6 lg:p-12">
                 <!-- Product Image -->
                 <div class="flex items-center justify-center rounded-3xl p-8 lg:p-12 bg-white/50">
-                    <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->image) }}" alt="{{ $product->name }}" class="max-w-full h-auto max-h-[400px] object-contain drop-shadow-2xl">
+                    <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->image) }}" alt="{{ $product->name }}" {!! \App\Helpers\ProductHelper::imgAttrs($product->image) !!} class="max-w-full h-auto max-h-[400px] object-contain drop-shadow-2xl">
 
                 </div>
 
@@ -416,7 +416,7 @@
                         <div class="flex flex-col items-center">
                             <h2 class="text-4xl font-bold text-gray-900 mb-8 self-start">{{ __('Product Details') }}</h2>
                             <div class="w-full max-w-4xl">
-                                <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->optional_image) }}" alt="{{ $product->name }}" class="w-full h-auto rounded-[2rem]">
+                                <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->optional_image) }}" alt="{{ $product->name }}" {!! \App\Helpers\ProductHelper::imgAttrs($product->optional_image) !!} class="w-full h-auto rounded-[2rem]">
 
                             </div>
                         </div>

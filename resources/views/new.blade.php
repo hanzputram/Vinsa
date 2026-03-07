@@ -228,7 +228,7 @@
                 <!-- Slide 1 -->
                 @foreach ($carousels as $carousel)
                     <div class="swiper-slide flex justify-center">
-                        <img class="rounded-3xl" src="{{ asset('storage/' . $carousel->image) }}" alt="">
+                        <img class="rounded-3xl" src="{{ \App\Helpers\ProductHelper::imageUrl($carousel->image) }}" alt="">
                     </div>
                 @endforeach
 
@@ -274,7 +274,7 @@
                             </h3>
 
                             @if ($firstProduct && $firstProduct->image)
-                                <img src="{{ asset('storage/' . $firstProduct->image) }}"
+                                <img src="{{ \App\Helpers\ProductHelper::imageUrl($firstProduct->image) }}"
                                     alt="{{ $firstProduct->name }}" class="w-[120px] h-[150px] object-cover rounded-md">
                             @else
                                 <div
@@ -326,6 +326,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -395,6 +396,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -468,6 +470,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -537,6 +540,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -610,6 +614,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -679,6 +684,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -752,6 +758,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -821,6 +828,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -894,6 +902,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -963,6 +972,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1036,6 +1046,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1105,6 +1116,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1386,6 +1398,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1457,6 +1470,7 @@
                                                                          srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                          @endif
+                                                                         {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1522,6 +1536,7 @@
                                                                  srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                  sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                                  @endif
+                                                                 {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                                  loading="lazy"
                                                                  alt="{{ $productItem->name }}"
                                                                  class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1582,6 +1597,7 @@
                                                  srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                  sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                                                  @endif
+                                                 {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                                                  loading="lazy"
                                                  alt="{{ $productItem->name }}"
                                                  class="w-full h-full object-contain group-hover:scale-125 transition-transform duration-700">
@@ -1700,7 +1716,7 @@
                             <div
                                 class="w-full h-[190px] rounded-2xl overflow-hidden bg-white/60 flex items-center justify-center">
                                 @if (!empty($blog->image))
-                                    <img src="{{ asset('storage/' . $blog->image) }}" alt="{{ $blog->title }}"
+                                    <img src="{{ \App\Helpers\ProductHelper::imageUrl($blog->image) }}" alt="{{ $blog->title }}"
                                         class="w-full h-full object-cover">
                                 @else
                                     <div class="text-xs text-gray-500">{{ __('No Image') }}</div>
@@ -1787,7 +1803,7 @@
                                 <div
                                     class="w-full h-[190px] rounded-2xl overflow-hidden bg-white/60 flex items-center justify-center">
                                     @if (!empty($blog->image))
-                                        <img src="{{ asset('storage/' . $blog->image) }}"
+                                        <img src="{{ \App\Helpers\ProductHelper::imageUrl($blog->image) }}"
                                             alt="{{ $blog->title }}" class="w-full h-full object-cover">
                                     @else
                                         <div class="text-xs text-gray-500">No Image</div>

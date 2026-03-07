@@ -8,6 +8,7 @@
                     srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                     sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
                     @endif
+                    {!! \App\Helpers\ProductHelper::imgAttrs($productItem->image) !!}
                     loading="{{ isset($isLazy) && !$isLazy ? 'eager' : 'lazy' }}"
                     alt="{{ $productItem->name ?? '' }}"
                     class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">

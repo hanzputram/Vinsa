@@ -199,7 +199,7 @@
                             <div class="relative h-72 overflow-hidden bg-gray-50/50 group-hover:bg-white transition-colors duration-500 flex items-center justify-center p-12">
                                 <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->image) }}" 
                                      alt="{{ $product->name }}" 
-
+                                     {!! \App\Helpers\ProductHelper::imgAttrs($product->image) !!}
                                      class="max-w-full max-h-full object-contain transform group-hover:scale-110 group-hover:rotate-2 transition-all duration-700 ease-out">
                                 
                                 <!-- Decorative background circle -->
