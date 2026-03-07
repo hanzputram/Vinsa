@@ -164,17 +164,33 @@
                             <div class="space-y-6">
                                 <div class="space-y-4">
                                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">Update Image</label>
-                                    <div class="relative group aspect-[8/11] bg-slate-100 rounded-[2rem] overflow-hidden border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-4">
-                                        <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->image) }}" alt="Current" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-500">
+                                    
+                                    <div class="space-y-4">
+                                        <div class="space-y-2">
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Option A: Upload File</p>
+                                            <div class="relative group aspect-[8/11] bg-slate-100 rounded-[2rem] overflow-hidden border-2 border-dashed border-slate-200 flex flex-col items-center justify-center p-4">
+                                                <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->image) }}" alt="Current" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:scale-110 transition-transform duration-500">
 
-                                        <div class="relative z-10 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl flex flex-col items-center gap-2">
-                                            <svg class="w-8 h-8 text-[#066c5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-                                            <span class="text-[10px] font-black text-slate-900 uppercase tracking-widest">Change Photo</span>
+                                                <div class="relative z-10 bg-white/80 backdrop-blur-md p-4 rounded-2xl shadow-xl flex flex-col items-center gap-2">
+                                                    <svg class="w-8 h-8 text-[#066c5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
+                                                    <span class="text-[10px] font-black text-slate-900 uppercase tracking-widest">Change Photo</span>
+                                                </div>
+                                                <input type="file" name="image" class="absolute inset-0 opacity-0 cursor-pointer">
+                                            </div>
+                                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Ratio 8:11 recommended</p>
                                         </div>
-                                        <input type="file" name="image" class="absolute inset-0 opacity-0 cursor-pointer">
+                                        <div class="space-y-2">
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Option B: Image URL (Google Drive, etc.)</p>
+                                            <input type="url" name="image_link" id="image_link" value="{{ old('image_link', (filter_var($product->image, FILTER_VALIDATE_URL) ? $product->image : '')) }}"
+                                                placeholder="https://drive.google.com/file/d/.../view"
+                                                class="w-full px-4 py-2.5 bg-slate-50 border-0 rounded-xl focus:ring-2 focus:ring-[#066c5f] text-xs font-bold">
+                                            @if(filter_var($product->image, FILTER_VALIDATE_URL))
+                                                <p class="text-[10px] font-bold text-emerald-500 uppercase tracking-widest">✓ Currently using external URL</p>
+                                            @endif
+                                        </div>
                                     </div>
-                                    <p class="text-[10px] font-black text-rose-500 uppercase tracking-widest">* Ratio 8:11 Only</p>
                                 </div>
+
 
                                 <div class="space-y-4">
                                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">Optional Detail Image (Tab Detail)</label>

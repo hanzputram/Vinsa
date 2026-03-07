@@ -92,11 +92,12 @@ public function show($param)
             'meta_description' => 'nullable|string|max:500',
 
             'image' => [
-                'required',
+                'required_without:image_link',
+                'nullable',
                 'image',
                 'mimes:jpeg,png,jpg,gif',
                 function ($attribute, $value, $fail) {
-                    if ($value->isValid()) {
+                    if ($value && $value->isValid()) {
                         $dimensions = getimagesize($value);
                         $ratio = $dimensions[0] / $dimensions[1];
                         if (abs($ratio - (8 / 11)) > 0.01) {
@@ -105,12 +106,14 @@ public function show($param)
                     }
                 }
             ],
+            'image_link' => 'nullable|url',
             'specifications' => 'nullable|array',
             'specifications.*.field_name' => 'nullable|string',
             'specifications.*.field_value' => 'nullable|string',
             'datasheet' => 'nullable|file|mimes:pdf|max:10240', // max 10MB PDF
             'datasheet_link' => 'nullable|url',
             'optional_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120', // max 5MB
+
         ]);
 
         foreach ($request->specifications ?? [] as $index => $spec) {
@@ -210,7 +213,13 @@ public function show($param)
             }
         }
 
-        $imagePath = $request->file('image')->store('products', 'public');
+        // Handle image: file upload takes priority, then URL
+        $imagePath = null;
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('products', 'public');
+        } elseif ($request->image_link) {
+            $imagePath = $this->processImageUrl($request->image_link);
+        }
 
         $datasheetPath = null;
         if ($request->hasFile('datasheet')) {
@@ -304,6 +313,7 @@ public function show($param)
                     }
                 }
             ],
+            'image_link' => 'nullable|url',
             'specifications' => 'nullable|array',
             'specifications.*.field_name' => 'required_with:specifications.*.field_value',
             'specifications.*.field_value' => 'required_with:specifications.*.field_name',
@@ -376,6 +386,15 @@ public function show($param)
             }
             $product->image = $newImagePath;
             $historyChanges[] = 'gambar produk telah diperbarui';
+        } elseif ($request->filled('image_link')) {
+            $newImageUrl = $this->processImageUrl($request->image_link);
+            if ($newImageUrl !== $product->image) {
+                if ($product->image && !filter_var($product->image, FILTER_VALIDATE_URL) && Storage::disk('public')->exists($product->image)) {
+                    Storage::disk('public')->delete($product->image);
+                }
+                $product->image = $newImageUrl;
+                $historyChanges[] = 'gambar produk diperbarui ke URL eksternal';
+            }
         }
 
         if ($request->hasFile('optional_image')) {
@@ -462,5 +481,31 @@ public function show($param)
         ]);
 
         return redirect()->route('products.edit')->with('success', 'Produk berhasil dihapus.');
+    }
+
+    /**
+     * Process image URL - convert Google Drive share links to direct view URLs
+     */
+    private function processImageUrl(string $url): string
+    {
+        $url = trim($url);
+
+        // Google Drive: /file/d/FILE_ID/view
+        if (preg_match('#drive\.google\.com/file/d/([a-zA-Z0-9_-]+)#', $url, $matches)) {
+            return 'https://drive.google.com/uc?export=view&id=' . $matches[1];
+        }
+
+        // Google Drive: /open?id=FILE_ID
+        if (preg_match('#drive\.google\.com/open\?id=([a-zA-Z0-9_-]+)#', $url, $matches)) {
+            return 'https://drive.google.com/uc?export=view&id=' . $matches[1];
+        }
+
+        // Google Drive: /uc?id=FILE_ID
+        if (preg_match('#drive\.google\.com/uc\?.*id=([a-zA-Z0-9_-]+)#', $url, $matches)) {
+            return 'https://drive.google.com/uc?export=view&id=' . $matches[1];
+        }
+
+        // Return as-is for other URLs
+        return $url;
     }
 }

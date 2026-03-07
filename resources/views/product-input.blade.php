@@ -135,18 +135,31 @@
                             <div class="space-y-6">
                                 <div class="space-y-4">
                                     <label class="block text-xs font-bold text-slate-500 uppercase tracking-widest pl-1">Product Image</label>
-                                    <div class="relative group">
-                                        <div class="absolute inset-0 bg-[#066c5f] rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none"></div>
-                                        <input type="file" name="image" required
-                                            class="block w-full text-xs text-slate-500 
-                                            file:mr-4 file:py-3 file:px-6 
-                                            file:rounded-xl file:border-0 
-                                            file:text-xs file:font-black file:uppercase file:tracking-widest
-                                            file:bg-[#066c5f] file:text-white 
-                                            hover:file:bg-[#088a7a]
-                                            transition-all cursor-pointer">
+                                    
+                                    <div class="space-y-4">
+                                        <div class="space-y-2">
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Option A: Upload File</p>
+                                            <div class="relative group">
+                                                <div class="absolute inset-0 bg-[#066c5f] rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none"></div>
+                                                <input type="file" name="image" id="image_file"
+                                                    class="block w-full text-xs text-slate-500 
+                                                    file:mr-4 file:py-3 file:px-6 
+                                                    file:rounded-xl file:border-0 
+                                                    file:text-xs file:font-black file:uppercase file:tracking-widest
+                                                    file:bg-[#066c5f] file:text-white 
+                                                    hover:file:bg-[#088a7a]
+                                                    transition-all cursor-pointer">
+                                            </div>
+                                            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Ratio 8:11 recommended</p>
+                                        </div>
+                                        <div class="space-y-2">
+                                            <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Option B: Image URL (Google Drive, etc.)</p>
+                                            <input type="url" name="image_link" id="image_link" value="{{ old('image_link') }}"
+                                                placeholder="https://drive.google.com/file/d/.../view"
+                                                class="w-full px-4 py-2.5 bg-slate-50 border-0 rounded-xl focus:ring-2 focus:ring-[#066c5f] text-xs font-bold">
+                                        </div>
                                     </div>
-                                    <p class="text-[10px] font-black text-rose-500 uppercase tracking-widest">* Required: 8:11 Ratio</p>
+                                    <p class="text-[10px] font-black text-rose-500 uppercase tracking-widest">* One of the two options is required</p>
                                 </div>
 
                                 <div class="space-y-4">

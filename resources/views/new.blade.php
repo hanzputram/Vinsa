@@ -322,10 +322,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -391,10 +391,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -464,10 +464,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -533,10 +533,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -606,10 +606,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -675,10 +675,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -748,10 +748,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -817,10 +817,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -890,10 +890,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -959,10 +959,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1032,10 +1032,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1101,10 +1101,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1382,10 +1382,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1453,10 +1453,10 @@
                                                             <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                                 @if (!empty($productItem->image))
                                                                     <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                         srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                                 {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                         @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                         srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                          sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                         @endif
                                                                          loading="lazy"
                                                                          alt="{{ $productItem->name }}"
                                                                          class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1518,10 +1518,10 @@
                                                     <div class="w-full h-40 rounded-xl overflow-hidden bg-white/20 flex items-center justify-center p-2">
                                                         @if (!empty($productItem->image))
                                                             <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                                 srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                                         {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                                         {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                                 @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                                 srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                                  sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                                 @endif
                                                                  loading="lazy"
                                                                  alt="{{ $productItem->name }}"
                                                                  class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
@@ -1578,10 +1578,10 @@
                                     <div class="w-full h-44 rounded-xl overflow-hidden bg-white/10 flex items-center justify-center p-4">
                                         @if (!empty($productItem->image))
                                             <img src="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}"
-                                                 srcset="{{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=300 300w,
-                                                         {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }}?w=600 600w,
-                                                         {{ \App\Helpers\ProductHelper::imageUrl($productItem->image) }} 1000w"
+                                                 @if(\App\Helpers\ProductHelper::srcset($productItem->image))
+                                                 srcset="{{ \App\Helpers\ProductHelper::srcset($productItem->image) }}"
                                                  sizes="(max-width: 640px) 300px, (max-width: 1024px) 600px, 1000px"
+                                                 @endif
                                                  loading="lazy"
                                                  alt="{{ $productItem->name }}"
                                                  class="w-full h-full object-contain group-hover:scale-125 transition-transform duration-700">
