@@ -58,7 +58,9 @@
                 <div x-show="open" x-collapse class="pl-12 space-y-1">
                     <a href="{{ route('products.view') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('products.view') ? 'text-[#F77F1E]' : 'hover:text-white' }}">{{ __('Tambah Produk') }}</a>
                     <a href="{{ route('products.edit') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('products.edit') ? 'text-[#F77F1E]' : 'hover:text-white' }}">{{ __('Perbarui Produk') }}</a>
+                    <a href="{{ route('products.import.view') }}" class="block py-2 text-sm transition-colors {{ request()->routeIs('products.import.view') ? 'text-[#F77F1E]' : 'hover:text-white' }}">{{ __('Mass Upload / Update') }}</a>
                 </div>
+
             </div>
         </div>
 

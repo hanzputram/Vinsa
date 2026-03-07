@@ -45,6 +45,12 @@ Route::middleware('auth')->group(function () {
     Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
+    // Product Mass Import/Export
+    Route::get('/products/import', [\App\Http\Controllers\ProductImportController::class, 'index'])->name('products.import.view');
+    Route::post('/products/import', [\App\Http\Controllers\ProductImportController::class, 'import'])->name('products.import');
+    Route::get('/products/export-template', [\App\Http\Controllers\ProductImportController::class, 'export'])->name('products.export.template');
+
+
     // Carousel Routes
     Route::get('/carousel/create', [CarouselController::class, 'create'])->name('carousels.create');
     Route::post('/carousel', [CarouselController::class, 'store'])->name('carousels.store');
