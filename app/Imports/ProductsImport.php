@@ -50,6 +50,13 @@ class ProductsImport implements ToModel, WithHeadingRow
             // Parse specifications from "field_name:field_value|field_name:field_value" format
             $specifications = $this->parseSpecifications($row['specifications'] ?? null);
 
+            // Build custom_input JSON from type/series columns based on category
+            $customInput = $this->buildCustomInput(
+                $row['category'] ?? null,
+                $row['type'] ?? null,
+                $row['series'] ?? null
+            );
+
             // Find existing product by kode
             $product = Product::where('kode', $row['kode'])->first();
 
@@ -63,6 +70,11 @@ class ProductsImport implements ToModel, WithHeadingRow
                     'meta_title' => $row['meta_title'] ?? $product->meta_title,
                     'meta_description' => $row['meta_description'] ?? $product->meta_description,
                 ];
+
+                // Only update custom_input if type or series is provided
+                if ($customInput !== null) {
+                    $updateData['custom_input'] = $customInput;
+                }
 
                 // Only update image if a new one is provided
                 if (!empty($imageValue)) {
@@ -101,6 +113,7 @@ class ProductsImport implements ToModel, WithHeadingRow
                 'description'      => $row['description'] ?? null,
                 'stock'            => $row['stock'] ?? 0,
                 'category_id'      => $categoryId,
+                'custom_input'     => $customInput,
                 'meta_title'       => $row['meta_title'] ?? null,
                 'meta_description' => $row['meta_description'] ?? null,
                 'image'            => $imageValue ?: 'default.png',
@@ -129,6 +142,69 @@ class ProductsImport implements ToModel, WithHeadingRow
             ]);
             return null;
         }
+    }
+
+    /**
+     * Build custom_input JSON from type and series columns based on category.
+     * Mirrors the logic in ProductController@store for category-specific custom fields.
+     *
+     * @param string|null $categoryName
+     * @param string|null $type
+     * @param string|null $series
+     * @return string|null JSON string or null
+     */
+    private function buildCustomInput(?string $categoryName, ?string $type, ?string $series): ?string
+    {
+        if (empty($type) && empty($series)) {
+            return null;
+        }
+
+        $categoryName = strtolower(trim($categoryName ?? ''));
+
+        // Categories that store both 'tipe' and 'series'
+        $typeAndSeriesCategories = [
+            'push button',
+            'selector switch',
+            'cable lug',
+            'mccb',
+            'mccb accessories',
+            'contactor accessories',
+            'terminal block',
+        ];
+
+        foreach ($typeAndSeriesCategories as $cat) {
+            if (str_contains($categoryName, $cat)) {
+                return json_encode([
+                    'tipe' => $type ?? '',
+                    'series' => $series ?? '',
+                ]);
+            }
+        }
+
+        // Cable tray stores series as 'value'
+        if ($categoryName === 'cable tray') {
+            return json_encode([
+                'value' => $series ?: $type ?? '',
+            ]);
+        }
+
+        // Pilot lamp and accessories store type as 'value'
+        if (in_array($categoryName, ['pilot lamp', 'accessories'])) {
+            return json_encode([
+                'value' => $type ?: $series ?? '',
+            ]);
+        }
+
+        // Fallback: if type or series was provided but category doesn't match known ones,
+        // store as tipe/series anyway
+        if (!empty($type) || !empty($series)) {
+            return json_encode([
+                'tipe' => $type ?? '',
+                'series' => $series ?? '',
+            ]);
+        }
+
+        return null;
     }
 
     /**

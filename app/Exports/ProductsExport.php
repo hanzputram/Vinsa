@@ -25,6 +25,8 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping
             'description',
             'stock',
             'category',
+            'type',
+            'series',
             'meta_title',
             'meta_description',
             'image',
@@ -46,12 +48,36 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping
             })->implode('|');
         }
 
+        // Extract type and series from custom_input JSON
+        $type = '';
+        $series = '';
+        if ($product->custom_input) {
+            $customData = json_decode($product->custom_input, true);
+            if (is_array($customData)) {
+                // Categories with 'tipe' and 'series' keys
+                $type = $customData['tipe'] ?? '';
+                $series = $customData['series'] ?? '';
+
+                // Categories with only 'value' key (cable tray, pilot lamp, accessories)
+                if (empty($type) && empty($series) && isset($customData['value'])) {
+                    $categoryName = $product->category ? strtolower($product->category->name) : '';
+                    if ($categoryName === 'cable tray') {
+                        $series = $customData['value'];
+                    } else {
+                        $type = $customData['value'];
+                    }
+                }
+            }
+        }
+
         return [
             $product->kode,
             $product->name,
             $product->description,
             $product->stock,
             $product->category ? $product->category->name : '',
+            $type,
+            $series,
             $product->meta_title,
             $product->meta_description,
             $product->image,
