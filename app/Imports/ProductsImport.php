@@ -8,9 +8,15 @@ use App\Models\ProductAtribute;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 class ProductsImport implements ToModel, WithHeadingRow
 {
+    public int $created = 0;
+    public int $updated = 0;
+    public int $skipped = 0;
+    public array $errors = [];
+
     /**
     * @param array $row
     *
@@ -18,92 +24,111 @@ class ProductsImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
+        // Log the raw row keys for debugging
+        Log::info('ProductsImport row keys: ' . implode(', ', array_keys($row)));
+        Log::info('ProductsImport row data: ', $row);
+
         // Skip if kode or name is empty
         if (empty($row['kode']) || empty($row['name'])) {
+            $this->skipped++;
+            Log::warning('ProductsImport: Skipped row - kode or name is empty', $row);
             return null;
         }
 
-        // Handle category mapping
-        $categoryId = null;
-        if (!empty($row['category'])) {
-            $category = Category::firstOrCreate(['name' => $row['category']]);
-            $categoryId = $category->id;
-        }
-
-        // Process images (supports Google Drive links or local path)
-        $imageValue = $this->processImage($row['image'] ?? null);
-        $optionalImageValue = $this->processImage($row['optional_image'] ?? null);
-
-        // Parse specifications from "field_name:field_value|field_name:field_value" format
-        $specifications = $this->parseSpecifications($row['specifications'] ?? null);
-
-        // Find existing product by kode
-        $product = Product::where('kode', $row['kode'])->first();
-
-        if ($product) {
-            // Build update data
-            $updateData = [
-                'name' => $row['name'],
-                'description' => $row['description'] ?? $product->description,
-                'stock' => $row['stock'] ?? $product->stock,
-                'category_id' => $categoryId ?? $product->category_id,
-                'meta_title' => $row['meta_title'] ?? $product->meta_title,
-                'meta_description' => $row['meta_description'] ?? $product->meta_description,
-            ];
-
-            // Only update image if a new one is provided
-            if (!empty($imageValue)) {
-                $updateData['image'] = $imageValue;
+        try {
+            // Handle category mapping
+            $categoryId = null;
+            if (!empty($row['category'])) {
+                $category = Category::firstOrCreate(['name' => $row['category']]);
+                $categoryId = $category->id;
             }
 
-            // Only update optional_image if a new one is provided
-            if (!empty($optionalImageValue)) {
-                $updateData['optional_image'] = $optionalImageValue;
+            // Process images (supports Google Drive links or local path)
+            $imageValue = $this->processImage($row['image'] ?? null);
+            $optionalImageValue = $this->processImage($row['optional_image'] ?? null);
+
+            // Parse specifications from "field_name:field_value|field_name:field_value" format
+            $specifications = $this->parseSpecifications($row['specifications'] ?? null);
+
+            // Find existing product by kode
+            $product = Product::where('kode', $row['kode'])->first();
+
+            if ($product) {
+                // Build update data
+                $updateData = [
+                    'name' => $row['name'],
+                    'description' => $row['description'] ?? $product->description,
+                    'stock' => $row['stock'] ?? $product->stock,
+                    'category_id' => $categoryId ?? $product->category_id,
+                    'meta_title' => $row['meta_title'] ?? $product->meta_title,
+                    'meta_description' => $row['meta_description'] ?? $product->meta_description,
+                ];
+
+                // Only update image if a new one is provided
+                if (!empty($imageValue)) {
+                    $updateData['image'] = $imageValue;
+                }
+
+                // Only update optional_image if a new one is provided
+                if (!empty($optionalImageValue)) {
+                    $updateData['optional_image'] = $optionalImageValue;
+                }
+
+                $product->update($updateData);
+
+                // Update specifications if provided
+                if (!empty($specifications)) {
+                    // Delete existing attributes and re-create
+                    $product->attributes()->delete();
+                    foreach ($specifications as $spec) {
+                        ProductAtribute::create([
+                            'product_id' => $product->id,
+                            'field_name' => $spec['field_name'],
+                            'field_value' => $spec['field_value'],
+                        ]);
+                    }
+                }
+
+                $this->updated++;
+                Log::info("ProductsImport: Updated product kode={$row['kode']}");
+                return null; // Return null so ToModel doesn't try to insert
             }
 
-            $product->update($updateData);
+            // Create new product
+            $newProduct = Product::create([
+                'name'             => $row['name'],
+                'kode'             => $row['kode'],
+                'description'      => $row['description'] ?? null,
+                'stock'            => $row['stock'] ?? 0,
+                'category_id'      => $categoryId,
+                'meta_title'       => $row['meta_title'] ?? null,
+                'meta_description' => $row['meta_description'] ?? null,
+                'image'            => $imageValue ?: 'default.png',
+                'optional_image'   => $optionalImageValue,
+            ]);
 
-            // Update specifications if provided
+            // Create specifications for new product
             if (!empty($specifications)) {
-                // Delete existing attributes and re-create
-                $product->attributes()->delete();
                 foreach ($specifications as $spec) {
                     ProductAtribute::create([
-                        'product_id' => $product->id,
+                        'product_id' => $newProduct->id,
                         'field_name' => $spec['field_name'],
                         'field_value' => $spec['field_value'],
                     ]);
                 }
             }
 
-            return null; // Return null so ToModel doesn't try to insert
+            $this->created++;
+            Log::info("ProductsImport: Created product kode={$row['kode']}, id={$newProduct->id}");
+            return null; // We already created the product manually
+
+        } catch (\Exception $e) {
+            $this->errors[] = "Row kode={$row['kode']}: {$e->getMessage()}";
+            Log::error("ProductsImport: Error on row kode={$row['kode']}: {$e->getMessage()}", [
+                'trace' => $e->getTraceAsString(),
+            ]);
+            return null;
         }
-
-        // Create new product
-        $newProduct = Product::create([
-            'name'             => $row['name'],
-            'kode'             => $row['kode'],
-            'description'      => $row['description'] ?? null,
-            'stock'            => $row['stock'] ?? 0,
-            'category_id'      => $categoryId,
-            'meta_title'       => $row['meta_title'] ?? null,
-            'meta_description' => $row['meta_description'] ?? null,
-            'image'            => $imageValue ?: 'default.png',
-            'optional_image'   => $optionalImageValue,
-        ]);
-
-        // Create specifications for new product
-        if (!empty($specifications)) {
-            foreach ($specifications as $spec) {
-                ProductAtribute::create([
-                    'product_id' => $newProduct->id,
-                    'field_name' => $spec['field_name'],
-                    'field_value' => $spec['field_value'],
-                ]);
-            }
-        }
-
-        return null; // We already created the product manually
     }
 
     /**

@@ -40,15 +40,17 @@ Route::middleware('auth')->group(function () {
     // Product Routes
     Route::get('/input-product', [ProductController::class, 'view'])->name('products.view');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/products/{id}/edit', [ProductController::class, 'editView'])->name('products.editss');
     Route::get('/products/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
-    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
-    // Product Mass Import/Export
+    // Product Mass Import/Export (must be before {id} routes)
     Route::get('/products/import', [\App\Http\Controllers\ProductImportController::class, 'index'])->name('products.import.view');
     Route::post('/products/import', [\App\Http\Controllers\ProductImportController::class, 'import'])->name('products.import');
     Route::get('/products/export-template', [\App\Http\Controllers\ProductImportController::class, 'export'])->name('products.export.template');
+
+    // Product {id} routes (must be after static routes)
+    Route::get('/products/{id}/edit', [ProductController::class, 'editView'])->name('products.editss');
+    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
 
 
     // Carousel Routes
