@@ -15,7 +15,7 @@
     $dropdownId = 'dropdown-' . Str::slug($seriesName) . '-' . uniqid();
 @endphp
 
-<div class="snap-start w-[100%] sm:w-[80%] md:w-[calc(50%-0.5rem)] flex-shrink-0 bg-white/5 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-lg relative flex flex-col h-fit">
+<div class="snap-start w-[100%] sm:w-[80%] md:w-[calc(50%-0.5rem)] flex-shrink-0 bg-white/5 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-lg relative flex flex-col h-fit transition-all duration-500">
     <h4 class="text-md font-bold mb-4 text-white">
         {{ $seriesName }}
     </h4>
@@ -32,7 +32,7 @@
 
             {{-- Dropdown / Show More Set --}}
             @if ($hasMore)
-                <div id="{{ $dropdownId }}" class="grid grid-rows-[0fr] overflow-hidden transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] will-change-[grid-template-rows]">
+                <div id="{{ $dropdownId }}" class="grid grid-rows-[0fr] overflow-hidden vinsa-dropdown">
                     <div class="min-h-0">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
                              @foreach ($rest as $productItem)

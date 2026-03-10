@@ -229,13 +229,13 @@
         [class*="backdrop-blur"] {
             -webkit-backdrop-filter: blur(12px); /* Safari support for backdrop-filter */
             backdrop-filter: blur(12px);
-            /* Help reduce frame drops by promoting to a layer if possible */
-            transform: translateZ(0);
-            backface-visibility: hidden;
         }
 
         /* Optimize Dropdown Animation */
-        .grid-rows-\[0fr\], .grid-rows-\[1fr\] {
+        .grid-rows-\[0fr\] { grid-template-rows: 0fr; }
+        .grid-rows-\[1fr\] { grid-template-rows: 1fr; }
+        .vinsa-dropdown {
+            transition: grid-template-rows 500ms cubic-bezier(0.4, 0, 0.2, 1);
             will-change: grid-template-rows;
         }
 
