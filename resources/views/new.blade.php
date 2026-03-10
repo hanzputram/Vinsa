@@ -229,6 +229,14 @@
         [class*="backdrop-blur"] {
             -webkit-backdrop-filter: blur(12px); /* Safari support for backdrop-filter */
             backdrop-filter: blur(12px);
+            /* Help reduce frame drops by promoting to a layer if possible */
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        /* Optimize Dropdown Animation */
+        .grid-rows-\[0fr\], .grid-rows-\[1fr\] {
+            will-change: grid-template-rows;
         }
 
         /* Fix for Safari flex gap issues in older versions if necessary */
