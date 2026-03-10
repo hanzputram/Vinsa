@@ -32,10 +32,10 @@
 
             {{-- Dropdown / Show More Set --}}
             @if ($hasMore)
-                <div id="{{ $dropdownId }}" class="grid grid-rows-[0fr] opacity-0 overflow-hidden transition-all duration-500 ease-in-out">
+                <div id="{{ $dropdownId }}" class="grid grid-rows-[0fr] overflow-hidden transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]">
                     <div class="min-h-0">
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                            @foreach ($rest as $productItem)
+                             @foreach ($rest as $productItem)
                                 @php $ci = $getCI($productItem); @endphp
                                 @include('components.product-card-inner', ['productItem' => $productItem, 'ci' => $ci])
                             @endforeach

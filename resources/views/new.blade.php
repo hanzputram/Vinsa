@@ -1943,13 +1943,11 @@
             const isExpanding = dropdown.classList.contains('grid-rows-[0fr]');
             
             if (isExpanding) {
-                dropdown.classList.remove('grid-rows-[0fr]', 'opacity-0');
-                dropdown.classList.add('grid-rows-[1fr]', 'opacity-100');
+                dropdown.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
                 textSpan.textContent = '{{ __("Show Less") }}';
                 iconBtn.style.transform = 'rotate(180deg)';
             } else {
-                dropdown.classList.remove('grid-rows-[1fr]', 'opacity-100');
-                dropdown.classList.add('grid-rows-[0fr]', 'opacity-0');
+                dropdown.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
                 textSpan.textContent = '{{ __("Show More") }}';
                 iconBtn.style.transform = 'rotate(0deg)';
             }
