@@ -191,6 +191,50 @@
             -ms-overflow-style: none;  /* IE and Edge */
             scrollbar-width: none;  /* Firefox */
         }
+
+        /* Ensure slider buttons are visible on mobile */
+        @media (max-width: 767px) {
+            .group\/slider button, .group\/outer-slider button {
+                opacity: 1 !important;
+                display: flex !important;
+            }
+        }
+
+        /* Landscape Mobile Optimization */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .landscape-banner {
+                padding-top: 2rem !important;
+                padding-bottom: 2rem !important;
+                max-height: 400px !important;
+            }
+            .landscape-title {
+                font-size: 2.5rem !important;
+                line-height: 1.1 !important;
+            }
+            .landscape-subtitle {
+                font-size: 1rem !important;
+                padding-bottom: 1rem !important;
+            }
+            .landscape-buttons {
+                margin-top: 1rem !important;
+            }
+        }
+
+        /* Safari & iOS Compatibility */
+        .slider-container, #blogCarousel, .category-slider {
+            -webkit-overflow-scrolling: touch !important; /* Smooth momentum scrolling on iOS */
+            scroll-behavior: smooth;
+        }
+
+        [class*="backdrop-blur"] {
+            -webkit-backdrop-filter: blur(12px); /* Safari support for backdrop-filter */
+        }
+
+        /* Fix for Safari flex gap issues in older versions if necessary */
+        .slider-container {
+            display: -webkit-flex;
+            display: flex;
+        }
     </style>
 </head>
 
@@ -202,19 +246,19 @@
         </div>
 
         {{-- isi image --}}
-        <div class="overflow-hidden lg:p-[5rem] lg:justify-center  py-[80px] h-full lg:max-h-[720px] flex justify-center relative bg-no-repeat bg-cover  after:content-[''] after:bg-[rgba(40,40,40,0.65)] after:w-full after:h-full after:absolute after:top-0 after:left-0 rounded-[40px]"
+        <div class="landscape-banner overflow-hidden lg:p-[5rem] lg:justify-center  py-[80px] h-full lg:max-h-[720px] flex justify-center relative bg-no-repeat bg-cover  after:content-[''] after:bg-[rgba(40,40,40,0.65)] after:w-full after:h-full after:absolute after:top-0 after:left-0 rounded-[40px]"
             style="background-image:url('/image/pabrik.jpg')">
             <div class="lg:w-[50%] w-full relative z-[10]">
                 <p class="shining-text text-xl text-center  font-medium">
                     {{ __('Fulfill Your Electricity Needs with the Best Products') }}
                 </p>
-                <p class="text-6xl text-center  font-extrabold  text-[#fff]">
+                <p class="landscape-title text-6xl text-center  font-extrabold  text-[#fff]">
                     {!! __('Welcome<br> To<br> Vinsa') !!}
                 </p>
-                <p class="text-xl lg:text-lg text-center mx-4 lg:mx-auto text-[#fffffffe] pt-5 pb-15">
+                <p class="landscape-subtitle text-xl lg:text-lg text-center mx-4 lg:mx-auto text-[#fffffffe] pt-5 pb-15">
                     "{{ __('Vinsa: Dedication to Providing Premium Electrical Solutions, Delivering High Quality Products for Your Home, Business, and Industrial Needs!') }}"
                 </p>
-                <div class="flex my-[2rem] justify-center ">
+                <div class="landscape-buttons flex my-[2rem] justify-center ">
                     <a href="/product"
                         class="bg-green-600 text-white px-6 py-3 transition-all mr-5 duration-100 ease-in-out rounded-full shadow hover:bg-green-700">{{ __('Our Product') }}</a>
                     <a href="https://wa.me/6281335715398"
@@ -1856,15 +1900,26 @@
                     const el = document.getElementById('blogCarousel');
                     if (!el) return;
 
-                    // scroll 1 card (mendekati 420px + gap)
-                    const cardWidth = 420;
-                    const gap = 24; // gap-6
-                    const amount = (cardWidth + gap) * direction;
+                    const firstCard = el.firstElementChild;
+                    if (firstCard) {
+                        const cardWidth = firstCard.offsetWidth;
+                        const gap = parseInt(window.getComputedStyle(el).gap) || 0;
+                        const amount = (cardWidth + gap) * direction;
 
-                    el.scrollBy({
-                        left: amount,
-                        behavior: 'smooth'
-                    });
+                        el.scrollBy({
+                            left: amount,
+                            behavior: 'smooth'
+                        });
+                    } else {
+                        // Fallback
+                        const cardWidth = 420;
+                        const gap = 24; 
+                        const amount = (cardWidth + gap) * direction;
+                        el.scrollBy({
+                            left: amount,
+                            behavior: 'smooth'
+                        });
+                    }
                 }
             </script>
         @endif
@@ -1994,11 +2049,22 @@
     function scrollSlider(button, direction) {
         const container = button.parentElement.querySelector('.slider-container');
         if (container) {
-            const scrollAmount = container.clientWidth * 0.7;
-            container.scrollBy({
-                left: direction * scrollAmount,
-                behavior: 'smooth'
-            });
+            const firstCard = container.firstElementChild;
+            if (firstCard) {
+                const cardWidth = firstCard.offsetWidth;
+                const gap = parseInt(window.getComputedStyle(container).gap) || 0;
+                const scrollAmount = (cardWidth + gap) * direction;
+                container.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            } else {
+                const scrollAmount = container.clientWidth * 0.7;
+                container.scrollBy({
+                    left: direction * scrollAmount,
+                    behavior: 'smooth'
+                });
+            }
         }
     }
 </script>
