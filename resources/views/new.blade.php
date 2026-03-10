@@ -228,6 +228,7 @@
 
         [class*="backdrop-blur"] {
             -webkit-backdrop-filter: blur(12px); /* Safari support for backdrop-filter */
+            backdrop-filter: blur(12px);
         }
 
         /* Fix for Safari flex gap issues in older versions if necessary */
@@ -1937,22 +1938,18 @@
             const dropdown = document.getElementById(id);
             if (!dropdown) return;
             
-            const isHidden = dropdown.classList.contains('hidden');
             const textSpan = btn.querySelector('.btn-text');
             const iconBtn = btn.querySelector('.btn-icon');
+            const isExpanding = dropdown.classList.contains('grid-rows-[0fr]');
             
-            if (isHidden) {
-                dropdown.classList.remove('hidden');
-                setTimeout(() => {
-                    dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
-                }, 10);
+            if (isExpanding) {
+                dropdown.classList.remove('grid-rows-[0fr]', 'opacity-0');
+                dropdown.classList.add('grid-rows-[1fr]', 'opacity-100');
                 textSpan.textContent = '{{ __("Show Less") }}';
                 iconBtn.style.transform = 'rotate(180deg)';
             } else {
-                dropdown.style.maxHeight = '0px';
-                setTimeout(() => {
-                    dropdown.classList.add('hidden');
-                }, 300); // match duration-300
+                dropdown.classList.remove('grid-rows-[1fr]', 'opacity-100');
+                dropdown.classList.add('grid-rows-[0fr]', 'opacity-0');
                 textSpan.textContent = '{{ __("Show More") }}';
                 iconBtn.style.transform = 'rotate(0deg)';
             }
