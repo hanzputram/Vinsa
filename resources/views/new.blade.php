@@ -228,6 +228,15 @@
 
         [class*="backdrop-blur"] {
             -webkit-backdrop-filter: blur(12px); /* Safari support for backdrop-filter */
+            backdrop-filter: blur(12px);
+        }
+
+        /* Optimize Dropdown Animation */
+        .grid-rows-\[0fr\] { grid-template-rows: 0fr; }
+        .grid-rows-\[1fr\] { grid-template-rows: 1fr; }
+        .vinsa-dropdown {
+            transition: grid-template-rows 500ms cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: grid-template-rows;
         }
 
         /* Fix for Safari flex gap issues in older versions if necessary */
@@ -1820,22 +1829,16 @@
             const dropdown = document.getElementById(id);
             if (!dropdown) return;
             
-            const isHidden = dropdown.classList.contains('hidden');
             const textSpan = btn.querySelector('.btn-text');
             const iconBtn = btn.querySelector('.btn-icon');
+            const isExpanding = dropdown.classList.contains('grid-rows-[0fr]');
             
-            if (isHidden) {
-                dropdown.classList.remove('hidden');
-                setTimeout(() => {
-                    dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
-                }, 10);
+            if (isExpanding) {
+                dropdown.classList.replace('grid-rows-[0fr]', 'grid-rows-[1fr]');
                 textSpan.textContent = '{{ __("Show Less") }}';
                 iconBtn.style.transform = 'rotate(180deg)';
             } else {
-                dropdown.style.maxHeight = '0px';
-                setTimeout(() => {
-                    dropdown.classList.add('hidden');
-                }, 300); // match duration-300
+                dropdown.classList.replace('grid-rows-[1fr]', 'grid-rows-[0fr]');
                 textSpan.textContent = '{{ __("Show More") }}';
                 iconBtn.style.transform = 'rotate(0deg)';
             }
