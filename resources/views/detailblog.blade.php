@@ -214,22 +214,43 @@
             </div>
 
             <!-- Footer Section -->
-            <div class="max-w-4xl mx-auto flex justify-between items-center py-10 border-t border-gray-200 fade-in" style="animation-delay: 0.4s;">
-                <a href="javascript:window.history.back()" class="text-[#066c5f] font-bold hover:underline flex items-center gap-2">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                    {{ __('Back to Blog') }}
-                </a>
-                
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] flex items-center justify-center text-white font-black shadow-lg">V</div>
-                    <div>
-                        <p class="text-xs font-bold text-gray-400 tracking-widest uppercase">{{ __('Published by') }}</p>
-                        <p class="font-bold text-gray-800">Vinsa Team</p>
+            <div class="max-w-4xl mx-auto py-10 border-t border-gray-200 fade-in" style="animation-delay: 0.4s;">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-16">
+                    <a href="javascript:window.history.back()" class="text-[#066c5f] font-bold hover:underline flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                        {{ __('Back to Blog') }}
+                    </a>
+                    
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] flex items-center justify-center text-white font-black shadow-lg">V</div>
+                        <div>
+                            <p class="text-xs font-bold text-gray-400 tracking-widest uppercase">{{ __('Published by') }}</p>
+                            <p class="font-bold text-gray-800">Vinsa Team</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action Banner -->
+                <div class="bg-gradient-to-br from-[#066c5f] to-[#0dd8bd] rounded-[3rem] p-8 md:p-12 text-white relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full translate-x-1/2 -translate-y-1/2 blur-2xl group-hover:scale-125 transition-transform duration-700"></div>
+                    <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+                        <div class="max-w-xl text-center lg:text-left">
+                            <h2 class="text-3xl md:text-4xl font-black mb-4">{{ __('Ready to Upgrade Your Electrical System?') }}</h2>
+                            <p class="text-white/80 text-lg">{{ __('Explore our premium products designed for industrial excellence and safety.') }}</p>
+                        </div>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <a href="/product" class="px-8 py-4 bg-white text-[#066c5f] font-bold rounded-2xl hover:shadow-2xl transition-all hover:-translate-y-1 text-center">
+                                {{ __('Our Products') }}
+                            </a>
+                            <a href="https://wa.me/6281335715398" class="px-8 py-4 border-2 border-white/30 hover:bg-white/10 font-bold rounded-2xl transition-all text-center">
+                                {{ __('Consult with Expert') }}
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Safely Render Related Blogs if Available -->
+            <!-- Read Next Blogs -->
             @isset($blogs)
                 <div class="mt-20 fade-in" style="animation-delay: 0.6s;">
                     <h2 class="text-3xl font-extrabold text-gray-900 mb-10">{{ __('Read Next') }}</h2>
