@@ -1727,171 +1727,75 @@
                     class="border-2 bg-[#066c5f] text-white underline hover:text-blue-500  px-6 pt-2 pb-3 rounded-full transition-all duration-300 ease-in-out shadow border-[#fff]">{{ __('Our Product More') }} →</a>
             </div>
         </div>
-        <p class="font-bold text-[28px] border-b-[1.5px] mb-5 pb-4 border-[#0000006a]">{{ __('From Our Blog') }}</p>
+        <div class="flex items-end justify-between mb-10 pb-4 border-b border-slate-200">
+            <div>
+                <h2 class="text-3xl font-black text-[#0f172a] uppercase tracking-tight">{{ __('From Our Blog') }}</h2>
+                <p class="text-slate-500 font-medium text-sm">{{ __('Industry insights and professional electrical solutions') }}</p>
+            </div>
+            <a href="{{ route('blog.collection') }}" class="hidden md:flex items-center gap-2 text-[#066c5f] font-bold text-sm hover:text-[#0dd8bd] transition-colors group">
+                {{ __('View All Stories') }}
+                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            </a>
+        </div>
 
         @php
-            // Ambil hanya yang published
             $publishedBlogs = $blogs->filter(fn($b) => !empty($b->is_published))->values();
             $count = $publishedBlogs->count();
-
-            // Max 3 jika tidak carousel
-            $displayBlogs = $count <= 3 ? $publishedBlogs : $publishedBlogs; // carousel: tampil semua
+            $displayBlogs = $publishedBlogs; 
         @endphp
 
         @if ($count === 0)
-            <p class="text-sm text-gray-500">{{ __('No blogs available.') }}</p>
-        @elseif($count <= 3)
-            {{-- GRID MAX 3 --}}
-            <div class="grid md:grid-cols-3 gap-6 items-stretch">
-                @foreach ($displayBlogs as $blog)
-                    <a href="{{ route('blog.public', ['slug' => $blog->slug]) }}" class="group block w-full h-full">
-                        <div
-                            class="mx-auto w-full max-w-[420px]
-                           min-h-[420px] max-h-[420px]
-                           bg-[#ffffff60] backdrop-blur-sm
-                           border-[1.5px] border-[#066c5f]
-                           p-6 rounded-3xl shadow-lg
-                           flex flex-col overflow-hidden
-                           transition-all duration-300
-                           group-hover:shadow-xl group-hover:shadow-[#00000046]
-                           group-hover:ring-2 group-hover:ring-[#066c5f]/30
-                           group-hover:scale-[1.01]">
-
-                            <div
-                                class="w-full h-[190px] rounded-2xl overflow-hidden bg-white/60 flex items-center justify-center">
-                                @if (!empty($blog->image))
-                                    <img src="{{ \App\Helpers\ProductHelper::imageUrl($blog->image) }}" alt="{{ $blog->title }}"
-                                        class="w-full h-full object-cover">
-                                @else
-                                    <div class="text-xs text-gray-500">{{ __('No Image') }}</div>
-                                @endif
-                            </div>
-
-                            <div class="mt-4 flex-1 flex flex-col">
-                                <p class="font-bold text-base leading-snug line-clamp-2">{{ $blog->title }}</p>
-
-                                @php
-                                    $firstSection = $blog->sections->first();
-                                    $previewHtml = $blog->content ?? (optional($firstSection)->content ?? '');
-                                    $previewText = trim(preg_replace('/\s+/', ' ', strip_tags($previewHtml)));
-                                @endphp
-
-                                @if (!empty($previewText))
-                                    <p class="text-[11px] text-gray-700 mt-2 line-clamp-5">
-                                        @if (!empty(optional($firstSection)->subtitle))
-                                            <span class="font-semibold">{{ $firstSection->subtitle }}:</span>
-                                        @endif
-                                        {{ $previewText }}
-                                    </p>
-                                @else
-                                    <p class="text-[11px] text-gray-500 italic mt-2">{{ __('No content') }}</p>
-                                @endif
-
-                                <div class="mt-auto pt-3">
-                                    <span
-                                        class="text-[11px] text-[#066c5f] font-semibold opacity-80 group-hover:opacity-100">
-                                        {{ __('Read more') }} →
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                @endforeach
+            <div class="bg-white rounded-[32px] p-20 text-center border border-slate-100 italic text-slate-400">
+                {{ __('No blogs available at the moment.') }}
             </div>
         @else
-            {{-- CAROUSEL (jika lebih dari 3) --}}
-            <div class="relative">
-                {{-- tombol kiri --}}
-                <button type="button"
-                    class="hidden md:flex items-center justify-center absolute -left-3 top-1/2 -translate-y-1/2 z-10
-                   w-10 h-10 rounded-full bg-white/80 backdrop-blur border border-black/10 shadow
-                   hover:bg-white transition"
-                    onclick="blogCarouselScroll(-1)">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="stroke-black">
-                        <path d="M15 18l-6-6 6-6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
+            <div class="relative group/outer-blog">
+                @if($count > 3)
+                    <button type="button" class="hidden md:flex items-center justify-center absolute -left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white shadow-2xl text-[#066c5f] transition-all duration-300 opacity-0 group-hover/outer-blog:opacity-100 hover:scale-110" onclick="blogCarouselScroll(-1)">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                    </button>
+                    <button type="button" class="hidden md:flex items-center justify-center absolute -right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full bg-white shadow-2xl text-[#066c5f] transition-all duration-300 opacity-0 group-hover/outer-blog:opacity-100 hover:scale-110" onclick="blogCarouselScroll(1)">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                    </button>
+                @endif
 
-                {{-- tombol kanan --}}
-                <button type="button"
-                    class="hidden md:flex items-center justify-center absolute -right-3 top-1/2 -translate-y-1/2 z-10
-                   w-10 h-10 rounded-full bg-white/80 backdrop-blur border border-black/10 shadow
-                   hover:bg-white transition"
-                    onclick="blogCarouselScroll(1)">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" class="stroke-black">
-                        <path d="M9 6l6 6-6 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
-                </button>
-
-                {{-- track --}}
-                <div id="blogCarousel"
-                    class="flex gap-6 overflow-x-auto scroll-smooth snap-x snap-mandatory
-                    py-10 -mx-1 px-1
-                    [scrollbar-width:none] [-ms-overflow-style:none]
-                    [&::-webkit-scrollbar]:hidden">
+                <div id="blogCarousel" class="flex gap-8 overflow-x-auto pb-12 scroll-smooth no-scrollbar snap-x snap-mandatory px-2">
                     @foreach ($displayBlogs as $blog)
-                        <a href="{{ route('blog.public', ['slug' => $blog->slug]) }}"
-                            class="group block snap-start shrink-0 w-[88%] sm:w-[60%] md:w-[420px]">
-                            <div
-                                class="w-full
-                               min-h-[420px] max-h-[420px]
-                               bg-[#ffffff60] backdrop-blur-sm
-                               border-[1.5px] border-[#066c5f]
-                               p-6 rounded-3xl shadow-lg
-                               flex flex-col overflow-hidden
-                               transition-all duration-300
-                               group-hover:shadow-xl group-hover:shadow-[#00000046]
-                               group-hover:ring-2 group-hover:ring-[#066c5f]/30
-                               group-hover:scale-[1.01]">
-
-                                <div
-                                    class="w-full h-[190px] rounded-2xl overflow-hidden bg-white/60 flex items-center justify-center">
+                        <div class="flex-shrink-0 w-[290px] sm:w-[350px] md:w-[400px] snap-start">
+                            <a href="{{ route('blog.public', ['slug' => $blog->slug]) }}" class="group flex flex-col h-full bg-white rounded-[32px] overflow-hidden border border-slate-100 hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.12)] transition-all duration-500 transform hover:-translate-y-2">
+                                <div class="relative h-60 overflow-hidden">
                                     @if (!empty($blog->image))
-                                        <img src="{{ \App\Helpers\ProductHelper::imageUrl($blog->image) }}"
-                                            alt="{{ $blog->title }}" class="w-full h-full object-cover">
+                                        <img src="{{ \App\Helpers\ProductHelper::imageUrl($blog->image) }}" alt="{{ $blog->title }}" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-[1500ms]">
                                     @else
-                                        <div class="text-xs text-gray-500">No Image</div>
+                                        <div class="w-full h-full bg-gradient-to-br from-slate-50 to-slate-200"></div>
                                     @endif
+                                    <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-all"></div>
                                 </div>
-
-                                <div class="mt-4 flex-1 flex flex-col">
-                                    <p class="font-bold text-base leading-snug line-clamp-2">{{ $blog->title }}</p>
-
+                                <div class="p-8 flex flex-col flex-1">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <span class="bg-[#066c5f]/5 text-[#066c5f] text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">Story</span>
+                                        <span class="text-[11px] font-bold text-slate-400">{{ $blog->created_at->format('M d') }}</span>
+                                    </div>
+                                    <h4 class="text-xl font-extrabold text-[#0f172a] mb-4 line-clamp-2 leading-tight group-hover:text-[#066c5f] transition-colors">{{ $blog->title }}</h4>
+                                    
                                     @php
                                         $firstSection = $blog->sections->first();
                                         $previewHtml = $blog->content ?? (optional($firstSection)->content ?? '');
                                         $previewText = trim(preg_replace('/\s+/', ' ', strip_tags($previewHtml)));
                                     @endphp
-
-                                    @if (!empty($previewText))
-                                        <p class="text-[11px] text-gray-700 mt-2 line-clamp-5">
-                                            @if (!empty(optional($firstSection)->subtitle))
-                                                <span class="font-semibold">{{ $firstSection->subtitle }}:</span>
-                                            @endif
-                                            {{ $previewText }}
-                                        </p>
-                                    @else
-                                        <p class="text-[11px] text-gray-500 italic mt-2">Tidak ada konten</p>
-                                    @endif
-
-                                    <div class="mt-auto pt-3">
-                                        <span
-                                            class="text-[11px] text-[#066c5f] font-semibold opacity-80 group-hover:opacity-100">
-                                            Baca selengkapnya →
-                                        </span>
+                                    
+                                    <p class="text-slate-500 font-medium text-[13px] leading-relaxed line-clamp-3 mb-8">
+                                        {{ $previewText }}
+                                    </p>
+                                    
+                                    <div class="mt-auto pt-6 border-t border-slate-50 flex items-center justify-between text-[#066c5f] font-bold text-xs uppercase tracking-wider">
+                                        <span>Read More</span>
+                                        <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
                                 </div>
-
-                            </div>
-                        </a>
+                            </a>
+                        </div>
                     @endforeach
-                </div>
-
-                {{-- dots (optional simple) --}}
-                <div class="flex justify-center mt-4 gap-2 md:hidden">
-                    <span class="w-2 h-2 rounded-full bg-[#066c5f]/40"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#066c5f]/20"></span>
-                    <span class="w-2 h-2 rounded-full bg-[#066c5f]/20"></span>
                 </div>
             </div>
 
@@ -1899,32 +1803,11 @@
                 function blogCarouselScroll(direction) {
                     const el = document.getElementById('blogCarousel');
                     if (!el) return;
-
-                    const firstCard = el.firstElementChild;
-                    if (firstCard) {
-                        const cardWidth = firstCard.offsetWidth;
-                        const gap = parseInt(window.getComputedStyle(el).gap) || 0;
-                        const amount = (cardWidth + gap) * direction;
-
-                        el.scrollBy({
-                            left: amount,
-                            behavior: 'smooth'
-                        });
-                    } else {
-                        // Fallback
-                        const cardWidth = 420;
-                        const gap = 24; 
-                        const amount = (cardWidth + gap) * direction;
-                        el.scrollBy({
-                            left: amount,
-                            behavior: 'smooth'
-                        });
-                    }
+                    const amount = (el.firstElementChild.offsetWidth + 32) * direction;
+                    el.scrollBy({ left: amount, behavior: 'smooth' });
                 }
             </script>
         @endif
-
-
     </div>
     </div>
     </div>

@@ -171,7 +171,13 @@ public function showPublic($slug)
         ->where('is_published', true)
         ->firstOrFail();
 
-    return view('detailblog', compact('blog'));
+    $relatedBlogs = Blog::where('is_published', true)
+        ->where('id', '!=', $blog->id)
+        ->latest()
+        ->take(3)
+        ->get();
+
+    return view('detailblog', compact('blog', 'relatedBlogs'));
 }
 
 
