@@ -160,26 +160,19 @@ class BlogController extends Controller
     public function showDetail($id)
     {
         $blog = Blog::with('sections')->findOrFail($id);
-        $blogs = Blog::where('id', '!=', $id)->latest()->take(3)->get();
-        return view('detailblog', compact('blog', 'blogs'));
+        return view('detailblog', compact('blog'));
     }
 
     // Detail publik by slug (SEO URL)
-    public function showPublic($slug)
-    {
-        $blog = Blog::with('sections')
-            ->where('slug', $slug)
-            ->where('is_published', true)
-            ->firstOrFail();
+public function showPublic($slug)
+{
+    $blog = Blog::with('sections')
+        ->where('slug', $slug)
+        ->where('is_published', true)
+        ->firstOrFail();
 
-        $blogs = Blog::where('is_published', true)
-            ->where('id', '!=', $blog->id)
-            ->latest()
-            ->take(3)
-            ->get();
-
-        return view('detailblog', compact('blog', 'blogs'));
-    }
+    return view('detailblog', compact('blog'));
+}
 
 
     public function destroy($id)
