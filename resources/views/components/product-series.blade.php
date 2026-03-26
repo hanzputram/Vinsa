@@ -32,14 +32,12 @@
 
             {{-- Dropdown / Show More Set --}}
             @if ($hasMore)
-                <div id="{{ $dropdownId }}" class="grid grid-rows-[0fr] overflow-hidden vinsa-dropdown">
-                    <div class="min-h-0">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                             @foreach ($rest as $productItem)
-                                @php $ci = $getCI($productItem); @endphp
-                                @include('components.product-card-inner', ['productItem' => $productItem, 'ci' => $ci])
-                            @endforeach
-                        </div>
+                <div id="{{ $dropdownId }}" class="hidden overflow-hidden vinsa-dropdown transition-all duration-300" style="max-height: 0px;">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
+                         @foreach ($rest as $productItem)
+                            @php $ci = $getCI($productItem); @endphp
+                            @include('components.product-card-inner', ['productItem' => $productItem, 'ci' => $ci])
+                        @endforeach
                     </div>
                 </div>
 
