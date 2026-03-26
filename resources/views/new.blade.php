@@ -334,7 +334,7 @@
                         <h3 class="text-xl font-bold mb-4 border-b-[1.5px] pb-3 border-white/20 flex items-center gap-2">
                             <span class="w-1.5 h-6 bg-[#066c5f] rounded-full"></span>
                             <a href="{{ route('products.view.user', \Illuminate\Support\Str::slug($category->name)) }}" class="hover:text-[#066C5F] transition-colors uppercase">
-                                {{ $category->name }}
+                                {{ __($category->name) }}
                             </a>
                         </h3>
 
@@ -1626,7 +1626,7 @@
                     <div class="hidden md:block bg-[#5f5f5f60]/40 backdrop-blur-md lg:hidden p-8 mt-2 col-span-12 rounded-[2rem] border border-white/20 shadow-2xl">
                         <h3 class="text-2xl font-bold mb-6 border-b-[1.5px] pb-4 border-white/20 text-white flex items-center gap-3">
                             <div class="w-3 h-3 bg-[#066c5f] rounded-full animate-pulse shadow-[0_0_10px_#066c5f]"></div>
-                            {{ $category->name }}
+                            {{ __($category->name) }}
                         </h3>
 
                         <div class="grid grid-cols-3 gap-6">
