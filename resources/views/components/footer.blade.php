@@ -140,22 +140,26 @@
 </footer>
 
 <style>
-    @keyframes spin-slow {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+    .wa-text-curv {
+        width: 100%;
+        position: absolute;
+        top: 0%;
+        -webkit-animation: wa-spin 6s linear infinite;
+        -moz-animation: wa-spin 6s linear infinite;
+        animation: wa-spin 6s linear infinite;
     }
-    .animate-spin-slow {
-        animation: spin-slow 8s linear infinite;
-    }
-</style>
 
-<style>
-    @keyframes spin-slow {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
+    @-moz-keyframes wa-spin {
+        100% { -moz-transform: rotate(360deg); }
     }
-    .animate-spin-slow {
-        animation: spin-slow 8s linear infinite;
+    @-webkit-keyframes wa-spin {
+        100% { -webkit-transform: rotate(360deg); }
+    }
+    @keyframes wa-spin {
+        100% {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+        }
     }
 </style>
 
