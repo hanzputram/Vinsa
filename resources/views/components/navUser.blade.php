@@ -24,7 +24,7 @@
 >
 
     <!-- Logo -->
-    <div x-show="!sidebarOpen" x-transition>
+    <div>
         <img 
             id="logo" 
             src="/image/vinsalg.png" 
