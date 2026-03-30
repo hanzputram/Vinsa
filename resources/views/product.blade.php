@@ -318,6 +318,8 @@
 
                 if (matchesSearch && matchesCategory) {
                     card.style.display = 'flex';
+                    // Force AOS animation to trigger for filtered results
+                    card.classList.add('aos-animate');
                     foundCount++;
                 } else {
                     card.style.display = 'none';
@@ -330,6 +332,11 @@
             } else {
                 noResults.classList.add('hidden');
                 noResults.classList.remove('flex');
+            }
+
+            // Refresh AOS to ensure proper position calculation
+            if (typeof AOS !== 'undefined') {
+                AOS.refresh();
             }
         }
     </script>
