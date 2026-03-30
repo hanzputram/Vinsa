@@ -179,12 +179,24 @@
                 <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
                     @forelse ($products as $product)
                         @php
-                            $searchText = strtolower($product->name . ' ' . $product->kode . ' ' . ($product->custom_input ?? ''));
-                            $customInput = json_decode($product->custom_input, true);
+                            $searchContext = [
+                                $product->name,
+                                $product->kode,
+                                $product->category->name ?? '',
+                            ];
+                            
+                            if (!empty($product->custom_input)) {
+                                $ci = json_decode($product->custom_input, true);
+                                if (is_array($ci)) {
+                                    $searchContext = array_merge($searchContext, array_values($ci));
+                                }
+                            }
+                            
+                            $searchText = strtolower(implode(' ', array_filter($searchContext)));
                         @endphp
                         <div class="product-card group relative bg-white rounded-[32px] shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(6,108,95,0.12)] transition-all duration-500 overflow-hidden border border-gray-50 flex flex-col h-full" 
                              data-category-id="{{ $product->category_id }}" 
-                             data-search="{{ $searchText }}"
+                             data-search="{{ htmlspecialchars($searchText) }}"
                              data-aos="fade-up"
                              data-aos-delay="{{ ($loop->index % 4) * 100 }}">
                             
@@ -200,6 +212,7 @@
                                 <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->image) }}" 
                                      alt="{{ $product->name }}" 
                                      {!! \App\Helpers\ProductHelper::imgAttrs($product->image) !!}
+                                     loading="lazy"
                                      class="max-w-full max-h-full object-contain transform group-hover:scale-110 group-hover:rotate-2 transition-all duration-700 ease-out">
                                 
                                 <!-- Decorative background circle -->
@@ -304,7 +317,7 @@
         }
 
         function filterProducts() {
-            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const searchInput = document.getElementById('searchInput').value.toLowerCase().trim();
             const cards = document.querySelectorAll('.product-card');
             const noResults = document.getElementById('noResults');
             let foundCount = 0;
@@ -313,16 +326,17 @@
                 const searchData = card.getAttribute('data-search') || '';
                 const category = card.getAttribute('data-category-id');
                 
-                const matchesSearch = searchData.includes(searchInput);
+                const matchesSearch = searchInput === "" || searchData.includes(searchInput);
                 const matchesCategory = currentCategory === "" || category === currentCategory;
 
                 if (matchesSearch && matchesCategory) {
                     card.style.display = 'flex';
-                    // Force AOS animation to trigger for filtered results
+                    // Force AOS reveal
                     card.classList.add('aos-animate');
                     foundCount++;
                 } else {
                     card.style.display = 'none';
+                    card.classList.remove('aos-animate');
                 }
             });
 
@@ -334,9 +348,9 @@
                 noResults.classList.remove('flex');
             }
 
-            // Refresh AOS to ensure proper position calculation
+            // Refresh AOS to ensure proper position calculation with extra delay for smooth reflow
             if (typeof AOS !== 'undefined') {
-                AOS.refresh();
+                setTimeout(() => AOS.refresh(), 100);
             }
         }
     </script>

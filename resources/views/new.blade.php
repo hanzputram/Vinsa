@@ -198,6 +198,9 @@
                 opacity: 1 !important;
                 display: flex !important;
             }
+            .hide-slider-mobile button {
+                display: none !important;
+            }
         }
 
         /* Landscape Mobile Optimization */
@@ -347,16 +350,19 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 5 Series
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $kb5Products = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'kb5');
+                                            })->sortBy(function ($item) {
+                                                return $item->kode;
+                                            }, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $kb5Products->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'kb5');
-                                                })->sortBy(function ($item) {
-                                                    return $item->kode;
-                                                }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($kb5Products as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -419,14 +425,17 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 2 Series
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $kb2Products = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'kb2');
+                                            })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $kb2Products->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'kb2');
-                                                })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($kb2Products as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -491,16 +500,19 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 5 Series
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $kb5Products = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'kb5');
+                                            })->sortBy(function ($item) {
+                                                return $item->kode;
+                                            }, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $kb5Products->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'kb5');
-                                                })->sortBy(function ($item) {
-                                                    return $item->kode;
-                                                }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($kb5Products as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -563,14 +575,17 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 2 Series
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $kb2Products = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'kb2');
+                                            })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $kb2Products->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'kb2');
-                                                })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($kb2Products as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -635,16 +650,19 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 5 Series
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $kb5Products = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'kb5');
+                                            })->sortBy(function ($item) {
+                                                return $item->kode;
+                                            }, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $kb5Products->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'kb5');
-                                                })->sortBy(function ($item) {
-                                                    return $item->kode;
-                                                }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($kb5Products as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -707,14 +725,17 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 2 Series
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $kb2Products = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'kb2');
+                                            })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $kb2Products->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'kb2');
-                                                })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($kb2Products as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -779,16 +800,19 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 5 Series
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $kb5Products = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'kb5');
+                                            })->sortBy(function ($item) {
+                                                return $item->kode;
+                                            }, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $kb5Products->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'kb5');
-                                                })->sortBy(function ($item) {
-                                                    return $item->kode;
-                                                }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($kb5Products as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -851,14 +875,17 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 2 Series
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $kb2Products = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'kb2');
+                                            })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $kb2Products->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'kb2');
-                                                })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($kb2Products as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -923,16 +950,19 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             Nylon Cable Ties
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $nctProducts = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'nct');
+                                            })->sortBy(function ($item) {
+                                                return $item->kode;
+                                            }, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $nctProducts->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'nct');
-                                                })->sortBy(function ($item) {
-                                                    return $item->kode;
-                                                }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($nctProducts as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -995,14 +1025,17 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             Stainless Steel Cable Ties
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $ssctProducts = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'ssct');
+                                            })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $ssctProducts->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'ssct');
-                                                })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($ssctProducts as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -1067,16 +1100,19 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 5 Series
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $kb5Products = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'kb5');
+                                            })->sortBy(function ($item) {
+                                                return $item->kode;
+                                            }, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $kb5Products->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'kb5');
-                                                })->sortBy(function ($item) {
-                                                    return $item->kode;
-                                                }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($kb5Products as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -1139,14 +1175,17 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             KB 2 Series
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $kb2Products = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'kb2');
+                                            })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $kb2Products->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'kb2');
-                                                })->sortBy(fn($i) => $i->kode, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($kb2Products as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -1221,7 +1260,10 @@
                                 @endphp
 
                                 {{-- CAROUSEL panel: tampil 2 panel, geser untuk lihat 5 panel --}}
-                                <div class="relative group/outer-slider">
+                                @php
+                                    $cntSeries = count($lugSeries);
+                                @endphp
+                                <div class="relative group/outer-slider {{ $cntSeries < 3 ? 'hide-slider-mobile' : '' }}">
                                     <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                         <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                     </button>
@@ -1268,7 +1310,7 @@
                                 @endphp
 
                                 {{-- CAROUSEL panel: tampil 2 panel, geser untuk lihat 6 panel --}}
-                                <div class="relative group/outer-slider">
+                                <div class="relative group/outer-slider {{ count($tbSeries) < 3 ? 'hide-slider-mobile' : '' }}">
                                     <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                         <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                     </button>
@@ -1309,7 +1351,7 @@
                                 @endphp
 
                                 {{-- CAROUSEL panel: tampil 2 panel, geser untuk lihat 6 panel --}}
-                                <div class="relative group/outer-slider">
+                                <div class="relative group/outer-slider {{ count($mccbSeries) < 3 ? 'hide-slider-mobile' : '' }}">
                                     <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                         <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                     </button>
@@ -1349,7 +1391,7 @@
                                 @endphp
 
                                 {{-- CAROUSEL panel: tampil 2 panel, geser untuk lihat 6 panel --}}
-                                <div class="relative group/outer-slider">
+                                <div class="relative group/outer-slider {{ count($mccbacSeries) < 3 ? 'hide-slider-mobile' : '' }}">
                                     <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                         <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                     </button>
@@ -1388,7 +1430,7 @@
                                 @endphp
 
                                 {{-- CAROUSEL panel: tampil 2 panel, geser untuk lihat 6 panel --}}
-                                <div class="relative group/outer-slider">
+                                <div class="relative group/outer-slider {{ count($caSeries) < 3 ? 'hide-slider-mobile' : '' }}">
                                     <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                         <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                     </button>
@@ -1419,16 +1461,19 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             Box Panel Wall Mounting IP65
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $wallMountingProducts = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'vhb') && !str_contains(strtolower($item->kode), 'vhb200');
+                                            })->sortBy(function ($item) {
+                                                return $item->kode;
+                                            }, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $wallMountingProducts->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'vhb') && !str_contains(strtolower($item->kode), 'vhb200');
-                                                })->sortBy(function ($item) {
-                                                    return $item->kode;
-                                                }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($wallMountingProducts as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -1491,16 +1536,19 @@
                                             <span class="w-1.5 h-1.5 bg-[#0cbca5] rounded-full"></span>
                                             Box Panel Free Standing IP55
                                         </h4>
-                                        <div class="relative group/slider">
+                                        @php
+                                            $freeStandingProducts = $category->products->filter(function ($item) {
+                                                return str_contains(strtolower($item->kode), 'vhb200');
+                                            })->sortBy(function ($item) {
+                                                return $item->kode;
+                                            }, SORT_NATURAL | SORT_FLAG_CASE);
+                                        @endphp
+                                        <div class="relative group/slider {{ $freeStandingProducts->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                             <button type="button" class="absolute -left-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                             </button>
                                             <div class="category-slider slider-container flex gap-4 overflow-x-auto pb-2 scroll-smooth no-scrollbar">
-                                                @foreach ($category->products->filter(function ($item) {
-                                                    return str_contains(strtolower($item->kode), 'vhb200');
-                                                })->sortBy(function ($item) {
-                                                    return $item->kode;
-                                                }, SORT_NATURAL | SORT_FLAG_CASE) as $productItem)
+                                                @foreach ($freeStandingProducts as $productItem)
                                                     @php
                                                         $customInput = json_decode($productItem->custom_input, true);
                                                     @endphp
@@ -1559,7 +1607,7 @@
                                 </div>
                             @else
                                 {{-- Layout default jika bukan kategori khusus di atas --}}
-                                <div class="relative group/slider">
+                                <div class="relative group/slider {{ $category->products->count() < 3 ? 'hide-slider-mobile' : '' }}">
                                     <button type="button" class="absolute -left-2 lg:-left-4 top-1/2 -translate-y-1/2 z-30 w-10 h-10 lg:w-12 lg:h-12 rounded-full bg-white/95 backdrop-blur shadow-2xl flex items-center justify-center text-[#066c5f] transition-all duration-300 opacity-0 group-hover/slider:opacity-100 hover:bg-white hover:scale-110" onclick="scrollSlider(this, -1)">
                                         <svg class="w-6 h-6 lg:w-8 lg:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                                     </button>
