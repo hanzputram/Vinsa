@@ -540,5 +540,6 @@
     "[Ui] Rated Insulation Voltage": "Tegangan Isolasi Terukur [Ui]",
     "[Uimp] Rated Impulse Withstand Voltage": "Tegangan Ketahanan Impuls Terukur [Uimp]",
     "IP Degree Of Protection": "Derajat Perlindungan IP",
-    "IK Degree Of Protection": "Derajat Perlindungan IK"
+    "IK Degree Of Protection": "Derajat Perlindungan IK",
+    "Colour ": "Warna"
 }
