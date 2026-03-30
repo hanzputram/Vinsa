@@ -231,6 +231,7 @@
 
         [class*="backdrop-blur"] {
             -webkit-backdrop-filter: blur(12px); /* Safari support for backdrop-filter */
+            backdrop-filter: blur(12px);
         }
 
         /* Fix for Safari flex gap issues in older versions if necessary */
