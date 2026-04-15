@@ -179,6 +179,7 @@
                 <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
                     @forelse ($products as $product)
                         @php
+                            $customInput = null;
                             $searchContext = [
                                 $product->name,
                                 $product->kode,
@@ -186,9 +187,9 @@
                             ];
                             
                             if (!empty($product->custom_input)) {
-                                $ci = json_decode($product->custom_input, true);
-                                if (is_array($ci)) {
-                                    $searchContext = array_merge($searchContext, array_values($ci));
+                                $customInput = json_decode($product->custom_input, true);
+                                if (is_array($customInput)) {
+                                    $searchContext = array_merge($searchContext, array_values($customInput));
                                 }
                             }
                             
