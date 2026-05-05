@@ -93,14 +93,14 @@
     <x-app-loader />
 
     <!-- Navbar Section -->
-    <div class="max-w-[93%] mx-auto relative z-50">
-        <div class="flex justify-between items-center">
+    <div class="max-w-[95%] mx-auto relative z-50">
+        <div class="flex justify-between items-center h-20">
             <x-navUser></x-navUser>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section class="relative min-h-[75vh] flex items-center justify-center overflow-hidden px-4 mb-20 rounded-[40px] mx-[3.5%] bg-mesh">
+    <section class="relative min-h-[60vh] md:min-h-[550px] flex items-center justify-center overflow-hidden px-4 mb-12 rounded-[40px] mx-[2.5%] bg-mesh shadow-2xl">
         <!-- Abstract Decorative Elements -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div class="absolute top-1/4 -left-20 w-96 h-96 bg-white/10 rounded-full blur-[100px] animate-pulse"></div>
@@ -113,21 +113,21 @@
             <div class="circuit-line h-[1px] w-full top-[60%] opacity-10"></div>
         </div>
         
-        <div class="relative z-20 text-center max-w-4xl mx-auto px-6">
-            <div class="inline-block px-4 py-1 bg-white/10 backdrop-blur-md rounded-full text-white/80 text-sm font-bold tracking-widest uppercase mb-6 border border-white/20">
+        <div class="relative z-20 text-center max-w-4xl mx-auto px-6 py-12">
+            <div class="inline-block px-3 py-1 bg-white/10 backdrop-blur-md rounded-full text-white/80 text-xs font-bold tracking-widest uppercase mb-4 border border-white/20">
                 Premium Electrical Solutions
             </div>
-            <h1 class="text-5xl md:text-8xl font-black text-white mb-8 drop-shadow-2xl leading-tight">
+            <h1 class="text-4xl md:text-7xl font-black text-white mb-6 drop-shadow-2xl leading-tight">
                 Innovating for <br><span class="text-white drop-shadow-[0_0_20px_rgba(13,216,189,0.8)]">Excellence</span>
             </h1>
-            <p class="text-xl md:text-2xl text-white/90 font-light leading-relaxed mb-12 max-w-2xl mx-auto">
+            <p class="text-lg md:text-xl text-white/90 font-light leading-relaxed mb-10 max-w-2xl mx-auto">
                 Vinsa berdedikasi menyediakan solusi kelistrikan terbaik untuk kebutuhan masa depan rumah, bisnis, dan industri Anda.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-6">
-                <a href="#story" class="bg-white text-[#066c5f] px-10 py-4 rounded-full font-bold hover:bg-[#FDFBEE] transition-all transform hover:scale-105 shadow-2xl text-lg">
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#story" class="bg-white text-[#066c5f] px-8 py-3 rounded-full font-bold hover:bg-[#FDFBEE] transition-all transform hover:scale-105 shadow-xl text-base">
                     Pelajari Kisah Kami
                 </a>
-                <a href="/contactus" class="border-2 border-white/50 backdrop-blur-sm text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-[#066c5f] transition-all transform hover:scale-105 text-lg">
+                <a href="/contactus" class="border-2 border-white/40 backdrop-blur-sm text-white px-8 py-3 rounded-full font-bold hover:bg-white hover:text-[#066c5f] transition-all transform hover:scale-105 text-base">
                     Hubungi Kami
                 </a>
             </div>
