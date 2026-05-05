@@ -51,6 +51,14 @@
                 radial-gradient(at 0% 0%, hsla(174,78%,45%,1) 0, transparent 50%), 
                 radial-gradient(at 50% 0%, hsla(171,85%,38%,1) 0, transparent 50%), 
                 radial-gradient(at 100% 0%, hsla(176,91%,43%,1) 0, transparent 50%);
+            background-size: 200% 200%;
+            animation: mesh-move 15s ease infinite;
+        }
+
+        @keyframes mesh-move {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         @keyframes float {
@@ -110,7 +118,7 @@
                 Premium Electrical Solutions
             </div>
             <h1 class="text-5xl md:text-8xl font-black text-white mb-8 drop-shadow-2xl leading-tight">
-                Innovating for <br><span class="text-[#0dd8bd]">Excellence</span>
+                Innovating for <br><span class="text-white drop-shadow-[0_0_20px_rgba(13,216,189,0.8)]">Excellence</span>
             </h1>
             <p class="text-xl md:text-2xl text-white/90 font-light leading-relaxed mb-12 max-w-2xl mx-auto">
                 Vinsa berdedikasi menyediakan solusi kelistrikan terbaik untuk kebutuhan masa depan rumah, bisnis, dan industri Anda.

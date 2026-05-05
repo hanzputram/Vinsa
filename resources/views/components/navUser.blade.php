@@ -39,10 +39,10 @@
     <!-- Menu Desktop -->
     <div class="flex items-center space-x-8">
         <ul class="hidden md:flex space-x-6 items-center">
-            <li><a href="{{ url('/') }}" class="font-bold text-xl hover:text-[#066c5fad]">{{ __('Home') }}</a></li>
-            <li><a href="/about" class="font-bold text-xl hover:text-[#066c5fad]">{{ __('About Us') }}</a></li>
-            <li><a href="/blog" class="font-bold text-xl hover:text-[#066c5fad]">{{ __('Blog') }}</a></li>
-            <li><a href="{{ route('contact-us') }}" class="font-bold text-xl hover:text-[#066c5fad]">{{ __('Contact Us') }}</a></li>
+            <li><a href="{{ url('/') }}" class="font-bold text-xl {{ Request::is('/') ? 'text-[#0dd8bd]' : 'hover:text-[#066c5fad]' }} transition-colors">{{ __('Home') }}</a></li>
+            <li><a href="/about" class="font-bold text-xl {{ Request::is('about') ? 'text-[#0dd8bd]' : 'hover:text-[#066c5fad]' }} transition-colors">{{ __('About Us') }}</a></li>
+            <li><a href="/blog" class="font-bold text-xl {{ Request::is('blog*') ? 'text-[#0dd8bd]' : 'hover:text-[#066c5fad]' }} transition-colors">{{ __('Blog') }}</a></li>
+            <li><a href="{{ route('contact-us') }}" class="font-bold text-xl {{ Request::routeIs('contact-us') ? 'text-[#0dd8bd]' : 'hover:text-[#066c5fad]' }} transition-colors">{{ __('Contact Us') }}</a></li>
         </ul>
 
         <!-- Language Switcher Desktop -->
