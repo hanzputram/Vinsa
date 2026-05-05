@@ -106,7 +106,7 @@
 
     <!-- Hero Section -->
     <main>
-        <section class="relative min-h-[60vh] md:min-h-[580px] flex items-center justify-center overflow-hidden rounded-[40px] mx-[2.5%] bg-mesh shadow-[0_20px_50px_rgba(6,108,95,0.2)] group">
+        <section class="relative min-h-[65vh] md:min-h-[650px] flex items-center justify-center overflow-hidden rounded-[40px] mx-[2.5%] bg-mesh shadow-[0_20px_50px_rgba(6,108,95,0.2)] group mb-32">
             <!-- Decorative Elements -->
             <div class="absolute inset-0 overflow-hidden pointer-events-none">
                 <div class="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-white/10 rounded-full blur-[100px] floating-element" style="animation-duration: 12s;"></div>
@@ -117,19 +117,19 @@
                 <div class="absolute bottom-1/4 left-[10%] w-20 h-20 border border-white/5 rounded-lg rotate-45 floating-element" style="animation-delay: -2s;"></div>
             </div>
             
-            <div class="relative z-20 text-center max-w-4xl mx-auto px-6 py-16">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-white/90 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-8 border border-white/20 transition-all hover:bg-white/20">
+            <div class="relative z-20 text-center max-w-4xl mx-auto px-6 pt-24 pb-32">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-white/90 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-10 border border-white/20 transition-all hover:bg-white/20">
                     <span class="w-2 h-2 bg-[#0dd8bd] rounded-full animate-pulse"></span>
                     Premium Electrical Solutions
                 </div>
-                <h1 class="text-4xl md:text-7xl lg:text-8xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+                <h1 class="text-4xl md:text-7xl lg:text-8xl font-black text-white mb-10 leading-[1.1] tracking-tight">
                     Innovating for <br>
                     <span class="hero-title-glow bg-gradient-to-r from-white via-white to-[#0dd8bd] bg-clip-text text-transparent">Excellence</span>
                 </h1>
-                <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed mb-12 max-w-2xl mx-auto">
+                <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed mb-16 max-w-2xl mx-auto">
                     Mewujudkan standar baru dalam sistem kelistrikan yang aman, cerdas, dan efisien untuk mendukung gaya hidup modern Anda.
                 </p>
-                <div class="flex flex-col sm:flex-row justify-center items-center gap-5">
+                <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8">
                     <a href="#story" class="group relative bg-white text-[#066c5f] px-10 py-4 rounded-full font-bold hover:bg-[#FDFBEE] transition-all transform hover:scale-105 shadow-[0_15px_30px_rgba(255,255,255,0.2)] text-base overflow-hidden">
                         <span class="relative z-10">Pelajari Kisah Kami</span>
                         <div class="absolute inset-0 bg-gray-100 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
