@@ -94,13 +94,13 @@
 
     <!-- Navbar Section -->
     <div class="max-w-[93%] mx-auto relative z-50">
-        <div class="flex justify-between items-center py-4">
+        <div class="flex justify-between items-center">
             <x-navUser></x-navUser>
         </div>
     </div>
 
     <!-- Hero Section -->
-    <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden px-4 mb-20 rounded-[40px] mx-[3.5%] mt-4 bg-mesh">
+    <section class="relative min-h-[75vh] flex items-center justify-center overflow-hidden px-4 mb-20 rounded-[40px] mx-[3.5%] bg-mesh">
         <!-- Abstract Decorative Elements -->
         <div class="absolute inset-0 overflow-hidden pointer-events-none">
             <div class="absolute top-1/4 -left-20 w-96 h-96 bg-white/10 rounded-full blur-[100px] animate-pulse"></div>
@@ -135,7 +135,7 @@
     </section>
 
     <!-- Our Story Section -->
-    <section id="story" class="max-w-7xl mx-auto px-6 py-32">
+    <section id="story" class="max-w-7xl mx-auto px-6 py-20">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
             <div class="scroll-reveal">
                 <div class="w-20 h-1 bg-[#066c5f] mb-8"></div>
