@@ -147,8 +147,8 @@
         </section>
 
         <!-- Our Story Section -->
-        <section id="story" class="max-w-7xl mx-auto px-6 py-28">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+        <section id="story" class="max-w-7xl mx-auto px-6 py-48">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-32 items-center">
                 <div class="scroll-reveal">
                     <div class="flex items-center gap-4 mb-8">
                         <div class="w-12 h-1 bg-[#066c5f] rounded-full"></div>
@@ -215,15 +215,15 @@
         </section>
 
         <!-- Core Values Section -->
-        <section class="bg-white py-28">
+        <section class="bg-white py-48">
             <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center max-w-3xl mx-auto mb-20 scroll-reveal">
-                    <h2 class="text-sm font-bold tracking-[0.4em] text-[#066c5f] uppercase mb-4">Core Philosophy</h2>
-                    <h3 class="text-4xl md:text-5xl font-black mb-6">Mengapa Memilih Vinsa?</h3>
-                    <p class="text-lg text-gray-500 font-light">Kami mengombinasikan keahlian teknis bertahun-tahun dengan material berkualitas tinggi untuk memberikan hasil yang tak tertandingi.</p>
+                <div class="text-center max-w-3xl mx-auto mb-32 scroll-reveal">
+                    <h2 class="text-sm font-bold tracking-[0.4em] text-[#066c5f] uppercase mb-6">Core Philosophy</h2>
+                    <h3 class="text-4xl md:text-6xl font-black mb-10">Mengapa Memilih Vinsa?</h3>
+                    <p class="text-lg text-gray-500 font-light leading-relaxed">Kami mengombinasikan keahlian teknis bertahun-tahun dengan material berkualitas tinggi untuk memberikan hasil yang tak tertandingi.</p>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
                     <!-- Value 1 -->
                     <div class="bg-white p-10 rounded-[40px] hover:bg-[#066c5f] group transition-all duration-500 scroll-reveal stagger-1 border border-gray-100 shadow-sm hover:shadow-2xl">
                         <div class="w-14 h-14 bg-[#066c5f]/10 group-hover:bg-white/20 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500">
@@ -261,8 +261,8 @@
         </section>
 
         <!-- Vision & Mission Section -->
-        <section class="max-w-7xl mx-auto px-6 py-28 mb-10">
-            <div class="bg-[#066c5f] rounded-[60px] p-12 md:p-24 text-white relative overflow-hidden shadow-[0_30px_60px_rgba(6,108,95,0.3)] group">
+        <section class="max-w-7xl mx-auto px-6 py-48 mb-20">
+            <div class="bg-[#066c5f] rounded-[60px] p-16 md:p-32 text-white relative overflow-hidden shadow-[0_30px_60px_rgba(6,108,95,0.3)] group">
                 <!-- Decorative effects -->
                 <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-[#0dd8bd]/20 rounded-full blur-[150px]"></div>
                 <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-black/20 rounded-full blur-[150px]"></div>
