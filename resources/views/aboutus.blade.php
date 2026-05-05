@@ -225,34 +225,34 @@
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <!-- Value 1 -->
-                    <div class="glass-card p-12 rounded-[50px] hover:bg-[#066c5f] group transition-all duration-700 scroll-reveal stagger-1">
-                        <div class="w-16 h-16 bg-[#066c5f]/10 group-hover:bg-white/20 rounded-3xl flex items-center justify-center mb-10 transition-all duration-500">
-                            <svg class="w-8 h-8 text-[#066c5f] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    <div class="bg-white p-10 rounded-[40px] hover:bg-[#066c5f] group transition-all duration-500 scroll-reveal stagger-1 border border-gray-100 shadow-sm hover:shadow-2xl">
+                        <div class="w-14 h-14 bg-[#066c5f]/10 group-hover:bg-white/20 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500">
+                            <svg class="w-7 h-7 text-[#066c5f] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                         </div>
-                        <h4 class="text-2xl font-black mb-6 group-hover:text-white transition-colors">Safety Legacy</h4>
-                        <p class="text-gray-600 group-hover:text-white/70 transition-colors leading-relaxed font-light">
+                        <h4 class="text-xl font-bold mb-4 group-hover:text-white transition-colors">Safety Legacy</h4>
+                        <p class="text-gray-500 group-hover:text-white/80 transition-colors leading-relaxed text-sm">
                             Keamanan bukan sekadar fitur, melainkan identitas kami. Setiap produk melewati uji ketat standar internasional.
                         </p>
                     </div>
 
-                    <!-- Value 2 -->
-                    <div class="glass-card p-12 rounded-[50px] bg-[#066c5f] md:translate-y-12 scroll-reveal stagger-2">
-                        <div class="w-16 h-16 bg-white/20 rounded-3xl flex items-center justify-center mb-10">
-                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <!-- Value 2 (Featured) -->
+                    <div class="bg-[#066c5f] p-10 rounded-[40px] md:translate-y-8 scroll-reveal stagger-2 shadow-xl">
+                        <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-8">
+                            <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
-                        <h4 class="text-2xl font-black mb-6 text-white">Innovation Hub</h4>
-                        <p class="text-white/70 leading-relaxed font-light">
+                        <h4 class="text-xl font-bold mb-4 text-white">Innovation Hub</h4>
+                        <p class="text-white/80 leading-relaxed text-sm">
                             Terus berevolusi dengan teknologi terbaru untuk memastikan sistem kelistrikan Anda tetap relevan di masa depan.
                         </p>
                     </div>
 
                     <!-- Value 3 -->
-                    <div class="glass-card p-12 rounded-[50px] hover:bg-[#066c5f] group transition-all duration-700 scroll-reveal stagger-3">
-                        <div class="w-16 h-16 bg-[#066c5f]/10 group-hover:bg-white/20 rounded-3xl flex items-center justify-center mb-10 transition-all duration-500">
-                            <svg class="w-8 h-8 text-[#066c5f] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                    <div class="bg-white p-10 rounded-[40px] hover:bg-[#066c5f] group transition-all duration-500 scroll-reveal stagger-3 border border-gray-100 shadow-sm hover:shadow-2xl">
+                        <div class="w-14 h-14 bg-[#066c5f]/10 group-hover:bg-white/20 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500">
+                            <svg class="w-7 h-7 text-[#066c5f] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
                         </div>
-                        <h4 class="text-2xl font-black mb-6 group-hover:text-white transition-colors">Material Quality</h4>
-                        <p class="text-gray-600 group-hover:text-white/70 transition-colors leading-relaxed font-light">
+                        <h4 class="text-xl font-bold mb-4 group-hover:text-white transition-colors">Material Quality</h4>
+                        <p class="text-gray-500 group-hover:text-white/80 transition-colors leading-relaxed text-sm">
                             Hanya menggunakan material kelas premium untuk menjamin daya tahan maksimal dan performa yang stabil.
                         </p>
                     </div>
@@ -262,33 +262,36 @@
 
         <!-- Vision & Mission Section -->
         <section class="max-w-7xl mx-auto px-6 py-28 mb-10">
-            <div class="bg-gray-900 rounded-[60px] p-12 md:p-24 text-white relative overflow-hidden shadow-2xl group">
-                <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0dd8bd]/10 rounded-full blur-[150px] transition-all duration-1000 group-hover:bg-[#0dd8bd]/20"></div>
-                <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#066c5f]/10 rounded-full blur-[150px]"></div>
+            <div class="bg-[#066c5f] rounded-[60px] p-12 md:p-24 text-white relative overflow-hidden shadow-[0_30px_60px_rgba(6,108,95,0.3)] group">
+                <!-- Decorative effects -->
+                <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-[#0dd8bd]/20 rounded-full blur-[150px]"></div>
+                <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-black/20 rounded-full blur-[150px]"></div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 relative z-10">
                     <div class="scroll-reveal">
+                        <div class="w-12 h-1 bg-[#0dd8bd] mb-8 rounded-full"></div>
                         <h3 class="text-4xl md:text-5xl font-black mb-10">Our Vision</h3>
-                        <p class="text-2xl text-gray-400 leading-relaxed font-light">
-                            Menjadi katalis utama dalam transformasi industri kelistrikan global yang <span class="text-white font-medium">berkelanjutan, cerdas, dan aman</span> bagi setiap generasi.
+                        <p class="text-2xl text-white/80 leading-relaxed font-light">
+                            Menjadi katalis utama dalam transformasi industri kelistrikan global yang <span class="text-[#0dd8bd] font-medium">berkelanjutan, cerdas, dan aman</span> bagi setiap generasi.
                         </p>
                     </div>
                     
                     <div class="scroll-reveal stagger-2">
+                        <div class="w-12 h-1 bg-[#0dd8bd] mb-8 rounded-full"></div>
                         <h3 class="text-4xl md:text-5xl font-black mb-10">Our Mission</h3>
-                        <div class="space-y-10">
-                            <div class="flex gap-8">
-                                <span class="text-5xl font-black text-[#0dd8bd]/20 group-hover:text-[#0dd8bd]/40 transition-colors">01</span>
+                        <div class="space-y-12">
+                            <div class="flex gap-8 group/item">
+                                <span class="text-5xl font-black text-white/10 group-hover/item:text-[#0dd8bd]/30 transition-colors duration-500">01</span>
                                 <div>
-                                    <h5 class="text-xl font-bold mb-3">Keamanan Global</h5>
-                                    <p class="text-gray-400 font-light">Menghadirkan standar keamanan internasional di setiap produk yang kami buat.</p>
+                                    <h5 class="text-xl font-bold mb-3 text-[#0dd8bd]">Keamanan Global</h5>
+                                    <p class="text-white/70 font-light leading-relaxed">Menghadirkan standar keamanan internasional di setiap produk yang kami buat tanpa kompromi.</p>
                                 </div>
                             </div>
-                            <div class="flex gap-8">
-                                <span class="text-5xl font-black text-[#0dd8bd]/20 group-hover:text-[#0dd8bd]/40 transition-colors">02</span>
+                            <div class="flex gap-8 group/item">
+                                <span class="text-5xl font-black text-white/10 group-hover/item:text-[#0dd8bd]/30 transition-colors duration-500">02</span>
                                 <div>
-                                    <h5 class="text-xl font-bold mb-3">Inovasi Terpadu</h5>
-                                    <p class="text-gray-400 font-light">Mengintegrasikan teknologi pintar untuk efisiensi energi yang maksimal.</p>
+                                    <h5 class="text-xl font-bold mb-3 text-[#0dd8bd]">Inovasi Terpadu</h5>
+                                    <p class="text-white/70 font-light leading-relaxed">Mengintegrasikan teknologi pintar untuk efisiensi energi yang maksimal dan berkelanjutan.</p>
                                 </div>
                             </div>
                         </div>
