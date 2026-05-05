@@ -18,163 +18,263 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="Pelajari lebih lanjut tentang Vinsa, penyedia solusi kelistrikan premium dengan dedikasi tinggi terhadap kualitas dan inovasi.">
+    
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
-    <title>Vinsa</title>
+    <title>About Us - Vinsa</title>
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
+    
     <style>
         .outfit {
             font-family: "Outfit", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 400;
-            font-style: normal;
         }
 
-        @keyframes shine {
-            0% {
-                background-position: -200%;
-            }
-
-            100% {
-                background-position: 200%;
-            }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
-        .shining-text {
-            background-image: linear-gradient(90deg, #9e9e9e 25%, #ffffff 50%, #9e9e9e 75%);
-            background-size: 200% auto;
+        .gradient-text {
+            background: linear-gradient(90deg, #066c5f, #0dd8bd);
             -webkit-background-clip: text;
-            background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shine 6s linear infinite;
         }
 
-        /* Untuk Chrome, Safari, Edge */
-        ::-webkit-scrollbar {
-            width: 6px;
-            /* Lebar scrollbar */
-            height: 7px;
-            /* Tinggi scrollbar */
+        .bg-mesh {
+            background-color: #066c5f;
+            background-image: 
+                radial-gradient(at 0% 0%, hsla(174,78%,45%,1) 0, transparent 50%), 
+                radial-gradient(at 50% 0%, hsla(171,85%,38%,1) 0, transparent 50%), 
+                radial-gradient(at 100% 0%, hsla(176,91%,43%,1) 0, transparent 50%);
         }
 
-        ::-webkit-scrollbar-button {
-            display: block;
-            background-color: #cccccc00;
-            /* Warna tombol */
-            border-radius: 10px;
-            width: 10px;
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0px); }
         }
 
-        ::-webkit-scrollbar-thumb {
-            background: #ffffff53;
-            /* Warna thumb */
-            border-radius: 100px;
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        ::-webkit-scrollbar-thumb:hover {
-            background: #ffffffb5;
-            /* Warna saat hover */
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-            /* Menghilangkan background */
-        }
-
-        /* Untuk Firefox */
-        .scroll-container {
-            scrollbar-width: thin;
-            /* Lebar scrollbar */
-            scrollbar-color: #888 transparent;
-        }
-
-        .wa-text-curv {
-            width: 100%;
+        .circuit-line {
             position: absolute;
-            top: 0%;
-            -webkit-animation: spin 6s linear infinite;
-            -moz-animation: spin 6s linear infinite;
-            animation: spin 6s linear infinite;
-        }
-
-        @-moz-keyframes spin {
-            100% {
-                -moz-transform: rotate(360deg);
-            }
-        }
-
-        @-webkit-keyframes spin {
-            100% {
-                -webkit-transform: rotate(360deg);
-            }
-        }
-
-        @keyframes spin {
-            100% {
-                -webkit-transform: rotate(360deg);
-                transform: rotate(360deg);
-            }
+            background: rgba(13, 216, 189, 0.1);
         }
     </style>
 </head>
 
-<body class="outfit bg-[#FDFBEE]">
+<body class="outfit bg-[#FDFBEE] text-gray-800 overflow-x-hidden">
     <x-app-loader />
-    <div class="max-w-[93%] mx-auto">
-        <div class="flex justify-between items-center py-3">
+
+    <!-- Navbar Section -->
+    <div class="max-w-[93%] mx-auto relative z-50">
+        <div class="flex justify-between items-center py-4">
             <x-navUser></x-navUser>
         </div>
-        <div
-            class="overflow-hidden p-10 lg:p-[5rem] lg:justify-between py-[80px]  flex justify-center relative w-full h-screen after:content-[''] bg-gradient-to-r from-[#066c5f] to-[#0dd8bd] after:w-full after:h-full after:absolute after:top-0 after:left-0 rounded-[40px]">
-            <div class="w-full relative z-[10]">
-                <a href="javascript:window.history.back()" class="group">
-                    <svg viewBox="0 0 24 24" width="40px" height="40px" fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="stroke-white group-hover:stroke-gray-400 transition-colors duration-300">
-                        <path d="M6 12H18M6 12L11 7M6 12L11 17" stroke-width="2" stroke-linecap="round"
-                            stroke-linejoin="round"></path>
-                    </svg>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-[80vh] flex items-center justify-center overflow-hidden px-4 mb-20 rounded-[40px] mx-[3.5%] mt-4 bg-mesh">
+        <!-- Abstract Decorative Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-1/4 -left-20 w-96 h-96 bg-white/10 rounded-full blur-[100px] animate-pulse"></div>
+            <div class="absolute bottom-1/4 -right-20 w-96 h-96 bg-[#0dd8bd]/20 rounded-full blur-[100px] animate-pulse" style="animation-delay: 2s;"></div>
+            
+            <!-- Circuit patterns (CSS only) -->
+            <div class="circuit-line w-[1px] h-full left-[10%] opacity-20"></div>
+            <div class="circuit-line w-[1px] h-full left-[20%] opacity-10"></div>
+            <div class="circuit-line h-[1px] w-full top-[30%] opacity-20"></div>
+            <div class="circuit-line h-[1px] w-full top-[60%] opacity-10"></div>
+        </div>
+        
+        <div class="relative z-20 text-center max-w-4xl mx-auto px-6">
+            <div class="inline-block px-4 py-1 bg-white/10 backdrop-blur-md rounded-full text-white/80 text-sm font-bold tracking-widest uppercase mb-6 border border-white/20">
+                Premium Electrical Solutions
+            </div>
+            <h1 class="text-5xl md:text-8xl font-black text-white mb-8 drop-shadow-2xl leading-tight">
+                Innovating for <br><span class="text-[#0dd8bd]">Excellence</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-white/90 font-light leading-relaxed mb-12 max-w-2xl mx-auto">
+                Vinsa berdedikasi menyediakan solusi kelistrikan terbaik untuk kebutuhan masa depan rumah, bisnis, dan industri Anda.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="#story" class="bg-white text-[#066c5f] px-10 py-4 rounded-full font-bold hover:bg-[#FDFBEE] transition-all transform hover:scale-105 shadow-2xl text-lg">
+                    Pelajari Kisah Kami
                 </a>
-                <p class="text-6xl text-center font-extrabold  text-[#fff]">
-                    {{ __('About Us') }}
-                </p>
-                <p class="text-xl w-[90%] text-center text-[#fffffffe] pt-5 mx-auto pb-15">
-                    {{-- "Vinsa: Dedikasi dalam Menyediakan Solusi Kelistrikan Premium, Menghadirkan Produk Berkualitas
-                    Tinggi untuk Kebutuhan Rumah, Bisnis, dan Industri Anda! --}}
-                </p>
+                <a href="/contactus" class="border-2 border-white/50 backdrop-blur-sm text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-[#066c5f] transition-all transform hover:scale-105 text-lg">
+                    Hubungi Kami
+                </a>
             </div>
         </div>
-    </div>
-    {{-- <div class="max-w-7xl mx-auto py-16 px-6 flex flex-col md:flex-row gap-12 items-start">
-        <!-- Google Map -->
-        <div class="w-full md:w-1/2 h-[400px] rounded-lg overflow-hidden shadow-md">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2156.2719827748297!2d112.69587530477804!3d-7.670149427676324!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7d96dc646c1d5%3A0x7e975d52bc2a3c77!2sATStekno%20Pandaan!5e0!3m2!1sen!2sid!4v1744161778716!5m2!1sen!2sid"
-                class="w-full h-full border-0" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade">
-            </iframe>
-        </div>
+    </section>
 
-        <!-- Contact Information -->
-        <div class="w-full md:w-1/2 text-[#e53935] space-y-4">
-            <h2 class="text-2xl font-bold">PT. Anugerah Tama Sejati Surabaya</h2>
-            <p>The Taman Dayu, Cluster Palazio Boulevard, J-1 No. 06, Pandaan, Pasuruan, Jawa Timur, Indonesia 67156</p>
-            <p><strong>Phone</strong>: 034-34857758</p>
-            <p><strong>WhatsApp</strong>: +62 8897 3783 384</p>
-            <p><strong>Email</strong>: <a href="mailto:sales@ATstekno.com"
-                    class="underline hover:text-red-400">sales@ATstekno.com</a></p>
+    <!-- Our Story Section -->
+    <section id="story" class="max-w-7xl mx-auto px-6 py-32">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+            <div class="scroll-reveal">
+                <div class="w-20 h-1 bg-[#066c5f] mb-8"></div>
+                <h2 class="text-sm font-bold tracking-widest text-[#066c5f] uppercase mb-4">A Decade of Excellence</h2>
+                <h3 class="text-4xl md:text-5xl font-extrabold mb-8 leading-tight">
+                    Membangun <span class="gradient-text">Masa Depan</span> Melalui Koneksi yang Aman
+                </h3>
+                <div class="space-y-6 text-lg text-gray-600 leading-relaxed">
+                    <p>
+                        Vinsa lahir dari ambisi sederhana namun mendalam: mendefinisikan ulang standar keamanan dan efisiensi dalam industri kelistrikan. Kami memahami bahwa setiap kabel dan panel adalah infrastruktur vital bagi kehidupan modern.
+                    </p>
+                    <p>
+                        Selama lebih dari 10 tahun, kami telah bertransformasi dari penyedia peralatan menjadi partner solusi strategis bagi ribuan pelanggan di seluruh Indonesia. Fokus kami tetap sama: **Kualitas tanpa kompromi.**
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-6 scroll-reveal">
+                <div class="bg-white p-10 rounded-[40px] shadow-xl border border-gray-100 flex flex-col justify-center items-center text-center group hover:bg-[#066c5f] transition-colors duration-500">
+                    <p class="text-5xl font-black text-[#066c5f] mb-2 group-hover:text-white transition-colors">10+</p>
+                    <p class="text-sm text-gray-500 uppercase font-bold group-hover:text-white/70 transition-colors">Years of Experience</p>
+                </div>
+                <div class="bg-[#0dd8bd] p-10 rounded-[40px] shadow-xl flex flex-col justify-center items-center text-center transform translate-y-12">
+                    <p class="text-5xl font-black text-white mb-2">500+</p>
+                    <p class="text-sm text-white/80 uppercase font-bold">Successful Projects</p>
+                </div>
+                <div class="bg-[#066c5f] p-10 rounded-[40px] shadow-xl flex flex-col justify-center items-center text-center">
+                    <p class="text-5xl font-black text-white mb-2">100%</p>
+                    <p class="text-sm text-white/80 uppercase font-bold">Safety Standard</p>
+                </div>
+                <div class="bg-white p-10 rounded-[40px] shadow-xl border border-gray-100 flex flex-col justify-center items-center text-center transform translate-y-12 group hover:bg-[#0dd8bd] transition-colors duration-500">
+                    <p class="text-5xl font-black text-[#066c5f] mb-2 group-hover:text-white transition-colors">24/7</p>
+                    <p class="text-sm text-gray-500 uppercase font-bold group-hover:text-white/70 transition-colors">Client Support</p>
+                </div>
+            </div>
         </div>
-    </div> --}}
+    </section>
 
+    <!-- Core Values Section -->
+    <section class="bg-white py-32 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-[#FDFBEE] -skew-x-12 transform translate-x-20"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 relative z-10">
+            <div class="mb-20 scroll-reveal">
+                <h2 class="text-sm font-bold tracking-widest text-[#066c5f] uppercase mb-4 text-center lg:text-left">Our Core Values</h2>
+                <h3 class="text-4xl font-extrabold text-center lg:text-left">Prinsip yang Menggerakkan Kami</h3>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Value 1 -->
+                <div class="p-12 rounded-[40px] bg-[#FDFBEE] hover:bg-[#066c5f] group transition-all duration-500 scroll-reveal shadow-sm hover:shadow-2xl">
+                    <div class="w-16 h-16 bg-[#066c5f] group-hover:bg-white rounded-2xl flex items-center justify-center mb-10 transition-colors shadow-lg">
+                        <svg class="w-8 h-8 text-white group-hover:text-[#066c5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-6 group-hover:text-white transition-colors">Keamanan Mutlak</h4>
+                    <p class="text-gray-600 group-hover:text-white/80 transition-colors leading-relaxed">
+                        Kami menganggap setiap koneksi sebagai tanggung jawab besar. Standar keamanan kami melampaui regulasi industri untuk ketenangan Anda.
+                    </p>
+                </div>
+
+                <!-- Value 2 -->
+                <div class="p-12 rounded-[40px] bg-[#FDFBEE] hover:bg-[#066c5f] group transition-all duration-500 scroll-reveal shadow-sm hover:shadow-2xl md:translate-y-8">
+                    <div class="w-16 h-16 bg-[#0dd8bd] group-hover:bg-white rounded-2xl flex items-center justify-center mb-10 transition-colors shadow-lg">
+                        <svg class="w-8 h-8 text-white group-hover:text-[#066c5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-6 group-hover:text-white transition-colors">Inovasi Berkelanjutan</h4>
+                    <p class="text-gray-600 group-hover:text-white/80 transition-colors leading-relaxed">
+                        Dunia terus berubah, begitu pula kami. Kami mengintegrasikan teknologi terbaru untuk solusi energi yang lebih cerdas dan efisien.
+                    </p>
+                </div>
+
+                <!-- Value 3 -->
+                <div class="p-12 rounded-[40px] bg-[#FDFBEE] hover:bg-[#066c5f] group transition-all duration-500 scroll-reveal shadow-sm hover:shadow-2xl">
+                    <div class="w-16 h-16 bg-[#066c5f] group-hover:bg-white rounded-2xl flex items-center justify-center mb-10 transition-colors shadow-lg">
+                        <svg class="w-8 h-8 text-white group-hover:text-[#066c5f]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+                    </div>
+                    <h4 class="text-2xl font-bold mb-6 group-hover:text-white transition-colors">Integritas Kualitas</h4>
+                    <p class="text-gray-600 group-hover:text-white/80 transition-colors leading-relaxed">
+                        Kualitas bukan hanya janji, tapi bukti. Kami menggunakan material premium untuk memastikan daya tahan jangka panjang.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Vision & Mission Section -->
+    <section class="max-w-7xl mx-auto px-6 py-32 mb-20">
+        <div class="bg-[#066c5f] rounded-[60px] p-12 md:p-24 text-white relative overflow-hidden shadow-2xl">
+            <!-- Decorative shapes -->
+            <div class="absolute top-0 right-0 w-96 h-96 bg-[#0dd8bd]/20 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-[100px]"></div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 relative z-10">
+                <div class="scroll-reveal">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-[2px] bg-[#0dd8bd]"></div>
+                        <h3 class="text-3xl md:text-4xl font-black italic">Visi Kami</h3>
+                    </div>
+                    <p class="text-2xl text-white/80 leading-relaxed font-light">
+                        Menjadi standar emas global dalam penyediaan solusi kelistrikan terpadu yang memberdayakan peradaban melalui teknologi yang aman, cerdas, dan ramah lingkungan.
+                    </p>
+                </div>
+                
+                <div class="scroll-reveal">
+                    <div class="flex items-center gap-4 mb-8">
+                        <div class="w-12 h-[2px] bg-[#0dd8bd]"></div>
+                        <h3 class="text-3xl md:text-4xl font-black italic">Misi Kami</h3>
+                    </div>
+                    <ul class="space-y-8">
+                        <li class="flex items-start gap-6 group">
+                            <div class="w-10 h-10 bg-white/10 rounded-full flex-shrink-0 flex items-center justify-center text-[#0dd8bd] font-bold border border-white/20 group-hover:bg-white group-hover:text-[#066c5f] transition-all">01</div>
+                            <p class="text-lg text-white/70 group-hover:text-white transition-colors">Menyediakan akses produk kelistrikan dengan standar keamanan internasional yang tak tertandingi.</p>
+                        </li>
+                        <li class="flex items-start gap-6 group">
+                            <div class="w-10 h-10 bg-white/10 rounded-full flex-shrink-0 flex items-center justify-center text-[#0dd8bd] font-bold border border-white/20 group-hover:bg-white group-hover:text-[#066c5f] transition-all">02</div>
+                            <p class="text-lg text-white/70 group-hover:text-white transition-colors">Membangun ekosistem pelayanan pelanggan yang transparan, responsif, dan berbasis solusi.</p>
+                        </li>
+                        <li class="flex items-start gap-6 group">
+                            <div class="w-10 h-10 bg-white/10 rounded-full flex-shrink-0 flex items-center justify-center text-[#0dd8bd] font-bold border border-white/20 group-hover:bg-white group-hover:text-[#066c5f] transition-all">03</div>
+                            <p class="text-lg text-white/70 group-hover:text-white transition-colors">Mendorong adopsi teknologi hemat energi untuk mendukung masa depan bumi yang berkelanjutan.</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <x-footer></x-footer>
+
+    <script>
+        // Scroll Reveal Animation
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 
 </html>
-<script>
-    document.getElementById('menu-toggle').addEventListener('click', function() {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-</script>

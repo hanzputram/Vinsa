@@ -40,6 +40,7 @@
     <div class="flex items-center space-x-8">
         <ul class="hidden md:flex space-x-6 items-center">
             <li><a href="{{ url('/') }}" class="font-bold text-xl hover:text-[#066c5fad]">{{ __('Home') }}</a></li>
+            <li><a href="/about" class="font-bold text-xl hover:text-[#066c5fad]">{{ __('About Us') }}</a></li>
             <li><a href="/blog" class="font-bold text-xl hover:text-[#066c5fad]">{{ __('Blog') }}</a></li>
             <li><a href="{{ route('contact-us') }}" class="font-bold text-xl hover:text-[#066c5fad]">{{ __('Contact Us') }}</a></li>
         </ul>
@@ -93,6 +94,7 @@
 
         <!-- Link Menu -->
         <a href="{{ url('/') }}" class="block py-3 text-[#066C5F] border-b-[1.5px] border-[#066c5f20] hover:text-[#066c5fad] font-bold">{{ __('Home') }}</a>
+        <a href="/about" class="block py-3 text-[#066C5F] border-b-[1.5px] border-[#066c5f20] hover:text-[#066c5fad] font-bold">{{ __('About Us') }}</a>
         <a href="/blog" class="block py-3 text-[#066C5F] border-b-[1.5px] border-[#066c5f20] hover:text-[#066c5fad] font-bold">{{ __('Blog') }}</a>
         <a href="{{ route('contact-us') }}" class="block py-3 text-[#066C5F] border-b-[1.5px] border-[#066c5f20] hover:text-[#066c5fad] font-bold">{{ __('Contact Us') }}</a>
         
