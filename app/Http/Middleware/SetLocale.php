@@ -18,12 +18,14 @@ class SetLocale
     public function handle(Request $request, Closure $next): Response
     {
         if ($request->hasSession()) {
-            if (!Session::has('locale')) {
-                Session::put('locale', 'en');
+            // Force reset to 'id' for sessions that haven't been updated yet
+            if (!Session::has('locale_default_v2')) {
+                Session::put('locale', 'id');
+                Session::put('locale_default_v2', true);
             }
-            App::setLocale(Session::get('locale'));
+            App::setLocale(Session::get('locale', 'id'));
         } else {
-            App::setLocale('en');
+            App::setLocale('id');
         }
 
         \Carbon\Carbon::setLocale(App::getLocale());

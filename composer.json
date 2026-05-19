@@ -11,8 +11,8 @@
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1",
         "maatwebsite/excel": "^3.1.67",
-
         "realrashid/sweet-alert": "^7.3",
+        "spatie/laravel-sitemap": "*",
         "wavey/sweetalert": "^1.2"
     },
     "require-dev": {
