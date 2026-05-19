@@ -120,22 +120,22 @@
             <div class="relative z-20 text-center max-w-4xl mx-auto px-6 pt-24 pb-32">
                 <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-white/10 backdrop-blur-md rounded-full text-white/90 text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase mb-10 border border-white/20 transition-all hover:bg-white/20">
                     <span class="w-2 h-2 bg-[#0dd8bd] rounded-full animate-pulse"></span>
-                    Premium Electrical Solutions
+                    {{ __('Premium Electrical Solutions') }}
                 </div>
                 <h1 class="text-4xl md:text-7xl lg:text-8xl font-black text-white mb-10 leading-[1.1] tracking-tight">
-                    Innovating for <br>
-                    <span class="hero-title-glow bg-gradient-to-r from-white via-white to-[#0dd8bd] bg-clip-text text-transparent">Excellence</span>
+                    {{ __('Innovating for') }} <br>
+                    <span class="hero-title-glow bg-gradient-to-r from-white via-white to-[#0dd8bd] bg-clip-text text-transparent">{{ __('Excellence') }}</span>
                 </h1>
                 <p class="text-lg md:text-xl text-white/80 font-light leading-relaxed mb-16 max-w-2xl mx-auto">
-                    Mewujudkan standar baru dalam sistem kelistrikan yang aman, cerdas, dan efisien untuk mendukung gaya hidup modern Anda.
+                    {{ __('Realizing new standards in safe, smart, and efficient electrical systems to support your modern lifestyle.') }}
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-6 mb-8">
                     <a href="#story" class="group relative bg-white text-[#066c5f] px-10 py-4 rounded-full font-bold hover:bg-[#FDFBEE] transition-all transform hover:scale-105 shadow-[0_15px_30px_rgba(255,255,255,0.2)] text-base overflow-hidden">
-                        <span class="relative z-10">Pelajari Kisah Kami</span>
+                        <span class="relative z-10">{{ __('Learn Our Story') }}</span>
                         <div class="absolute inset-0 bg-gray-100 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                     </a>
                     <a href="/contactus" class="group border-2 border-white/30 backdrop-blur-sm text-white px-10 py-4 rounded-full font-bold hover:border-white transition-all transform hover:scale-105 text-base">
-                        Hubungi Kami
+                        {{ __('Contact Us') }}
                     </a>
                 </div>
             </div>
@@ -152,34 +152,34 @@
                 <div class="scroll-reveal">
                     <div class="flex items-center gap-4 mb-8">
                         <div class="w-12 h-1 bg-[#066c5f] rounded-full"></div>
-                        <span class="text-sm font-bold tracking-[0.3em] text-[#066c5f] uppercase">A Decade of Excellence</span>
+                        <span class="text-sm font-bold tracking-[0.3em] text-[#066c5f] uppercase">{{ __('A Decade of Excellence') }}</span>
                     </div>
                     <h2 class="text-4xl md:text-6xl font-black mb-10 leading-[1.1] text-gray-900">
-                        Membangun <span class="gradient-text">Masa Depan</span> Melalui Keahlian
+                        {{ __('Building') }} <span class="gradient-text">{{ __('the Future') }}</span> {{ __('Through Expertise') }}
                     </h2>
                     <div class="space-y-8 text-lg text-gray-600 leading-relaxed font-light">
                         <p>
-                            Vinsa didirikan dengan satu tujuan utama: menghadirkan solusi kelistrikan yang tidak hanya memenuhi standar, tetapi melampaui ekspektasi keamanan dan efisiensi.
+                            {{ __('Vinsa was founded with one main goal: to deliver electrical solutions that not only meet standards, but exceed expectations for safety and efficiency.') }}
                         </p>
                         <p>
-                            Kami percaya bahwa di balik setiap rumah yang terang dan industri yang produktif, terdapat sistem kelistrikan yang dirancang dengan presisi. Itulah komitmen kami selama lebih dari sepuluh tahun.
+                            {{ __('We believe that behind every bright home and productive industry, there is an electrical system designed with precision. That has been our commitment for over ten years.') }}
                         </p>
                     </div>
                     
                     <div class="mt-12 flex flex-wrap gap-10">
                         <div class="flex flex-col">
                             <span class="text-4xl font-black text-[#066c5f]">10+</span>
-                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Years Experience</span>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">{{ __('Years Experience') }}</span>
                         </div>
                         <div class="w-[1px] h-12 bg-gray-200"></div>
                         <div class="flex flex-col">
                             <span class="text-4xl font-black text-[#066c5f]">500+</span>
-                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Global Clients</span>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">{{ __('Global Clients') }}</span>
                         </div>
                         <div class="w-[1px] h-12 bg-gray-200"></div>
                         <div class="flex flex-col">
                             <span class="text-4xl font-black text-[#066c5f]">100%</span>
-                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">Quality Trust</span>
+                            <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">{{ __('Quality Trust') }}</span>
                         </div>
                     </div>
                 </div>
@@ -191,19 +191,19 @@
                                 <svg class="w-16 h-16 text-[#0dd8bd]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm0 3.45L19.15 19H4.85L12 5.45zM11 16h2v2h-2v-2zm0-7h2v5h-2V9z"/></svg>
                             </div>
                             <div class="h-48 bg-white p-8 rounded-[40px] shadow-lg border border-gray-100 flex flex-col justify-end">
-                                <span class="text-3xl font-black text-[#066c5f]">Safety</span>
-                                <p class="text-sm text-gray-500 mt-2">Zero compromise policy on all electrical standards.</p>
+                                <span class="text-3xl font-black text-[#066c5f]">{{ __('Safety') }}</span>
+                                <p class="text-sm text-gray-500 mt-2">{{ __('Zero compromise policy on all electrical standards.') }}</p>
                             </div>
                         </div>
                         <div class="space-y-6 pt-12">
                             <div class="h-48 bg-[#0dd8bd] p-8 rounded-[40px] shadow-lg flex flex-col justify-end">
-                                <span class="text-3xl font-black text-white">Smart</span>
-                                <p class="text-white/80 text-sm mt-2">Integrated technology for modern energy management.</p>
+                                <span class="text-3xl font-black text-white">{{ __('Smart') }}</span>
+                                <p class="text-white/80 text-sm mt-2">{{ __('Integrated technology for modern energy management.') }}</p>
                             </div>
                             <div class="h-64 bg-white p-8 rounded-[40px] shadow-xl border border-gray-100 flex items-center justify-center transform hover:scale-[1.03] transition-all duration-500">
                                 <div class="text-center">
                                     <div class="text-5xl font-black text-[#066c5f]">24/7</div>
-                                    <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-2">Professional Support</div>
+                                    <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-2">{{ __('Professional Support') }}</div>
                                 </div>
                             </div>
                         </div>
@@ -218,9 +218,9 @@
         <section class="bg-white py-48">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto mb-32 scroll-reveal">
-                    <h2 class="text-sm font-bold tracking-[0.4em] text-[#066c5f] uppercase mb-6">Core Philosophy</h2>
-                    <h3 class="text-4xl md:text-6xl font-black mb-10">Mengapa Memilih Vinsa?</h3>
-                    <p class="text-lg text-gray-500 font-light leading-relaxed">Kami mengombinasikan keahlian teknis bertahun-tahun dengan material berkualitas tinggi untuk memberikan hasil yang tak tertandingi.</p>
+                    <h2 class="text-sm font-bold tracking-[0.4em] text-[#066c5f] uppercase mb-6">{{ __('Core Philosophy') }}</h2>
+                    <h3 class="text-4xl md:text-6xl font-black mb-10">{{ __('Why Choose Vinsa?') }}</h3>
+                    <p class="text-lg text-gray-500 font-light leading-relaxed">{{ __('We combine years of technical expertise with high-quality materials to deliver unmatched results.') }}</p>
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -229,9 +229,9 @@
                         <div class="w-14 h-14 bg-[#066c5f]/10 group-hover:bg-white/20 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500">
                             <svg class="w-7 h-7 text-[#066c5f] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                         </div>
-                        <h4 class="text-xl font-bold mb-4 group-hover:text-white transition-colors">Safety Legacy</h4>
+                        <h4 class="text-xl font-bold mb-4 group-hover:text-white transition-colors">{{ __('Safety Legacy') }}</h4>
                         <p class="text-gray-500 group-hover:text-white/80 transition-colors leading-relaxed text-sm">
-                            Keamanan bukan sekadar fitur, melainkan identitas kami. Setiap produk melewati uji ketat standar internasional.
+                            {{ __('Safety is not just a feature, but our identity. Every product passes rigorous international standard testing.') }}
                         </p>
                     </div>
 
@@ -240,9 +240,9 @@
                         <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-8">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
-                        <h4 class="text-xl font-bold mb-4 text-white">Innovation Hub</h4>
+                        <h4 class="text-xl font-bold mb-4 text-white">{{ __('Innovation Hub') }}</h4>
                         <p class="text-white/80 leading-relaxed text-sm">
-                            Terus berevolusi dengan teknologi terbaru untuk memastikan sistem kelistrikan Anda tetap relevan di masa depan.
+                            {{ __('Continuously evolving with the latest technology to ensure your electrical systems remain relevant in the future.') }}
                         </p>
                     </div>
 
@@ -251,9 +251,9 @@
                         <div class="w-14 h-14 bg-[#066c5f]/10 group-hover:bg-white/20 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500">
                             <svg class="w-7 h-7 text-[#066c5f] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
                         </div>
-                        <h4 class="text-xl font-bold mb-4 group-hover:text-white transition-colors">Material Quality</h4>
+                        <h4 class="text-xl font-bold mb-4 group-hover:text-white transition-colors">{{ __('Material Quality') }}</h4>
                         <p class="text-gray-500 group-hover:text-white/80 transition-colors leading-relaxed text-sm">
-                            Hanya menggunakan material kelas premium untuk menjamin daya tahan maksimal dan performa yang stabil.
+                            {{ __('Using only premium-grade materials to guarantee maximum durability and stable performance.') }}
                         </p>
                     </div>
                 </div>
@@ -270,28 +270,28 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 relative z-10">
                     <div class="scroll-reveal">
                         <div class="w-12 h-1 bg-[#0dd8bd] mb-8 rounded-full"></div>
-                        <h3 class="text-4xl md:text-5xl font-black mb-10">Our Vision</h3>
+                        <h3 class="text-4xl md:text-5xl font-black mb-10">{{ __('Our Vision') }}</h3>
                         <p class="text-2xl text-white/80 leading-relaxed font-light">
-                            Menjadi katalis utama dalam transformasi industri kelistrikan global yang <span class="text-[#0dd8bd] font-medium">berkelanjutan, cerdas, dan aman</span> bagi setiap generasi.
+                            {{ __('To become the main catalyst in the transformation of the global electrical industry that is') }} <span class="text-[#0dd8bd] font-medium">{{ __('sustainable, smart, and safe') }}</span> {{ __('for every generation.') }}
                         </p>
                     </div>
                     
                     <div class="scroll-reveal stagger-2">
                         <div class="w-12 h-1 bg-[#0dd8bd] mb-8 rounded-full"></div>
-                        <h3 class="text-4xl md:text-5xl font-black mb-10">Our Mission</h3>
+                        <h3 class="text-4xl md:text-5xl font-black mb-10">{{ __('Our Mission') }}</h3>
                         <div class="space-y-12">
                             <div class="flex gap-8 group/item">
                                 <span class="text-5xl font-black text-white/10 group-hover/item:text-[#0dd8bd]/30 transition-colors duration-500">01</span>
                                 <div>
-                                    <h5 class="text-xl font-bold mb-3 text-[#0dd8bd]">Keamanan Global</h5>
-                                    <p class="text-white/70 font-light leading-relaxed">Menghadirkan standar keamanan internasional di setiap produk yang kami buat tanpa kompromi.</p>
+                                    <h5 class="text-xl font-bold mb-3 text-[#0dd8bd]">{{ __('Global Safety') }}</h5>
+                                    <p class="text-white/70 font-light leading-relaxed">{{ __('Delivering international safety standards in every product we make without compromise.') }}</p>
                                 </div>
                             </div>
                             <div class="flex gap-8 group/item">
                                 <span class="text-5xl font-black text-white/10 group-hover/item:text-[#0dd8bd]/30 transition-colors duration-500">02</span>
                                 <div>
-                                    <h5 class="text-xl font-bold mb-3 text-[#0dd8bd]">Inovasi Terpadu</h5>
-                                    <p class="text-white/70 font-light leading-relaxed">Mengintegrasikan teknologi pintar untuk efisiensi energi yang maksimal dan berkelanjutan.</p>
+                                    <h5 class="text-xl font-bold mb-3 text-[#0dd8bd]">{{ __('Integrated Innovation') }}</h5>
+                                    <p class="text-white/70 font-light leading-relaxed">{{ __('Integrating smart technology for maximum and sustainable energy efficiency.') }}</p>
                                 </div>
                             </div>
                         </div>
