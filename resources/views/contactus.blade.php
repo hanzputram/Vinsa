@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <!-- Google tag (gtag.js) -->
@@ -23,7 +23,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
-    <title>Vinsa | Electrical solution</title>
+    <title>Hubungi Kami | Vinsa Electrical Solution</title>
+    <meta name="description" content="Hubungi Vinsa untuk konsultasi kebutuhan listrik Anda. Kami menyediakan solusi kelistrikan premium untuk rumah, bisnis, dan industri.">
+    <link rel="canonical" href="{{ url('/contact-us') }}">
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
     <style>
         .outfit {

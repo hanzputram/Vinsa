@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <!-- Google tag (gtag.js) -->
@@ -41,6 +41,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <title>Vinsa | Electrical solution</title>
+    <meta name="description" content="Vinsa - Solusi kelistrikan premium. Menyediakan push button, box panel, kontaktor, MCB, MCCB, dan peralatan listrik berkualitas tinggi untuk kebutuhan rumah, bisnis, dan industri.">
+    <link rel="canonical" href="{{ url('/') }}">
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
     <style>
         .outfit {

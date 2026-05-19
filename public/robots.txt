@@ -1,4 +1,26 @@
 User-agent: *
-Allow: / 
+Allow: /
 
-Sitemap: /sitemap.xml
+# Block admin and auth pages
+Disallow: /dashboard
+Disallow: /profile
+Disallow: /input-product
+Disallow: /products/edit
+Disallow: /products/import
+Disallow: /products/export-template
+Disallow: /products/*/edit
+Disallow: /carousel/create
+Disallow: /carouselView
+Disallow: /carousels/*/edit
+Disallow: /admin/
+Disallow: /login
+Disallow: /register
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /verify-email
+Disallow: /locale/
+
+# Block query string duplicates
+Disallow: /*?*
+
+Sitemap: https://vinsa.co.id/sitemap.xml

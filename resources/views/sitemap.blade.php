@@ -46,6 +46,20 @@
         </url>
     @endforeach
 
+    <!-- Category Pages -->
+    @if(isset($categories))
+        @foreach ($categories as $category)
+            <url>
+                <loc>{{ route('products.view.user', \Illuminate\Support\Str::slug($category->name)) }}</loc>
+                @if($category->updated_at)
+                    <lastmod>{{ $category->updated_at->tz('UTC')->toAtomString() }}</lastmod>
+                @endif
+                <changefreq>weekly</changefreq>
+                <priority>0.8</priority>
+            </url>
+        @endforeach
+    @endif
+
     {{-- Blog Pages --}}
     @foreach ($blogs as $blog)
         <url>

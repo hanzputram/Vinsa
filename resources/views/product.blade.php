@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" x-data="{ sidebarOpen: false }" :class="{ 'overflow-hidden': sidebarOpen }">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ sidebarOpen: false }" :class="{ 'overflow-hidden': sidebarOpen }">
 
 <head>
     <!-- Google tag (gtag.js) -->
@@ -22,7 +22,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="{{ asset('image/sa.png') }}">
-    <title>Vinsa | Electrical solution</title>
+    <title>{{ isset($activeCategory) ? $activeCategory->name . ' | ' : '' }}Vinsa | Electrical solution</title>
+    <meta name="description" content="Koleksi produk listrik premium Vinsa. Push button, box panel, kontaktor, MCB, MCCB, cable tray, dan peralatan industri berkualitas tinggi.">
+    <link rel="canonical" href="{{ url()->current() }}">
 
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Response;
 
@@ -16,8 +17,10 @@ class SitemapController extends Controller
             ->where('is_published', true)
             ->get();
 
+        $categories = Category::select('name', 'updated_at')->get();
+
         return response()
-            ->view('sitemap', compact('products', 'blogs'))
+            ->view('sitemap', compact('products', 'blogs', 'categories'))
             ->header('Content-Type', 'application/xml; charset=UTF-8')
             ->header('Cache-Control', 'public, max-age=3600');
     }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <!-- Google tag (gtag.js) -->
@@ -18,7 +18,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Pelajari lebih lanjut tentang Vinsa, penyedia solusi kelistrikan premium dengan dedikasi tinggi terhadap kualitas dan inovasi.">
+    <meta name="description" content="Tentang Vinsa - Lebih dari satu dekade berinovasi dalam solusi kelistrikan premium. Keamanan, kualitas material, dan inovasi adalah filosofi inti kami.">
+    <link rel="canonical" href="{{ url('/about') }}">
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="preconnect" href="https://fonts.googleapis.com">

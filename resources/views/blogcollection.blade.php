@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <!-- Google tag (gtag.js) -->
@@ -24,6 +24,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
     <title>Blog | Vinsa</title>
+    <meta name="description" content="Blog Vinsa - Artikel dan informasi terbaru seputar solusi kelistrikan, tips pemasangan, dan produk listrik berkualitas.">
+    <link rel="canonical" href="{{ url('/blog') }}">
 
     <style>
         .outfit {
