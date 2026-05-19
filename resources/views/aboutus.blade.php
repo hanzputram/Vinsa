@@ -169,7 +169,7 @@
                     
                     <div class="mt-12 flex flex-wrap gap-10">
                         <div class="flex flex-col">
-                            <span class="text-4xl font-black text-[#066c5f]">10+</span>
+                            <span class="text-4xl font-black text-[#066c5f]">5+</span>
                             <span class="text-xs font-bold text-gray-400 uppercase tracking-widest mt-1">{{ __('Years Experience') }}</span>
                         </div>
                         <div class="w-[1px] h-12 bg-gray-200"></div>
@@ -219,7 +219,7 @@
         <section class="bg-white py-48">
             <div class="max-w-7xl mx-auto px-6">
                 <div class="text-center max-w-3xl mx-auto mb-32 scroll-reveal">
-                    <h2 class="text-sm font-bold tracking-[0.4em] text-[#066c5f] uppercase mb-6">{{ __('Core Philosophy') }}</h2>
+                     <h2 class="text-sm font-bold tracking-[0.4em] text-[#066c5f] uppercase mb-6">{{ __('Core Philosophy') }}</h2>
                     <h3 class="text-4xl md:text-6xl font-black mb-10">{{ __('Why Choose Vinsa?') }}</h3>
                     <p class="text-lg text-gray-500 font-light leading-relaxed">{{ __('We combine years of technical expertise with high-quality materials to deliver unmatched results.') }}</p>
                 </div>
@@ -230,9 +230,9 @@
                         <div class="w-14 h-14 bg-[#066c5f]/10 group-hover:bg-white/20 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500">
                             <svg class="w-7 h-7 text-[#066c5f] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
                         </div>
-                        <h4 class="text-xl font-bold mb-4 group-hover:text-white transition-colors">{{ __('Safety Legacy') }}</h4>
+                        <h4 class="text-xl font-bold mb-4 group-hover:text-white transition-colors">{{ __('1 Year Warranty') }}</h4>
                         <p class="text-gray-500 group-hover:text-white/80 transition-colors leading-relaxed text-sm">
-                            {{ __('Safety is not just a feature, but our identity. Every product passes rigorous international standard testing.') }}
+                            {{ __('We stand behind the quality of our products. Enjoy complete peace of mind with our comprehensive 1-year warranty.') }}
                         </p>
                     </div>
 
@@ -241,9 +241,9 @@
                         <div class="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center mb-8">
                             <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                         </div>
-                        <h4 class="text-xl font-bold mb-4 text-white">{{ __('Innovation Hub') }}</h4>
+                        <h4 class="text-xl font-bold mb-4 text-white">{{ __('Material Quality') }}</h4>
                         <p class="text-white/80 leading-relaxed text-sm">
-                            {{ __('Continuously evolving with the latest technology to ensure your electrical systems remain relevant in the future.') }}
+                            {{ __('silver coated, certified materials to ensure optimal conductivity and safety.') }}
                         </p>
                     </div>
 
@@ -252,50 +252,10 @@
                         <div class="w-14 h-14 bg-[#066c5f]/10 group-hover:bg-white/20 rounded-2xl flex items-center justify-center mb-8 transition-all duration-500">
                             <svg class="w-7 h-7 text-[#066c5f] group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
                         </div>
-                        <h4 class="text-xl font-bold mb-4 group-hover:text-white transition-colors">{{ __('Material Quality') }}</h4>
+                        <h4 class="text-xl font-bold mb-4 group-hover:text-white transition-colors">{{ __('Plug & Play') }}</h4>
                         <p class="text-gray-500 group-hover:text-white/80 transition-colors leading-relaxed text-sm">
-                            {{ __('Using only premium-grade materials to guarantee maximum durability and stable performance.') }}
+                            {{ __('Easy to install and use, saving you time and effort.') }}
                         </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Vision & Mission Section -->
-        <section class="max-w-7xl mx-auto px-6 py-48 mb-20">
-            <div class="bg-[#066c5f] rounded-[60px] p-16 md:p-32 text-white relative overflow-hidden shadow-[0_30px_60px_rgba(6,108,95,0.3)] group">
-                <!-- Decorative effects -->
-                <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-[#0dd8bd]/20 rounded-full blur-[150px]"></div>
-                <div class="absolute bottom-0 left-0 w-[600px] h-[600px] bg-black/20 rounded-full blur-[150px]"></div>
-                
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 relative z-10">
-                    <div class="scroll-reveal">
-                        <div class="w-12 h-1 bg-[#0dd8bd] mb-8 rounded-full"></div>
-                        <h3 class="text-4xl md:text-5xl font-black mb-10">{{ __('Our Vision') }}</h3>
-                        <p class="text-2xl text-white/80 leading-relaxed font-light">
-                            {{ __('To become the main catalyst in the transformation of the global electrical industry that is') }} <span class="text-[#0dd8bd] font-medium">{{ __('sustainable, smart, and safe') }}</span> {{ __('for every generation.') }}
-                        </p>
-                    </div>
-                    
-                    <div class="scroll-reveal stagger-2">
-                        <div class="w-12 h-1 bg-[#0dd8bd] mb-8 rounded-full"></div>
-                        <h3 class="text-4xl md:text-5xl font-black mb-10">{{ __('Our Mission') }}</h3>
-                        <div class="space-y-12">
-                            <div class="flex gap-8 group/item">
-                                <span class="text-5xl font-black text-white/10 group-hover/item:text-[#0dd8bd]/30 transition-colors duration-500">01</span>
-                                <div>
-                                    <h5 class="text-xl font-bold mb-3 text-[#0dd8bd]">{{ __('Global Safety') }}</h5>
-                                    <p class="text-white/70 font-light leading-relaxed">{{ __('Delivering international safety standards in every product we make without compromise.') }}</p>
-                                </div>
-                            </div>
-                            <div class="flex gap-8 group/item">
-                                <span class="text-5xl font-black text-white/10 group-hover/item:text-[#0dd8bd]/30 transition-colors duration-500">02</span>
-                                <div>
-                                    <h5 class="text-xl font-bold mb-3 text-[#0dd8bd]">{{ __('Integrated Innovation') }}</h5>
-                                    <p class="text-white/70 font-light leading-relaxed">{{ __('Integrating smart technology for maximum and sustainable energy efficiency.') }}</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
