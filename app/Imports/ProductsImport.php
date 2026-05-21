@@ -47,6 +47,9 @@ class ProductsImport implements ToModel, WithHeadingRow
             $imageValue = $this->processImage($row['image'] ?? null);
             $optionalImageValue = $this->processImage($row['optional_image'] ?? null);
 
+            // Process datasheet value (path or URL, kept as-is)
+            $datasheetValue = !empty($row['datasheet']) ? trim($row['datasheet']) : null;
+
             // Parse specifications from "field_name:field_value|field_name:field_value" format
             $specifications = $this->parseSpecifications($row['specifications'] ?? null);
 
@@ -86,6 +89,11 @@ class ProductsImport implements ToModel, WithHeadingRow
                     $updateData['optional_image'] = $optionalImageValue;
                 }
 
+                // Only update datasheet if a new one is provided
+                if (!empty($datasheetValue)) {
+                    $updateData['datasheet'] = $datasheetValue;
+                }
+
                 $product->update($updateData);
 
                 // Update specifications if provided
@@ -118,6 +126,7 @@ class ProductsImport implements ToModel, WithHeadingRow
                 'meta_description' => $row['meta_description'] ?? null,
                 'image'            => $imageValue ?: 'default.png',
                 'optional_image'   => $optionalImageValue,
+                'datasheet'        => $datasheetValue,
             ]);
 
             // Create specifications for new product

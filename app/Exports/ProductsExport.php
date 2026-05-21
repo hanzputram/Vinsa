@@ -31,6 +31,7 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping
             'meta_description',
             'image',
             'optional_image',
+            'datasheet',
             'specifications',
         ];
     }
@@ -82,6 +83,7 @@ class ProductsExport implements FromCollection, WithHeadings, WithMapping
             $product->meta_description,
             $product->image,
             $product->optional_image,
+            $product->datasheet,
             $specs,
         ];
     }
