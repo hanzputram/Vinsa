@@ -2,6 +2,9 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ sidebarOpen: false }" :class="{ 'overflow-hidden': sidebarOpen }">
 
 <head>
+    <link rel="manifest" href="{{ asset('manifest.json') }}">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="apple-touch-icon" href="{{ asset('image/vinsalg.png') }}">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-55S5JHNQLG"></script>
     <script>
@@ -362,3 +365,4 @@
 
 
 </html>
+
