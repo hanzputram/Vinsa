@@ -3,7 +3,7 @@
 <head>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="apple-touch-icon" href="{{ asset('image/vinsalg.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('image/vinsalg_square.png') }}">
     <title>New Contact Message</title>
 </head>
 <body>
@@ -15,4 +15,5 @@
     <p>{{ $contactData['message'] }}</p>
 </body>
 </html>
+
 

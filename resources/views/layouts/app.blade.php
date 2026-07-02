@@ -4,7 +4,7 @@
 <head>
     <link rel="manifest" href="{{ asset('manifest.json') }}">
     <meta name="theme-color" content="#ffffff">
-    <link rel="apple-touch-icon" href="{{ asset('image/vinsalg.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('image/vinsalg_square.png') }}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -55,4 +55,5 @@
 </body>
 
 </html>
+
 
