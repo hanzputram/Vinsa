@@ -19,6 +19,9 @@ class ProductImportController extends Controller
 
     public function import(Request $request)
     {
+        @set_time_limit(600);
+        @ini_set('max_execution_time', '600');
+
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv',
         ]);
