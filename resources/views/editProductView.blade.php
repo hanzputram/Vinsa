@@ -8,13 +8,16 @@
                 <p class="text-slate-500 font-medium tracking-tight">Manage and update your products</p>
             </div>
             <div class="flex items-center gap-4">
-                <div class="relative group">
+                <form method="GET" action="{{ route('products.edit') }}" class="relative group">
                     <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                         <svg class="w-5 h-5 text-slate-400 group-focus-within:text-[#066c5f] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
                     </div>
-                    <input type="text" x-model="search" placeholder="Search product name or code..."
-                        class="w-full md:w-80 pl-11 pr-4 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-[#066c5f] focus:border-transparent font-semibold shadow-sm transition-all outline-none" />
-                </div>
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Search product name or code..."
+                        class="w-full md:w-80 pl-11 pr-10 py-3 bg-white border border-slate-200 rounded-2xl focus:ring-2 focus:ring-[#066c5f] focus:border-transparent font-semibold shadow-sm transition-all outline-none" />
+                    @if(request('search'))
+                        <a href="{{ route('products.edit') }}" class="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-slate-400 hover:text-red-500">✕</a>
+                    @endif
+                </form>
                 <a href="{{ route('products.view') }}" class="inline-flex items-center gap-2 bg-[#066c5f] text-white px-6 py-3 rounded-2xl font-black text-sm uppercase tracking-widest shadow-lg shadow-[#066c5f]/30 hover:bg-[#088a7a] transition-all active:scale-95">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4" /></svg>
                     New Product
@@ -127,6 +130,14 @@
                 </div>
             @endforeach
         </div>
+
+        @if ($products->hasPages())
+            <div class="mt-8 flex justify-center">
+                <div class="bg-white rounded-2xl p-3 border border-slate-200 shadow-sm">
+                    {{ $products->links() }}
+                </div>
+            </div>
+        @endif
 
         @if(count($products) == 0)
             <div class="py-40 text-center">

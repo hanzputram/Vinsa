@@ -39,19 +39,10 @@ class Product extends Model
 
         // Saat update: jika name berubah & slug tidak di-set manual, slug ikut berubah
         static::updating(function ($product) {
-            if ($product->isDirty('name') && blank($product->getOriginal('slug'))) {
-                // kalau sebelumnya slug kosong (kasus lama), bikin dari name
-                $product->slug = static::generateUniqueSlug($product->name, $product->id);
-            }
-
-            // Jika name berubah, biasanya kamu memang ingin slug ikut berubah:
-            if ($product->isDirty('name')) {
-                $product->slug = static::generateUniqueSlug($product->name, $product->id);
-            }
-
-            // Kalau slug diedit manual saat update, pastikan aman & unik
             if ($product->isDirty('slug')) {
                 $product->slug = static::generateUniqueSlug($product->slug, $product->id);
+            } elseif ($product->isDirty('name')) {
+                $product->slug = static::generateUniqueSlug($product->name, $product->id);
             }
         });
     }

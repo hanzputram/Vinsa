@@ -5,12 +5,15 @@ namespace App\Imports;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductAtribute;
-use Maatwebsite\Excel\Concerns\ToModel;
+use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
-class ProductsImport implements ToModel, WithHeadingRow
+class ProductsImport implements ToCollection, WithHeadingRow, WithChunkReading
 {
     public int $created = 0;
     public int $updated = 0;
@@ -18,144 +21,199 @@ class ProductsImport implements ToModel, WithHeadingRow
     public array $errors = [];
 
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+     * In-memory cache for category name => id to avoid repetitive queries
+     * @var array<string, int>
+     */
+    protected array $categoryCache = [];
+
+    public function __construct()
     {
-        // Log the raw row keys for debugging
-        Log::info('ProductsImport row keys: ' . implode(', ', array_keys($row)));
-        Log::info('ProductsImport row data: ', $row);
-
-        // Skip if kode or name is empty
-        if (empty($row['kode']) || empty($row['name'])) {
-            $this->skipped++;
-            Log::warning('ProductsImport: Skipped row - kode or name is empty', $row);
-            return null;
-        }
-
+        // Preload existing categories into memory cache
         try {
-            // Handle category mapping
-            $categoryId = null;
-            if (!empty($row['category'])) {
-                $category = Category::firstOrCreate(['name' => $row['category']]);
-                $categoryId = $category->id;
-            }
-
-            // Process images (supports Google Drive links or local path)
-            $imageValue = $this->processImage($row['image'] ?? null);
-            $optionalImageValue = $this->processImage($row['optional_image'] ?? null);
-
-            // Process datasheet value (path or URL, kept as-is)
-            $datasheetValue = !empty($row['datasheet']) ? trim($row['datasheet']) : null;
-
-            // Parse specifications from "field_name:field_value|field_name:field_value" format
-            $specifications = $this->parseSpecifications($row['specifications'] ?? null);
-
-            // Build custom_input JSON from type/series columns based on category
-            $customInput = $this->buildCustomInput(
-                $row['category'] ?? null,
-                $row['type'] ?? null,
-                $row['series'] ?? null
-            );
-
-            // Find existing product by kode
-            $product = Product::where('kode', $row['kode'])->first();
-
-            if ($product) {
-                // Build update data
-                $updateData = [
-                    'name' => $row['name'],
-                    'description' => $row['description'] ?? $product->description,
-                    'stock' => $row['stock'] ?? $product->stock,
-                    'category_id' => $categoryId ?? $product->category_id,
-                    'meta_title' => $row['meta_title'] ?? $product->meta_title,
-                    'meta_description' => $row['meta_description'] ?? $product->meta_description,
-                ];
-
-                // Only update custom_input if type or series is provided
-                if ($customInput !== null) {
-                    $updateData['custom_input'] = $customInput;
-                }
-
-                // Only update image if a new one is provided
-                if (!empty($imageValue)) {
-                    $updateData['image'] = $imageValue;
-                }
-
-                // Only update optional_image if a new one is provided
-                if (!empty($optionalImageValue)) {
-                    $updateData['optional_image'] = $optionalImageValue;
-                }
-
-                // Only update datasheet if a new one is provided
-                if (!empty($datasheetValue)) {
-                    $updateData['datasheet'] = $datasheetValue;
-                }
-
-                $product->update($updateData);
-
-                // Update specifications if provided
-                if (!empty($specifications)) {
-                    // Delete existing attributes and re-create
-                    $product->attributes()->delete();
-                    foreach ($specifications as $spec) {
-                        ProductAtribute::create([
-                            'product_id' => $product->id,
-                            'field_name' => $spec['field_name'],
-                            'field_value' => $spec['field_value'],
-                        ]);
-                    }
-                }
-
-                $this->updated++;
-                Log::info("ProductsImport: Updated product kode={$row['kode']}");
-                return null; // Return null so ToModel doesn't try to insert
-            }
-
-            // Create new product
-            $newProduct = Product::create([
-                'name'             => $row['name'],
-                'kode'             => $row['kode'],
-                'description'      => $row['description'] ?? null,
-                'stock'            => $row['stock'] ?? 0,
-                'category_id'      => $categoryId,
-                'custom_input'     => $customInput,
-                'meta_title'       => $row['meta_title'] ?? null,
-                'meta_description' => $row['meta_description'] ?? null,
-                'image'            => $imageValue ?: 'default.png',
-                'optional_image'   => $optionalImageValue,
-                'datasheet'        => $datasheetValue,
-            ]);
-
-            // Create specifications for new product
-            if (!empty($specifications)) {
-                foreach ($specifications as $spec) {
-                    ProductAtribute::create([
-                        'product_id' => $newProduct->id,
-                        'field_name' => $spec['field_name'],
-                        'field_value' => $spec['field_value'],
-                    ]);
-                }
-            }
-
-            $this->created++;
-            Log::info("ProductsImport: Created product kode={$row['kode']}, id={$newProduct->id}");
-            return null; // We already created the product manually
-
-        } catch (\Exception $e) {
-            $this->errors[] = "Row kode={$row['kode']}: {$e->getMessage()}";
-            Log::error("ProductsImport: Error on row kode={$row['kode']}: {$e->getMessage()}", [
-                'trace' => $e->getTraceAsString(),
-            ]);
-            return null;
+            $this->categoryCache = Category::pluck('id', 'name')
+                ->mapWithKeys(fn($id, $name) => [strtolower(trim($name)) => $id])
+                ->all();
+        } catch (\Throwable $e) {
+            $this->categoryCache = [];
         }
     }
 
     /**
+     * Process collection of rows in chunks
+     *
+     * @param Collection $rows
+     */
+    public function collection(Collection $rows)
+    {
+        $validRows = [];
+        $kodes = [];
+
+        foreach ($rows as $row) {
+            $kode = isset($row['kode']) ? trim((string)$row['kode']) : '';
+            $name = isset($row['name']) ? trim((string)$row['name']) : '';
+
+            if (empty($kode) || empty($name)) {
+                $this->skipped++;
+                continue;
+            }
+
+            $validRows[] = $row;
+            $kodes[] = $kode;
+        }
+
+        if (empty($validRows)) {
+            return;
+        }
+
+        // Process this chunk within a DB transaction for maximum speed & atomicity
+        DB::transaction(function () use ($validRows, $kodes) {
+            // Pre-fetch existing products in this chunk with 1 single query
+            $existingProducts = Product::whereIn('kode', $kodes)
+                ->get()
+                ->keyBy('kode');
+
+            $allAttributesToInsert = [];
+            $productsToCleanAttributes = [];
+
+            foreach ($validRows as $row) {
+                $kode = trim((string)$row['kode']);
+                $name = trim((string)$row['name']);
+
+                try {
+                    // Resolve Category ID using cache
+                    $categoryId = null;
+                    if (!empty($row['category'])) {
+                        $catName = trim((string)$row['category']);
+                        $catKey = strtolower($catName);
+
+                        if (isset($this->categoryCache[$catKey])) {
+                            $categoryId = $this->categoryCache[$catKey];
+                        } else {
+                            $category = Category::firstOrCreate(['name' => $catName]);
+                            $this->categoryCache[$catKey] = $category->id;
+                            $categoryId = $category->id;
+                        }
+                    }
+
+                    // Process images & datasheet
+                    $imageValue = $this->processImage($row['image'] ?? null);
+                    $optionalImageValue = $this->processImage($row['optional_image'] ?? null);
+                    $datasheetValue = !empty($row['datasheet']) ? trim((string)$row['datasheet']) : null;
+
+                    // Parse specifications
+                    $specifications = $this->parseSpecifications($row['specifications'] ?? null);
+
+                    // Build custom input JSON
+                    $customInput = $this->buildCustomInput(
+                        $row['category'] ?? null,
+                        $row['type'] ?? null,
+                        $row['series'] ?? null
+                    );
+
+                    $existingProduct = $existingProducts->get($kode);
+
+                    if ($existingProduct) {
+                        // Update existing product
+                        $updateData = [
+                            'name' => $name,
+                            'description' => $row['description'] ?? $existingProduct->description,
+                            'stock' => $row['stock'] ?? $existingProduct->stock,
+                            'category_id' => $categoryId ?? $existingProduct->category_id,
+                            'meta_title' => $row['meta_title'] ?? $existingProduct->meta_title,
+                            'meta_description' => $row['meta_description'] ?? $existingProduct->meta_description,
+                        ];
+
+                        if ($customInput !== null) {
+                            $updateData['custom_input'] = $customInput;
+                        }
+                        if (!empty($imageValue)) {
+                            $updateData['image'] = $imageValue;
+                        }
+                        if (!empty($optionalImageValue)) {
+                            $updateData['optional_image'] = $optionalImageValue;
+                        }
+                        if (!empty($datasheetValue)) {
+                            $updateData['datasheet'] = $datasheetValue;
+                        }
+
+                        $existingProduct->update($updateData);
+
+                        if (!empty($specifications)) {
+                            $productsToCleanAttributes[] = $existingProduct->id;
+                            $now = now();
+                            foreach ($specifications as $spec) {
+                                $allAttributesToInsert[] = [
+                                    'product_id' => $existingProduct->id,
+                                    'field_name' => $spec['field_name'],
+                                    'field_value' => $spec['field_value'],
+                                    'created_at' => $now,
+                                    'updated_at' => $now,
+                                ];
+                            }
+                        }
+
+                        $this->updated++;
+                    } else {
+                        // Create new product
+                        $newProduct = Product::create([
+                            'name'             => $name,
+                            'kode'             => $kode,
+                            'description'      => $row['description'] ?? null,
+                            'stock'            => $row['stock'] ?? 0,
+                            'category_id'      => $categoryId,
+                            'custom_input'     => $customInput,
+                            'meta_title'       => $row['meta_title'] ?? null,
+                            'meta_description' => $row['meta_description'] ?? null,
+                            'image'            => $imageValue ?: 'default.png',
+                            'optional_image'   => $optionalImageValue,
+                            'datasheet'        => $datasheetValue,
+                        ]);
+
+                        if (!empty($specifications)) {
+                            $now = now();
+                            foreach ($specifications as $spec) {
+                                $allAttributesToInsert[] = [
+                                    'product_id' => $newProduct->id,
+                                    'field_name' => $spec['field_name'],
+                                    'field_value' => $spec['field_value'],
+                                    'created_at' => $now,
+                                    'updated_at' => $now,
+                                ];
+                            }
+                        }
+
+                        $this->created++;
+                    }
+                } catch (\Throwable $e) {
+                    $this->errors[] = "Row kode={$kode}: {$e->getMessage()}";
+                }
+            }
+
+            // Clean up attributes in 1 query for updated products
+            if (!empty($productsToCleanAttributes)) {
+                ProductAtribute::whereIn('product_id', $productsToCleanAttributes)->delete();
+            }
+
+            // Batch insert all attributes in 1 single SQL query for this chunk
+            if (!empty($allAttributesToInsert)) {
+                // Chunk attribute inserts in slices of 500 to stay well below MySQL placeholders limit
+                foreach (array_chunk($allAttributesToInsert, 500) as $attrChunk) {
+                    ProductAtribute::insert($attrChunk);
+                }
+            }
+        });
+    }
+
+    /**
+     * Chunk size for Excel reading
+     */
+    public function chunkSize(): int
+    {
+        return 100;
+    }
+
+    /**
      * Build custom_input JSON from type and series columns based on category.
-     * Mirrors the logic in ProductController@store for category-specific custom fields.
      *
      * @param string|null $categoryName
      * @param string|null $type
@@ -204,8 +262,6 @@ class ProductsImport implements ToModel, WithHeadingRow
             ]);
         }
 
-        // Fallback: if type or series was provided but category doesn't match known ones,
-        // store as tipe/series anyway
         if (!empty($type) || !empty($series)) {
             return json_encode([
                 'tipe' => $type ?? '',
@@ -229,7 +285,7 @@ class ProductsImport implements ToModel, WithHeadingRow
             return [];
         }
 
-        $specString = trim($specString);
+        $specString = trim((string)$specString);
         $specs = [];
 
         // Split by pipe
@@ -239,7 +295,6 @@ class ProductsImport implements ToModel, WithHeadingRow
             $pair = trim($pair);
             if (empty($pair)) continue;
 
-            // Split by first colon only (value might contain colons)
             $colonPos = strpos($pair, ':');
             if ($colonPos !== false) {
                 $fieldName = trim(substr($pair, 0, $colonPos));
@@ -259,13 +314,6 @@ class ProductsImport implements ToModel, WithHeadingRow
 
     /**
      * Process image value - convert Google Drive share links to direct URLs
-     *
-     * Supported formats:
-     * - https://drive.google.com/file/d/FILE_ID/view?usp=sharing
-     * - https://drive.google.com/open?id=FILE_ID
-     * - https://drive.google.com/uc?id=FILE_ID
-     * - Regular URL (kept as-is)
-     * - Local path (kept as-is)
      */
     private function processImage(?string $image): ?string
     {
@@ -273,7 +321,7 @@ class ProductsImport implements ToModel, WithHeadingRow
             return null;
         }
 
-        $image = trim($image);
+        $image = trim((string)$image);
 
         // Google Drive: /file/d/FILE_ID/view
         if (preg_match('#drive\.google\.com/file/d/([a-zA-Z0-9_-]+)#', $image, $matches)) {
@@ -295,7 +343,6 @@ class ProductsImport implements ToModel, WithHeadingRow
             return 'https://lh3.googleusercontent.com/d/' . $matches[1];
         }
 
-        // Return as-is (external URL or local path)
         return $image;
     }
 }

@@ -75,31 +75,6 @@
             background: transparent;
         }
 
-        .wa-text-curv {
-            width: 100%;
-            position: absolute;
-            top: 0%;
-            animation: spin 6s linear infinite;
-        }
-
-        @keyframes spin {
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes rotate-border {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .animate-rotate-border {
-            animation: rotate-border var(--speed) linear infinite;
-        }
-
-        .product-card:hover .product-overlay {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
         .category-pill.active {
             background-color: #F77F1E !important;
             color: white !important;
@@ -123,8 +98,6 @@
             <div class="absolute top-[-20%] right-[-10%] w-[500px] h-[500px] bg-white opacity-10 rounded-full blur-[120px] animate-pulse"></div>
             <div class="absolute bottom-[-20%] left-[-10%] w-[600px] h-[600px] bg-[#F77F1E] opacity-10 rounded-full blur-[150px]"></div>
             
-            <!-- Animated Background Shapes -->
-            <!-- <div class="absolute top-1/4 left-10 w-4 h-4 bg-white/20 rounded-full animate-bounce"></div> -->
             <div class="absolute bottom-1/4 right-20 w-6 h-6 bg-white/10 rounded-full animate-ping" style="animation-duration: 3s;"></div>
 
             <div class="relative z-10 text-center max-w-4xl mx-auto">
@@ -139,17 +112,25 @@
                 </p>
 
                 <!-- Search Container -->
-                <div class="relative max-w-2xl mx-auto group shadow-2xl rounded-3xl" data-aos="fade-up" data-aos-delay="300">
+                <form method="GET" action="{{ route('products.view.user', $activeCategory ? \Illuminate\Support\Str::slug($activeCategory->name) : null) }}" class="relative max-w-2xl mx-auto group shadow-2xl rounded-3xl" data-aos="fade-up" data-aos-delay="300">
                     <div class="absolute inset-y-0 left-0 pl-7 flex items-center pointer-events-none">
                         <svg class="h-6 w-6 text-gray-400 group-focus-within:text-[#066C5F] transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
-                    <input type="text" id="searchInput" 
+                    <input type="text" name="search" id="searchInput" 
+                        value="{{ request('search') }}"
                         placeholder="{{ __('Search by name or product code...') }}"
-                        class="w-full pl-16 pr-8 py-6 rounded-3xl text-xl text-gray-800 bg-white/95 backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-[#F77F1E]/40 transition-all border-none placeholder-gray-400"
-                        oninput="filterProducts()">
-                </div>
+                        class="w-full pl-16 pr-28 py-6 rounded-3xl text-xl text-gray-800 bg-white/95 backdrop-blur-sm focus:outline-none focus:ring-4 focus:ring-[#F77F1E]/40 transition-all border-none placeholder-gray-400">
+                    @if(request('search'))
+                        <a href="{{ route('products.view.user', $activeCategory ? \Illuminate\Support\Str::slug($activeCategory->name) : null) }}" class="absolute right-14 top-1/2 -translate-y-1/2 text-xs font-bold text-gray-400 hover:text-red-500 bg-gray-100 px-3 py-1.5 rounded-full transition-colors">
+                            ✕ Clear
+                        </a>
+                    @endif
+                    <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-[#066C5F] hover:bg-[#F77F1E] text-white rounded-2xl flex items-center justify-center transition-colors shadow-md">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                    </button>
+                </form>
             </div>
             <div class="px-4">
             <!-- Filters Section -->
@@ -164,7 +145,7 @@
                     </div>
                     
                     <div class="flex items-center gap-3 overflow-x-auto pb-4 lg:pb-0 no-scrollbar w-full lg:w-auto scroll-smooth">
-                        <a href="{{ route('products.view.user') }}" 
+                        <a href="{{ route('products.view.user', request('search') ? ['search' => request('search')] : []) }}" 
                             class="category-pill {{ !$activeCategoryId ? 'active' : '' }} whitespace-nowrap px-8 py-3 rounded-2xl border-2 border-transparent font-bold bg-white text-gray-600 shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-2" id="cat-all">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -172,7 +153,7 @@
                             {{ __('All Products') }}
                         </a>
                         @foreach ($categories as $category)
-                            <a href="{{ route('products.view.user', \Illuminate\Support\Str::slug($category->name)) }}" 
+                            <a href="{{ route('products.view.user', array_merge(['category' => \Illuminate\Support\Str::slug($category->name)], request('search') ? ['search' => request('search')] : [])) }}" 
                                 class="category-pill {{ $activeCategoryId == $category->id ? 'active' : '' }} whitespace-nowrap px-8 py-3 rounded-2xl border-2 border-transparent font-bold bg-white text-gray-600 shadow-sm hover:shadow-md transition-all duration-300" id="cat-{{ $category->id }}">
                                 {{ __($category->name) }}
                             </a>
@@ -185,24 +166,12 @@
                     @forelse ($products as $product)
                         @php
                             $customInput = null;
-                            $searchContext = [
-                                $product->name,
-                                $product->kode,
-                                $product->category->name ?? '',
-                            ];
-                            
                             if (!empty($product->custom_input)) {
                                 $customInput = json_decode($product->custom_input, true);
-                                if (is_array($customInput)) {
-                                    $searchContext = array_merge($searchContext, array_values($customInput));
-                                }
                             }
-                            
-                            $searchText = strtolower(implode(' ', array_filter($searchContext)));
                         @endphp
                         <div class="product-card group relative bg-white rounded-[32px] shadow-[0_10px_30px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_60px_rgba(6,108,95,0.12)] transition-all duration-500 overflow-hidden border border-gray-50 flex flex-col h-full" 
                              data-category-id="{{ $product->category_id }}" 
-                             data-search="{{ htmlspecialchars($searchText) }}"
                              data-aos="fade-up"
                              data-aos-delay="{{ ($loop->index % 4) * 100 }}">
                             
@@ -219,6 +188,7 @@
                                      alt="{{ $product->name }}" 
                                      {!! \App\Helpers\ProductHelper::imgAttrs($product->image) !!}
                                      loading="lazy"
+                                     decoding="async"
                                      class="max-w-full max-h-full object-contain transform group-hover:scale-110 group-hover:rotate-2 transition-all duration-700 ease-out">
                                 
                                 <!-- Decorative background circle -->
@@ -238,22 +208,22 @@
 
                                     <!-- Technical Details Pills -->
                                     <div class="flex flex-wrap gap-2">
-                                        @if ($customInput)
+                                        @if ($customInput && is_array($customInput))
                                             @php $count = 0; @endphp
                                             @foreach ($customInput as $key => $value)
-                                                @if($count < 3)
+                                                @if($count < 3 && !empty($value))
                                                     <span class="px-3 py-1 bg-gray-50 rounded-lg text-[10px] font-bold text-gray-500 border border-gray-100">
-                                                        {{ __(ucfirst($key)) }}: {{ \Illuminate\Support\Str::limit(__($value), 15) }}
+                                                        {{ __(ucfirst($key)) }}: {{ \Illuminate\Support\Str::limit(__((string)$value), 15) }}
                                                     </span>
+                                                    @php $count++; @endphp
                                                 @endif
-                                                @php $count++; @endphp
                                             @endforeach
                                         @endif
                                     </div>
                                 </div>
 
                                 <!-- Action Button -->
-                                <a href="{{ route('product.show', $product->id) }}" 
+                                <a href="{{ route('product.show', $product->slug ?: $product->id) }}" 
                                    class="group/btn relative overflow-hidden flex items-center justify-center gap-3 w-full py-4 bg-[#066C5F] text-white rounded-2xl font-black text-sm tracking-wide shadow-lg shadow-[#066C5F]/20 hover:shadow-[#F77F1E]/30 transition-all duration-500">
                                     <span class="relative z-10">{{ __('VIEW SPECIFICATIONS') }}</span>
                                     <svg class="w-5 h-5 relative z-10 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -274,18 +244,16 @@
                             <p class="text-gray-400 max-w-sm mx-auto font-medium">{{ __('Our engineering team is currently updating this collection. Please check back soon.') }}</p>
                         </div>
                     @endforelse
-
-                    <!-- Empty Search Result -->
-                    <div id="noResults" class="col-span-full hidden flex-col items-center justify-center py-32 text-center">
-                        <div class="w-32 h-32 bg-gray-50 rounded-[40px] flex items-center justify-center mb-8 border border-gray-100">
-                            <svg class="w-16 h-16 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-3xl font-black text-gray-300 mb-4">{{ __('Search Not Found') }}</h3>
-                        <p class="text-gray-400 max-w-sm mx-auto font-medium">{{ __('Try different keywords or browse our categories to find what you need.') }}</p>
-                    </div>
                 </div>
+
+                <!-- Pagination Section -->
+                @if ($products->hasPages())
+                    <div class="mt-16 flex justify-center" data-aos="fade-up">
+                        <div class="bg-white/95 backdrop-blur-md rounded-3xl px-6 py-4 shadow-xl border border-white/20">
+                            {{ $products->links() }}
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </main>
@@ -300,70 +268,8 @@
             once: true,
             easing: 'ease-out-expo'
         });
-
-        let currentCategory = "{{ $activeCategoryId ?? '' }}";
-
-        function filterByCategory(id) {
-            currentCategory = id;
-            
-            // Reset all pills
-            document.querySelectorAll('.category-pill').forEach(pill => {
-                pill.classList.remove('active', 'bg-[#F77F1E]', 'text-white', 'shadow-[#F77F1E]/30', 'border-[#F77F1E]');
-                pill.classList.add('bg-white', 'text-gray-600');
-            });
-            
-            // Set active pill
-            const targetPill = id === "" ? document.getElementById('cat-all') : document.getElementById('cat-' + id);
-            if (targetPill) {
-                targetPill.classList.add('active');
-                targetPill.classList.remove('bg-white', 'text-gray-600');
-            }
-
-            filterProducts();
-        }
-
-        function filterProducts() {
-            const searchInput = document.getElementById('searchInput').value.toLowerCase().trim();
-            const cards = document.querySelectorAll('.product-card');
-            const noResults = document.getElementById('noResults');
-            let foundCount = 0;
-
-            cards.forEach(card => {
-                const searchData = card.getAttribute('data-search') || '';
-                const category = card.getAttribute('data-category-id');
-                
-                const matchesSearch = searchInput === "" || searchData.includes(searchInput);
-                const matchesCategory = currentCategory === "" || category === currentCategory;
-
-                if (matchesSearch && matchesCategory) {
-                    card.style.display = 'flex';
-                    // Force AOS reveal
-                    card.classList.add('aos-animate');
-                    foundCount++;
-                } else {
-                    card.style.display = 'none';
-                    card.classList.remove('aos-animate');
-                }
-            });
-
-            if (foundCount === 0 && cards.length > 0) {
-                noResults.classList.remove('hidden');
-                noResults.classList.add('flex');
-            } else {
-                noResults.classList.add('hidden');
-                noResults.classList.remove('flex');
-            }
-
-            // Refresh AOS to ensure proper position calculation with extra delay for smooth reflow
-            if (typeof AOS !== 'undefined') {
-                setTimeout(() => AOS.refresh(), 100);
-            }
-        }
     </script>
     <script src="https://unpkg.com/alpinejs" defer></script>
 </body>
 
-
 </html>
-
-

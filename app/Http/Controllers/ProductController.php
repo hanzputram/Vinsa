@@ -14,63 +14,83 @@ class ProductController extends Controller
 {
     public function index(Request $request, $category = null)
     {
-        /** @var \App\Models\User $user */
-        $user = Auth::user();
-        $query = Product::with('attributes', 'category');
+        $query = Product::select('id', 'name', 'slug', 'kode', 'image', 'category_id', 'custom_input')
+            ->with('category:id,name');
+
         $activeCategoryId = null;
+        $activeCategory = null;
 
         if ($category) {
-            $categoryModel = Category::all()->filter(function ($c) use ($category) {
-                return Str::slug($c->name) === $category;
-            })->first();
+            $categoryModel = Category::where('slug', $category)->first();
+            if (!$categoryModel) {
+                $categoryModel = Category::all()->filter(function ($c) use ($category) {
+                    return Str::slug($c->name) === $category;
+                })->first();
+            }
 
             if ($categoryModel) {
                 $query->where('category_id', $categoryModel->id);
                 $activeCategoryId = $categoryModel->id;
+                $activeCategory = $categoryModel;
             }
         }
 
-        if ($request->has('category') && $request->category !== null) {
+        if ($request->filled('category')) {
             $query->where('category_id', $request->category);
             $activeCategoryId = $request->category;
+            if (!$activeCategory) {
+                $activeCategory = Category::find($request->category);
+            }
         }
 
-        if ($request->has('search') && $request->search !== null) {
-            $searchTerm = $request->search;
+        if ($request->filled('search')) {
+            $searchTerm = trim($request->search);
             $query->where(function ($q) use ($searchTerm) {
                 $q->where('name', 'like', "%{$searchTerm}%")
-                    ->orWhere('kode', 'like', "%{$searchTerm}%");
+                    ->orWhere('kode', 'like', "%{$searchTerm}%")
+                    ->orWhere('custom_input', 'like', "%{$searchTerm}%");
             });
         }
 
-        $products = $query->get();
-        $categories = Category::all();
+        $products = $query->latest('id')->paginate(24)->withQueryString();
+        $categories = Category::select('id', 'name')->get();
 
-        return view('product', compact('products', 'categories', 'activeCategoryId'));
+        return view('product', compact('products', 'categories', 'activeCategoryId', 'activeCategory'));
     }
 
-public function show($param)
-{
-    $product = Product::with('attributes', 'category')
-        ->where('slug', $param)
-        ->orWhere('id', $param)
-        ->firstOrFail();
+    public function show($param)
+    {
+        $product = Product::with('attributes', 'category')
+            ->where('slug', $param)
+            ->orWhere('id', $param)
+            ->firstOrFail();
 
-    // Kalau akses pakai ID, redirect ke slug
-    if ((string)$product->id === (string)$param) {
-        return redirect()
-            ->route('product.show', $product->slug)
-            ->setStatusCode(301);
+        // Kalau akses pakai ID, redirect ke slug
+        if ((string)$product->id === (string)$param) {
+            return redirect()
+                ->route('product.show', $product->slug)
+                ->setStatusCode(301);
+        }
+
+        // Hanya load perbandingan produk jika kategori atau kode adalah Box Panel / VHB
+        $barangs = collect();
+        $isBoxPanel = Str::contains(strtoupper($product->kode), 'VHB') || Str::contains(strtoupper($product->name), 'BOX');
+        if ($isBoxPanel) {
+            $barangs = Product::select('id', 'name', 'kode')
+                ->where(function ($q) {
+                    $q->where('kode', 'like', '%VHB%')
+                        ->orWhere('name', 'like', '%box%');
+                })
+                ->with('attributes')
+                ->get();
+        }
+
+        return view('detailproduct', [
+            'product' => $product,
+            'barangs' => $barangs,
+            'kodeAktif' => strtoupper($product->kode),
+        ]);
     }
-
-    $barangs = Product::with('attributes')->get();
-
-    return view('detailproduct', [
-        'product' => $product,
-        'barangs' => $barangs,
-        'kodeAktif' => strtoupper($product->kode),
-    ]);
-}
 
 
 
@@ -275,9 +295,21 @@ public function show($param)
         return redirect()->route('products.view', $product->id)->with('success', 'Produk berhasil ditambahkan!');
     }
 
-    public function edit()
+    public function edit(Request $request)
     {
-        $products = Product::with('attributes')->get();
+        $query = Product::select('id', 'name', 'description', 'kode', 'image', 'category_id', 'custom_input')
+            ->with('category:id,name');
+
+        if ($request->filled('search')) {
+            $searchTerm = trim($request->search);
+            $query->where(function ($q) use ($searchTerm) {
+                $q->where('name', 'like', "%{$searchTerm}%")
+                    ->orWhere('kode', 'like', "%{$searchTerm}%")
+                    ->orWhere('custom_input', 'like', "%{$searchTerm}%");
+            });
+        }
+
+        $products = $query->latest('id')->paginate(30)->withQueryString();
         return view('editProductView', compact('products'));
     }
 

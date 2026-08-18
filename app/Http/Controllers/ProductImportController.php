@@ -21,6 +21,8 @@ class ProductImportController extends Controller
     {
         @set_time_limit(600);
         @ini_set('max_execution_time', '600');
+        @ini_set('memory_limit', '512M');
+        @ignore_user_abort(true);
 
         $request->validate([
             'file' => 'required|mimes:xlsx,xls,csv',
