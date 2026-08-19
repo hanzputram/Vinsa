@@ -14,12 +14,8 @@ class NewController extends Controller
     {
         $carousels = Carousel::all();
 
-        // ✅ Hanya ambil kolom yang dibutuhkan untuk card produk (bukan semua kolom)
-        $allCategories = Category::with([
-            'products' => function ($q) {
-                $q->select('id', 'name', 'slug', 'kode', 'image', 'category_id', 'custom_input');
-            }
-        ])->get(['id', 'name']);
+        // Ambil kategori tanpa memuat seluruh relasi produk yang tidak dipakai di view
+        $allCategories = Category::select('id', 'name')->get();
 
         // ✅ Hanya blog published, kolom minimal, limit 12
         $blogs = Blog::with([

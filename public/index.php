@@ -1,8 +1,5 @@
 <?php
 
-// Increase execution time limit to prevent 408 / script timeout on heavy requests
-@set_time_limit(300);
-@ini_set('max_execution_time', '300');
 
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;

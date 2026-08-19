@@ -5,9 +5,9 @@
 
     RewriteEngine On
 
-    # LiteSpeed Web Server: Prevent connection timeout on long processes (e.g. imports)
+    # LiteSpeed Web Server: Only prevent connection timeout for specific long background tasks (e.g. product import)
     <IfModule Litespeed>
-        RewriteRule .* - [E=noabort:1,E=nthreads:4]
+        RewriteRule ^products/import - [E=noabort:1]
     </IfModule>
 
     # Handle Authorization Header
