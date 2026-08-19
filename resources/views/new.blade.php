@@ -243,6 +243,26 @@
         .slider-container {
             display: -webkit-flex;
             display: flex;
+            overscroll-behavior-x: contain;
+            will-change: scroll-position;
+        }
+
+        /* 60fps GPU-Accelerated Dropdown (No scrollHeight / layout thrashing) */
+        .vinsa-dropdown-wrapper {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.28s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.22s ease;
+            opacity: 0;
+        }
+
+        .vinsa-dropdown-wrapper.is-open {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+
+        .vinsa-dropdown-inner {
+            overflow: hidden;
+            min-height: 0;
         }
     </style>
 </head>
@@ -1985,30 +2005,20 @@
     <x-footer></x-footer>
     @stack('scripts')
 
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
         function toggleProductDropdown(id, btn) {
             const dropdown = document.getElementById(id);
             if (!dropdown) return;
             
-            const isHidden = dropdown.classList.contains('hidden');
+            const isOpen = dropdown.classList.toggle('is-open');
             const textSpan = btn.querySelector('.btn-text');
             const iconBtn = btn.querySelector('.btn-icon');
             
-            if (isHidden) {
-                dropdown.classList.remove('hidden');
-                setTimeout(() => {
-                    dropdown.style.maxHeight = dropdown.scrollHeight + 'px';
-                }, 10);
-                textSpan.textContent = '{{ __("Show Less") }}';
-                iconBtn.style.transform = 'rotate(180deg)';
-            } else {
-                dropdown.style.maxHeight = '0px';
-                setTimeout(() => {
-                    dropdown.classList.add('hidden');
-                }, 300); // match duration-300
-                textSpan.textContent = '{{ __("Show More") }}';
-                iconBtn.style.transform = 'rotate(0deg)';
+            if (textSpan) {
+                textSpan.textContent = isOpen ? '{{ __("Show Less") }}' : '{{ __("Show More") }}';
+            }
+            if (iconBtn) {
+                iconBtn.style.transform = isOpen ? 'rotate(180deg)' : 'rotate(0deg)';
             }
         }
     </script>
@@ -2016,18 +2026,18 @@
 
 </html>
 <script>
-    document.getElementById('menu-toggle').addEventListener('click', function() {
-        document.getElementById('mobile-menu').classList.toggle('hidden');
+    document.getElementById('menu-toggle')?.addEventListener('click', function() {
+        document.getElementById('mobile-menu')?.classList.toggle('hidden');
     });
 </script>
 
 <script>
     var swiper = new Swiper(".mySwiper", {
-        slidesPerView: 1, // Only one slide at a time
-        spaceBetween: 0, // No gaps
+        slidesPerView: 1,
+        spaceBetween: 0,
         loop: true,
         autoplay: {
-            delay: 3000, // Change slide every 3s
+            delay: 3500,
             disableOnInteraction: false,
         },
         pagination: {
@@ -2038,9 +2048,6 @@
 </script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const sliders = document.querySelectorAll('.slider-container');
-        
-        // Function to check and toggle navigation buttons visibility
         function updateNavigationButtons() {
             document.querySelectorAll('.group\\/slider, .group\\/outer-slider').forEach(sliderGroup => {
                 const container = sliderGroup.querySelector('.slider-container');
@@ -2050,75 +2057,31 @@
                 const buttons = sliderGroup.querySelectorAll('button[onclick*="scrollSlider"]');
                 
                 buttons.forEach(button => {
-                    if (hasScroll) {
-                        button.style.display = 'flex';
-                    } else {
-                        button.style.display = 'none';
-                    }
+                    button.style.display = hasScroll ? 'flex' : 'none';
                 });
             });
         }
         
-        // Initial check
         updateNavigationButtons();
         
-        // Recheck on window resize
-        window.addEventListener('resize', updateNavigationButtons);
-        
-        sliders.forEach(slider => {
-            slider.addEventListener('wheel', function(e) {
-                // Cegah pergerakan horizontal dari touchpad atau mouse (shift+scroll)
-                if (Math.abs(e.deltaX) !== 0) {
-                    e.preventDefault();
-                }
-                // Biarkan vertical scroll (e.deltaY) lolos agar seluruh halaman ikut terscroll
-            }, { passive: false });
-
-            // Prevent vertical scroll on touch devices during horizontal swipe
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let scrollStartLeft = 0;
-            
-            slider.addEventListener('touchstart', function(e) {
-                touchStartX = e.touches[0].clientX;
-                touchStartY = e.touches[0].clientY;
-                scrollStartLeft = slider.scrollLeft;
-            }, { passive: true });
-            
-            slider.addEventListener('touchmove', function(e) {
-                const touchX = e.touches[0].clientX;
-                const touchY = e.touches[0].clientY;
-                const deltaX = touchStartX - touchX;
-                const deltaY = touchStartY - touchY;
-                
-                // If horizontal movement is greater than vertical, prevent page scroll
-                if (Math.abs(deltaX) > Math.abs(deltaY)) {
-                    e.preventDefault();
-                    slider.scrollLeft = scrollStartLeft + deltaX;
-                }
-            }, { passive: false });
-        });
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(updateNavigationButtons, 150);
+        }, { passive: true });
     });
 
     function scrollSlider(button, direction) {
         const container = button.parentElement.querySelector('.slider-container');
         if (container) {
             const firstCard = container.firstElementChild;
-            if (firstCard) {
-                const cardWidth = firstCard.offsetWidth;
-                const gap = parseInt(window.getComputedStyle(container).gap) || 0;
-                const scrollAmount = (cardWidth + gap) * direction;
-                container.scrollBy({
-                    left: scrollAmount,
-                    behavior: 'smooth'
-                });
-            } else {
-                const scrollAmount = container.clientWidth * 0.7;
-                container.scrollBy({
-                    left: direction * scrollAmount,
-                    behavior: 'smooth'
-                });
-            }
+            const cardWidth = firstCard ? firstCard.offsetWidth : 200;
+            const gap = parseInt(window.getComputedStyle(container).gap) || 16;
+            const scrollAmount = (cardWidth + gap) * direction;
+            container.scrollBy({
+                left: scrollAmount,
+                behavior: 'smooth'
+            });
         }
     }
 </script>

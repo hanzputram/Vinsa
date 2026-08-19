@@ -15,7 +15,7 @@
     $dropdownId = 'dropdown-' . Str::slug($seriesName) . '-' . uniqid();
 @endphp
 
-<div class="snap-start w-[100%] sm:w-[80%] md:w-[calc(50%-0.5rem)] flex-shrink-0 bg-white/5 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-lg relative flex flex-col h-fit transition-all duration-500">
+<div class="snap-start w-[100%] sm:w-[80%] md:w-[calc(50%-0.5rem)] flex-shrink-0 bg-white/5 backdrop-blur-md rounded-3xl p-6 border border-white/10 shadow-lg relative flex flex-col h-fit transition-all duration-300">
     <h4 class="text-md font-bold mb-4 text-white">
         {{ $seriesName }}
     </h4>
@@ -30,24 +30,26 @@
                 @endforeach
             </div>
 
-            {{-- Dropdown / Show More Set --}}
+            {{-- GPU-Accelerated Dropdown / Show More Set --}}
             @if ($hasMore)
-                <div id="{{ $dropdownId }}" class="hidden overflow-hidden vinsa-dropdown transition-all duration-300" style="max-height: 0px;">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-2">
-                         @foreach ($rest as $productItem)
-                            @php $ci = $getCI($productItem); @endphp
-                            @include('components.product-card-inner', ['productItem' => $productItem, 'ci' => $ci])
-                        @endforeach
+                <div id="{{ $dropdownId }}" class="vinsa-dropdown-wrapper">
+                    <div class="vinsa-dropdown-inner">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                             @foreach ($rest as $productItem)
+                                @php $ci = $getCI($productItem); @endphp
+                                @include('components.product-card-inner', ['productItem' => $productItem, 'ci' => $ci])
+                            @endforeach
+                        </div>
                     </div>
                 </div>
 
                 {{-- Trigger Button --}}
-                <div class="flex justify-center mt-auto group w-full pt-2 pb-3">
+                <div class="flex justify-center mt-auto group w-full pt-3 pb-1">
                     <button type="button" 
                         onclick="toggleProductDropdown('{{ $dropdownId }}', this)" 
-                        class="px-5 py-2 w-full bg-white/10 hover:bg-white/20 rounded-xl text-white font-semibold text-xs shadow-md backdrop-blur transition-all duration-300 flex items-center justify-center gap-2">
+                        class="px-5 py-2.5 w-full bg-white/10 hover:bg-white/20 active:scale-[0.98] rounded-xl text-white font-semibold text-xs shadow-md backdrop-blur transition-all duration-200 flex items-center justify-center gap-2">
                         <span class="btn-text">{{ __('Show More') }}</span>
-                        <svg class="w-4 h-4 transform transition-transform duration-300 btn-icon text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 transform transition-transform duration-200 btn-icon text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                         </svg>
                     </button>
