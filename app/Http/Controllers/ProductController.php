@@ -20,13 +20,14 @@ class ProductController extends Controller
         $activeCategoryId = null;
         $activeCategory = null;
 
+        $categories = \Illuminate\Support\Facades\Cache::remember('all_categories_nav', 3600, function () {
+            return Category::select('id', 'name')->get();
+        });
+
         if ($category) {
-            $categoryModel = Category::where('slug', $category)->first();
-            if (!$categoryModel) {
-                $categoryModel = Category::all()->filter(function ($c) use ($category) {
-                    return Str::slug($c->name) === $category;
-                })->first();
-            }
+            $categoryModel = $categories->first(function ($c) use ($category) {
+                return Str::slug($c->name) === $category || strtolower($c->name) === strtolower($category);
+            });
 
             if ($categoryModel) {
                 $query->where('category_id', $categoryModel->id);
@@ -39,7 +40,7 @@ class ProductController extends Controller
             $query->where('category_id', $request->category);
             $activeCategoryId = $request->category;
             if (!$activeCategory) {
-                $activeCategory = Category::find($request->category);
+                $activeCategory = $categories->firstWhere('id', $request->category);
             }
         }
 
@@ -53,7 +54,6 @@ class ProductController extends Controller
         }
 
         $products = $query->latest('id')->paginate(24)->withQueryString();
-        $categories = Category::select('id', 'name')->get();
 
         return view('product', compact('products', 'categories', 'activeCategoryId', 'activeCategory'));
     }

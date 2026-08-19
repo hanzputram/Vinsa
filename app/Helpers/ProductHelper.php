@@ -5,11 +5,15 @@ namespace App\Helpers;
 class ProductHelper
 {
     /**
-     * Get the proper image URL for a product.
-     * Supports external URLs (Google Drive, etc.) and local storage paths.
-     * Converts Google Drive URLs to the most reliable embedding format.
+     * Get optimized, cached, and WebP-compressed image URL for a product.
+     * Automatically converts Google Drive images to Google's high-speed CDN edge with
+     * on-the-fly WebP compression (-rw) and dynamic dimension resizing (=w{width}).
+     *
+     * @param string|null $image
+     * @param int $width Max width in pixels (default 450 for cards/grid)
+     * @return string
      */
-    public static function imageUrl(?string $image): string
+    public static function imageUrl(?string $image, int $width = 450): string
     {
         if (empty($image)) {
             return asset('storage/default.png');
@@ -17,8 +21,7 @@ class ProductHelper
 
         // If it's already a full URL (http/https)
         if (filter_var($image, FILTER_VALIDATE_URL)) {
-            // Convert any Google Drive URL to lh3 format for reliable embedding
-            return self::convertDriveUrl($image);
+            return self::convertDriveUrl($image, $width);
         }
 
         // Otherwise, treat as local storage path
@@ -26,33 +29,22 @@ class ProductHelper
     }
 
     /**
-     * Convert Google Drive URLs to the lh3.googleusercontent.com format
-     * which is the most reliable for embedding in img tags.
+     * Convert Google Drive URLs to Google CDN edge with WebP & dynamic resizing.
      */
-    private static function convertDriveUrl(string $url): string
+    private static function convertDriveUrl(string $url, int $width = 450): string
     {
-        // Extract FILE_ID from various Google Drive URL formats
         $fileId = null;
 
-        // Format: drive.google.com/file/d/FILE_ID/...
-        if (preg_match('#drive\.google\.com/file/d/([a-zA-Z0-9_-]+)#', $url, $matches)) {
-            $fileId = $matches[1];
-        }
-        // Format: drive.google.com/open?id=FILE_ID
-        elseif (preg_match('#drive\.google\.com/open\?id=([a-zA-Z0-9_-]+)#', $url, $matches)) {
-            $fileId = $matches[1];
-        }
-        // Format: drive.google.com/uc?...id=FILE_ID
-        elseif (preg_match('#drive\.google\.com/uc\?.*id=([a-zA-Z0-9_-]+)#', $url, $matches)) {
-            $fileId = $matches[1];
-        }
-        // Format: lh3.googleusercontent.com/d/FILE_ID (already correct)
-        elseif (preg_match('#lh3\.googleusercontent\.com/d/([a-zA-Z0-9_-]+)#', $url, $matches)) {
+        // Extract Google Drive / lh3 file ID
+        if (preg_match('#(?:drive\.google\.com/(?:file/d/|open\?id=|uc\?.*id=)|lh3\.googleusercontent\.com/d/)([a-zA-Z0-9_-]+)#', $url, $matches)) {
             $fileId = $matches[1];
         }
 
         if ($fileId) {
-            return 'https://lh3.googleusercontent.com/d/' . $fileId;
+            // Appending =w{width}-rw serves optimized WebP format from Google's global edge cache
+            return $width > 0
+                ? "https://lh3.googleusercontent.com/d/{$fileId}=w{$width}-rw"
+                : "https://lh3.googleusercontent.com/d/{$fileId}";
         }
 
         // Not a Google Drive URL, return as-is
@@ -68,28 +60,34 @@ class ProductHelper
     }
 
     /**
-     * Generate extra img attributes for external images.
-     * Returns referrerpolicy="no-referrer" for external URLs to prevent blocking.
+     * Generate extra img attributes for optimal rendering performance.
+     * Includes referrerpolicy for external CDN and decoding="async".
      */
     public static function imgAttrs(?string $image): string
     {
         if (self::isExternal($image)) {
-            return 'referrerpolicy="no-referrer" crossorigin="anonymous"';
+            return 'referrerpolicy="no-referrer" crossorigin="anonymous" decoding="async"';
         }
-        return '';
+        return 'decoding="async"';
     }
 
     /**
-     * Generate srcset attribute value for responsive images.
-     * Returns empty string for external URLs (they don't support resize params).
+     * Generate responsive srcset attribute value for Google CDN and local images.
      */
     public static function srcset(?string $image): string
     {
-        if (empty($image) || self::isExternal($image)) {
+        if (empty($image)) {
             return '';
         }
 
+        if (self::isExternal($image)) {
+            $url250 = self::imageUrl($image, 250);
+            $url500 = self::imageUrl($image, 500);
+            $url800 = self::imageUrl($image, 800);
+            return "{$url250} 250w, {$url500} 500w, {$url800} 800w";
+        }
+
         $url = self::imageUrl($image);
-        return "{$url}?w=300 300w, {$url}?w=600 600w, {$url} 1000w";
+        return "{$url} 600w";
     }
 }

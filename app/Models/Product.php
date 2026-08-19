@@ -37,13 +37,15 @@ class Product extends Model
             }
         });
 
-        // Saat update: jika name berubah & slug tidak di-set manual, slug ikut berubah
-        static::updating(function ($product) {
-            if ($product->isDirty('slug')) {
-                $product->slug = static::generateUniqueSlug($product->slug, $product->id);
-            } elseif ($product->isDirty('name')) {
-                $product->slug = static::generateUniqueSlug($product->name, $product->id);
-            }
+        // Auto-clear cache saat ada produk yang dibuat / diupdate / dihapus
+        static::saved(function () {
+            \Illuminate\Support\Facades\Cache::forget('homepage_categories_tree');
+            \Illuminate\Support\Facades\Cache::forget('all_categories_nav');
+        });
+
+        static::deleted(function () {
+            \Illuminate\Support\Facades\Cache::forget('homepage_categories_tree');
+            \Illuminate\Support\Facades\Cache::forget('all_categories_nav');
         });
     }
 

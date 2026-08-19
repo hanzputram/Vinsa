@@ -184,8 +184,12 @@
 
                             <!-- Product Image Container -->
                             <div class="relative h-72 overflow-hidden bg-gray-50/50 group-hover:bg-white transition-colors duration-500 flex items-center justify-center p-12">
-                                <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->image) }}" 
+                                <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->image, 400) }}" 
                                      alt="{{ $product->name }}" 
+                                     @if(\App\Helpers\ProductHelper::srcset($product->image))
+                                     srcset="{{ \App\Helpers\ProductHelper::srcset($product->image) }}"
+                                     sizes="(max-width: 640px) 280px, (max-width: 1024px) 380px, 450px"
+                                     @endif
                                      {!! \App\Helpers\ProductHelper::imgAttrs($product->image) !!}
                                      loading="lazy"
                                      decoding="async"

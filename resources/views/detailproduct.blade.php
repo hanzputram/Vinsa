@@ -187,10 +187,13 @@
             <!-- Product Overview Section -->
             <div class="backdrop-blur-sm rounded-3xl mx-6 lg:mx-10 mb-8">
                 <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 p-6 lg:p-12">
-                <!-- Product Image -->
                 <div class="flex items-center justify-center rounded-3xl p-8 lg:p-12 bg-white/50">
-                    <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->image) }}" alt="{{ $product->name }}" {!! \App\Helpers\ProductHelper::imgAttrs($product->image) !!} class="max-w-full h-auto max-h-[400px] object-contain drop-shadow-2xl">
-
+                    <img src="{{ \App\Helpers\ProductHelper::imageUrl($product->image, 800) }}" 
+                         alt="{{ $product->name }}" 
+                         {!! \App\Helpers\ProductHelper::imgAttrs($product->image) !!} 
+                         fetchpriority="high"
+                         decoding="async"
+                         class="max-w-full h-auto max-h-[400px] object-contain drop-shadow-2xl">
                 </div>
 
                 <!-- Product Info -->
