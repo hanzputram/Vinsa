@@ -1,7 +1,53 @@
 User-agent: *
 Allow: /
 
-# Block admin and auth pages
+# Explicit AI Engine & LLM Crawlers Permissions (GEO / AEO)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GoogleOther
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: Cohere-ai
+Allow: /
+
+User-agent: Diffbot
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: facebookcatalog
+Allow: /
+
+# Block admin, dashboard, auth, and private management routes
 Disallow: /dashboard
 Disallow: /profile
 Disallow: /input-product
@@ -23,4 +69,13 @@ Disallow: /locale/
 # Block query string duplicates
 Disallow: /*?*
 
-Sitemap: https://vinsa.co.id/sitemap.xml
+# Allow static assets and images
+Allow: /image/
+Allow: /build/
+Allow: /assets/
+Allow: /storage/
+Allow: /llms.txt
+Allow: /llms-full.txt
+
+# Sitemaps and AI Manifests
+Sitemap: https://vinsa.fr/sitemap.xml

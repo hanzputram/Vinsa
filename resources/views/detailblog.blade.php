@@ -32,6 +32,14 @@
     <title>{{ $blog->title }} | Vinsa</title>
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
 
+    <!-- GEO / AEO Schema Markup (JSON-LD) -->
+    <x-schema.article :blog="$blog" />
+    <x-schema.breadcrumb :items="[
+        ['name' => 'Home', 'url' => url('/')],
+        ['name' => 'Blog', 'url' => route('blog.collection')],
+        ['name' => $blog->title ?? 'Artikel', 'url' => url()->current()]
+    ]" />
+
     <style>
         .outfit {
             font-family: "Outfit", sans-serif;

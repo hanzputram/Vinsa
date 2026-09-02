@@ -63,6 +63,14 @@
     <meta name="description" content="{{ $metaDesc }}">
     <link rel="canonical" href="{{ url()->current() }}">
 
+    <!-- GEO / AEO Schema Markup (JSON-LD) -->
+    <x-schema.product :product="$product" :attributes="$product->attributes ?? []" />
+    <x-schema.breadcrumb :items="[
+        ['name' => 'Home', 'url' => url('/')],
+        ['name' => 'Products', 'url' => route('products.view.user')],
+        ['name' => $product->name ?? 'Detail Produk', 'url' => url()->current()]
+    ]" />
+
     <style>
         .outfit {
             font-family: "Outfit", sans-serif;

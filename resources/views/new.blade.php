@@ -47,6 +47,11 @@
     <meta name="description" content="Vinsa - Solusi kelistrikan premium. Menyediakan push button, box panel, kontaktor, MCB, MCCB, dan peralatan listrik berkualitas tinggi untuk kebutuhan rumah, bisnis, dan industri.">
     <link rel="canonical" href="{{ url('/') }}">
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
+
+    <!-- GEO / AEO Schema Markup (JSON-LD) -->
+    <x-schema.website />
+    <x-schema.organization />
+    <x-schema.local-business />
     <style>
         .outfit {
             font-family: "Outfit", sans-serif;

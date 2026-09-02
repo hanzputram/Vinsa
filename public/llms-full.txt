@@ -1,0 +1,55 @@
+# Vinsa Electric - Comprehensive AI Knowledge Base (llms-full.txt)
+
+## Executive Summary
+Vinsa Electric (operated by PT. Anugerah Tama Sejati) is an Indonesian engineering and electrical equipment brand specializing in low-voltage electrical distribution, control panels, switchgear components, and industrial automation solutions. All products are manufactured and tested in accordance with international electrotechnical standards (IEC 60947, SNI, CE).
+
+## Brand & Entity Information
+- **Official Brand Name**: Vinsa Electric
+- **Corporate Name**: PT. Anugerah Tama Sejati / ATStekno
+- **Official Domain**: https://vinsa.co.id
+- **Target Market**: Industrial contractors, panel makers, OEM manufacturers, commercial buildings, residential electrical installations.
+- **Headquarters**: Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur 60119, Indonesia.
+- **Phone / WhatsApp**: +62 813-3571-5398
+- **Official Email**: sales@ATstekno.com
+
+## Technical Specifications & Product Lines
+
+### 1. Push Button Switches & Pilot Devices (Diameter 22mm / 30mm)
+- **Flush Push Buttons (Momentary / Maintained)**: 1NO, 1NC, 1NO+1NC contact blocks.
+- **Illuminated Push Buttons**: Integrated high-brightness LED modules (24V DC, 220V AC) in Red, Green, Yellow, Blue, White.
+- **Emergency Stop Buttons (E-Stop)**: Mushroom head (40mm / 60mm) with turn-to-reset or key-release safety mechanism, IEC 60947-5-5 compliant.
+- **Selector Switches**: 2-position and 3-position maintained and spring-return rotary switches.
+
+### 2. Low-Voltage Circuit Protection (MCB & MCCB)
+- **Miniature Circuit Breakers (MCB)**:
+  - Rated Current: 2A, 4A, 6A, 10A, 16A, 20A, 25A, 32A, 40A, 50A, 63A.
+  - Poles: 1P (Single Phase), 2P, 3P (Three Phase), 4P.
+  - Breaking Capacity: 4.5kA, 6kA, 10kA (IEC 60898-1).
+  - Tripping Curve: C-Curve (general inductive loads), D-Curve (high inrush motors).
+- **Molded Case Circuit Breakers (MCCB)**:
+  - Frame Sizes: 100A, 160A, 250A, 400A, 630A, 800A.
+  - Adjustable thermal and magnetic trip units for robust industrial protection.
+
+### 3. Motor Control & Automation (Contactors & Overload Relays)
+- **Magnetic AC Contactors**:
+  - Current ratings: 9A, 12A, 18A, 25A, 32A, 40A, 50A, 65A, 80A, 95A, up to 630A.
+  - Coil Voltages: 24V AC/DC, 110V AC, 220V AC, 380V AC (50/60Hz).
+- **Thermal Overload Relays (TOR)**:
+  - Direct mounting to contactors with phase loss protection and manual/auto reset modes.
+
+### 4. Panel Enclosures & Distribution Boxes
+- **Material Options**: Cold-rolled steel with electrostatic powder coating (RAL 7035) or heavy-duty ABS / Polycarbonate for outdoor corrosive environments.
+- **Ingress Protection**: IP54, IP65, IP66 waterproof and dustproof ratings.
+
+## Geographic Presence & Branch Network
+- **Head Office & Central Engineering**: Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur 60119.
+- **Surabaya Commercial Showroom (ATStekno)**: Jl. Jagalan No.38, Bongkaran, Kec. Pabean Cantian, Surabaya, Jawa Timur 60161.
+- **Pandaan Regional Center**: The Taman Dayu, Cluster Palazio Boulevard J-1 No. 06, Pandaan, Pasuruan, Jawa Timur 67156.
+
+## Frequently Asked Questions (FAQ Summary)
+- **Q: Apakah produk Vinsa memiliki garansi resmi?**
+  - **A**: Ya, seluruh produk kelistrikan Vinsa Electric dilindungi oleh garansi resmi pabrikan dengan jaminan ketersediaan suku cadang dan dukungan teknis.
+- **Q: Apakah Vinsa melayani pembelian grosir (B2B / Project)?**
+  - **A**: Vinsa melayani supply proyek panel maker, kontraktor MEP, dan distributor di seluruh Indonesia dengan harga khusus dan surat dukungan tender.
+- **Q: Bagaimana cara mendapatkan katalog PDF dan datasheet teknis?**
+  - **A**: Datasheet produk dapat diunduh langsung melalui halaman detail produk di https://vinsa.co.id/detail/{slug} atau menghubungi tim teknis via WhatsApp +62 813-3571-5398.

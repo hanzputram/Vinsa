@@ -30,6 +30,15 @@
     <meta name="description" content="Hubungi Vinsa untuk konsultasi kebutuhan listrik Anda. Kami menyediakan solusi kelistrikan premium untuk rumah, bisnis, dan industri.">
     <link rel="canonical" href="{{ url('/contact-us') }}">
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
+
+    <!-- GEO / AEO Schema Markup (JSON-LD) -->
+    <x-schema.organization />
+    <x-schema.local-business />
+    <x-schema.breadcrumb :items="[
+        ['name' => 'Home', 'url' => url('/')],
+        ['name' => 'Contact Us', 'url' => url('/contact-us')]
+    ]" />
+
     <style>
         .outfit {
             font-family: "Outfit", sans-serif;
@@ -282,5 +291,3 @@
 </body>
 
 </html>
-
-

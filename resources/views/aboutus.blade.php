@@ -31,6 +31,14 @@
 
     <title>Vinsa | Electrical solution</title>
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
+
+    <!-- GEO / AEO Schema Markup (JSON-LD) -->
+    <x-schema.organization />
+    <x-schema.local-business />
+    <x-schema.breadcrumb :items="[
+        ['name' => 'Home', 'url' => url('/')],
+        ['name' => 'About Us', 'url' => url('/about')]
+    ]" />
     
     <style>
         .outfit {

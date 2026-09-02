@@ -29,6 +29,19 @@
     <meta name="description" content="Koleksi produk listrik premium Vinsa. Push button, box panel, kontaktor, MCB, MCCB, cable tray, dan peralatan industri berkualitas tinggi.">
     <link rel="canonical" href="{{ url()->current() }}">
 
+    <!-- GEO / AEO Schema Markup (JSON-LD) -->
+    <x-schema.organization />
+    @php
+        $breadcrumbItems = [
+            ['name' => 'Home', 'url' => url('/')],
+            ['name' => 'Products', 'url' => route('products.view.user')]
+        ];
+        if (isset($activeCategory) && $activeCategory) {
+            $breadcrumbItems[] = ['name' => $activeCategory->name, 'url' => url()->current()];
+        }
+    @endphp
+    <x-schema.breadcrumb :items="$breadcrumbItems" />
+
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
