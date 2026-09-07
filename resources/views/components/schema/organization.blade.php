@@ -7,7 +7,8 @@
     'email' => 'sales@ATstekno.com',
     'telephone' => '+62-813-3571-5398',
     'sameAs' => [
-        'https://wa.me/6281335715398'
+        'https://wa.me/6281335715398',
+        'https://www.instagram.com/vinsa.fr'
     ]
 ])
 @php
