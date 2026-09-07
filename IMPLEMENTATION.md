@@ -183,7 +183,7 @@ Mendefinisikan 3 lokasi fisik showroom & kantor cabang lengkap dengan koordinat 
 - **Showroom Surabaya (ATStekno)**: Jl. Jagalan No.38, Surabaya.
 - **Showroom Pandaan**: The Taman Dayu, Cluster Palazio Boulevard J-1 No. 06, Pandaan.
 
-### C. Product (`<x-schema.product :product="$product" :attributes="$product->attributes" />`)
+### C. Product (`<x-schema.product :product="$product" />`)
 Mendefinisikan produk kelistrikan secara lengkap:
 - `@type: Product`
 - `name`, `sku`, `mpn`, `image`, `description`

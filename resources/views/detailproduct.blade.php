@@ -64,7 +64,7 @@
     <link rel="canonical" href="{{ url()->current() }}">
 
     <!-- GEO / AEO Schema Markup (JSON-LD) -->
-    <x-schema.product :product="$product" :attributes="$product->attributes ?? []" />
+    <x-schema.product :product="$product" />
     <x-schema.breadcrumb :items="[
         ['name' => 'Home', 'url' => url('/')],
         ['name' => 'Products', 'url' => route('products.view.user')],

@@ -61,8 +61,10 @@ class ProductController extends Controller
     public function show($param)
     {
         $product = Product::with('attributes', 'category')
-            ->where('slug', $param)
-            ->orWhere('id', $param)
+            ->where(function ($q) use ($param) {
+                $q->where('slug', $param)
+                    ->orWhere('id', $param);
+            })
             ->firstOrFail();
 
         // Kalau akses pakai ID, redirect ke slug

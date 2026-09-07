@@ -1,7 +1,7 @@
 @props([
     'product',
     'category' => null,
-    'attributes' => []
+    'productAttributes' => null
 ])
 @php
 use Illuminate\Support\Str;
@@ -21,11 +21,12 @@ $productSku = $product->kode ?? ($product->sku ?? ('VINSA-' . ($product->id ?? '
 $productDesc = !empty($product->description) ? Str::limit(strip_tags($product->description), 280) : ($product->meta_description ?? 'Peralatan listrik industri berkualitas tinggi dari Vinsa Electric.');
 $categoryName = $category->name ?? ($product->category->name ?? 'Electrical Components');
 
+$rawAttrs = $productAttributes ?? ($product->attributes ?? []);
 $additionalProperties = [];
-if (!empty($attributes)) {
-    foreach ($attributes as $attr) {
-        $name = is_object($attr) ? ($attr->name ?? $attr->key ?? '') : ($attr['name'] ?? $attr['key'] ?? '');
-        $val = is_object($attr) ? ($attr->value ?? '') : ($attr['value'] ?? '');
+if (!empty($rawAttrs)) {
+    foreach ($rawAttrs as $attr) {
+        $name = is_object($attr) ? ($attr->field_name ?? $attr->name ?? $attr->key ?? '') : ($attr['field_name'] ?? $attr['name'] ?? $attr['key'] ?? '');
+        $val = is_object($attr) ? ($attr->field_value ?? $attr->value ?? '') : ($attr['field_value'] ?? $attr['value'] ?? '');
         if ($name && $val) {
             $additionalProperties[] = [
                 '@type' => 'PropertyValue',
