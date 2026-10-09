@@ -59,16 +59,50 @@
         }
     @endphp
 
-    <title>{{ $metaTitle }}</title>
-    <meta name="description" content="{{ $metaDesc }}">
-    <link rel="canonical" href="{{ url()->current() }}">
+    @php
+        $detailCanonical = 'https://vinsa.fr/detail/' . ($product->slug ?? '');
+        $productImg = !empty($product->image) ? asset($product->image) : asset('image/vinsalg.png');
+        $fullTitle = $metaTitle . ' | Vinsa Electric (vinsa.fr)';
+    @endphp
+
+    <title>{{ $fullTitle }}</title>
+    <meta name="description" content="{{ $metaDesc }} - Komponen kelistrikan industri resmi Vinsa Electric berstandar IEC 60947 & CE sekelas Schneider Electric.">
+    <meta name="keywords" content="{{ $product->name }}, {{ $product->kode ?? '' }}, alat listrik vinsa, switchgear, komponen panel listrik, iec 60947, vinsa.fr">
+    <meta name="author" content="Vinsa Electric">
+
+    <!-- Canonical & Alternates -->
+    <link rel="canonical" href="{{ $detailCanonical }}">
+    <link rel="alternate" hreflang="id" href="{{ $detailCanonical }}">
+    <link rel="alternate" hreflang="en" href="{{ $detailCanonical }}">
+    <link rel="alternate" hreflang="fr" href="{{ $detailCanonical }}">
+    <link rel="alternate" hreflang="x-default" href="{{ $detailCanonical }}">
+
+    <!-- Crawlers -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <!-- Open Graph (Product) -->
+    <meta property="og:type" content="product">
+    <meta property="og:site_name" content="Vinsa Electric">
+    <meta property="og:url" content="{{ $detailCanonical }}">
+    <meta property="og:title" content="{{ $fullTitle }}">
+    <meta property="og:description" content="{{ $metaDesc }}">
+    <meta property="og:image" content="{{ $productImg }}">
+    <meta property="og:locale" content="id_ID">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $fullTitle }}">
+    <meta name="twitter:description" content="{{ $metaDesc }}">
+    <meta name="twitter:image" content="{{ $productImg }}">
 
     <!-- GEO / AEO Schema Markup (JSON-LD) -->
     <x-schema.product :product="$product" />
     <x-schema.breadcrumb :items="[
-        ['name' => 'Home', 'url' => url('/')],
-        ['name' => 'Products', 'url' => route('products.view.user')],
-        ['name' => $product->name ?? 'Detail Produk', 'url' => url()->current()]
+        ['name' => 'Home', 'url' => 'https://vinsa.fr/'],
+        ['name' => 'Products', 'url' => 'https://vinsa.fr/product'],
+        ['name' => $product->name ?? 'Detail Produk', 'url' => $detailCanonical]
     ]" />
 
     <style>

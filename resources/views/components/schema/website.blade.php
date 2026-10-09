@@ -1,27 +1,35 @@
 @props([
     'name' => 'Vinsa Electric',
-    'url' => url('/')
+    'url' => 'https://vinsa.fr'
 ])
 @php
+$siteUrl = 'https://vinsa.fr';
+$searchUrl = $siteUrl . '/product?search={search_term_string}';
+
 $schema = [
     '@context' => 'https://schema.org',
     '@type' => 'WebSite',
-    '@id' => $url . '#website',
-    'url' => $url,
+    '@id' => $siteUrl . '/#website',
+    'url' => $siteUrl,
     'name' => $name,
-    'description' => 'Solusi perlengkapan dan komponen kelistrikan industri dan rumah tangga terpercaya di Indonesia.',
+    'alternateName' => ['Vinsa', 'Vinsa Electric Official', 'Vinsa France', 'vinsa.fr'],
+    'description' => 'Website Resmi Vinsa Electric (vinsa.fr) - Solusi komponen kelistrikan industri, switchgear tegangan rendah, panel maker, kontaktor, MCB, MCCB, dan push button berstandar internasional.',
     'publisher' => [
         '@type' => 'Organization',
-        'name' => 'PT. Anugerah Tama Sejati'
+        '@id' => $siteUrl . '/#organization',
+        'name' => 'PT. Anugerah Tama Sejati',
+        'url' => $siteUrl,
+        'logo' => asset('image/vinsalg.png')
     ],
     'potentialAction' => [
         '@type' => 'SearchAction',
         'target' => [
             '@type' => 'EntryPoint',
-            'urlTemplate' => url('/product') . '?search={search_term_string}'
+            'urlTemplate' => $searchUrl
         ],
         'query-input' => 'required name=search_term_string'
-    ]
+    ],
+    'inLanguage' => ['id-ID', 'en-US', 'fr-FR']
 ];
 @endphp
 <script type="application/ld+json">

@@ -29,15 +29,53 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
-    <title>{{ $blog->title }} | Vinsa</title>
+    @php
+        use Illuminate\Support\Str;
+        $blogCanonical = 'https://vinsa.fr/blog/' . ($blog->slug ?? '');
+        $blogImg = !empty($blog->image) ? asset($blog->image) : asset('image/vinsalg.png');
+        $blogDesc = !empty($blog->content) ? Str::limit(strip_tags($blog->content), 155) : 'Panduan teknis kelistrikan industri resmi dari Vinsa Electric.';
+    @endphp
+
+    <title>{{ $blog->title }} | Vinsa Electric (vinsa.fr)</title>
+    <meta name="description" content="{{ $blogDesc }}">
+    <meta name="keywords" content="{{ $blog->title }}, artikel listrik, vinsa electric, switchgear, iec 60947, vinsa.fr">
+    <meta name="author" content="Tim Engineering Vinsa Electric">
+
+    <!-- Canonical & Alternates -->
+    <link rel="canonical" href="{{ $blogCanonical }}">
+    <link rel="alternate" hreflang="id" href="{{ $blogCanonical }}">
+    <link rel="alternate" hreflang="en" href="{{ $blogCanonical }}">
+    <link rel="alternate" hreflang="fr" href="{{ $blogCanonical }}">
+    <link rel="alternate" hreflang="x-default" href="{{ $blogCanonical }}">
+
+    <!-- Crawlers -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <!-- Open Graph (Article) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Vinsa Electric">
+    <meta property="og:url" content="{{ $blogCanonical }}">
+    <meta property="og:title" content="{{ $blog->title }} | Vinsa Electric (vinsa.fr)">
+    <meta property="og:description" content="{{ $blogDesc }}">
+    <meta property="og:image" content="{{ $blogImg }}">
+    <meta property="og:locale" content="id_ID">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $blog->title }} | Vinsa Electric">
+    <meta name="twitter:description" content="{{ $blogDesc }}">
+    <meta name="twitter:image" content="{{ $blogImg }}">
+
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
 
     <!-- GEO / AEO Schema Markup (JSON-LD) -->
     <x-schema.article :blog="$blog" />
     <x-schema.breadcrumb :items="[
-        ['name' => 'Home', 'url' => url('/')],
-        ['name' => 'Blog', 'url' => route('blog.collection')],
-        ['name' => $blog->title ?? 'Artikel', 'url' => url()->current()]
+        ['name' => 'Home', 'url' => 'https://vinsa.fr/'],
+        ['name' => 'Blog', 'url' => 'https://vinsa.fr/blog'],
+        ['name' => $blog->title ?? 'Artikel', 'url' => $blogCanonical]
     ]" />
 
     <style>

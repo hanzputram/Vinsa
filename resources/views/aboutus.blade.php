@@ -21,23 +21,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="Tentang Vinsa - Lebih dari satu dekade berinovasi dalam solusi kelistrikan premium. Keamanan, kualitas material, dan inovasi adalah filosofi inti kami.">
-    <link rel="canonical" href="{{ url('/about') }}">
-    
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
+    <title>Tentang Vinsa Electric | Solusi Perlengkapan Kelistrikan Industri & Otomasi (vinsa.fr)</title>
+    <meta name="description" content="Profil Vinsa Electric (vinsa.fr) - Merek terpercaya perlengkapan kelistrikan industri, switchgear tegangan rendah, dan aksesoris panel listrik berstandar internasional IEC 60947, CE, dan SNI sekelas Schneider Electric di bawah naungan PT. Anugerah Tama Sejati.">
+    <meta name="keywords" content="tentang vinsa, vinsa electric, vinsa.fr, pt anugerah tama sejati, produsen alat listrik, distributor panel listrik surabaya, switchgear indonesia, sertifikasi iec 60947">
+    <meta name="author" content="Vinsa Electric">
 
-    <title>Vinsa | Electrical solution</title>
+    <!-- Canonical & Alternates -->
+    <link rel="canonical" href="https://vinsa.fr/about">
+    <link rel="alternate" hreflang="id" href="https://vinsa.fr/about">
+    <link rel="alternate" hreflang="en" href="https://vinsa.fr/about">
+    <link rel="alternate" hreflang="fr" href="https://vinsa.fr/about">
+    <link rel="alternate" hreflang="x-default" href="https://vinsa.fr/about">
+
+    <!-- Crawlers -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vinsa Electric">
+    <meta property="og:url" content="https://vinsa.fr/about">
+    <meta property="og:title" content="Tentang Vinsa Electric | Solusi Perlengkapan Kelistrikan Industri (vinsa.fr)">
+    <meta property="og:description" content="Inovasi, keandalan, dan standar internasional IEC 60947 & CE. Solusi kelistrikan industri terpercaya sekelas Schneider Electric.">
+    <meta property="og:image" content="{{ asset('image/vinsalg.png') }}">
+    <meta property="og:locale" content="id_ID">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Tentang Vinsa Electric | Solusi Perlengkapan Kelistrikan Industri (vinsa.fr)">
+    <meta name="twitter:description" content="Profil resmi Vinsa Electric. Komponen panel maker, switchgear, dan proteksi listrik berstandar IEC 60947 & CE.">
+    <meta name="twitter:image" content="{{ asset('image/vinsalg.png') }}">
+
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
 
     <!-- GEO / AEO Schema Markup (JSON-LD) -->
     <x-schema.organization />
     <x-schema.local-business />
     <x-schema.breadcrumb :items="[
-        ['name' => 'Home', 'url' => url('/')],
-        ['name' => 'About Us', 'url' => url('/about')]
+        ['name' => 'Home', 'url' => 'https://vinsa.fr/'],
+        ['name' => 'About Us', 'url' => 'https://vinsa.fr/about']
     ]" />
     
     <style>
@@ -146,7 +169,7 @@
                         <span class="relative z-10">{{ __('Learn Our Story') }}</span>
                         <div class="absolute inset-0 bg-gray-100 scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300"></div>
                     </a>
-                    <a href="/contactus" class="group border-2 border-white/30 backdrop-blur-sm text-white px-10 py-4 rounded-full font-bold hover:border-white transition-all transform hover:scale-105 text-base">
+                    <a href="/contact-us" class="group border-2 border-white/30 backdrop-blur-sm text-white px-10 py-4 rounded-full font-bold hover:border-white transition-all transform hover:scale-105 text-base">
                         {{ __('Contact Us') }}
                     </a>
                 </div>

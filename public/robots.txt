@@ -69,7 +69,7 @@ Disallow: /locale/
 # Block query string duplicates
 Disallow: /*?*
 
-# Allow static assets and images
+# Allow static assets, images, and AI manifests
 Allow: /image/
 Allow: /build/
 Allow: /assets/
@@ -96,5 +96,5 @@ Disallow: /
 User-agent: DataForSeoBot
 Disallow: /
 
-# Sitemaps and AI Manifests
-Sitemap: https://vinsa.co.id/sitemap.xml
+# Sitemaps and AI Manifests for vinsa.fr
+Sitemap: https://vinsa.fr/sitemap.xml

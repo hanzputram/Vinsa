@@ -26,17 +26,46 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
-    <title>Hubungi Kami | Vinsa Electrical Solution</title>
-    <meta name="description" content="Hubungi Vinsa untuk konsultasi kebutuhan listrik Anda. Kami menyediakan solusi kelistrikan premium untuk rumah, bisnis, dan industri.">
-    <link rel="canonical" href="{{ url('/contact-us') }}">
+    <title>Hubungi Vinsa Electric | Konsultasi Teknis & Penawaran Proyek (vinsa.fr)</title>
+    <meta name="description" content="Hubungi tim engineering & sales Vinsa Electric (vinsa.fr) untuk konsultasi teknis komponen panel industri, surat dukungan tender, permintaan sampel, dan penawaran harga proyek B2B. Showroom di Surabaya & Pandaan.">
+    <meta name="keywords" content="kontak vinsa, hubungi vinsa electric, sales vinsa, distributor alat listrik surabaya, penawaran proyek panel maker, vinsa.fr">
+    <meta name="author" content="Vinsa Electric">
+
+    <!-- Canonical & Alternates -->
+    <link rel="canonical" href="https://vinsa.fr/contact-us">
+    <link rel="alternate" hreflang="id" href="https://vinsa.fr/contact-us">
+    <link rel="alternate" hreflang="en" href="https://vinsa.fr/contact-us">
+    <link rel="alternate" hreflang="fr" href="https://vinsa.fr/contact-us">
+    <link rel="alternate" hreflang="x-default" href="https://vinsa.fr/contact-us">
+
+    <!-- Crawlers -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vinsa Electric">
+    <meta property="og:url" content="https://vinsa.fr/contact-us">
+    <meta property="og:title" content="Hubungi Vinsa Electric | Konsultasi Teknis & Penawaran Proyek (vinsa.fr)">
+    <meta property="og:description" content="Layanan konsultasi spesifikasi teknis, pengadaan proyek panel maker, dan garansi resmi Vinsa Electric.">
+    <meta property="og:image" content="{{ asset('image/vinsalg.png') }}">
+    <meta property="og:locale" content="id_ID">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hubungi Vinsa Electric | Solusi Kelistrikan Industri (vinsa.fr)">
+    <meta name="twitter:description" content="Konsultasi teknis, pengadaan tender proyek, dan dukungan engineering resmi Vinsa Electric.">
+    <meta name="twitter:image" content="{{ asset('image/vinsalg.png') }}">
+
     <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
 
     <!-- GEO / AEO Schema Markup (JSON-LD) -->
     <x-schema.organization />
     <x-schema.local-business />
     <x-schema.breadcrumb :items="[
-        ['name' => 'Home', 'url' => url('/')],
-        ['name' => 'Contact Us', 'url' => url('/contact-us')]
+        ['name' => 'Home', 'url' => 'https://vinsa.fr/'],
+        ['name' => 'Contact Us', 'url' => 'https://vinsa.fr/contact-us']
     ]" />
 
     <style>

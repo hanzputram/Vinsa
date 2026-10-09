@@ -112,7 +112,7 @@
             <div class="lg:col-span-1">
                 <h3 class="text-lg font-bold mb-8 text-gray-900 border-b-2 border-[#0dd8bd] inline-block">{{ __('Menu Utama') }}</h3>
                 <ul class="grid grid-cols-2 gap-x-4 gap-y-4 text-gray-500 font-medium">
-                    <li><a href="/new" class="hover:text-[#066c5f]  transition-colors flex items-center gap-2 text-sm"> {{ __('Home') }}</a></li>
+                    <li><a href="/" class="hover:text-[#066c5f] transition-colors flex items-center gap-2 text-sm"> {{ __('Home') }}</a></li>
                     <li><a href="/about" class="hover:text-[#066c5f] transition-colors flex items-center gap-2 text-sm"> {{ __('About Us') }}</a></li>
                     <li><a href="/product" class="hover:text-[#066c5f] transition-colors flex items-center gap-2 text-sm"> {{ __('Products') }}</a></li>
                     <li><a href="/blog" class="hover:text-[#066c5f] transition-colors flex items-center gap-2 text-sm"> {{ __('Blog') }}</a></li>

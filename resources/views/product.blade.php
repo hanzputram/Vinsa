@@ -25,19 +25,60 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="{{ asset('image/sa.png') }}">
-    <title>{{ isset($activeCategory) ? $activeCategory->name . ' | ' : '' }}Vinsa | Electrical solution</title>
-    <meta name="description" content="Koleksi produk listrik premium Vinsa. Push button, box panel, kontaktor, MCB, MCCB, cable tray, dan peralatan industri berkualitas tinggi.">
-    <link rel="canonical" href="{{ url()->current() }}">
+    @php
+        $catTitle = isset($activeCategory) ? ($activeCategory->name . ' - ') : '';
+        $metaTitle = $catTitle . 'Katalog Komponen Kelistrikan & Panel Industri | Vinsa Electric (vinsa.fr)';
+        $metaDesc = isset($activeCategory)
+            ? 'Koleksi ' . $activeCategory->name . ' resmi Vinsa Electric (vinsa.fr). Komponen switchgear industri berkualitas tinggi berstandar IEC 60947 & CE untuk panel maker dan proyek MEP.'
+            : 'Katalog lengkap komponen kelistrikan industri Vinsa Electric (vinsa.fr): Push Button 22mm, Magnetic Contactor CJX2, MCB, MCCB, Box Panel IP65/IP66, Pilot Lamp, dan Terminal Block berstandar IEC 60947 & CE sekelas Schneider Electric.';
+        $canonicalProdUrl = isset($activeCategory) 
+            ? ('https://vinsa.fr/product/' . \Illuminate\Support\Str::slug($activeCategory->name))
+            : 'https://vinsa.fr/product';
+    @endphp
+
+    <title>{{ $metaTitle }}</title>
+    <meta name="description" content="{{ $metaDesc }}">
+    <meta name="keywords" content="produk vinsa, katalog alat listrik, vinsa electric, kontaktor cjx2, push button 22mm, box panel ip65, mccb, mcb, switchgear indonesia, vinsa.fr">
+    <meta name="author" content="Vinsa Electric">
+
+    <!-- Canonical & Alternates -->
+    <link rel="canonical" href="{{ $canonicalProdUrl }}">
+    <link rel="alternate" hreflang="id" href="{{ $canonicalProdUrl }}">
+    <link rel="alternate" hreflang="en" href="{{ $canonicalProdUrl }}">
+    <link rel="alternate" hreflang="fr" href="{{ $canonicalProdUrl }}">
+    <link rel="alternate" hreflang="x-default" href="{{ $canonicalProdUrl }}">
+
+    <!-- Crawlers -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vinsa Electric">
+    <meta property="og:url" content="{{ $canonicalProdUrl }}">
+    <meta property="og:title" content="{{ $metaTitle }}">
+    <meta property="og:description" content="{{ $metaDesc }}">
+    <meta property="og:image" content="{{ asset('image/vinsalg.png') }}">
+    <meta property="og:locale" content="id_ID">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ $metaTitle }}">
+    <meta name="twitter:description" content="{{ $metaDesc }}">
+    <meta name="twitter:image" content="{{ asset('image/vinsalg.png') }}">
+
+    <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
 
     <!-- GEO / AEO Schema Markup (JSON-LD) -->
     <x-schema.organization />
     @php
         $breadcrumbItems = [
-            ['name' => 'Home', 'url' => url('/')],
-            ['name' => 'Products', 'url' => route('products.view.user')]
+            ['name' => 'Home', 'url' => 'https://vinsa.fr/'],
+            ['name' => 'Products', 'url' => 'https://vinsa.fr/product']
         ];
         if (isset($activeCategory) && $activeCategory) {
-            $breadcrumbItems[] = ['name' => $activeCategory->name, 'url' => url()->current()];
+            $breadcrumbItems[] = ['name' => $activeCategory->name, 'url' => $canonicalProdUrl];
         }
     @endphp
     <x-schema.breadcrumb :items="$breadcrumbItems" />

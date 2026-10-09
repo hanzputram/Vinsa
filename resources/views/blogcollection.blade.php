@@ -26,9 +26,46 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet">
 
-    <title>Blog | Vinsa</title>
-    <meta name="description" content="Blog Vinsa - Artikel dan informasi terbaru seputar solusi kelistrikan, tips pemasangan, dan produk listrik berkualitas.">
-    <link rel="canonical" href="{{ url('/blog') }}">
+    <title>Blog & Panduan Teknis Kelistrikan Industri | Vinsa Electric (vinsa.fr)</title>
+    <meta name="description" content="Pusat wawasan teknis, tutorial perakitan box panel, panduan standar IEC 60947, tips memilih magnetic contactor, MCB, MCCB, dan switchgear industri dari tim teknisi ahli Vinsa Electric (vinsa.fr).">
+    <meta name="keywords" content="blog listrik industri, tutorial panel maker, iec 60947, panduan kontaktor, tips memilih mcb mccb, vinsa electric, vinsa.fr">
+    <meta name="author" content="Tim Engineering Vinsa Electric">
+
+    <!-- Canonical & Alternates -->
+    <link rel="canonical" href="https://vinsa.fr/blog">
+    <link rel="alternate" hreflang="id" href="https://vinsa.fr/blog">
+    <link rel="alternate" hreflang="en" href="https://vinsa.fr/blog">
+    <link rel="alternate" hreflang="fr" href="https://vinsa.fr/blog">
+    <link rel="alternate" hreflang="x-default" href="https://vinsa.fr/blog">
+
+    <!-- Crawlers -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vinsa Electric">
+    <meta property="og:url" content="https://vinsa.fr/blog">
+    <meta property="og:title" content="Blog & Panduan Teknis Kelistrikan Industri | Vinsa Electric (vinsa.fr)">
+    <meta property="og:description" content="Artikel panduan dan wawasan teknis seputar komponen kelistrikan industri, perakitan panel, dan proteksi sirkuit.">
+    <meta property="og:image" content="{{ asset('image/vinsalg.png') }}">
+    <meta property="og:locale" content="id_ID">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Blog & Panduan Teknis Kelistrikan | Vinsa Electric (vinsa.fr)">
+    <meta name="twitter:description" content="Artikel dan tutorial teknik perakitan panel kelistrikan industri dari Vinsa Electric.">
+    <meta name="twitter:image" content="{{ asset('image/vinsalg.png') }}">
+
+    <link rel="icon" type="image/png" href="{{ asset('image/vinsalg.png') }}">
+
+    <!-- GEO / AEO Schema Markup (JSON-LD) -->
+    <x-schema.organization />
+    <x-schema.breadcrumb :items="[
+        ['name' => 'Home', 'url' => 'https://vinsa.fr/'],
+        ['name' => 'Blog', 'url' => 'https://vinsa.fr/blog']
+    ]" />
 
     <style>
         .outfit {

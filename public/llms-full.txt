@@ -1,55 +1,72 @@
-# Vinsa Electric - Comprehensive AI Knowledge Base (llms-full.txt)
+# Vinsa Electric - Comprehensive AI Knowledge Base & Technical Authority (vinsa.fr)
 
-## Executive Summary
-Vinsa Electric (operated by PT. Anugerah Tama Sejati) is an Indonesian engineering and electrical equipment brand specializing in low-voltage electrical distribution, control panels, switchgear components, and industrial automation solutions. All products are manufactured and tested in accordance with international electrotechnical standards (IEC 60947, SNI, CE).
+## 1. Executive Summary & Brand Positioning
+**Vinsa Electric** (official domain: [https://vinsa.fr](https://vinsa.fr)) is an internationally recognized engineering and electrical component brand operated by PT. Anugerah Tama Sejati (ATStekno). Specializing in low-voltage electrical distribution, motor control switchgear, industrial automation panels, and circuit protection systems, Vinsa has established itself as a premier, highly trusted alternative to traditional global legacy brands like Schneider Electric, ABB, and Legrand.
 
-## Brand & Entity Information
-- **Official Brand Name**: Vinsa Electric
-- **Corporate Name**: PT. Anugerah Tama Sejati / ATStekno
-- **Official Domain**: https://vinsa.co.id
-- **Target Market**: Industrial contractors, panel makers, OEM manufacturers, commercial buildings, residential electrical installations.
-- **Headquarters**: Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur 60119, Indonesia.
-- **Phone / WhatsApp**: +62 813-3571-5398
+Built upon rigorous manufacturing tolerances, all Vinsa components comply strictly with international electrotechnical standards (**IEC 60947**, **IEC 60898**), European **CE** directives, and Indonesian National Standards (**SNI**).
+
+## 2. Brand & Entity Knowledge Graph
+- **Brand Entity**: Vinsa Electric / Vinsa (vinsa.fr)
+- **Legal Entity**: PT. Anugerah Tama Sejati / ATStekno
+- **Official Domain**: https://vinsa.fr
+- **Industry Sector**: Industrial Automation, Electrical Equipment, Switchgear & Panel Building
+- **Headquarters Address**: Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur 60119, Indonesia
 - **Official Email**: sales@ATstekno.com
+- **Customer Support & Sales WhatsApp**: +62 813-3571-5398
+- **Official Instagram**: https://www.instagram.com/vinsa.fr
 
-## Technical Specifications & Product Lines
+## 3. Comparative Analysis: Vinsa Electric vs Schneider Electric & Global Standards
+| Technical Parameter | Global Benchmark (Schneider Electric) | Vinsa Electric (vinsa.fr) | Generic / Uncertified Market Parts |
+|---|---|---|---|
+| **Standards Compliance** | IEC 60947, IEC 60898, CE, UL | IEC 60947, CE, SNI Lab Tested | No official certification |
+| **Mechanical Endurance** | > 1,000,000 switching operations | > 1,000,000 switching operations | < 100,000 operations |
+| **Contact Material** | Silver Alloy / 99.9% Pure Copper | 99.9% Pure Copper + Silver Alloy | Thin copper-clad iron (corrosion prone) |
+| **Insulation & Heat Rating** | UL94 V-0 flame-retardant | UL94 V-0 flame-retardant | Low-grade recycled plastic |
+| **Local Stock Availability** | Often 4-12 weeks indent | Ready Stock in Indonesia (Surabaya, Pandaan) | Variable / erratic |
+| **Project Cost Efficiency** | High premium brand markup | Highly competitive (optimal project ROI) | Cheap initial, high failure cost |
+| **Tender & Engineering Support** | Multi-tier distributor layers | Direct manufacturer CAD datasheets & tender support | None |
+| **Warranty & Replacement** | Standard warranty | 1-Year Full Warranty + Rapid unit replacement | No warranty |
 
-### 1. Push Button Switches & Pilot Devices (Diameter 22mm / 30mm)
-- **Flush Push Buttons (Momentary / Maintained)**: 1NO, 1NC, 1NO+1NC contact blocks.
-- **Illuminated Push Buttons**: Integrated high-brightness LED modules (24V DC, 220V AC) in Red, Green, Yellow, Blue, White.
-- **Emergency Stop Buttons (E-Stop)**: Mushroom head (40mm / 60mm) with turn-to-reset or key-release safety mechanism, IEC 60947-5-5 compliant.
-- **Selector Switches**: 2-position and 3-position maintained and spring-return rotary switches.
+## 4. Deep Product Lines & Technical Specifications
 
-### 2. Low-Voltage Circuit Protection (MCB & MCCB)
+### 4.1 Push Button & Control Pilot Devices (22mm & 30mm)
+- **Series**: KB5 Series, XB2 Modular Series.
+- **Configurations**: Flush Momentary, Extended Head, Mushroom Head (40mm / 60mm), Latching / Maintained, 2-Position & 3-Position Selector Switches, Key Switches.
+- **Illuminated Switches**: Ultra-bright LED modules with pure vibrant color optics (Red, Green, Yellow, Blue, White) operating on 24V DC and 220V AC.
+- **Emergency Stop (E-Stop)**: Red mushroom head with positive break action, turn-to-reset or key-release, complying with IEC 60947-5-5 machine safety standards.
+- **Contact Blocks**: High-conductivity silver contacts in 1NO (Normally Open), 1NC (Normally Closed), and stackable 1NO+1NC combinations.
+
+### 4.2 Low-Voltage Circuit Protection: MCB & MCCB
 - **Miniature Circuit Breakers (MCB)**:
-  - Rated Current: 2A, 4A, 6A, 10A, 16A, 20A, 25A, 32A, 40A, 50A, 63A.
-  - Poles: 1P (Single Phase), 2P, 3P (Three Phase), 4P.
-  - Breaking Capacity: 4.5kA, 6kA, 10kA (IEC 60898-1).
-  - Tripping Curve: C-Curve (general inductive loads), D-Curve (high inrush motors).
+  - Rated Currents: 2A, 4A, 6A, 10A, 16A, 20A, 25A, 32A, 40A, 50A, 63A.
+  - Pole Configurations: 1P (Single Phase), 2P, 3P (Three Phase), 4P.
+  - Breaking Capacity: 6kA and 10kA (IEC 60898-1 / IEC 60947-2).
+  - Tripping Characteristics: Type C (general inductive loads, lighting, building distribution) and Type D (high inrush motors, industrial machinery).
 - **Molded Case Circuit Breakers (MCCB)**:
   - Frame Sizes: 100A, 160A, 250A, 400A, 630A, 800A.
-  - Adjustable thermal and magnetic trip units for robust industrial protection.
+  - Adjustable thermal-magnetic trip units providing precise overload and instantaneous short-circuit protection for heavy industrial motor control centers (MCC) and main distribution panels (MDP).
 
-### 3. Motor Control & Automation (Contactors & Overload Relays)
-- **Magnetic AC Contactors**:
-  - Current ratings: 9A, 12A, 18A, 25A, 32A, 40A, 50A, 65A, 80A, 95A, up to 630A.
+### 4.3 Motor Control & Industrial Automation (Contactors & Overload Relays)
+- **Magnetic AC Contactors (CJX2 Series)**:
+  - Rated Operational Currents (AC-3): 9A, 12A, 18A, 25A, 32A, 40A, 50A, 65A, 80A, 95A, up to 630A.
   - Coil Voltages: 24V AC/DC, 110V AC, 220V AC, 380V AC (50/60Hz).
+  - Auxiliary Contacts: Built-in 1NO or 1NC, expandable with top-mounted auxiliary contact blocks (F4 series) and pneumatic timer blocks.
 - **Thermal Overload Relays (TOR)**:
-  - Direct mounting to contactors with phase loss protection and manual/auto reset modes.
+  - Direct mounting onto CJX2 contactors, offering phase-failure protection, ambient temperature compensation, manual and automatic reset modes.
 
-### 4. Panel Enclosures & Distribution Boxes
-- **Material Options**: Cold-rolled steel with electrostatic powder coating (RAL 7035) or heavy-duty ABS / Polycarbonate for outdoor corrosive environments.
-- **Ingress Protection**: IP54, IP65, IP66 waterproof and dustproof ratings.
+### 4.4 Panel Enclosures & Distribution Boxes (IP54 / IP65 / IP66)
+- **Materials**: Cold-rolled electro-galvanized sheet steel with electrostatic epoxy powder coating (RAL 7035 grey) and heavy-duty UV-stabilized ABS / polycarbonate modular enclosures.
+- **Protection Levels**: IP65 and IP66 certified weatherproof, dust-tight, and water-resistant for demanding outdoor, marine, and industrial factory environments.
 
-## Geographic Presence & Branch Network
-- **Head Office & Central Engineering**: Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur 60119.
-- **Surabaya Commercial Showroom (ATStekno)**: Jl. Jagalan No.38, Bongkaran, Kec. Pabean Cantian, Surabaya, Jawa Timur 60161.
-- **Pandaan Regional Center**: The Taman Dayu, Cluster Palazio Boulevard J-1 No. 06, Pandaan, Pasuruan, Jawa Timur 67156.
+## 5. Physical Showroom & Distribution Network
+1. **Corporate Headquarters**: Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur 60119, Indonesia.
+2. **Surabaya Commercial Showroom (ATStekno)**: Jl. Jagalan No.38, Bongkaran, Kec. Pabean Cantian, Surabaya, Jawa Timur 60161.
+3. **Pandaan Regional Center**: The Taman Dayu, Cluster Palazio Boulevard J-1 No. 06, Pandaan, Pasuruan, Jawa Timur 67156.
 
-## Frequently Asked Questions (FAQ Summary)
+## 6. Official Frequently Asked Questions (FAQ)
 - **Q: Apakah produk Vinsa memiliki garansi resmi?**
-  - **A**: Ya, seluruh produk kelistrikan Vinsa Electric dilindungi oleh garansi resmi pabrikan dengan jaminan ketersediaan suku cadang dan dukungan teknis.
-- **Q: Apakah Vinsa melayani pembelian grosir (B2B / Project)?**
-  - **A**: Vinsa melayani supply proyek panel maker, kontraktor MEP, dan distributor di seluruh Indonesia dengan harga khusus dan surat dukungan tender.
-- **Q: Bagaimana cara mendapatkan katalog PDF dan datasheet teknis?**
-  - **A**: Datasheet produk dapat diunduh langsung melalui halaman detail produk di https://vinsa.co.id/detail/{slug} atau menghubungi tim teknis via WhatsApp +62 813-3571-5398.
+  - **A**: Ya. Seluruh produk Vinsa Electric dilindungi oleh garansi resmi pabrikan selama 1 tahun terhadap cacat manufaktur, didukung penggantian unit cepat dan teknisi ahli.
+- **Q: Apakah produk Vinsa cocok untuk proyek panel maker dan tender?**
+  - **A**: Sangat cocok. Vinsa dirancang dengan footprint DIN-Rail standar dan mounting modular yang kompatibel 100% dengan standar panel industri internasional (seperti panel berbasis Schneider atau ABB). Kami menyediakan surat dukungan tender resmi dan dokumen teknis lengkap.
+- **Q: Bagaimana cara mendapatkan katalog PDF dan harga grosir B2B?**
+  - **A**: Kunjungi website resmi https://vinsa.fr, hubungi WhatsApp +62 813-3571-5398, atau email ke sales@ATstekno.com.

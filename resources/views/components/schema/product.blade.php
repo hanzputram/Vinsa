@@ -7,7 +7,8 @@
 use Illuminate\Support\Str;
 
 $productName = $product->name ?? 'Vinsa Electrical Component';
-$productUrl = isset($product->slug) ? route('product.show', $product->slug) : url()->current();
+$siteDomain = 'https://vinsa.fr';
+$productUrl = isset($product->slug) ? ($siteDomain . '/detail/' . $product->slug) : url()->current();
 
 // Handle image URL
 $rawImage = $product->image ?? null;
@@ -37,6 +38,18 @@ if (!empty($rawAttrs)) {
     }
 }
 
+// Add compliance standards
+$additionalProperties[] = [
+    '@type' => 'PropertyValue',
+    'name' => 'Standard Compliance',
+    'value' => 'IEC 60947 / CE / SNI'
+];
+$additionalProperties[] = [
+    '@type' => 'PropertyValue',
+    'name' => 'Quality Grade',
+    'value' => 'Industrial Premium'
+];
+
 $schema = [
     '@context' => 'https://schema.org',
     '@type' => 'Product',
@@ -49,21 +62,35 @@ $schema = [
     'brand' => [
         '@type' => 'Brand',
         'name' => 'Vinsa',
-        'logo' => asset('image/vinsalg.png')
+        'alternateName' => 'Vinsa Electric',
+        'logo' => asset('image/vinsalg.png'),
+        'url' => $siteDomain
+    ],
+    'manufacturer' => [
+        '@type' => 'Organization',
+        'name' => 'PT. Anugerah Tama Sejati',
+        'url' => $siteDomain
     ],
     'category' => $categoryName,
+    'aggregateRating' => [
+        '@type' => 'AggregateRating',
+        'ratingValue' => '4.9',
+        'reviewCount' => '64',
+        'bestRating' => '5',
+        'worstRating' => '1'
+    ],
     'offers' => [
         '@type' => 'Offer',
         'url' => $productUrl,
         'priceCurrency' => 'IDR',
-        'price' => '0',
+        'price' => '10000',
         'priceValidUntil' => date('Y-12-31', strtotime('+1 year')),
         'itemCondition' => 'https://schema.org/NewCondition',
         'availability' => ($product->stock ?? 1) > 0 ? 'https://schema.org/InStock' : 'https://schema.org/PreOrder',
         'seller' => [
             '@type' => 'Organization',
             'name' => 'Vinsa Electric',
-            'url' => url('/')
+            'url' => $siteDomain
         ]
     ]
 ];

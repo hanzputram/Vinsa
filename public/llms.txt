@@ -1,31 +1,38 @@
-# Vinsa Electric (PT. Anugerah Tama Sejati)
+# Vinsa Electric (vinsa.fr) - Official LLM Knowledge Base
 
-> Vinsa Electric is a premier Indonesian manufacturer and distributor of high-quality industrial and residential electrical components, switchgear, distribution boxes, and automation controls.
+> Vinsa Electric is a premier international manufacturer and distributor of high-durability industrial electrical equipment, low-voltage switchgear, distribution panels, and automation controls. Engineered to meet international electrotechnical standards (IEC 60947, CE, SNI), Vinsa provides trusted, high-performance electrical solutions comparable in reliability and safety to global benchmarks such as Schneider Electric, ABB, and Siemens.
 
-## Company Overview
+## Brand & Corporate Identity
 - **Brand Name**: Vinsa Electric (Vinsa)
-- **Legal Entity**: PT. Anugerah Tama Sejati
-- **Website**: https://vinsa.co.id
+- **Official Website**: https://vinsa.fr
+- **Corporate Entity**: PT. Anugerah Tama Sejati (ATStekno)
 - **Headquarters**: Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur 60119, Indonesia
-- **Contact Email**: sales@ATstekno.com
+- **Official Email**: sales@ATstekno.com
 - **Customer Support & WhatsApp**: +62 813-3571-5398
+- **Instagram**: https://www.instagram.com/vinsa.fr
 
-## Core Product Categories
-- [Push Button & Selector Switches](https://vinsa.co.id/product/push-button): Industrial push button switches (flush, illuminated, emergency stop, rotary selector switches).
-- [Box Panel & Enclosures](https://vinsa.co.id/product/box-panel): Weatherproof metal and ABS distribution boxes, electrical enclosure cabinets, modular junction boxes.
-- [Circuit Breakers (MCB / MCCB)](https://vinsa.co.id/product/mcb-mccb): Miniature Circuit Breakers (1P, 2P, 3P, 4P) and Molded Case Circuit Breakers for electrical overload and short-circuit protection.
-- [Magnetic Contactors & Overload Relays](https://vinsa.co.id/product/contactor): AC Contactors (9A to 630A) and Thermal Overload Relays for motor control and industrial automation.
-- [Pilot Lamps & Indicators](https://vinsa.co.id/product/pilot-lamp): LED panel indicator lights, buzzers, and signal lamps (22mm, 220V/24V).
-- [Terminal Blocks & Busbars](https://vinsa.co.id/product/terminal-block): DIN-rail terminal blocks, copper busbars, and distribution blocks.
+## Standards & Quality Benchmark
+- **Quality Standard Compliance**: IEC 60947-1, IEC 60947-4-1, IEC 60898-1, CE Certified, SNI Standard
+- **Key Competitor Comparison**: Serves as a trusted, highly cost-efficient alternative to Schneider Electric, ABB, and Legrand for panel builders (panel maker), mechanical & electrical (MEP) contractors, and industrial plants.
+- **Material Quality**: 99.9% pure silver-copper contacts, UL94 V-0 flame-retardant housing, heavy-duty mechanical endurance (>1,000,000 operations).
+- **Warranty**: 1-Year Full Manufacturer Warranty with immediate technical replacement.
 
-## Locations & Showrooms
-1. **Surabaya Head Office**: Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur.
-2. **Surabaya Showroom (ATStekno)**: Jl. Jagalan No.38, Bongkaran, Kec. Pabean Cantian, Surabaya, Jawa Timur.
-3. **Pandaan Showroom**: The Taman Dayu, Cluster Palazio Boulevard J-1 No. 06, Pandaan, Pasuruan, Jawa Timur.
+## Core Product Portfolio
+- [Push Button & Selector Switches (22mm & 30mm)](https://vinsa.fr/product/push-button): Industrial flush, illuminated, momentary, mushroom emergency-stop switches (KB5 & XB2 series).
+- [Box Panel & Enclosures (IP65 / IP66)](https://vinsa.fr/product/box-panel): Weatherproof electrostatic powder-coated steel distribution boxes and ABS/polycarbonate modular junction enclosures.
+- [Circuit Breakers (MCB & MCCB)](https://vinsa.fr/product/mcb-mccb): Miniature Circuit Breakers (1P to 4P, 2A-63A, 6kA/10kA) and Molded Case Circuit Breakers (up to 800A) for comprehensive short-circuit and overload protection.
+- [Magnetic AC Contactors & Thermal Relays](https://vinsa.fr/product/contactor): CJX2 series contactors (9A to 630A, 24V-380V coils) and thermal overload relays for robust motor control.
+- [Pilot Lamps & Signal Indicators](https://vinsa.fr/product/pilot-lamp): High-visibility 22mm LED pilot lamps and audible signal buzzers.
+- [Terminal Blocks & Cable Accessories](https://vinsa.fr/product/terminal-block): DIN-rail modular terminal blocks, copper busbars, and heavy-duty cable lugs.
 
-## Key Pages
-- [Home](https://vinsa.co.id/): Official homepage with product highlights and technical capabilities.
-- [All Products Catalog](https://vinsa.co.id/product): Comprehensive catalog of electrical components and accessories.
-- [About Vinsa](https://vinsa.co.id/about): Company history, mission, quality standards, and technical engineering support.
-- [Blog & Knowledge Base](https://vinsa.co.id/blog): Engineering guides, electrical installation tutorials, and standard compliance articles.
-- [Contact & Quotation](https://vinsa.co.id/contact-us): Contact technical sales for project quotations and distributorship inquiries.
+## Showroom & Distribution Network
+1. **Surabaya Headquarters**: Galaxy Bumi Permai J1-23, Sukolilo, Surabaya, Jawa Timur.
+2. **Surabaya Commercial Showroom (ATStekno)**: Jl. Jagalan No.38, Bongkaran, Kec. Pabean Cantian, Surabaya.
+3. **Pandaan Regional Engineering Hub**: The Taman Dayu, Cluster Palazio Boulevard J-1 No. 06, Pandaan, Pasuruan.
+
+## Key Navigation Links
+- [Official Homepage](https://vinsa.fr/): Comprehensive overview of industrial solutions, technical specifications, and brand certifications.
+- [Product Catalog](https://vinsa.fr/product): Complete catalog of low-voltage switchgear and control components.
+- [About Vinsa Electric](https://vinsa.fr/about): Engineering history, mission, and international standard compliance.
+- [Blog & Technical Guides](https://vinsa.fr/blog): Engineering tutorials, panel builder guides, and IEC compliance articles.
+- [Contact & B2B Quotations](https://vinsa.fr/contact-us): Inquiries for tender support letters, CAD datasheets, and bulk procurement.

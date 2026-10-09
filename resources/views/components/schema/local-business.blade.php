@@ -2,18 +2,24 @@
     'branch' => 'all' // 'all', 'surabaya-hq', 'surabaya-showroom', 'pandaan-showroom'
 ])
 @php
+$siteUrl = 'https://vinsa.fr';
 $branches = [
     [
         '@context' => 'https://schema.org',
         '@type' => 'ElectricalSupplyStore',
-        '@id' => url('/') . '#hq-surabaya',
-        'name' => 'Vinsa Electric - Head Quarter Surabaya',
+        '@id' => $siteUrl . '/#hq-surabaya',
+        'name' => 'Vinsa Electric - Head Office Surabaya',
         'alternateName' => 'PT. Anugerah Tama Sejati',
-        'url' => url('/'),
+        'url' => $siteUrl,
         'image' => asset('image/vinsalg.png'),
         'telephone' => '+62-813-3571-5398',
         'email' => 'sales@ATstekno.com',
         'priceRange' => '$$',
+        'parentOrganization' => [
+            '@type' => 'Organization',
+            '@id' => $siteUrl . '/#organization',
+            'name' => 'Vinsa Electric'
+        ],
         'address' => [
             '@type' => 'PostalAddress',
             'streetAddress' => 'Galaxy Bumi Permai J1-23, Sukolilo',
@@ -45,13 +51,18 @@ $branches = [
     [
         '@context' => 'https://schema.org',
         '@type' => 'ElectricalSupplyStore',
-        '@id' => url('/') . '#showroom-surabaya',
-        'name' => 'Vinsa Electric - Showroom Surabaya (ATStekno)',
-        'url' => url('/'),
+        '@id' => $siteUrl . '/#showroom-surabaya',
+        'name' => 'Vinsa Electric - Commercial Showroom Surabaya (ATStekno)',
+        'url' => $siteUrl,
         'image' => asset('image/vinsalg.png'),
         'telephone' => '+62-813-3571-5398',
         'email' => 'sales@ATstekno.com',
         'priceRange' => '$$',
+        'parentOrganization' => [
+            '@type' => 'Organization',
+            '@id' => $siteUrl . '/#organization',
+            'name' => 'Vinsa Electric'
+        ],
         'address' => [
             '@type' => 'PostalAddress',
             'streetAddress' => 'Jl. Jagalan No.38, Bongkaran, Kec. Pabean Cantian',
@@ -83,13 +94,18 @@ $branches = [
     [
         '@context' => 'https://schema.org',
         '@type' => 'ElectricalSupplyStore',
-        '@id' => url('/') . '#showroom-pandaan',
-        'name' => 'Vinsa Electric - Showroom Pandaan',
-        'url' => url('/'),
+        '@id' => $siteUrl . '/#showroom-pandaan',
+        'name' => 'Vinsa Electric - Regional Showroom & Engineering Hub Pandaan',
+        'url' => $siteUrl,
         'image' => asset('image/vinsalg.png'),
         'telephone' => '+62-813-3571-5398',
         'email' => 'sales@ATstekno.com',
         'priceRange' => '$$',
+        'parentOrganization' => [
+            '@type' => 'Organization',
+            '@id' => $siteUrl . '/#organization',
+            'name' => 'Vinsa Electric'
+        ],
         'address' => [
             '@type' => 'PostalAddress',
             'streetAddress' => 'The Taman Dayu, Cluster Palazio Boulevard J-1 No. 06',
