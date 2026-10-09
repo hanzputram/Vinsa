@@ -66,7 +66,7 @@
     @endphp
 
     <title>{{ $fullTitle }}</title>
-    <meta name="description" content="{{ $metaDesc }} - Komponen kelistrikan industri resmi Vinsa Electric berstandar IEC 60947 & CE sekelas Schneider Electric.">
+    <meta name="description" content="{{ $metaDesc }} - Komponen kelistrikan industri resmi Vinsa Electric berstandar IEC 60947 & CE standar global.">
     <meta name="keywords" content="{{ $product->name }}, {{ $product->kode ?? '' }}, alat listrik vinsa, switchgear, komponen panel listrik, iec 60947, vinsa.fr">
     <meta name="author" content="Vinsa Electric">
 

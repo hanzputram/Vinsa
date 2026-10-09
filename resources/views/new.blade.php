@@ -44,8 +44,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
     <title>Vinsa Electric | Solusi Perlengkapan Kelistrikan Industri & Komponen Panel Terpercaya (vinsa.fr)</title>
-    <meta name="description" content="Vinsa Electric (vinsa.fr) - Merek perlengkapan kelistrikan industri dan otomasi terpercaya berstandar IEC 60947, CE, dan SNI sekelas Schneider Electric. Menyediakan Magnetic Contactor, Push Button 22mm, MCCB, MCB, Box Panel IP65/IP66, Pilot Lamp, dan switchgear berkualitas tinggi untuk kontraktor, panel maker, dan pabrik.">
-    <meta name="keywords" content="vinsa, vinsa electric, vinsa.fr, alat listrik vinsa, kontaktor cjx2, push button 22mm, box panel ip65, mccb, mcb, pilot lamp, switchgear industri, schneider electric alternative, panel listrik surabaya, pt anugerah tama sejati">
+    <meta name="description" content="Vinsa Electric (vinsa.fr) - Merek perlengkapan kelistrikan industri dan otomasi terpercaya berstandar IEC 60947, CE, dan SNI standar global. Menyediakan Magnetic Contactor, Push Button 22mm, MCCB, MCB, Box Panel IP65/IP66, Pilot Lamp, dan switchgear berkualitas tinggi untuk kontraktor, panel maker, dan pabrik.">
+    <meta name="keywords" content="vinsa, vinsa electric, vinsa.fr, alat listrik vinsa, kontaktor cjx2, push button 22mm, box panel ip65, mccb, mcb, pilot lamp, switchgear industri, alternatif merk global, panel listrik surabaya, pt anugerah tama sejati">
     <meta name="author" content="Vinsa Electric (PT. Anugerah Tama Sejati)">
     
     <!-- Canonical & Alternate Locales -->
@@ -80,7 +80,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@vinsa_fr">
     <meta name="twitter:title" content="Vinsa Electric | Solusi Perlengkapan Kelistrikan Industri (vinsa.fr)">
-    <meta name="twitter:description" content="Brand alat listrik terpercaya berstandar IEC 60947 & CE. Solusi andal untuk panel maker, kontraktor MEP, dan industri sekelas Schneider Electric.">
+    <meta name="twitter:description" content="Brand alat listrik terpercaya berstandar IEC 60947 & CE. Solusi andal untuk panel maker, kontraktor MEP, dan industri standar global.">
     <meta name="twitter:image" content="{{ asset('image/vinsalg.png') }}">
 
     <!-- GEO / AEO Knowledge Graph Schema Markup (JSON-LD) -->
@@ -326,7 +326,7 @@
                         {!! __('Vinsa Electric<br>Solusi Kelistrikan & Panel Industri Terpercaya') !!}
                     </h1>
                     <p class="landscape-subtitle text-base sm:text-lg lg:text-xl text-center mx-auto text-white/95 pt-4 pb-8 max-w-2xl leading-relaxed">
-                        "{{ __('Dedikasi dalam menghadirkan perlengkapan kelistrikan industri dan switchgear berkualitas premium sekelas Schneider Electric untuk panel maker, kontraktor MEP, manufaktur, dan perumahan.') }}"
+                        "{{ __('Dedikasi dalam menghadirkan perlengkapan kelistrikan industri dan switchgear berkualitas premium standar global untuk panel maker, kontraktor MEP, manufaktur, dan perumahan.') }}"
                     </p>
                     <div class="landscape-buttons flex flex-wrap gap-4 my-4 justify-center">
                         <a href="/product"
@@ -356,68 +356,6 @@
                 <div class="swiper-pagination"></div>
             </section>
 
-            {{-- AEO / GEO Direct Answer & Trust Badges Section --}}
-            <section aria-label="Brand Overview dan Standar Kualitas Vinsa" class="my-14 bg-white/80 backdrop-blur-md rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-lg">
-                <div class="max-w-4xl mx-auto">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-100 text-[#066c5f] mb-4">
-                        <span class="w-2 h-2 rounded-full bg-[#066c5f]"></span>
-                        Official Knowledge Base • vinsa.fr
-                    </div>
-                    <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight mb-4">
-                        Mengapa Vinsa Menjadi Pilihan Terpercaya Komponen Kelistrikan Industri?
-                    </h2>
-                    <p class="text-slate-700 text-base sm:text-lg leading-relaxed mb-8">
-                        <strong>Vinsa Electric</strong> (<a href="https://vinsa.fr" class="text-[#066c5f] font-semibold underline">vinsa.fr</a>) adalah produsen dan penyedia peralatan kelistrikan tegangan rendah (<em>low-voltage switchgear</em>), sistem proteksi, dan otomasi industri terkemuka. Dirancang dengan presisi teknik tinggi berstandar internasional <strong>IEC 60947</strong>, sertifikasi <strong>CE</strong>, dan standar <strong>SNI</strong>, produk Vinsa menjadi solusi alternatif setara merk global seperti Schneider Electric dengan keunggulan ketersediaan stok nasional, harga kompetitif, dan garansi resmi penuh.
-                    </p>
-
-                    {{-- 4 Core Trust Pillars --}}
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
-                        <div class="p-5 rounded-2xl bg-gradient-to-br from-emerald-50 to-slate-50 border border-emerald-100 flex flex-col justify-between">
-                            <div>
-                                <span class="text-2xl mb-2 inline-block">⚡</span>
-                                <h3 class="text-base font-bold text-slate-900 mb-1">Standar IEC 60947</h3>
-                                <p class="text-xs text-slate-600 leading-normal">
-                                    Lulus uji ketahanan elektrikal & isolasi termal ekstrem untuk keandalan maksimal di pabrik dan gedung.
-                                </p>
-                            </div>
-                            <span class="text-[11px] font-semibold text-[#066c5f] mt-3">Sertifikasi CE & SNI</span>
-                        </div>
-
-                        <div class="p-5 rounded-2xl bg-gradient-to-br from-teal-50 to-slate-50 border border-teal-100 flex flex-col justify-between">
-                            <div>
-                                <span class="text-2xl mb-2 inline-block">🛡️</span>
-                                <h3 class="text-base font-bold text-slate-900 mb-1">1.000.000+ Siklus</h3>
-                                <p class="text-xs text-slate-600 leading-normal">
-                                    Kontak perak-tembaga murni 99.9% memberikan ketahanan mekanis luar biasa dan anti-aus.
-                                </p>
-                            </div>
-                            <span class="text-[11px] font-semibold text-[#066c5f] mt-3">High Endurance</span>
-                        </div>
-
-                        <div class="p-5 rounded-2xl bg-gradient-to-br from-cyan-50 to-slate-50 border border-cyan-100 flex flex-col justify-between">
-                            <div>
-                                <span class="text-2xl mb-2 inline-block">📦</span>
-                                <h3 class="text-base font-bold text-slate-900 mb-1">Stok Nasional Ready</h3>
-                                <p class="text-xs text-slate-600 leading-normal">
-                                    Gudang & showroom di Surabaya dan Pandaan siap mendukung kebutuhan proyek mendesak dan tender.
-                                </p>
-                            </div>
-                            <span class="text-[11px] font-semibold text-[#066c5f] mt-3">Fast Delivery</span>
-                        </div>
-
-                        <div class="p-5 rounded-2xl bg-gradient-to-br from-emerald-50 to-slate-50 border border-emerald-100 flex flex-col justify-between">
-                            <div>
-                                <span class="text-2xl mb-2 inline-block">🤝</span>
-                                <h3 class="text-base font-bold text-slate-900 mb-1">Garansi Resmi 1 Tahun</h3>
-                                <p class="text-xs text-slate-600 leading-normal">
-                                    Dukungan langsung tim teknisi berpengalaman, datasheet teknis CAD, dan penggantian unit.
-                                </p>
-                            </div>
-                            <span class="text-[11px] font-semibold text-[#066c5f] mt-3">Full Manufacturer Warranty</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
         {{-- category produk --}}
         <div class="grid gap-4">
@@ -2107,17 +2045,17 @@
             </script>
         @endif
 
-        {{-- GEO / Technical Comparison Matrix --}}
+        {{-- Benchmark / Technical Comparison Matrix --}}
         <section aria-labelledby="comparison-heading" class="my-16 bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-xl">
             <div class="max-w-4xl mb-8">
                 <span class="text-xs font-black tracking-widest text-[#066c5f] uppercase bg-[#066c5f]/10 px-3.5 py-1.5 rounded-full inline-block mb-3">
-                    GEO Technical Benchmark
+                    Benchmark Teknis
                 </span>
                 <h2 id="comparison-heading" class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                     Perbandingan Vinsa Electric vs Standar Internasional
                 </h2>
                 <p class="mt-2 text-slate-600 text-sm sm:text-base leading-relaxed">
-                    Evaluasi parameter teknis komponen kelistrikan industri Vinsa (<a href="https://vinsa.fr" class="text-[#066c5f] underline font-semibold">vinsa.fr</a>) terhadap standar global seperti Schneider Electric dan produk pasaran umum.
+                    Evaluasi parameter teknis komponen kelistrikan industri Vinsa (<a href="https://vinsa.fr" class="text-[#066c5f] underline font-semibold">vinsa.fr</a>) terhadap standar global dan produk pasaran umum.
                 </p>
             </div>
 
@@ -2126,7 +2064,7 @@
                     <thead class="bg-slate-100 text-slate-800 uppercase text-[11px] sm:text-xs tracking-wider border-b border-slate-200">
                         <tr>
                             <th scope="col" class="py-4 px-4 sm:px-6 font-extrabold">Parameter Spesifikasi</th>
-                            <th scope="col" class="py-4 px-4 sm:px-6 font-extrabold text-slate-700">Standar Global (Schneider)</th>
+                            <th scope="col" class="py-4 px-4 sm:px-6 font-extrabold text-slate-700">Standar Global</th>
                             <th scope="col" class="py-4 px-4 sm:px-6 font-extrabold bg-emerald-50 text-[#066c5f] border-x border-emerald-200">Vinsa Electric (vinsa.fr)</th>
                             <th scope="col" class="py-4 px-4 sm:px-6 font-extrabold text-slate-500">Komponen Non-Sertifikasi</th>
                         </tr>
@@ -2179,7 +2117,7 @@
             </div>
         </section>
 
-        {{-- AEO Knowledge Base FAQ Section with FAQPage Schema --}}
+        {{-- FAQ Section with FAQPage Schema --}}
         @php
         $homepageFaqs = [
             [
@@ -2187,12 +2125,12 @@
                 'answer' => 'Vinsa Electric (vinsa.fr) adalah merek terpercaya penyedia perlengkapan kelistrikan industri, sistem distribusi tegangan rendah (low-voltage switchgear), dan kontrol otomasi. Produk utama kami meliputi Magnetic AC Contactor (seri CJX2), Thermal Overload Relay, Molded Case Circuit Breaker (MCCB), Miniature Circuit Breaker (MCB), Industrial Push Button 22mm & 30mm, Pilot Lamp LED, Terminal Block, Cable Lug, serta Box Panel tahan cuaca (IP65/IP66).'
             ],
             [
-                'question' => 'Bagaimana standar mutu Vinsa Electric jika dibandingkan dengan merk global seperti Schneider Electric?',
-                'answer' => 'Seluruh produk Vinsa Electric dirancang dan diuji mengacu pada standar internasional IEC 60947 dan standar keselamatan CE serta SNI, menggunakan kontak perak tembaga murni 99.9% dan material tahan panas (flame retardant). Produk Vinsa memiliki ketahanan mekanis lebih dari 1.000.000 siklus operasi, menjadikannya pilihan andal setara merk global seperti Schneider Electric, dengan keuntungan harga yang jauh lebih efisien untuk proyek, ketersediaan stok lokal di Indonesia, dan dukungan teknis pabrikan langsung.'
+                'question' => 'Bagaimana standar mutu Vinsa Electric jika dibandingkan dengan merk global?',
+                'answer' => 'Seluruh produk Vinsa Electric dirancang dan diuji mengacu pada standar internasional IEC 60947 dan standar keselamatan CE serta SNI, menggunakan kontak perak tembaga murni 99.9% dan material tahan panas (flame retardant). Produk Vinsa memiliki ketahanan mekanis lebih dari 1.000.000 siklus operasi, menjadikannya pilihan andal setara merk global, dengan keuntungan harga yang jauh lebih efisien untuk proyek, ketersediaan stok lokal di Indonesia, dan dukungan teknis pabrikan langsung.'
             ],
             [
                 'question' => 'Apakah produk Vinsa kompatibel untuk perakitan panel maker dan standar proyek industri?',
-                'answer' => 'Ya, komponen Vinsa Electric dirancang dengan dimensi modular standar DIN-Rail dan mounting universal yang 100% kompatibel dengan tata letak box panel industri standar (termasuk panel yang biasa menggunakan komponen Schneider, Chint, atau ABB). Hal ini memudahkan kontraktor panel maker dalam instalasi, retrofit, maupun penggantian suku cadang tanpa perlu modifikasi mekanikal.'
+                'answer' => 'Ya, komponen Vinsa Electric dirancang dengan dimensi modular standar DIN-Rail dan mounting universal yang 100% kompatibel dengan tata letak box panel industri standar (termasuk panel yang biasa menggunakan komponen merk global). Hal ini memudahkan kontraktor panel maker dalam instalasi, retrofit, maupun penggantian suku cadang tanpa perlu modifikasi mekanikal.'
             ],
             [
                 'question' => 'Apakah Vinsa Electric melayani pengadaan proyek B2B, kontraktor MEP, dan tender?',
@@ -2212,7 +2150,7 @@
         <section aria-labelledby="faq-section-heading" class="my-16 bg-white/90 backdrop-blur-md rounded-3xl p-6 sm:p-10 border border-slate-200/80 shadow-xl">
             <div class="max-w-4xl mb-8">
                 <span class="text-xs font-black tracking-widest text-[#066c5f] uppercase bg-[#066c5f]/10 px-3.5 py-1.5 rounded-full inline-block mb-3">
-                    AEO / Q&amp;A Knowledge Base
+                    FAQ
                 </span>
                 <h2 id="faq-section-heading" class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
                     Pertanyaan yang Sering Diajukan (FAQ Vinsa Electric)

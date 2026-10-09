@@ -30,7 +30,7 @@
         $metaTitle = $catTitle . 'Katalog Komponen Kelistrikan & Panel Industri | Vinsa Electric (vinsa.fr)';
         $metaDesc = isset($activeCategory)
             ? 'Koleksi ' . $activeCategory->name . ' resmi Vinsa Electric (vinsa.fr). Komponen switchgear industri berkualitas tinggi berstandar IEC 60947 & CE untuk panel maker dan proyek MEP.'
-            : 'Katalog lengkap komponen kelistrikan industri Vinsa Electric (vinsa.fr): Push Button 22mm, Magnetic Contactor CJX2, MCB, MCCB, Box Panel IP65/IP66, Pilot Lamp, dan Terminal Block berstandar IEC 60947 & CE sekelas Schneider Electric.';
+            : 'Katalog lengkap komponen kelistrikan industri Vinsa Electric (vinsa.fr): Push Button 22mm, Magnetic Contactor CJX2, MCB, MCCB, Box Panel IP65/IP66, Pilot Lamp, dan Terminal Block berstandar IEC 60947 & CE standar global.';
         $canonicalProdUrl = isset($activeCategory) 
             ? ('https://vinsa.fr/product/' . \Illuminate\Support\Str::slug($activeCategory->name))
             : 'https://vinsa.fr/product';

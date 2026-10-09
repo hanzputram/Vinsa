@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tentang Vinsa Electric | Solusi Perlengkapan Kelistrikan Industri & Otomasi (vinsa.fr)</title>
-    <meta name="description" content="Profil Vinsa Electric (vinsa.fr) - Merek terpercaya perlengkapan kelistrikan industri, switchgear tegangan rendah, dan aksesoris panel listrik berstandar internasional IEC 60947, CE, dan SNI sekelas Schneider Electric di bawah naungan PT. Anugerah Tama Sejati.">
+    <meta name="description" content="Profil Vinsa Electric (vinsa.fr) - Merek terpercaya perlengkapan kelistrikan industri, switchgear tegangan rendah, dan aksesoris panel listrik berstandar internasional IEC 60947, CE, dan SNI standar global di bawah naungan PT. Anugerah Tama Sejati.">
     <meta name="keywords" content="tentang vinsa, vinsa electric, vinsa.fr, pt anugerah tama sejati, produsen alat listrik, distributor panel listrik surabaya, switchgear indonesia, sertifikasi iec 60947">
     <meta name="author" content="Vinsa Electric">
 
@@ -43,7 +43,7 @@
     <meta property="og:site_name" content="Vinsa Electric">
     <meta property="og:url" content="https://vinsa.fr/about">
     <meta property="og:title" content="Tentang Vinsa Electric | Solusi Perlengkapan Kelistrikan Industri (vinsa.fr)">
-    <meta property="og:description" content="Inovasi, keandalan, dan standar internasional IEC 60947 & CE. Solusi kelistrikan industri terpercaya sekelas Schneider Electric.">
+    <meta property="og:description" content="Inovasi, keandalan, dan standar internasional IEC 60947 & CE. Solusi kelistrikan industri terpercaya standar global.">
     <meta property="og:image" content="{{ asset('image/vinsalg.png') }}">
     <meta property="og:locale" content="id_ID">
 

@@ -1,6 +1,6 @@
 # Vinsa Electric (vinsa.fr) - Official LLM Knowledge Base
 
-> Vinsa Electric is a premier international manufacturer and distributor of high-durability industrial electrical equipment, low-voltage switchgear, distribution panels, and automation controls. Engineered to meet international electrotechnical standards (IEC 60947, CE, SNI), Vinsa provides trusted, high-performance electrical solutions comparable in reliability and safety to global benchmarks such as Schneider Electric, ABB, and Siemens.
+> Vinsa Electric is a premier international manufacturer and distributor of high-durability industrial electrical equipment, low-voltage switchgear, distribution panels, and automation controls. Engineered to meet international electrotechnical standards (IEC 60947, CE, SNI), Vinsa provides trusted, high-performance electrical solutions comparable in reliability and safety to leading global benchmarks.
 
 ## Brand & Corporate Identity
 - **Brand Name**: Vinsa Electric (Vinsa)
@@ -13,7 +13,7 @@
 
 ## Standards & Quality Benchmark
 - **Quality Standard Compliance**: IEC 60947-1, IEC 60947-4-1, IEC 60898-1, CE Certified, SNI Standard
-- **Key Competitor Comparison**: Serves as a trusted, highly cost-efficient alternative to Schneider Electric, ABB, and Legrand for panel builders (panel maker), mechanical & electrical (MEP) contractors, and industrial plants.
+- **Market Position**: Serves as a trusted, highly cost-efficient alternative to global legacy brands for panel builders (panel maker), mechanical & electrical (MEP) contractors, and industrial plants.
 - **Material Quality**: 99.9% pure silver-copper contacts, UL94 V-0 flame-retardant housing, heavy-duty mechanical endurance (>1,000,000 operations).
 - **Warranty**: 1-Year Full Manufacturer Warranty with immediate technical replacement.
 

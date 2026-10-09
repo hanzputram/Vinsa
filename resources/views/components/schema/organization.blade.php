@@ -3,7 +3,7 @@
     'legalName' => 'PT. Anugerah Tama Sejati',
     'url' => 'https://vinsa.fr',
     'logo' => asset('image/vinsalg.png'),
-    'description' => 'Vinsa Electric (vinsa.fr) adalah merek perlengkapan kelistrikan industri dan otomasi terpercaya berstandar internasional (IEC 60947, CE, SNI). Menyediakan solusi komponen panel listrik lengkap: magnetic contactor, push button, pilot lamp, MCCB, MCB, box panel IP65/IP66, dan aksesoris kelistrikan berkualitas tinggi sekelas Schneider Electric untuk kontraktor, panel maker, dan industri.',
+    'description' => 'Vinsa Electric (vinsa.fr) adalah merek perlengkapan kelistrikan industri dan otomasi terpercaya berstandar internasional (IEC 60947, CE, SNI). Menyediakan solusi komponen panel listrik lengkap: magnetic contactor, push button, pilot lamp, MCCB, MCB, box panel IP65/IP66, dan aksesoris kelistrikan berkualitas tinggi standar global untuk kontraktor, panel maker, dan industri.',
     'email' => 'sales@ATstekno.com',
     'telephone' => '+62-813-3571-5398',
     'sameAs' => [
@@ -55,7 +55,7 @@ $schema = [
         'Industrial Enclosures & Waterproof Box Panels (IP65, IP66)',
         'Terminal Blocks, Busbars & Cable Accessories',
         'IEC 60947 & IEC 60898 Electrotechnical Standards',
-        'Schneider Electric Compatible Electrical Components'
+        'Standard Modular Compatible Electrical Components'
     ],
     'brand' => [
         '@type' => 'Brand',
